@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <!-- Outer Track (Near-Black / White) -->
+  <path d="M 37.5 9.2 L 32 6 L 12 17.5 L 12 31 L 27.5 40" stroke="#FFFFFF" stroke-width="4.2" stroke-linecap="butt" stroke-linejoin="miter"/>
+  <path d="M 36.5 24 L 52 33 L 52 46.5 L 32 58 L 26.5 54.8" stroke="#FFFFFF" stroke-width="4.2" stroke-linecap="butt" stroke-linejoin="miter"/>
+  <!-- Middle Track (Coral) -->
+  <path d="M 43.5 12.7 L 32 12.7 L 18 20.8 L 18 27.5 L 46 43.2 L 32 51.3 L 20.5 44.7" stroke="#FFFFFF" stroke-width="4.2" stroke-linecap="butt" stroke-linejoin="miter"/>
+  <!-- Inner Track (Slate) -->
+  <path d="M 49.5 16.2 L 34.5 24.8" stroke="#FFFFFF" stroke-width="4.2" stroke-linecap="butt" stroke-linejoin="miter"/>
+  <path d="M 29.5 39.2 L 14.5 47.8" stroke="#FFFFFF" stroke-width="4.2" stroke-linecap="butt" stroke-linejoin="miter"/>
+</svg>
