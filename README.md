@@ -1,23 +1,63 @@
-# LangSpan
+# LangSpan website
 
-**Planning stage: implementation proposals under review.**
+The product website for [LangSpan](https://langspan.github.io/), built as static
+HTML, CSS, and JavaScript for the existing GitHub Pages repository. No build step
+or package installation is required.
 
-LangSpan is a proposed headless coordination tool for people working with multiple AI coding agents on the same codebase. The aim is to help those agents share relevant context, recognize overlapping work, and understand how their changes fit together while people keep using their existing coding tools.
+## Files
 
-## The use case
+- `index.html`: product narrative, illustrative two-agent workflow, integrations,
+  and practical source-build setup.
+- `assets/site.css`: responsive layout and the supplied brand palette.
+- `assets/site.js`: three selectable demo scenarios and command-copy controls.
+- `assets/brand/`: the owner-supplied SVG kit and `COLORS.txt`, copied unchanged.
 
-Imagine one agent changing an interface while another updates a feature that depends on it. Each can make reasonable progress independently, yet their changes may disagree when brought together. Separate branches and worktrees provide useful isolation, but the work still needs coordination.
+## Preview
 
-LangSpan would make that relationship easier to see: what each agent intends to change, which work depends on another change, where edits may conflict, and which checks have run against the resulting code. A passing check would be associated with the inputs it actually checked, so later changes could be distinguished from the previously checked result.
+Serve the repository root with any static server. For example:
 
-## A tool system at the core
+```sh
+python3 -m http.server 8080 --bind 127.0.0.1
+```
 
-The proposed core would expose a command-line interface and Model Context Protocol (MCP) tools, with integrations for supported agent workflows. An optional user interface could provide a human view of activity and decisions. Existing coding agents would remain the place where coding work happens.
+Open `http://127.0.0.1:8080/`. The page does not use remote fonts, trackers,
+analytics, cookies, external scripts, or a backend. The demo is a local
+illustration; it does not launch agents or contact a coordinator.
 
-The design priorities are practical: useful coordination, understandable decisions, predictable overhead, and clear handling of incomplete or outdated information.
+## Brand and source notes
 
-## Where things stand
+The final supplied kit is Variation B, “Swarm Weave.” Its palette is warm white
+`#F7F6F2`, near-black `#141413`, slate `#3F3F46` (dark mode `#A1A1AA`), and coral
+`#D97757`. The supplied lockups, icons, badges, and favicon are original assets
+provided by the owner. Their SVG content has not been edited, traced, or rebuilt.
+The earlier PNG has been superseded by this kit and is not used.
 
-We are comparing implementation proposals and evaluating architecture, integration coverage, and ways to measure results. These ideas remain proposals; the initial scope and technical choices are still being reviewed.
+The page uses system sans-serif and monospace stacks, with no downloaded font
+dependency. Composition, copy, and demo interface were created for this site;
+no third-party brand assets, testimonials, or performance figures are included.
+Future brand updates should replace the original files in `assets/brand/` and
+update the CSS tokens together.
 
-This page is a planning-stage introduction. Implementation details and public project information will develop as decisions are made and tested.
+## Claims and evidence
+
+The terminal-style example is explicitly labelled **Illustrative demo**, including
+its native-host responses. It is not a recording or acceptance result. The page
+separately identifies supported-operation coverage, cooperative/local limits, and
+the Codex adapter's pending native-host acceptance. Actual build instructions and
+available commands are checked against the core CLI source.
+
+The core repository is [Langspan/Langspan](https://github.com/Langspan/Langspan).
+Repository and documentation links may require access; the public page does not
+claim an anonymously downloadable release or a selected software licence.
+[Implementation status](https://github.com/Langspan/Langspan/blob/main/docs/IMPLEMENTATION_STATUS.md)
+is the detailed authority for delivery and validation. No platform, Pages
+configuration, publication, or repository visibility change is part of these
+website source files.
+
+## Review before publication
+
+Check desktop and narrow mobile layouts, keyboard focus, all three demo states,
+copy controls and their fallback, in-page navigation, and the repository-access
+wording. Review product claims against the corresponding core commit. JavaScript
+is optional: the initial conflict example, product explanation, and setup
+instructions remain readable without it.
