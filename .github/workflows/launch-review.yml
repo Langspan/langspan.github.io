@@ -1,0 +1,88 @@
+name: Launch readiness review
+on:
+  pull_request:
+    paths:
+      - '**.html'
+      - '**.css'
+      - '**.js'
+      - 'review/**'
+      - '.github/workflows/launch-review.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  website:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned browser checks
+        working-directory: review
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.65.1 axe-core@4.10.3
+          npx playwright install --with-deps chromium
+      - name: Validate user journey
+        run: |
+          python3 -m http.server 8123 --bind 127.0.0.1 >/tmp/langspan-site-http.log 2>&1 &
+          node review/site-check.mjs
+      - name: Actual Hallmark audit (report only; existing brand is not a Hallmark certification)
+        if: always()
+        continue-on-error: true
+        run: |
+          mkdir -p review-output
+          git init /tmp/hallmark
+          git -C /tmp/hallmark remote add origin https://github.com/nutlope/hallmark.git
+          git -C /tmp/hallmark fetch --depth=1 origin 04977e15f3dfd6ee4b74c887dac3eb52665d6c92
+          git -C /tmp/hallmark checkout --detach FETCH_HEAD
+          node /tmp/hallmark/skills/hallmark/scripts/sloplint.mjs index.html assets/site.css --genre editorial --render --url http://127.0.0.1:8123/ > review-output/hallmark.txt 2>&1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: launch-website-review
+          path: review-output/
+  binary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Download published Linux release and verify
+        run: |
+          mkdir -p /tmp/ls-release review-output
+          cd /tmp/ls-release
+          base=https://github.com/Langspan/LangSpan.dev/releases/download/v0.1.0
+          name=langspan-v0.1.0-x86_64-unknown-linux-gnu
+          curl -fsSL --retry 3 "$base/$name.tar.gz" -o "$name.tar.gz"
+          curl -fsSL --retry 3 "$base/SHA256SUMS" -o SHA256SUMS
+          grep " $name.tar.gz$" SHA256SUMS | sha256sum -c
+          echo "cb8d47adfb02be105a56909d065d107a29f28a7fc483ff194cb2d0f7b786cd0c  $name.tar.gz" | sha256sum -c
+          tar -xzf "$name.tar.gz"
+          "$PWD/$name/langspan" --version | grep -Fx 'langspan 0.1.0'
+      - name: Run the release's own two-developer scenario
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/Langspan/LangSpan.dev/8cbd13dadd942a4405d8cb9353aaae37b8358936/scripts/demo-two-developers.sh -o /tmp/ls-demo.sh
+          set -o pipefail
+          LANGSPAN=/tmp/ls-release/langspan-v0.1.0-x86_64-unknown-linux-gnu/langspan bash /tmp/ls-demo.sh | tee review-output/released-binary-demo.txt
+      - name: Install browser capture tools
+        working-directory: review
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.65.1 axe-core@4.10.3
+          npx playwright install --with-deps chromium
+      - name: Capture actual dashboard
+        env:
+          LANGSPAN_BIN: /tmp/ls-release/langspan-v0.1.0-x86_64-unknown-linux-gnu/langspan
+        run: node review/capture-dashboard.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: launch-binary-review
+          path: review-output/
