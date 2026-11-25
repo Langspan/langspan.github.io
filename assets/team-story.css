@@ -1,10 +1,10 @@
 /* Original LangSpan team-story component. Its complete source is the default frame. */
 .team-story {
-  --team-paper: var(--paper, #f7f6f2);
-  --team-ink: var(--ink, #141413);
-  --team-slate: var(--slate, #3f3f46);
+  --team-paper: var(--paper, #f4f3ef);
+  --team-ink: var(--ink, #151513);
+  --team-slate: var(--slate, #3f3e44);
   --team-rule: #d8d7d0;
-  --team-accent: var(--coral, #d97757);
+  --team-accent: var(--coral, #d87859);
   --team-accent-dark: var(--coral-dark, #a94b31);
   --team-accent-wash: var(--coral-wash, #f7e8e1);
   --motion-fast: 160ms;
@@ -226,3 +226,53 @@
   .team-story__agent { break-inside: avoid; }
 }
 
+
+/* A framed work surface makes the authored exchange legible before playback. */
+.team-story {
+  padding: 26px 28px 22px;
+  border: 1px solid #d6d6cf;
+  border-radius: 12px;
+  background: var(--white, #fffefa);
+  box-shadow: 0 2px 3px #15151304, 0 14px 34px #15151305;
+}
+.team-story__heading { padding-bottom: 22px; border-bottom: 1px solid #e5e4dd; margin-bottom: 24px; }
+.team-story .team-story__eyebrow { color: var(--team-accent-dark); font-weight: 600; }
+.team-story .team-story__heading h2 { font-size: clamp(1.375rem, 2.2vw, 1.625rem); letter-spacing: -.035em; }
+.team-story__project { max-width: 190px; }
+.team-story__agent { border-color: #dcdcd5; background: #fbfaf6; }
+.team-story__avatar { border-color: #d2d1ca; background: #eae9e2; border-radius: 8px; }
+.team-story__event { border-color: #d7d6ce; background: var(--white, #fffefa); }
+.team-story__connection-label { background: var(--white, #fffefa); }
+.team-story__notice { border-color: #d49a82; border-left-color: var(--team-accent); box-shadow: 0 2px 6px #a94b3107; }
+.team-story__actions li { background: var(--white, #fffefa); border-color: #deded6; border-radius: 5px; }
+.team-story__player { margin-top: 24px; padding-top: 18px; gap: 16px 22px; }
+.team-story__buttons { gap: 6px; }
+.team-story__buttons button { border-color: #d4d3cc; }
+.team-story__buttons .team-story__play { border-color: var(--team-ink); min-width: 102px; }
+.team-story__progress-group { display: flex; align-items: center; gap: 12px; }
+.team-story__progress { min-width: 102px; font-variant-numeric: tabular-nums; }
+.team-story__progress-bars { display: inline-flex; gap: 4px; align-items: center; }
+.team-story__progress-bars i { display: block; width: 15px; height: 4px; border-radius: 1px; background: #dcdcd5; }
+.team-story[data-frame="static"] .team-story__progress-bars i,
+.team-story[data-frame="end"] .team-story__progress-bars i,
+.team-story[data-team-story-current-step="1"] .team-story__progress-bars i:nth-child(-n+1),
+.team-story[data-team-story-current-step="2"] .team-story__progress-bars i:nth-child(-n+2),
+.team-story[data-team-story-current-step="3"] .team-story__progress-bars i:nth-child(-n+3),
+.team-story[data-team-story-current-step="4"] .team-story__progress-bars i { background: var(--team-accent-dark); }
+.team-story .team-story__disclosure { margin-top: 18px; padding-top: 0; }
+.motion-enabled .team-story.motion-ready [data-motion-item] { transition: none; }
+@media (max-width: 1000px) {
+  .team-story { padding: 24px; }
+  .team-story .team-story__keys { width: 100%; margin-left: 0; }
+}
+@media (max-width: 840px) {
+  .team-story__project { max-width: 160px; }
+}
+@media (max-width: 480px) {
+  .team-story { padding: 19px 15px 18px; border-radius: 9px; }
+  .team-story__heading { padding-bottom: 18px; margin-bottom: 20px; }
+  .team-story .team-story__heading h2 { font-size: 1.375rem; }
+  .team-story__player { gap: 14px; }
+  .team-story__progress-group { width: 100%; justify-content: space-between; }
+  .team-story__progress-bars i { width: 21px; }
+}

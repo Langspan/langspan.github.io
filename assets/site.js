@@ -361,6 +361,7 @@
     if (playTimer !== null) window.clearTimeout(playTimer);
     playTimer = null;
     playing = false;
+    if (window.LangSpanMotion) window.LangSpanMotion.settle(panel);
     syncPlayback();
   }
 
@@ -377,7 +378,9 @@
     lines.replaceChildren(...value.blocks.map(renderBlock));
     lines.scrollTop = 0;
     lines.classList.remove("scene-enter");
-    if (!reducedMotion.matches) {
+    if (window.LangSpanMotion) {
+      if (focused) window.LangSpanMotion.enter(lines, { distance: 6, duration: 0.28 });
+    } else if (!reducedMotion.matches && !(window.location && /[?&]motion=static(?:&|$)/.test(window.location.search))) {
       window.requestAnimationFrame(() => lines.classList.add("scene-enter"));
     }
   }

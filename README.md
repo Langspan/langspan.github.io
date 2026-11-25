@@ -1,4 +1,4 @@
-<img src="assets/brand/langspan-lockup-light.svg" alt="LangSpan" width="320" height="80">
+<img src="assets/brand/langspan-lockup-light.svg" alt="LangSpan" width="288" height="80">
 
 # Your agents. On the same page.
 
@@ -22,7 +22,7 @@ The complete story is visible without playback or JavaScript. Play, Pause and
 Replay let visitors follow the update between sessions. The response is an
 authored illustration, not a recording or measured improvement.
 
-Three expandable examples then explain the supported operations:
+An expandable walkthrough then explains three supported operations:
 
 - Catch an overlap: Agent B tries to edit a file Agent A currently holds, then
   moves to an unclaimed test file.
@@ -46,8 +46,10 @@ python3 -m http.server 8080 --bind 127.0.0.1
 ```
 
 Open `http://127.0.0.1:8080/`. The page uses no remote fonts, analytics, cookies,
-external scripts or backend. JavaScript is optional for reading the product
-story, initial example and setup instructions.
+externally hosted scripts or backend. Motion mini is included locally under
+its upstream MIT license. JavaScript is optional for reading the product story,
+initial example and setup instructions. Reduced-motion preferences and
+`?motion=static` disable the added Motion effects.
 
 | File | Purpose |
 | --- | --- |
@@ -56,20 +58,28 @@ story, initial example and setup instructions.
 | `assets/site.js` | Walkthrough playback, step selection, setup tabs and copy controls |
 | `assets/team-story.css` | Compact two-session illustration and responsive layout |
 | `assets/team-story.js` | Explicit story playback, pause and replay |
-| `assets/brand/` | Original supplied brand kit and rasterized organization avatar |
+| `assets/motion-enhancements.js` | Optional Motion transitions and cleanup |
+| `assets/vendor/motion-14.14.0/` | Pinned Motion mini build, license and provenance |
+| `assets/brand/` | Reference image, corrected vector outlines and organization avatar |
 | `assets/product/` | Original product illustration and social preview card |
 | `docs/marketing-refresh-plan.md` | Scope, product basis and validation plan |
+| `docs/motion-refresh-validation.md` | Motion behavior, fallback and browser verification |
 
 ## Brand and product basis
 
-The supplied “Swarm Weave” kit anchors the site: warm white `#F7F6F2`, near-black
-`#141413`, slate `#3F3F46` and coral `#D97757`. Original SVGs remain unchanged.
-`langspan-avatar.png` is a padded raster export of the supplied icon for GitHub.
+The updated supplied “Swarm Weave” kit anchors the site: warm white `#F4F3EF`,
+near-black `#151513`, slate `#3F3E44` and coral `#D87859`.
+The [brand assets](assets/brand/README.md) use the updated supplied SVG kit
+verbatim, including its outlined lettering and palette. `langspan-avatar.png`
+is a padded export of that mark for GitHub.
 The product illustrations use the same original vector paths. Composition, copy
 and walkthrough code were created for LangSpan.
 
 The core repository is [Langspan/Langspan](https://github.com/Langspan/Langspan).
-It currently requires access. Setup commands match the source CLI.
+It currently requires access. The page shows single-project hook setup.
+The [core setup guide](https://github.com/Langspan/Langspan/blob/main/docs/usage.md#connect-a-native-agent)
+also covers user-level hooks and MCP registration across Git repositories.
+Both setup paths use the same product and supported-tool limits.
 [Implementation status](https://github.com/Langspan/Langspan/blob/main/docs/IMPLEMENTATION_STATUS.md)
 holds the recorded evidence and remaining verification work.
 [The mission](https://github.com/Langspan/Langspan/blob/main/docs/mission.md)
