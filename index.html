@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#F7F6F2">
   <title>LangSpan — Your agents. On the same page.</title>
-  <meta name="description" content="Shared context and coordination for the coding agents you already use. Bring relevant work into every session, catch overlapping edits, and see what changed.">
+  <meta name="description" content="LangSpan tells your coding agents what the others are working on and flags overlapping edits. See the two-agent walkthrough and source setup.">
   <link rel="canonical" href="https://langspan.github.io/">
   <meta property="og:title" content="LangSpan — Your agents. On the same page.">
-  <meta property="og:description" content="Shared context and coordination for the coding agents you already use. Explore the interactive walkthrough.">
+  <meta property="og:description" content="LangSpan briefs coding agents on related work and checks supported edits for conflicts. Explore the two-agent walkthrough.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://langspan.github.io/">
   <meta property="og:image" content="https://langspan.github.io/assets/product/social-card.png">
@@ -37,16 +37,16 @@
     <section class="hero wrap" id="top" aria-labelledby="hero-title">
       <p class="eyebrow"><span class="accent-line" aria-hidden="true"></span> Coordination for coding agents</p>
       <h1 id="hero-title">Your agents.<br><span>On the same page.</span></h1>
-      <p class="hero-copy">Give your coding agents the context to work better together.<br class="desktop-only"> Shared awareness. Coordinated edits. A clearer next move.</p>
+      <p class="hero-copy">LangSpan tells your coding agents what the others are working on<br class="desktop-only"> and flags overlapping edits.</p>
       <div class="hero-actions">
         <a class="button button-dark" href="#demo" data-start-tour><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4.5 15 10l-8 5.5Z" fill="currentColor"/></svg>Explore the walkthrough</a>
         <a class="button button-outline" href="#start">Build from source</a>
       </div>
-      <div class="hero-meta"><span>Claude Code</span><span>Codex</span><span>CLI + MCP</span><span class="meta-note">Your sessions. Your workflow.</span></div>
+      <div class="hero-meta"><span>Claude Code</span><span>Codex</span><span>CLI + MCP</span><span class="meta-note">Runs beside your existing sessions.</span></div>
     </section>
 
     <section class="demo-section wrap" id="demo" aria-labelledby="demo-title">
-      <div class="demo-intro"><h2 id="demo-title">See the moment coordination matters.</h2><span>Click through a story. You set the pace.</span></div>
+      <div class="demo-intro"><h2 id="demo-title">See LangSpan in a shared project.</h2><span>Choose a story and follow each step.</span></div>
       <div class="story-tabs" role="tablist" aria-label="Choose a walkthrough">
         <button type="button" role="tab" id="tab-overlap" aria-controls="story-panel" aria-selected="true" tabindex="0" data-story="overlap"><span class="tab-symbol" aria-hidden="true">⧉</span>Catch an overlap</button>
         <button type="button" role="tab" id="tab-context" aria-controls="story-panel" aria-selected="false" tabindex="-1" data-story="context"><span class="tab-symbol" aria-hidden="true">≋</span>Share the context</button>
@@ -59,7 +59,7 @@
           <span class="illustration-label">Interactive illustration</span>
         </div>
         <div class="stage-body">
-          <div class="stage-heading"><p id="stage-kicker">One developer. Two independent agents.</p><span class="stage-local">Local coordination</span></div>
+          <div class="stage-heading"><p id="stage-kicker">Two agents working in one checkout</p><span class="stage-local">Local coordination</span></div>
           <div class="agent-grid">
             <article class="agent-window is-focus" id="agent-a" aria-labelledby="agent-a-title">
               <header class="agent-top"><span class="avatar avatar-a" aria-hidden="true">A</span><div><h3 id="agent-a-title">Agent A</h3><span id="agent-a-host">Claude Code</span></div><span class="agent-chip" id="agent-a-state">Working</span></header>
@@ -78,7 +78,7 @@
                 <p class="terminal-line prompt">Add refresh coverage.</p>
                 <p class="terminal-line muted">Checking the session flow…</p>
                 <div class="tool-line"><span class="tool-label">Read</span><code>src/auth/session.ts</code></div>
-                <p class="terminal-line muted terminal-spacer">Another session. Its own next move.</p>
+                <p class="terminal-line muted terminal-spacer">Agent B chooses its next edit.</p>
               </div>
               <footer class="agent-foot" id="agent-b-foot">An independent native session</footer>
             </article>
@@ -90,7 +90,7 @@
             <span class="shared-status" id="shared-status">In progress</span>
           </div>
           <div class="story-callout">
-            <div class="callout-copy" aria-live="polite" aria-atomic="true"><span class="callout-eyebrow" id="step-eyebrow">Work starts</span><h3 id="step-title">Parallel work starts with shared context.</h3><p id="step-description">Agent A’s supported edit holds this file for a bounded time. Agent B keeps working in its own session.</p></div>
+            <div class="callout-copy" aria-live="polite" aria-atomic="true"><span class="callout-eyebrow" id="step-eyebrow">Work starts</span><h3 id="step-title">Agent A holds the session file.</h3><p id="step-description">LangSpan holds the file for Agent A’s edit until it completes or the hold expires. Agent B continues in its own session.</p></div>
             <button class="button button-coral" type="button" id="story-next-action">Try an overlapping edit</button>
           </div>
         </div>
@@ -105,71 +105,71 @@
           <div class="player-end"><span id="step-count" aria-hidden="true">1 / 4</span><button type="button" id="replay" aria-label="Replay walkthrough"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7a6 6 0 1 1 0 6M4 3v4h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
         </div>
       </div>
-      <p class="demo-disclosure" id="demo-disclosure">An illustration of local coordination, not a recorded host session. Native Codex acceptance is still in progress.</p>
+      <p class="demo-disclosure" id="demo-disclosure">This illustration shows local file conflicts. Native Codex acceptance still needs verification; the agent’s own permissions apply.</p>
       <noscript><p class="notice">The first step is shown above. Enable JavaScript to explore the other steps and scenarios.</p></noscript>
     </section>
 
     <section class="outcomes wrap" aria-labelledby="outcomes-title">
-      <div class="section-heading"><p class="eyebrow">Less relaying. More building.</p><h2 id="outcomes-title">A little shared context.<br>A much clearer next move.</h2><p>Run several agents on your own, or build with a team. Give each agent useful context about the work happening around it.</p></div>
+      <div class="section-heading"><p class="eyebrow">During parallel work</p><h2 id="outcomes-title">What agents get<br>from LangSpan.</h2><p>Run several agents on one project. LangSpan brings related tasks and edited file paths into their sessions.</p></div>
       <div class="outcome-grid">
         <article class="outcome-card">
-          <div class="mini-brief" aria-hidden="true"><span class="mini-heading">Peer context</span><p><span class="mini-avatar">A</span><strong>Agent A is refactoring sessions</strong></p><code>src/auth/session.ts</code><span class="mini-note">Relevant work, in the next prompt.</span></div>
-          <h3>Know what’s underway.</h3><p>Bring relevant peer activity into a session’s context at startup and when its prompt briefing changes.</p><button type="button" class="inline-demo-link" data-open-story="context">Explore shared context</button>
+          <div class="mini-brief" aria-hidden="true"><span class="mini-heading">Peer context</span><p><span class="mini-avatar">A</span><strong>Agent A is refactoring sessions</strong></p><code>src/auth/session.ts</code><span class="mini-note">Updated with the next prompt.</span></div>
+          <h3>Get a briefing at session start.</h3><p>The model receives related sessions’ task summaries and recent file paths. Later prompts get an updated briefing when that information changes.</p><button type="button" class="inline-demo-link" data-open-story="context">Explore shared context</button>
         </article>
         <article class="outcome-card">
           <div class="mini-overlap" aria-hidden="true"><div><code>session.ts</code><span>Agent A</span></div><div class="mini-conflict"><code>session.ts</code><span>Overlap</span></div><div><code>session.test.ts</code><span class="mini-clear">Available</span></div></div>
-          <h3>Catch the overlap.</h3><p>Surface a current conflict before a supported edit runs. Keep unrelated files available for useful parallel work.</p><button type="button" class="inline-demo-link" data-open-story="overlap">Explore edit coordination</button>
+          <h3>Find the overlapping edit.</h3><p>For supported edits in the same checkout, the hook denies a write if another session holds that file. Unclaimed files stay available.</p><button type="button" class="inline-demo-link" data-open-story="overlap">Explore edit coordination</button>
         </article>
         <article class="outcome-card">
           <div class="mini-events" aria-hidden="true"><div><span class="event-tick"></span><span>Tool result received</span><b>Reported</b></div><div><span class="event-tick coral-tick"></span><span>File content changed</span><b>Observed</b></div><div><span class="event-tick hollow-tick"></span><span>Same shared record</span><b>Inspectable</b></div></div>
-          <h3>See what changed.</h3><p>Inspect the operation history and observed checkout changes. Keep reported results distinct from what was seen on disk.</p><button type="button" class="inline-demo-link" data-open-story="changes">Explore observations</button>
+          <h3>Check what changed on disk.</h3><p>Agents can query file and branch changes through CLI or MCP, including changes made outside the hooks. Git scans record the change without assigning it to an author.</p><button type="button" class="inline-demo-link" data-open-story="changes">Explore observations</button>
         </article>
       </div>
     </section>
 
     <section class="workflow-section" id="workflow" aria-labelledby="workflow-title">
       <div class="wrap workflow-grid">
-        <div class="workflow-copy"><p class="eyebrow">Headless by design</p><h2 id="workflow-title">Keep your tools.<br>Connect the work.</h2><p>LangSpan runs alongside your coding agents. Native hooks bring coordination into the flow; CLI and MCP make the same core available to your own tools.</p><div class="architecture-tags"><span>Rust core</span><span>Local state</span><span>CLI + MCP</span></div><p class="workflow-footnote">Your agent keeps its prompts, permissions, and sandbox. LangSpan adds coordination around supported operations.</p></div>
+        <div class="workflow-copy"><p class="eyebrow">Headless by design</p><h2 id="workflow-title">Connect the agents<br>you already run.</h2><p>Project hooks add briefings and file checks to your agent’s normal session. Other tools can request briefings and inspect work records through CLI or MCP.</p><div class="architecture-tags"><span>Rust core</span><span>Local state</span><span>CLI + MCP</span></div><p class="workflow-footnote">The agent’s permission prompts and sandbox still decide what can run.</p></div>
         <div class="ecosystem" aria-label="Claude Code, Codex and custom tools connect to one local LangSpan coordinator">
           <div class="ecosystem-agents"><div><span class="eco-symbol">✳</span><strong>Claude Code</strong><small>Native hooks</small></div><div><span class="eco-symbol mono">›_</span><strong>Codex</strong><small>Adapter preview</small></div><div><span class="eco-symbol mono">{ }</span><strong>Your tools</strong><small>CLI + MCP</small></div></div>
           <div class="connection-lines" aria-hidden="true"><i></i><i></i><i></i></div>
-          <div class="ecosystem-core"><img src="assets/brand/langspan-icon-dark.svg" width="48" height="48" alt=""><div><strong>LangSpan</strong><span>A shared local coordination layer</span></div><span class="core-pill">Headless</span></div>
+          <div class="ecosystem-core"><img src="assets/brand/langspan-icon-dark.svg" width="48" height="48" alt=""><div><strong>LangSpan</strong><span>Local coordinator</span></div><span class="core-pill">Headless</span></div>
           <div class="ecosystem-facts"><span>Peer work</span><span>File claims</span><span>Observed changes</span></div>
-          <p class="ecosystem-note">Independent sessions. One shared view.</p>
+          <p class="ecosystem-note">Hooks query the local work records.</p>
         </div>
       </div>
     </section>
 
     <section class="start-section wrap" id="start" aria-labelledby="start-title">
-      <div class="section-heading start-heading"><p class="eyebrow">Start with the source</p><h2 id="start-title">A small layer.<br>A familiar workflow.</h2><p>Build LangSpan, start the local coordinator, and connect the project your agents are working in.</p></div>
+      <div class="section-heading start-heading"><p class="eyebrow">Start with the source</p><h2 id="start-title">Connect your first project.</h2><p>Build the binary and start its daemon, then review the hook settings for the project your agents will edit.</p></div>
       <div class="setup-grid">
         <article class="setup-card"><div class="setup-title"><span class="setup-glyph" aria-hidden="true">{ }</span><h3>Build the binary</h3></div><p>From the core repository, with Rust and a C compiler installed.</p><div class="code-block"><button type="button" class="copy-button" data-copy="build-command" aria-label="Copy build command">Copy</button><pre id="build-command"><code>cargo build --workspace --release --locked</code></pre></div></article>
         <article class="setup-card"><div class="setup-title"><span class="setup-glyph" aria-hidden="true">›_</span><h3>Start the coordinator</h3></div><p>Keep this running. Participating sessions use the same local state directory.</p><div class="code-block"><button type="button" class="copy-button" data-copy="daemon-command" aria-label="Copy daemon command">Copy</button><pre id="daemon-command"><code>./target/release/langspan daemon</code></pre></div></article>
         <article class="setup-card setup-connect"><div class="setup-title"><span class="setup-glyph" aria-hidden="true">⌘</span><h3>Connect your project</h3></div><p>Preview the project hook settings, review them, then add <code>--apply</code> to install.</p><div class="vendor-tabs" role="group" aria-label="Choose an agent for setup"><button type="button" data-vendor="claude-code" aria-pressed="true">Claude Code</button><button type="button" data-vendor="codex" aria-pressed="false">Codex</button></div><div class="code-block"><button type="button" class="copy-button" data-copy="hooks-command" aria-label="Copy hook setup command">Copy</button><pre id="hooks-command"><code>./target/release/langspan hooks install claude-code \
   --workspace my-project --root /path/to/project</code></pre></div><p class="setup-detail">Your host’s hook-trust and permission checks still apply. Prompt briefings share the first task line locally by default; use <code>--prompt-summary off</code> to omit it.</p></article>
       </div>
-      <div class="source-note"><span class="source-label">Developer preview</span><p>The core repository currently requires access. Linux CI and the macOS arm64 suite have recorded passes. Claude briefing receipt is observed; Codex native delivery and mixed-host acceptance remain in progress.</p><a href="https://github.com/Langspan/Langspan">Source &amp; setup docs <span class="access-label">Access required</span></a></div>
+      <div class="source-note"><span class="source-label">Developer preview</span><p>Source access is required. Linux and macOS arm64 checks have passed, and a recorded Claude Code session received a briefing. Live Codex and mixed-agent runs still need verification.</p><a href="https://github.com/Langspan/Langspan">Source &amp; setup docs <span class="access-label">Access required</span></a></div>
       <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
     </section>
 
     <section class="next-section wrap" aria-labelledby="next-title">
-      <div class="next-heading"><p class="eyebrow">Where we’re going</p><h2 id="next-title">From parallel agents<br>to connected work.</h2><p>Local coordination is the foundation. The product direction extends that shared understanding across your team’s agents and through integration.</p></div>
-      <div class="next-list"><article><span class="roadmap-tag">Planned</span><h3>Across teammates.</h3><p>Relevant work travels between developers’ agents, with clear sources and freshness.</p></article><article><span class="roadmap-tag">Planned</span><h3>Through the code.</h3><p>Symbol context and dependency impact help agents see where a change reaches.</p></article><article><span class="roadmap-tag">Planned</span><h3>All the way to landing.</h3><p>Change records and checks tied to exact inputs support a deliberate integration flow.</p></article></div>
+      <div class="next-heading"><p class="eyebrow">Beyond the local edit</p><h2 id="next-title">Work across agents<br>and branches.</h2><p>The source preview also includes remote briefings and commands for checking and landing changes. Mixed-agent sessions and hosted workflows still need live validation.</p></div>
+      <div class="next-list"><article><span class="roadmap-tag">Source preview</span><h3>Share work across machines.</h3><p>Opt in to publish branch and file updates through your Git remote. Remote work appears in briefings; edit checks remain local.</p></article><article><span class="roadmap-tag">Planned</span><h3>Find affected callers.</h3><p>A planned code graph would show which functions and callers a change may affect.</p></article><article><span class="roadmap-tag">CLI preview</span><h3>Check changes before landing.</h3><p>Test combined branches in a temporary checkout. LangSpan requires a matching pass before you choose to push the result.</p></article></div>
     </section>
 
     <section class="faq-section wrap" aria-labelledby="faq-title">
-      <h2 id="faq-title">A few useful details.</h2>
+      <h2 id="faq-title">Questions before you start</h2>
       <div class="faq-list">
-        <details><summary>How does LangSpan fit my agent setup?</summary><p>Keep your existing agents and sessions. LangSpan provides a local coordinator, native hook adapters, a CLI, and an MCP server. It does not need to launch the agents. An optional human view can sit on top of the same tool system.</p></details>
-        <details><summary>What does coordination cover?</summary><p>Supported edits can receive a conflict when another current operation holds an overlapping file. Admission is cooperative and time-bounded. Direct filesystem writes, unsupported tools, and writes after a claim expires are not prevented. Native permissions remain authoritative.</p></details>
-        <details><summary>Does it work across machines yet?</summary><p>The current source implementation coordinates sessions using the same local daemon. Related linked worktrees can contribute peer context. Cross-machine sharing is part of the product direction and is not available in this preview.</p></details>
-        <details><summary>Where does the coordination data go?</summary><p>The current LangSpan coordinator stores its state locally. The website’s walkthrough runs entirely in your browser and sends no demo activity anywhere. Your coding agents’ own model and data connections are separate from LangSpan.</p></details>
-        <details><summary>Is this a recording of real agents?</summary><p>The walkthrough is an interactive illustration of the coordination flow. It does not run an agent or reproduce a recorded session. Actual native-host evidence, supported operations, and remaining validation are tracked in the development repository.</p></details>
+        <details><summary>How does LangSpan fit my agent setup?</summary><p>Launch your agents as usual. LangSpan adds hook commands to the project and provides CLI and MCP access to briefings and work records. You can inspect those records from your terminal.</p></details>
+        <details><summary>What does coordination cover?</summary><p>For supported edits in the same checkout, LangSpan denies a write while another session holds the file. It cannot stop writes outside those hooks or after a hold expires. Your agent’s own permissions still apply.</p></details>
+        <details><summary>Can agents on different machines share work?</summary><p>Opt-in remote briefings are implemented through your repository’s Git remote. They report activity but never block edits across machines. Hosted remotes and a real two-machine run still need verification.</p></details>
+        <details><summary>Where does the coordination data go?</summary><p>LangSpan stores its records locally. If you enable remote sharing, work updates go to the Git remote you select; task text stays out unless you opt in. Your agents use their own model connections. This walkthrough runs only in your browser.</p></details>
+        <details><summary>Is this a recording of real agents?</summary><p>This is an interactive illustration. It runs no agents. Recorded host sessions and the remaining verification work are linked from the development repository.</p></details>
       </div>
     </section>
 
-    <section class="closing wrap"><img src="assets/brand/langspan-icon-light.svg" width="72" height="72" alt=""><h2>Good agents.<br>Better together.</h2><p>Bring the tools you trust.<br>Give the work a shared context.</p><a class="button button-dark" href="#demo" data-start-tour>Explore the walkthrough</a></section>
+    <section class="closing wrap"><img src="assets/brand/langspan-icon-light.svg" width="72" height="72" alt=""><h2>See how two agents<br>handle an overlap.</h2><p>Follow the session-file example from the first edit to the second agent’s fresh request.</p><a class="button button-dark" href="#demo" data-start-tour>Explore the walkthrough</a></section>
   </main>
-  <footer class="site-footer wrap"><a href="#top" aria-label="LangSpan home"><img src="assets/brand/langspan-lockup-light.svg" width="148" height="37" alt="LangSpan"></a><p>Shared context. Independent agents.</p><div><a href="https://github.com/Langspan/langspan.github.io">Website source</a><a href="https://github.com/Langspan/Langspan">Development repo <span class="access-label">Access required</span></a></div></footer>
+  <footer class="site-footer wrap"><a href="#top" aria-label="LangSpan home"><img src="assets/brand/langspan-lockup-light.svg" width="148" height="37" alt="LangSpan"></a><p>Coordination for coding agents.</p><div><a href="https://github.com/Langspan/langspan.github.io">Website source</a><a href="https://github.com/Langspan/Langspan">Development repo <span class="access-label">Access required</span></a></div></footer>
 </body>
 </html>
