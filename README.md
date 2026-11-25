@@ -104,6 +104,11 @@ and action. Product behavior comes from the implementation and its evidence.
 
 ## Review changes
 
+Page and UI work uses [Impeccable](https://github.com/pbakaus/impeccable)
+for design critique, focused refinement and final review alongside the existing
+brand and product evidence. [AGENTS.md](AGENTS.md) records the workflow for
+contributors and coding agents.
+
 Check every story and step, Play/Pause, replay, keyboard tabs, copy fallback and
 both setup variants. Inspect desktop and narrow layouts with normal and reduced
 motion when changing layout. Keep availability beside setup and planned features
