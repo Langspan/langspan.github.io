@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820" role="img" aria-labelledby="title desc">
+  <title id="title">LangSpan: two agents, one clear view of overlapping work</title>
+  <desc id="desc">Illustrated workflow. Claude Code holds src/auth/session.ts for an edit. Codex receives an overlapping-file conflict. The unrelated tests/session.test.ts file remains available. Native permissions stay in control. Explore the linked interactive demo.</desc>
+  <defs>
+    <clipPath id="left-clip"><rect x="48" y="238" width="636" height="408" rx="20"/></clipPath>
+    <clipPath id="right-clip"><rect x="716" y="238" width="636" height="408" rx="20"/></clipPath>
+  </defs>
+  <rect x="1" y="1" width="1398" height="818" rx="28" fill="#F7F6F2" stroke="#DCD9D2" stroke-width="2"/>
+  <g font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <g transform="translate(41 24) scale(.76)" fill="none">
+      <g transform="translate(8 8)">
+        <path d="M 37.5 9.2 L 32 6 L 12 17.5 L 12 31 L 27.5 40" stroke="#141413" stroke-width="4.2" stroke-linecap="butt" stroke-linejoin="miter"/>
+        <path d="M 36.5 24 L 52 33 L 52 46.5 L 32 58 L 26.5 54.8" stroke="#141413" stroke-width="4.2" stroke-linecap="butt" stroke-linejoin="miter"/>
+        <path d="M 43.5 12.7 L 32 12.7 L 18 20.8 L 18 27.5 L 46 43.2 L 32 51.3 L 20.5 44.7" stroke="#D97757" stroke-width="4.2" stroke-linecap="butt" stroke-linejoin="miter"/>
+        <path d="M 49.5 16.2 L 34.5 24.8" stroke="#3F3F46" stroke-width="4.2" stroke-linecap="butt" stroke-linejoin="miter"/>
+        <path d="M 29.5 39.2 L 14.5 47.8" stroke="#3F3F46" stroke-width="4.2" stroke-linecap="butt" stroke-linejoin="miter"/>
+      </g>
+      <text x="86" y="53" fill="#141413" font-size="38" font-weight="700" letter-spacing="-1.2">LangSpan</text>
+    </g>
+    <rect x="1110" y="36" width="242" height="38" rx="19" fill="#EAE7E0"/>
+    <text x="1231" y="61" text-anchor="middle" fill="#53534F" font-size="16" font-weight="600">Illustrated workflow</text>
+    <text x="48" y="150" fill="#141413" font-size="51" font-weight="700" letter-spacing="-1.9">Same file. Clear signal.</text>
+    <text x="48" y="194" fill="#5A5A55" font-size="24">Catch the overlap. Keep parallel work moving.</text>
+
+    <rect x="48" y="238" width="636" height="408" rx="20" fill="#141413"/>
+    <g clip-path="url(#left-clip)">
+      <rect x="48" y="238" width="636" height="72" fill="#232321"/>
+      <path d="M48 310H684" stroke="#3A3A36"/>
+    </g>
+    <rect x="70" y="256" width="36" height="36" rx="10" fill="#D97757"/>
+    <text x="88" y="281" text-anchor="middle" fill="#141413" font-size="20" font-weight="700">A</text>
+    <text x="120" y="282" fill="#F7F6F2" font-size="23" font-weight="600">Claude Code</text>
+    <text x="660" y="281" text-anchor="end" fill="#B8B8AE" font-size="16">Session A</text>
+    <text x="76" y="351" fill="#A1A1AA" font-size="18">Refresh session handling</text>
+    <g font-family="'SFMono-Regular', Consolas, 'Liberation Mono', monospace">
+      <text x="76" y="392" fill="#D97757" font-size="20">›</text>
+      <text x="102" y="392" fill="#E5E4DF" font-size="20">Edit src/auth/session.ts</text>
+      <text x="76" y="443" fill="#8E8E88" font-size="19">− return session;</text>
+      <rect x="64" y="461" width="604" height="45" rx="7" fill="#26362D"/>
+      <text x="76" y="490" fill="#C0D7C9" font-size="19">+ return refreshSession(session);</text>
+    </g>
+    <path d="M76 534H656" stroke="#363633"/>
+    <circle cx="87" cy="568" r="11" fill="#D97757"/>
+    <path d="m82 568 4 4 6-7" fill="none" stroke="#141413" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="110" y="574" fill="#F7F6F2" font-size="21" font-weight="600">File reserved for this edit</text>
+    <text x="76" y="612" fill="#B8B8AE" font-size="18">The host’s permission flow still applies.</text>
+
+    <rect x="716" y="238" width="636" height="408" rx="20" fill="#141413"/>
+    <g clip-path="url(#right-clip)">
+      <rect x="716" y="238" width="636" height="72" fill="#232321"/>
+      <path d="M716 310H1352" stroke="#3A3A36"/>
+    </g>
+    <rect x="738" y="256" width="36" height="36" rx="10" fill="#E8E6E0"/>
+    <text x="756" y="281" text-anchor="middle" fill="#141413" font-size="20" font-weight="700">B</text>
+    <text x="788" y="282" fill="#F7F6F2" font-size="23" font-weight="600">Codex</text>
+    <text x="1328" y="281" text-anchor="end" fill="#B8B8AE" font-size="16">Session B</text>
+    <text x="744" y="351" fill="#A1A1AA" font-size="18">Adjust the same session handler</text>
+    <g font-family="'SFMono-Regular', Consolas, 'Liberation Mono', monospace">
+      <text x="744" y="392" fill="#D97757" font-size="20">›</text>
+      <text x="770" y="392" fill="#E5E4DF" font-size="20">apply_patch src/auth/session.ts</text>
+    </g>
+    <rect x="740" y="421" width="588" height="103" rx="10" fill="#30221E" stroke="#8F513D"/>
+    <rect x="740" y="435" width="4" height="75" rx="2" fill="#D97757"/>
+    <text x="760" y="457" fill="#F3C1AF" font-size="23" font-weight="600">This file is already in use.</text>
+    <text x="760" y="493" fill="#D8B9AE" font-size="18">Session A is editing session.ts.</text>
+    <circle cx="755" cy="568" r="11" fill="none" stroke="#D97757" stroke-width="2"/>
+    <path d="M750 568h10" stroke="#D97757" stroke-width="2" stroke-linecap="round"/>
+    <text x="778" y="574" fill="#F7F6F2" font-size="21" font-weight="600">Overlapping edit declined</text>
+    <text x="744" y="612" fill="#B8B8AE" font-size="18">Choose other work, or retry after release.</text>
+
+    <rect x="48" y="668" width="1304" height="64" rx="12" fill="#FFFFFF" stroke="#DCD9D2"/>
+    <circle cx="80" cy="700" r="12" fill="#E8EBE5"/>
+    <path d="m74 700 4 4 8-8" fill="none" stroke="#445C4C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="105" y="707" fill="#141413" font-size="19" font-weight="600">Still available</text>
+    <text x="270" y="707" fill="#3F3F46" font-size="20" font-family="'SFMono-Regular', Consolas, 'Liberation Mono', monospace">tests/session.test.ts</text>
+    <text x="1328" y="707" text-anchor="end" fill="#5A5A55" font-size="19">Unrelated work can continue.</text>
+    <text x="48" y="778" fill="#686861" font-size="17">Your agents. Your sessions. Shared coordination.</text>
+    <rect x="1000" y="752" width="352" height="44" rx="22" fill="#141413"/>
+    <circle cx="1027" cy="774" r="12" fill="#D97757"/>
+    <path d="m1024 768 8 6-8 6z" fill="#141413"/>
+    <text x="1050" y="781" fill="#F7F6F2" font-size="18" font-weight="600">Explore the walkthrough</text>
+  </g>
+</svg>
