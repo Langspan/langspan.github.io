@@ -2,12 +2,12 @@
 
 # Your agents. On the same page.
 
-The [LangSpan product website](https://langspan.github.io/). LangSpan gives a
+The [LangSpan product website](https://langspan.dev/). LangSpan gives a
 team's coding agents a shared view of work in progress. The goal is to help
 people build connected parts of a project with less avoidable repair and less
 manual relay between their sessions.
 
-[![LangSpan illustrated workflow](assets/product/langspan-overview.svg)](https://langspan.github.io/#team-story)
+[![LangSpan illustrated workflow](assets/product/langspan-overview.svg)](https://langspan.dev/#team-story)
 
 ## Follow the team story
 
