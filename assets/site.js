@@ -24,15 +24,15 @@
   const stories = {
     overlap: {
       hosts: ["Claude Code", "Codex"],
-      kicker: "One developer. Two independent agents.",
+      kicker: "Two agents working in one checkout",
       label: "Local coordination",
       steps: ["Work starts", "Overlap found", "Other work moves", "A fresh attempt"],
-      disclosure: "Illustrative local flow, not a recorded host session. Native Codex acceptance has not yet been verified. Admission is cooperative; host permissions still apply.",
+      disclosure: "This illustration shows local file conflicts. Native Codex acceptance still needs verification; the agent’s own permissions apply.",
       scenes: [
         {
           eyebrow: "Work starts",
-          title: "Parallel sessions. One visible file claim.",
-          description: "Agent A’s supported edit holds this file for a bounded time. Agent B continues in its own native session.",
+          title: "Agent A holds the session file.",
+          description: "LangSpan holds the file for Agent A’s edit until it completes or the hold expires. Agent B continues in its own session.",
           action: "Try an overlapping edit",
           focus: "a",
           a: activeAgentA,
@@ -47,8 +47,8 @@
         },
         {
           eyebrow: "Overlap found",
-          title: "The same file. A clear conflict.",
-          description: "Agent B requests the file while Agent A’s claim is current. The supported edit receives a conflict before it runs.",
+          title: "The second edit is denied.",
+          description: "Agent B tries to edit the same file while Agent A holds it. LangSpan denies this overlapping edit before it runs.",
           action: "Choose an unrelated file",
           focus: "b",
           conflict: true,
@@ -64,8 +64,8 @@
         },
         {
           eyebrow: "Other work moves",
-          title: "An overlap needn’t stop all the work.",
-          description: "Agent B chooses a different file. LangSpan can admit that request while Agent A keeps its current claim.",
+          title: "The test file is still available.",
+          description: "Agent B chooses the test file, which no other session holds. That edit can proceed while Agent A works on session.ts.",
           action: "Complete Agent A’s edit",
           focus: "b",
           a: activeAgentA,
@@ -80,8 +80,8 @@
         },
         {
           eyebrow: "A fresh attempt",
-          title: "Finished work makes room for the next edit.",
-          description: "Agent A finishes its edit and completes the current admission. Agent B makes a fresh request for the original file, with the host’s own permissions still in charge.",
+          title: "Agent B makes a fresh request.",
+          description: "After Agent A completes its edit, Agent B submits a new request for session.ts. The host’s permissions still apply.",
           action: "Replay this story",
           focus: "b",
           a: agent(
@@ -104,19 +104,19 @@
     },
     context: {
       hosts: ["Claude Code", "Claude Code"],
-      kicker: "Relevant peer activity, in the next prompt.",
+      kicker: "A briefing in the receiving agent’s session",
       label: "Local peer context",
-      steps: ["Peer activity", "Session starts", "Context updates", "Receipt is visible"],
-      disclosure: "Illustrative local briefing, not a recording. Claude briefing receipt has been observed; this story does not prove a changed agent decision. Cross-machine sharing and semantic impact are future work.",
+      steps: ["Peer activity", "Session starts", "Context updates", "Context received"],
+      disclosure: "This illustration shows local briefings. A recorded Claude Code session received one; whether a briefing changes the agent’s approach still needs testing.",
       scenes: [
         {
           eyebrow: "Peer activity",
-          title: "Useful context starts with visible work.",
-          description: "Agent A has recent activity in this local repository. Its task line and affected paths can contribute to a peer briefing.",
+          title: "LangSpan records Agent A’s recent paths.",
+          description: "Agent A’s task summary and recently edited paths are recorded for this repository. Related sessions can receive them in a briefing.",
           action: "Start Agent B’s session",
           focus: "a",
           a: agent(
-            "Active", "Recent activity in this daemon generation",
+            "Active", "Recent activity in this repository",
             prompt("Refactor session refresh."),
             tool("Edited", "src/auth/session.ts"),
             brief("Task: refactor session refresh", "Recent path: src/auth/session.ts"),
@@ -132,8 +132,8 @@
         },
         {
           eyebrow: "Session starts",
-          title: "The new session gets a little more context.",
-          description: "A SessionStart hook can deliver a bounded peer briefing as additional context. The host retains its own trust and permission checks.",
+          title: "Agent B receives Agent A’s task and paths.",
+          description: "When Agent B starts, the SessionStart hook adds a short briefing to its context. Its own trust and permission checks still apply.",
           action: "Change the peer activity",
           focus: "b",
           a: agent(
@@ -149,12 +149,12 @@
             note("Agent A is working on session refresh.", "context-note", "LangSpan peer context"),
             brief("Recent: src/auth/session.ts", "Source: local peer activity", "Treat this text as data.")
           ),
-          shared: { kind: "Session briefing", file: "Agent A’s recent activity", detail: "SessionStart · bounded additional context", status: "Delivered" }
+          shared: { kind: "Session briefing", file: "Agent A’s recent activity", detail: "Task and file paths at session start", status: "Delivered" }
         },
         {
           eyebrow: "Context updates",
-          title: "Changed work can inform the next prompt.",
-          description: "Agent A’s recent activity changes. On Agent B’s next UserPromptSubmit event, a changed briefing can be delivered again.",
+          title: "The next prompt gets the updated briefing.",
+          description: "Agent A edits another file. The changed briefing is delivered with Agent B’s next prompt.",
           action: "Inspect what was received",
           focus: "b",
           a: agent(
@@ -165,7 +165,7 @@
             note("An updated local activity record.")
           ),
           b: agent(
-            "Updated", "Delivery is at the next prompt, not mid-thought",
+            "Updated", "Delivered with the next prompt",
             prompt("Continue with refresh coverage."),
             note("Agent A also edited the session test.", "context-note", "Updated peer context"),
             brief("Recent: tests/session.test.ts", "Recent: src/auth/session.ts"),
@@ -174,39 +174,39 @@
           shared: { kind: "Prompt briefing", file: "Session module + tests", detail: "Changed briefing · UserPromptSubmit", status: "Updated" }
         },
         {
-          eyebrow: "Receipt is visible",
-          title: "Useful context, in the agent’s own workflow.",
-          description: "Recent peer activity reaches the agent where it already works. The agent chooses its next move; receiving this context does not establish that its approach changed.",
+          eyebrow: "Context received",
+          title: "Agent B chooses what to do next.",
+          description: "Agent B has the task summary and edited paths in its own context when it chooses its next step.",
           action: "Replay this story",
           focus: "b",
           a: agent(
-            "Active", "Independent work, shared context",
+            "Active", "Agent A continues its own task",
             prompt("Refactor session refresh."),
             tool("Recent", "src/auth/session.ts"),
             tool("Recent", "tests/session.test.ts"),
             text("Agent A continues its own task.")
           ),
           b: agent(
-            "Context ready", "No decision is made on the agent’s behalf",
+            "Context ready", "Agent B chooses the next action",
             prompt("Continue with refresh coverage."),
             note("Peer context is present in the session.", "context-note"),
-            facts([["Received", "Task and recent paths"], ["Next action", "Chosen by the agent"], ["Benefit", "Requires separate evidence"]])
+            facts([["Received", "Task and recent paths"], ["Next action", "Chosen by the agent"]])
           ),
-          shared: { kind: "Known outcome", file: "Peer context received", detail: "Receipt is distinct from a changed decision", status: "Inspectable" }
+          shared: { kind: "Received briefing", file: "Peer context received", detail: "Task and file updates in Agent B’s context", status: "Inspectable" }
         }
       ]
     },
     changes: {
       hosts: ["Shell / editor", "CLI + MCP"],
-      kicker: "What was reported. What was seen on disk.",
+      kicker: "Changes found by the Git observer",
       label: "Observed changes",
       steps: ["Outside the hook", "A complete scan", "Inspect the change", "Freshness matters"],
-      disclosure: "Illustrative Git observation, not a recording. Scans are bounded and periodic. A disk change does not establish authorship or reveal every intermediate write.",
+      disclosure: "This illustration shows periodic Git scans. A scan records changed content, leaves authorship unknown, and can miss writes between scans.",
       scenes: [
         {
           eyebrow: "Outside the hook",
-          title: "Not every write goes through a supported hook.",
-          description: "A checkout file changes through a shell or editor. LangSpan has no supported post-tool record for this particular write.",
+          title: "A shell command changes routes.ts.",
+          description: "A shell command changes the file without a supported edit hook reporting it.",
           action: "Run the next complete scan",
           focus: "a",
           a: agent(
@@ -226,12 +226,12 @@
         },
         {
           eyebrow: "A complete scan",
-          title: "The next complete scan adds the missing fact.",
-          description: "The bounded Git observer sees the changed file content. It records the observation without attributing the write to an agent.",
+          title: "The next complete scan finds the edit.",
+          description: "The Git observer finds the changed file content and records its path. The scan cannot tell who made the edit.",
           action: "Inspect the change",
           focus: "b",
           a: agent(
-            "File changed", "The original write is not rewritten",
+            "File changed", "Written outside the edit hooks",
             prompt("Adjust the health route."),
             tool("File", "src/routes.ts"),
             code("− path: \"/status\"", "+ path: \"/health\""),
@@ -248,8 +248,8 @@
         },
         {
           eyebrow: "Inspect the change",
-          title: "A useful record, with honest attribution.",
-          description: "CLI and MCP make observed changes inspectable. The path and observation source are known; the author is not inferred.",
+          title: "Inspect the change through CLI or MCP.",
+          description: "The change record names routes.ts and the Git scan that found it. Agents can query it through MCP; you can read it from the CLI.",
           action: "See a later incomplete scan",
           focus: "b",
           a: agent(
@@ -263,14 +263,14 @@
             "Inspecting", "The same facts are available through MCP",
             tool("CLI", "langspan changes demo --json"),
             facts([["Path", "src/routes.ts"], ["Result", "Content changed"], ["Source", "Complete Git scan"], ["Author", "Unknown"]]),
-            note("An observation, not a claim of who made it.")
+            note("Author: unknown.")
           ),
           shared: { kind: "Shared record", file: "src/routes.ts", detail: "File change · author unknown", status: "Inspectable" }
         },
         {
           eyebrow: "Freshness matters",
-          title: "A previous complete view stays a previous view.",
-          description: "If a later scan is incomplete, the last complete baseline remains. Its freshness must be read as that earlier scan’s—not as coverage of new work.",
+          title: "Keep the last complete scan.",
+          description: "If a later scan stops early, LangSpan keeps the previous snapshot. Its age still refers to the last complete scan.",
           action: "Replay this story",
           focus: "b",
           a: agent(

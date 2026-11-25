@@ -1,5 +1,28 @@
 # Product presentation verification
 
+## Writing-skills follow-up
+
+The follow-up applies the current core `brand-voice`, `anti-slop-writing` and
+`readme-glow-up` skills. Product claims were checked against core commit
+`86279ce57a1e05000459db453042d74d70e8c54f`, including the remote briefing and
+check-and-landing implementations. Copy, scenario text and documentation change;
+layout, styles, brand assets and interaction logic are unchanged.
+
+- `node --check assets/site.js` passed.
+- `git diff --check` passed.
+- The existing DOM harness passed all 89 assertions across the twelve scenes,
+  playback, replay, keyboard controls, visibility pause, setup variants and
+  clipboard success, denial and timeout.
+- An independent copy review checked the wording against the new skills; a
+  separate source review checked current capabilities and limits.
+- No new browser inspection or native-agent acceptance run was performed.
+  The earlier browser-controller failure is recorded below. DOM checks do not
+  establish browser layout or native-host behavior.
+- No Rust source or dependencies changed. The local Rust suite was not rerun
+  for this copy-only update.
+
+## Original presentation pass
+
 This refresh changes the product site and documentation. It does not change the
 LangSpan engine. Product claims were reconciled with core main `47ed6c55`,
 including automatic local briefings and the source-version work merged in

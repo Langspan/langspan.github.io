@@ -2,30 +2,30 @@
 
 # Your agents. On the same page.
 
-The [LangSpan product website](https://langspan.github.io/): shared context and
-coordination for the coding agents you already use.
+The [LangSpan product website](https://langspan.github.io/). LangSpan tells your
+coding agents what the others are working on and flags overlapping edits.
 
 [![LangSpan illustrated workflow](assets/product/langspan-overview.svg)](https://langspan.github.io/#demo)
 
-## The experience
+## Follow two agents at work
 
-Three guided, interactive stories explain what LangSpan brings to independent
-agent sessions. Visitors can play a story, pause, select any step, replay, or
-switch scenarios:
+Three interactive stories show agents receiving briefings, trying overlapping
+edits and inspecting changes. Visitors can play, pause, select a step or replay:
 
-- **Catch an overlap:** a current file claim surfaces an overlapping edit while
-  unrelated work stays available.
-- **Share the context:** relevant peer work reaches another agent's session and
-  prompt context.
-- **See the changes:** complete Git scans provide observations separate from
-  host-reported tool results.
+- Catch an overlap: Agent B tries to edit a file Agent A currently holds, then
+  moves to an unclaimed test file.
+- Share the context: Agent B receives Agent A's task and recent file paths at
+  session start, followed by an updated briefing on its next prompt.
+- See the changes: a Git scan finds a shell edit and records it without
+  assigning an author.
 
-The walkthrough is explicitly an **interactive illustration**, not a recording
-or an acceptance result. It runs in the browser and contacts no agent or daemon.
+The walkthrough is labelled as an interactive illustration. It runs in the
+browser without contacting an agent or daemon; it is not a recording or test
+evidence.
 
 ## Work on the site
 
-This is buildless HTML, CSS and JavaScript for **GitHub Pages**. Serve the
+This is buildless HTML, CSS and JavaScript for GitHub Pages. Serve the
 repository root with your usual static server; no package installation or build
 step is needed. For example:
 
@@ -55,16 +55,21 @@ The product illustrations use the same original vector paths. Composition, copy
 and walkthrough code were created for LangSpan.
 
 The core repository is [Langspan/Langspan](https://github.com/Langspan/Langspan).
-It currently requires access. Setup commands match the source CLI; the page does
-not advertise an anonymous release download or an unselected licence.
+It currently requires access. Setup commands match the source CLI.
 [Implementation status](https://github.com/Langspan/Langspan/blob/main/docs/IMPLEMENTATION_STATUS.md)
-holds the retained evidence and remaining acceptance work. The public story is
-agent-first: one developer running several agents is the starting use case;
-teams and cross-machine coordination extend the product direction.
+holds the recorded evidence and remaining verification work. The page starts
+with one developer running several agents. It also describes the opt-in remote
+briefing and check-and-landing commands now in the source preview. The code graph
+remains planned.
+
+Copy follows the core repository's `brand-voice`, `anti-slop-writing` and
+`readme-glow-up` skills: one headline, then sentences that name the agent, file
+and action. Product behavior comes from the implementation and its evidence.
 
 ## Review changes
 
 Check every story and step, Play/Pause, replay, keyboard tabs, copy fallback and
 both setup variants. Inspect desktop and narrow layouts with normal and reduced
-motion. Keep current availability beside setup and future capabilities labelled.
+motion when changing layout. Keep availability beside setup and planned features
+labelled.
 Publish through a feature branch and pull request to this GitHub Pages repo.
