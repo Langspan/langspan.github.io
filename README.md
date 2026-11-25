@@ -75,14 +75,14 @@ is a padded export of that mark for GitHub.
 The product illustrations use the same original vector paths. Composition, copy
 and walkthrough code were created for LangSpan.
 
-The core repository is [Langspan/Langspan](https://github.com/Langspan/Langspan).
-It currently requires access. The page shows single-project hook setup.
-The [core setup guide](https://github.com/Langspan/Langspan/blob/main/docs/usage.md#connect-a-native-agent)
+The core repository is [Langspan/LangSpan.dev](https://github.com/Langspan/LangSpan.dev).
+The source is public. The page shows single-project hook setup.
+The [core setup guide](https://github.com/Langspan/LangSpan.dev/blob/main/docs/usage.md#connect-a-native-agent)
 also covers user-level hooks and MCP registration across Git repositories.
 Both setup paths use the same product and supported-tool limits.
-[Implementation status](https://github.com/Langspan/Langspan/blob/main/docs/IMPLEMENTATION_STATUS.md)
+[Implementation status](https://github.com/Langspan/LangSpan.dev/blob/main/docs/IMPLEMENTATION_STATUS.md)
 holds the recorded evidence and remaining verification work.
-[The mission](https://github.com/Langspan/Langspan/blob/main/docs/mission.md)
+[The mission](https://github.com/Langspan/LangSpan.dev/blob/main/docs/mission.md)
 owns the problem, product hypothesis and success measures. Teams are the main
 audience; one developer running several agents is also a useful entry point.
 The page describes opt-in remote briefings, check-and-landing commands,
@@ -90,7 +90,7 @@ region admission, the optional read-only dashboard and the name-based source
 index in the source preview. Interface notices remain within one physical
 workspace.
 
-One [retained native run](https://github.com/Langspan/Langspan/blob/main/docs/evidence/mixed-hosts/README.md)
+One [retained native run](https://github.com/Langspan/LangSpan.dev/blob/main/docs/evidence/mixed-hosts/README.md)
 records Claude Code and Codex taking sequential turns in one shared checkout:
 Codex completed an edit, Claude preserved its change, and Codex later declined
 to edit without rereading the file. Simultaneous mixed-host conflicts, live
