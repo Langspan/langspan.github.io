@@ -60,11 +60,22 @@
       root.dataset.frame = frame;
       root.dataset.motionState = reducedMotion.matches ? "reduced" :
         staticMode ? "static" : playing ? "playing" : frame === "end" ? "complete" : "paused";
+      const entering = [];
       items.forEach(function (item) {
         const itemStep = Number(item.dataset.teamStoryStep);
-        item.classList.toggle("is-visible", complete || itemStep <= step);
+        const visible = complete || itemStep <= step;
+        if (visible && !item.classList.contains("is-visible")) entering.push(item);
+        item.classList.toggle("is-visible", visible);
         item.classList.toggle("is-current", !complete && itemStep === step);
       });
+      if (frame !== "static" && window.LangSpanMotion) {
+        entering.forEach(function (item) {
+          window.LangSpanMotion.enter(item, {
+            distance: item.classList.contains("team-story__connection") ? 0 : 6,
+            duration: 0.32
+          });
+        });
+      }
       controls.hidden = staticMode;
       play.disabled = staticMode;
       replay.disabled = staticMode;
@@ -78,6 +89,7 @@
 
     function stop(shouldAnnounce) {
       clearTimer();
+      if (window.LangSpanMotion) window.LangSpanMotion.settle(root);
       playing = false;
       render();
       if (shouldAnnounce) announce("Paused. " + stepMessage());
@@ -85,6 +97,7 @@
 
     function showComplete(message) {
       clearTimer();
+      if (window.LangSpanMotion) window.LangSpanMotion.settle(root);
       playing = false;
       step = count;
       frame = "static";
@@ -123,6 +136,7 @@
     function start(reset) {
       if (unavailable() || document.hidden) return;
       clearTimer();
+      if (window.LangSpanMotion) window.LangSpanMotion.settle(root);
       if (reset || frame === "static" || frame === "end" || step >= count) step = 0;
       frame = "step";
       playing = true;
@@ -134,6 +148,7 @@
     function select(nextStep) {
       if (unavailable()) return;
       clearTimer();
+      if (window.LangSpanMotion) window.LangSpanMotion.settle(root);
       playing = false;
       step = Math.max(0, Math.min(count, nextStep));
       frame = step === count ? "end" : "step";

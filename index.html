@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#F7F6F2">
+  <meta name="theme-color" content="#F4F3EF">
   <title>LangSpan — Your agents. On the same page.</title>
   <meta name="description" content="Help your team keep building together with coding agents. LangSpan shares work in progress so related changes reach the next session in time.">
   <link rel="canonical" href="https://langspan.github.io/">
@@ -19,6 +19,8 @@
   <link rel="icon" href="assets/brand/langspan-favicon-16px.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/site.css">
   <link rel="stylesheet" href="assets/team-story.css">
+  <script src="assets/vendor/motion-14.14.0/motion-mini.js" defer></script>
+  <script src="assets/motion-enhancements.js" defer></script>
   <script src="assets/site.js" defer></script>
   <script src="assets/team-story.js" defer></script>
 </head>
@@ -26,7 +28,7 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="header-inner wrap">
-      <a class="brand" href="#top" aria-label="LangSpan home"><img src="assets/brand/langspan-lockup-light.svg" width="172" height="43" alt="LangSpan"></a>
+      <a class="brand" href="#top" aria-label="LangSpan home"><img src="assets/brand/langspan-lockup-light.svg" width="172" height="48" alt="LangSpan"></a>
       <nav aria-label="Main navigation">
         <a href="#team-story">The team story</a>
         <a href="#mission">Our mission</a>
@@ -38,9 +40,9 @@
   <main id="main">
     <section class="hero wrap" id="top" aria-labelledby="hero-title">
       <p class="eyebrow"><span class="accent-line" aria-hidden="true"></span> For teams building with coding agents</p>
-      <h1 id="hero-title">Your agents.<br><span>On the same page.</span></h1>
-      <p class="hero-copy">Give your team’s coding agents a shared view of work in progress,<br class="desktop-only"> so everyone can contribute to the same project.</p>
-      <div class="hero-actions">
+      <h1 id="hero-title" data-motion-intro>Your agents.<br><span>On the same page.</span></h1>
+      <p class="hero-copy" data-motion-intro>Give your team’s coding agents a shared view of work in progress,<br class="desktop-only"> so everyone can contribute to the same project.</p>
+      <div class="hero-actions" data-motion-intro>
         <a class="button button-dark" href="#team-story"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4.5 15 10l-8 5.5Z" fill="currentColor"/></svg>See the team story</a>
         <a class="button button-outline" href="#start">Build from source</a>
       </div>
@@ -52,7 +54,7 @@
       <div class="problem-copy"><p>A teammate offers to help, but a swarm has already finished the task. Others choose unrelated work to avoid getting in the way. The team is ready to contribute; keeping up with the work has become a job of its own.</p><p>Separate worktrees give agents room to edit. Related changes can still meet incompatible assumptions when they come back together. Shared awareness needs to start while the work is happening.</p></div>
     </section>
 
-    <div class="team-story-section wrap">
+    <div class="team-story-section wrap" data-motion-reveal>
       <section id="team-story" class="team-story" data-team-story data-motion-root data-motion-mode="step" data-team-story-step-count="4" data-frame="static" data-motion-state="static" aria-labelledby="team-story-heading">
         <header class="team-story__heading">
           <div>
@@ -139,7 +141,7 @@
               Replay
             </button>
           </div>
-          <span class="team-story__progress" data-team-story-progress aria-hidden="true">Complete story</span>
+          <div class="team-story__progress-group"><span class="team-story__progress" data-team-story-progress aria-hidden="true">Complete story</span><span class="team-story__progress-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
           <p class="team-story__keys">Use ← and → to step through.</p>
         </div>
         <p class="team-story__status" data-motion-status role="status" aria-live="polite" aria-atomic="true">The complete story is shown.</p>
@@ -147,7 +149,7 @@
       </section>
     </div>
 
-    <section class="mission-section wrap" id="mission" aria-labelledby="mission-title">
+    <section class="mission-section wrap" data-motion-reveal id="mission" aria-labelledby="mission-title">
       <p class="eyebrow">Our mission</p>
       <div class="mission-content"><h2 id="mission-title">Help teams keep building together as their agents write more code.</h2><div><p>People bring judgment, feedback and different expertise. We’re building LangSpan so their agents can work on connected changes with less repair and less manual relay between sessions.</p><p>We’ll judge it by the combined result: useful work progressing in parallel, fewer avoidable corrections and the same standard of checks and review. Those gains are the goal we’re testing.</p></div></div>
     </section>
@@ -282,6 +284,6 @@
 
     <section class="closing wrap"><img src="assets/brand/langspan-icon-light.svg" width="72" height="72" alt=""><h2>Start with a<br>shared project.</h2><p>Connect the agents you already use and see what reaches the next session.</p><a class="button button-dark" href="#team-story">See the team story</a></section>
   </main>
-  <footer class="site-footer wrap"><a href="#top" aria-label="LangSpan home"><img src="assets/brand/langspan-lockup-light.svg" width="148" height="37" alt="LangSpan"></a><p>Built for people and their coding agents.</p><div><a href="https://github.com/Langspan/langspan.github.io">Website source</a><a href="https://github.com/Langspan/Langspan">Development repo <span class="access-label">Access required</span></a></div></footer>
+  <footer class="site-footer wrap"><a href="#top" aria-label="LangSpan home"><img src="assets/brand/langspan-lockup-light.svg" width="148" height="41" alt="LangSpan"></a><p>Built for people and their coding agents.</p><div><a href="https://github.com/Langspan/langspan.github.io">Website source</a><a href="https://github.com/Langspan/Langspan">Development repo <span class="access-label">Access required</span></a></div></footer>
 </body>
 </html>
