@@ -52,4 +52,5 @@ await browser.close();
 writeFileSync(out+'/accessibility.json',JSON.stringify(a11y,null,2));writeFileSync(out+'/lab-metrics.json',JSON.stringify(perf,null,2));
 console.log('Accessibility findings:',JSON.stringify(a11y));console.log('Lab metrics (not field measurements):',JSON.stringify(perf));
 assert.deepEqual(errors,[],'browser errors');
+assert.deepEqual(a11y.filter(x=>x.violations.length),[],'WCAG scan findings');
 console.log('PASS: five widths, demo steps and pause, keyboard tabs, copy, download paths, FAQ, reduced motion, and no-JS fallback.');

@@ -24,7 +24,7 @@ jobs:
       - name: Install pinned browser checks
         working-directory: review
         run: |
-          npm install --no-save --ignore-scripts playwright@1.65.1 axe-core@4.10.3
+          npm install --no-save --ignore-scripts playwright@1.65.1 axe-core@4.10.3 puppeteer-core@24.39.0
           npx playwright install --with-deps chromium
       - name: Validate user journey
         run: |
@@ -39,6 +39,8 @@ jobs:
           git -C /tmp/hallmark remote add origin https://github.com/nutlope/hallmark.git
           git -C /tmp/hallmark fetch --depth=1 origin 04977e15f3dfd6ee4b74c887dac3eb52665d6c92
           git -C /tmp/hallmark checkout --detach FETCH_HEAD
+          export HALLMARK_PUPPETEER="$PWD/review/node_modules/puppeteer-core"
+          export CHROME_PATH="$(node -e \"console.log(require('./review/node_modules/playwright').chromium.executablePath())\")"
           node /tmp/hallmark/skills/hallmark/scripts/sloplint.mjs index.html assets/site.css --genre editorial --render --url http://127.0.0.1:8123/ > review-output/hallmark.txt 2>&1
       - uses: actions/upload-artifact@v4
         if: always()

@@ -26,3 +26,16 @@ The website leads with the existing promise and concrete mechanism, then an illu
 
 ## Validation
 See the launch-review workflow and artifacts; don't report a pass before observed. Review desktop/mobile, release links, copy, keyboard, motion pause, static fallback, and actual binary smoke tests. Physical devices and independent reviewer agents are not assumed available.
+
+## Market scan (public descriptions, 25 November 2026)
+
+- [Cork](https://corkcli.com/blog/coordinate-ai-coding-agents-across-team) describes native agent coordination, cross-machine awareness and write gates on a paid team offering.
+- [Coordinaut](https://github.com/LevDomasnih/coordinaut) describes task ownership, scoped claims, handoffs and hosted sync.
+- [Kith](https://github.com/connorhriley/kith) describes local coordination, scoped claims, worktrees and verified integration.
+- [AgentLane](https://github.com/thetrueshags/AgentLane) describes Git-native coordination with task lanes and exclusive path claims.
+
+These are provider descriptions, not independent tests. Shared coordination is not a new category. LangSpan should compete on how early and usefully relevant context reaches an existing session, transparent enforcement boundaries, open-source deployment and adoption friction. The product has not established superiority or comparative time savings. Keep competitor claims out of the public homepage unless independently verified.
+
+## First rendered iteration
+
+[Run 45724068958](https://github.com/Langspan/langspan.github.io/actions/runs/45724068958) passed the five-width interactive user journey, binary hash/version verification and the release's scripted two-developer scenario. The initial dashboard capture failed because its harness used the wrong hook argument order, not because the scenario failed. Fixed the invocation. Initial axe scan found contrast failures in existing illustration labels and two horizontally scrolling preformatted code blocks. Corrected both categories and made WCAG-tagged findings fail the browser gate. The first Hallmark source audit found many legacy token and copy style findings; its browser tier did not run without Puppeteer. Its findings are not a certification and the original brand is intentionally retained. The second pass removes redundant section eyebrows, improves text contrast, and preserves semantic labels and source evidence.
