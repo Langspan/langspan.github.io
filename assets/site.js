@@ -40,7 +40,7 @@
             "Exploring", "An independent native session",
             prompt("Add refresh coverage."),
             text("Checking the session flow…"),
-            tool("Read", "src/auth/session.ts"),
+            tool("Inspect", "src/auth/session.ts"),
             text("Choosing the next edit.")
           ),
           shared: { kind: "Shared work", file: "src/auth/session.ts", detail: "Current file claim · Agent A", status: "In progress" }
@@ -431,6 +431,19 @@
     render();
   }
 
+
+  const detailExamples = byId("detail-examples");
+  if (detailExamples) {
+    detailExamples.addEventListener("toggle", () => {
+      if (!detailExamples.open) pause();
+    });
+    const revealLinkedExample = () => {
+      if (window.location && window.location.hash === "#demo") detailExamples.open = true;
+    };
+    window.addEventListener("hashchange", revealLinkedExample);
+    revealLinkedExample();
+  }
+
   function selectStep(index) {
     if (!Number.isInteger(index) || index < 0 || index >= stories[currentStory].scenes.length) return;
     pause();
@@ -453,6 +466,8 @@
   }
 
   function startPlayback() {
+    const details = byId("detail-examples");
+    if (details) details.open = true;
     if (document.hidden) return;
     if (currentStep === stories[currentStory].scenes.length - 1) {
       currentStep = 0;
@@ -464,6 +479,8 @@
   }
 
   function openStory(name) {
+    const details = byId("detail-examples");
+    if (details) details.open = true;
     selectStory(name);
     const section = byId("demo");
     if (section) section.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth", block: "start" });
