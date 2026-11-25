@@ -7,7 +7,16 @@ team's coding agents a shared view of work in progress. The goal is to help
 people build connected parts of a project with less avoidable repair and less
 manual relay between their sessions.
 
-[![LangSpan illustrated workflow](assets/product/langspan-overview.svg)](https://langspan.dev/#team-story)
+<a href="https://langspan.dev/#demo">
+  <picture>
+    <source media="(max-width: 600px)" srcset="assets/product/langspan-overview-compact.svg">
+    <img src="assets/product/langspan-overview.svg" alt="LangSpan holds a file for Agent A, denies Agent B’s overlapping edit, and leaves an unrelated test file available." width="1400">
+  </picture>
+</a>
+
+*An authored illustration of local coordination. The brief animation settles into
+the complete picture; reduced motion shows that picture immediately.
+[Explore each step](https://langspan.dev/#demo) with Play, Pause and Replay.*
 
 ## Follow the team story
 
@@ -62,6 +71,7 @@ initial example and setup instructions. Reduced-motion preferences and
 | `assets/vendor/motion-14.14.0/` | Pinned Motion mini build, license and provenance |
 | `assets/brand/` | Reference image, corrected vector outlines and organization avatar |
 | `assets/product/` | Original product illustration and social preview card |
+| `docs/readme-animation.md` | Card storyboard, source references, embedding and verification |
 | `docs/marketing-refresh-plan.md` | Scope, product basis and validation plan |
 | `docs/motion-refresh-validation.md` | Motion behavior, fallback and browser verification |
 
@@ -93,10 +103,12 @@ workspace.
 One [retained native run](https://github.com/Langspan/LangSpan.dev/blob/main/docs/evidence/mixed-hosts/README.md)
 records Claude Code and Codex taking sequential turns in one shared checkout:
 Codex completed an edit, Claude preserved its change, and Codex later declined
-to edit without rereading the file. Simultaneous mixed-host conflicts, live
-agents in linked worktrees, a completed two-machine run and comparative
-reductions in rework remain unverified. The page's authored illustrations are
-separate from this retained run.
+to edit without rereading the file. A [Mac/cloud run](https://github.com/Langspan/LangSpan.dev/blob/main/docs/evidence/two-machine/README.md)
+also records briefings reaching real sessions in both directions, without a
+change to an agent's edit because of the briefing. Simultaneous mixed-host
+conflicts, live agents in linked worktrees, two developers coordinating their
+work and comparative reductions in rework remain unverified. The page's
+authored illustrations are separate from these retained runs.
 
 Copy follows the core repository's `brand-voice`, `anti-slop-writing` and
 `readme-glow-up` skills: one headline, then sentences that name the agent, file

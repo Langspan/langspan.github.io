@@ -1,0 +1,64 @@
+# README coordination card
+
+## Intent and storyboard
+
+The README should explain one useful mechanism before the visitor reads the
+setup guide. The card follows a whole-file hold in one shared checkout:
+
+1. Agent A holds the session file for its edit.
+2. Agent B's overlapping edit is denied.
+3. An unrelated test file remains available.
+
+The complete result is the default illustration. A finite CSS highlight sequence
+directs attention through these three facts; essential text stays visible.
+This is an authored explanation, not a recording or timing measurement.
+LangSpan does not choose a new task for the agent.
+
+The mechanism is supported by the [two-session Claude Code evidence](https://github.com/Langspan/LangSpan.dev/blob/main/docs/evidence/m2-claude-code/README.md).
+Generic agent labels avoid presenting simultaneous mixed-host behavior as proven.
+The broader mission remains helping teams work on related changes together.
+
+## Delivery
+
+The desktop and compact SVGs live in `assets/product/`. Both README surfaces
+use the same artwork. The marketing README uses relative paths; the core
+README uses the canonical `https://langspan.dev/assets/product/` URLs.
+The whole image links to the website's existing `#demo` walkthrough, which
+has real Play, Pause and Replay controls.
+
+The compact illustration has its own vertical composition, selected with a
+`picture` source at widths up to 600 pixels. It is not a desktop screenshot
+shrunk to phone size. A full background plate keeps either version legible
+against light or dark GitHub themes. Approved logo paths are retained exactly.
+
+The SVGs use native vector shapes, system-fallback text and internal CSS.
+There is no JavaScript, external font, external image, SMIL or `foreignObject`.
+Animation runs once and finishes within 4.8 seconds. Reduced-motion styling
+removes it entirely, leaving the same complete illustration. Text is never
+rotated or hidden behind a timer.
+
+## Design references
+
+- [ChanMeng product-card workflow](https://github.com/ChanMeng666/chanmeng-svg-animation-studio/blob/539208618e6ca68963474f77921f62e39713bb0e/skills/chanmeng-svg-product-card/SKILL.md): source the real brand and behavior, compose the still first, inspect image-context rendering.
+- [Stageshow](https://github.com/benjitaylor/skills/blob/299140fafd08df55a9c234e610c3f64af3f45531/stageshow/SKILL.md): a short causal sequence, a clear outcome and an intentional compact layout.
+- [SVG image restrictions](https://developer.mozilla.org/en-US/docs/Web/SVG/Guides/SVG_as_an_image): scripts and external resources cannot be relied on inside an image.
+- [Pause, Stop, Hide](https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html): an SVG image cannot provide the website's interactive controls, so the README animation is brief and finite.
+
+These are design references. No upstream kit, executable skill scripts,
+third-party product artwork or runtime dependencies were imported. GitHub
+Pages continues to use the existing HTML, CSS, JavaScript and Motion mini.
+
+## Verification
+
+- Both SVGs parse as XML. Source checks confirm the approved logo path data is
+  unchanged, the animation runs once for 4.8 seconds with no delay, and all
+  essential content is present without CSS.
+- Static raster renders inspected at 960px wide (desktop) and 390px wide
+  (compact): readable copy, no clipped text, and the complete outcome present.
+  These are raster checks, not a physical-device or browser animation test.
+- Live GitHub image-context playback and website link checks are performed on
+  the pull-request branch before merging. Their observed results are recorded
+  in the pull request.
+
+This presentation-only work does not change or test the Rust core. No new
+runtime dependency or framework is added.

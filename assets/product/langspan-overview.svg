@@ -1,6 +1,39 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820" role="img" aria-labelledby="title desc">
   <title id="title">LangSpan: two agents, one clear view of overlapping work</title>
-  <desc id="desc">Illustrated workflow. Claude Code holds src/auth/session.ts for an edit. Codex receives an overlapping-file conflict. The unrelated tests/session.test.ts file remains available. Native permissions stay in control. Explore the linked interactive demo.</desc>
+  <desc id="desc">Authored illustration. Agent A holds src/auth/session.ts for an edit. Agent B receives an overlapping-file conflict. The unrelated tests/session.test.ts file remains available. Native permissions stay in control. Explore the linked interactive demo.</desc>
+  <style>
+    /* One finite 4.8-second sequence. The unanimated artwork is the full poster. */
+    .focus-admit, .focus-overlap, .focus-available {
+      opacity: 0;
+      pointer-events: none;
+      animation-duration: 4.8s;
+      animation-delay: 0s;
+      animation-iteration-count: 1;
+      animation-fill-mode: both;
+      animation-timing-function: ease-in-out;
+    }
+    .focus-admit { animation-name: focus-admit; }
+    .focus-overlap { animation-name: focus-overlap; }
+    .focus-available { animation-name: focus-available; }
+    @keyframes focus-admit {
+      0% { opacity: 0; }
+      8%, 25% { opacity: 1; }
+      34%, 100% { opacity: 0; }
+    }
+    @keyframes focus-overlap {
+      0%, 30% { opacity: 0; }
+      38%, 58% { opacity: 1; }
+      67%, 100% { opacity: 0; }
+    }
+    @keyframes focus-available {
+      0%, 63% { opacity: 0; }
+      72%, 90% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .focus-admit, .focus-overlap, .focus-available { animation: none; opacity: 0; }
+    }
+  </style>
   <defs>
     <clipPath id="left-clip"><rect x="48" y="238" width="636" height="408" rx="20"/></clipPath>
     <clipPath id="right-clip"><rect x="716" y="238" width="636" height="408" rx="20"/></clipPath>
@@ -27,7 +60,7 @@
     </g>
     <rect x="70" y="256" width="36" height="36" rx="10" fill="#D87859"/>
     <text x="88" y="281" text-anchor="middle" fill="#151513" font-size="20" font-weight="700">A</text>
-    <text x="120" y="282" fill="#F4F3EF" font-size="23" font-weight="600">Claude Code</text>
+    <text x="120" y="282" fill="#F4F3EF" font-size="23" font-weight="600">Agent A</text>
     <text x="660" y="281" text-anchor="end" fill="#B8B8AE" font-size="16">Session A</text>
     <text x="76" y="351" fill="#A1A1AA" font-size="18">Refresh session handling</text>
     <g font-family="'SFMono-Regular', Consolas, 'Liberation Mono', monospace">
@@ -41,6 +74,7 @@
     <circle cx="87" cy="568" r="11" fill="#D87859"/>
     <path d="m82 568 4 4 6-7" fill="none" stroke="#151513" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     <text x="110" y="574" fill="#F4F3EF" font-size="21" font-weight="600">File reserved for this edit</text>
+    <rect class="focus-admit" x="64" y="544" width="604" height="47" rx="10" fill="none" stroke="#D87859" stroke-width="2.5" opacity="0"/>
     <text x="76" y="612" fill="#B8B8AE" font-size="18">The host’s permission flow still applies.</text>
 
     <rect x="716" y="238" width="636" height="408" rx="20" fill="#151513"/>
@@ -50,12 +84,12 @@
     </g>
     <rect x="738" y="256" width="36" height="36" rx="10" fill="#E8E6E0"/>
     <text x="756" y="281" text-anchor="middle" fill="#151513" font-size="20" font-weight="700">B</text>
-    <text x="788" y="282" fill="#F4F3EF" font-size="23" font-weight="600">Codex</text>
+    <text x="788" y="282" fill="#F4F3EF" font-size="23" font-weight="600">Agent B</text>
     <text x="1328" y="281" text-anchor="end" fill="#B8B8AE" font-size="16">Session B</text>
     <text x="744" y="351" fill="#A1A1AA" font-size="18">Adjust the same session handler</text>
     <g font-family="'SFMono-Regular', Consolas, 'Liberation Mono', monospace">
       <text x="744" y="392" fill="#D87859" font-size="20">›</text>
-      <text x="770" y="392" fill="#E5E4DF" font-size="20">apply_patch src/auth/session.ts</text>
+      <text x="770" y="392" fill="#E5E4DF" font-size="20">Edit src/auth/session.ts</text>
     </g>
     <rect x="740" y="421" width="588" height="103" rx="10" fill="#30221E" stroke="#8F513D"/>
     <rect x="740" y="435" width="4" height="75" rx="2" fill="#D87859"/>
@@ -64,6 +98,7 @@
     <circle cx="755" cy="568" r="11" fill="none" stroke="#D87859" stroke-width="2"/>
     <path d="M750 568h10" stroke="#D87859" stroke-width="2" stroke-linecap="round"/>
     <text x="778" y="574" fill="#F4F3EF" font-size="21" font-weight="600">Overlapping edit declined</text>
+    <rect class="focus-overlap" x="736" y="417" width="596" height="111" rx="14" fill="none" stroke="#D87859" stroke-width="2.5" opacity="0"/>
     <text x="744" y="612" fill="#B8B8AE" font-size="18">Choose other work, or retry after release.</text>
 
     <rect x="48" y="668" width="1304" height="64" rx="12" fill="#FFFFFF" stroke="#DCD9D2"/>
@@ -72,6 +107,7 @@
     <text x="105" y="707" fill="#151513" font-size="19" font-weight="600">Still available</text>
     <text x="270" y="707" fill="#3F3E44" font-size="20" font-family="'SFMono-Regular', Consolas, 'Liberation Mono', monospace">tests/session.test.ts</text>
     <text x="1328" y="707" text-anchor="end" fill="#5A5A55" font-size="19">Unrelated work can continue.</text>
+    <rect class="focus-available" x="47" y="667" width="1306" height="66" rx="13" fill="none" stroke="#445C4C" stroke-width="2.5" opacity="0"/>
     <text x="48" y="778" fill="#686861" font-size="17">Your agents. Your sessions. Shared coordination.</text>
     <rect x="1000" y="752" width="352" height="44" rx="22" fill="#151513"/>
     <circle cx="1027" cy="774" r="12" fill="#D87859"/>
