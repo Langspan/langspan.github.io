@@ -12,7 +12,7 @@ const children=[];
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 function git(...args){return execFileSync('git',['-C',repo,'-c','user.name=Demo','-c','user.email=demo@example.invalid',...args],{stdio:'pipe'});}
 function cli(args,input){return execFileSync(bin,['--state-dir',state,...args],{input,encoding:'utf8',stdio:['pipe','pipe','pipe']});}
-function hook(vendor,event){return cli(['hook',vendor,'--workspace','demo','--root',repo],JSON.stringify({cwd:repo,...event}));}
+function hook(vendor,event){return execFileSync(bin,['hook',vendor,'--state-dir',state,'--workspace','demo','--root',repo],{input:JSON.stringify({cwd:repo,...event}),encoding:'utf8',stdio:['pipe','pipe','pipe']});}
 function start(args){const p=spawn(bin,args,{stdio:['ignore','pipe','ignore']});children.push(p);return p;}
 let browser;
 try{
@@ -38,4 +38,4 @@ try{
  const light=await browser.newPage({viewport:{width:1280,height:900},colorScheme:'light',deviceScaleFactor:2});await light.goto(url.trim());await light.locator('#editing').getByText('tests/session.test.ts',{exact:true}).waitFor();await light.screenshot({path:join(out,'dashboard-independent-light.png'),fullPage:true});
  writeFileSync(join(out,'dashboard-provenance.txt'),'Released v0.1.0 Linux x86-64 binary. Actual loopback dashboard; constructed Claude Code/Codex-shaped events, fictional repo, real local coordinator. No model invoked. No production data or access token in media.\n');
  console.log('PASS: real released dashboard shows a refused overlap and independent hold');
-}finally{await browser?.close();for(const p of children.reverse())p.kill('SIGTERM');await sleep(500);rmSync(base,{recursive:true,force:true});}
+}catch(error){console.error(String(error.message).replace(/([?&]t=)[a-f0-9]+/gi,'$1[redacted]'));process.exitCode=1;}finally{await browser?.close();for(const p of children.reverse())p.kill('SIGTERM');await sleep(500);rmSync(base,{recursive:true,force:true});}
