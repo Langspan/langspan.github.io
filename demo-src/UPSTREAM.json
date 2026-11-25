@@ -1,0 +1,161 @@
+{
+  "repository": "https://github.com/benjitaylor/skills",
+  "commit": "299140fafd08df55a9c234e610c3f64af3f45531",
+  "license": "MIT",
+  "files": [
+    {
+      "path": "vendor/stageshow/kit/act.ts",
+      "upstream_path": "stageshow/kit/act.ts",
+      "upstream_git_blob_sha": "10bb56809905bfc9dba5959830fbe0b5f11803ff",
+      "modified": false,
+      "local_sha256": "2f2835e6600cd62022467ab8b67534f4f478b8eed4122deffdfc21901e3da573"
+    },
+    {
+      "path": "vendor/stageshow/kit/clock.ts",
+      "upstream_path": "stageshow/kit/clock.ts",
+      "upstream_git_blob_sha": "e7cbb97d2e546053030d08d6025cbf9c2b12fb71",
+      "modified": false,
+      "local_sha256": "06f30986325edbd8d26273c94d3d92a0e68ce4bce09eb711aad68994d06bbc47"
+    },
+    {
+      "path": "vendor/stageshow/kit/code.css",
+      "upstream_path": "stageshow/kit/code.css",
+      "upstream_git_blob_sha": "cfbf5ba7877b38155b90fd432d8fe0dc3b0caee1",
+      "modified": false,
+      "local_sha256": "aa8a222394318305f3c6bfbe33ce73e95f39f686144f3a3c15579378990102bd"
+    },
+    {
+      "path": "vendor/stageshow/kit/code.tsx",
+      "upstream_path": "stageshow/kit/code.tsx",
+      "upstream_git_blob_sha": "37ef44d6d7c86e2e507dc37d9a5d0febce458c62",
+      "modified": false,
+      "local_sha256": "e7b9a2b545e7f457ec58602bcf5c9d534479e5a425ac1ee24d43f24431cbe5fb"
+    },
+    {
+      "path": "vendor/stageshow/kit/cursor.css",
+      "upstream_path": "stageshow/kit/cursor.css",
+      "upstream_git_blob_sha": "896640c63f9b39f7a06b92436079c96cb43146d0",
+      "modified": false,
+      "local_sha256": "40c69aaff8c7c970f49ef9f9f4c6d8c3f89fdf4218d8aa703cf5b36483a9e42d"
+    },
+    {
+      "path": "vendor/stageshow/kit/cursor.tsx",
+      "upstream_path": "stageshow/kit/cursor.tsx",
+      "upstream_git_blob_sha": "ffd3f99c8db0b651e913aad931fa0d9d091efeb9",
+      "modified": false,
+      "local_sha256": "e3c73976b0cc132af659c6079470a5fd22709f894058a044dceddcdd761b12f4"
+    },
+    {
+      "path": "vendor/stageshow/kit/cursors.tsx",
+      "upstream_path": "stageshow/kit/cursors.tsx",
+      "upstream_git_blob_sha": "8dd5b8daffadeea9963a3fd5e7e6c502097ade9f",
+      "modified": false,
+      "local_sha256": "cc5100bfe6393fb2635b644988557ca42589457b46faa81274e8683effadaae5"
+    },
+    {
+      "path": "vendor/stageshow/kit/ease.ts",
+      "upstream_path": "stageshow/kit/ease.ts",
+      "upstream_git_blob_sha": "38c4e7257decbfc3feb85eebe22caecb5cb8b83b",
+      "modified": false,
+      "local_sha256": "0b1699fa40ff569f2d21f54c910565affed7fed3059b8a04514feacd9ab61636"
+    },
+    {
+      "path": "vendor/stageshow/kit/keys.css",
+      "upstream_path": "stageshow/kit/keys.css",
+      "upstream_git_blob_sha": "a6b39e9303b2a054193edd2982b46be9674db6ec",
+      "modified": false,
+      "local_sha256": "929ef94999bfd7fd6bc78c5026c98f5b4ff8483c8aecfa3bc87cfb2e466cfc3c"
+    },
+    {
+      "path": "vendor/stageshow/kit/keys.tsx",
+      "upstream_path": "stageshow/kit/keys.tsx",
+      "upstream_git_blob_sha": "3d1d28a15675c1cafecab72c9117f152e1b0c461",
+      "modified": false,
+      "local_sha256": "ab45f610aa1c2ccac54a966e8e8c804ed601258cc4e8071278d48cb8bc4f6c59"
+    },
+    {
+      "path": "vendor/stageshow/kit/looks.ts",
+      "upstream_path": "stageshow/kit/looks.ts",
+      "upstream_git_blob_sha": "b637c7dea489ea463f65a44a5af1b06e55bcd420",
+      "modified": false,
+      "local_sha256": "263a44eaa74b5d7f4efb7868080c1e04cbbd03a224c06ddf88fd27c47c6f92ac"
+    },
+    {
+      "path": "vendor/stageshow/kit/measure.ts",
+      "upstream_path": "stageshow/kit/measure.ts",
+      "upstream_git_blob_sha": "e98c78f062216c14b2fa78712326d856dbd409d4",
+      "modified": false,
+      "local_sha256": "0958237aca2af81015dda8b1c18815b3a30187b8796f809a15f7898c5861c68c"
+    },
+    {
+      "path": "vendor/stageshow/kit/motion/Collapse.css",
+      "upstream_path": "stageshow/kit/motion/Collapse.css",
+      "upstream_git_blob_sha": "768938ab372f46beb87cd8769f144ebba41c7c99",
+      "modified": false,
+      "local_sha256": "2a2c985bb71a8518390c65fd3392827871625d6dd72e67649fee20b2175ff703"
+    },
+    {
+      "path": "vendor/stageshow/kit/motion/Collapse.tsx",
+      "upstream_path": "stageshow/kit/motion/Collapse.tsx",
+      "upstream_git_blob_sha": "df2093660388c1d7ed9e0f4f8a36738d708314dd",
+      "modified": false,
+      "local_sha256": "fea3a7dc6ac5da0b3d1a4709dc1a1aa97da65c1e7da35895c59fa7c143a6bb5e"
+    },
+    {
+      "path": "vendor/stageshow/kit/motion/Roll.css",
+      "upstream_path": "stageshow/kit/motion/Roll.css",
+      "upstream_git_blob_sha": "9415ce563a8a970225af26c70684f6aa9ac74ffc",
+      "modified": false,
+      "local_sha256": "0e55390fa9984a1dbad543dff66405abc39acae04b78e4366deea34f286bb29a"
+    },
+    {
+      "path": "vendor/stageshow/kit/motion/Roll.tsx",
+      "upstream_path": "stageshow/kit/motion/Roll.tsx",
+      "upstream_git_blob_sha": "cb952693a42663c8bb117e937b03c8f8c815b99e",
+      "modified": false,
+      "local_sha256": "8c265a336111a939c946c8dc8e43d3b70474d26abc1ed8baca7e6c13808ac10e"
+    },
+    {
+      "path": "vendor/stageshow/kit/reduced-motion.ts",
+      "upstream_path": "stageshow/kit/reduced-motion.ts",
+      "upstream_git_blob_sha": "cdac59bbc7ca9a2bd199bdd69ab07a5f5162b54f",
+      "modified": false,
+      "local_sha256": "9f8926f18ce0489f2c4073d7041c82ee3b6cfb6c16ecd75aea3ef76c43581113"
+    },
+    {
+      "path": "vendor/stageshow/kit/stage.css",
+      "upstream_path": "stageshow/kit/stage.css",
+      "upstream_git_blob_sha": "54319bd6a8bc0c93a83233fe6932f648504d1938",
+      "modified": false,
+      "local_sha256": "fa1b22a158235b7d3d0a89a46348d216d392a3ebdfd247f2a9a6041045e0f866"
+    },
+    {
+      "path": "vendor/stageshow/kit/stage.tsx",
+      "upstream_path": "stageshow/kit/stage.tsx",
+      "upstream_git_blob_sha": "83cec073cdfcbcd96d0672e6dca0cc6ac7f4fbbe",
+      "modified": true,
+      "local_sha256": "98c2ffeb29412ce3ce57b3883af0295aa92ee747064c82513d7e913af4c019c7"
+    },
+    {
+      "path": "vendor/stageshow/kit/util.ts",
+      "upstream_path": "stageshow/kit/util.ts",
+      "upstream_git_blob_sha": "a2e2642131cd9ce29f1278251822941a1aebada6",
+      "modified": false,
+      "local_sha256": "b999c044ea0022744588ccb56fea58a41dcc94a60c030856bae05a9beb6ad67f"
+    },
+    {
+      "path": "vendor/stageshow/kit/window.css",
+      "upstream_path": "stageshow/kit/window.css",
+      "upstream_git_blob_sha": "7b09d677b809dc04dc2b6f7f2ae36d865c7abf49",
+      "modified": false,
+      "local_sha256": "f95bae539dd0525d2be41b12de516ce37f0b64901a6ed7889038861ed2c0b4cd"
+    },
+    {
+      "path": "vendor/stageshow/kit/window.tsx",
+      "upstream_path": "stageshow/kit/window.tsx",
+      "upstream_git_blob_sha": "2d3985aed80460ee4f34e8b9cc7fde69864feadd",
+      "modified": false,
+      "local_sha256": "a854067dde2c9c4271bc355d48da45879face6ea2ecec96a16980b238d356783"
+    }
+  ]
+}
