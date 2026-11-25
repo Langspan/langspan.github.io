@@ -22,7 +22,7 @@ The complete story is visible without playback or JavaScript. Play, Pause and
 Replay let visitors follow the update between sessions. The response is an
 authored illustration, not a recording or measured improvement.
 
-Three expandable examples then explain the supported operations:
+An expandable walkthrough then explains three supported operations:
 
 - Catch an overlap: Agent B tries to edit a file Agent A currently holds, then
   moves to an unclaimed test file.
@@ -69,7 +69,10 @@ The product illustrations use the same original vector paths. Composition, copy
 and walkthrough code were created for LangSpan.
 
 The core repository is [Langspan/Langspan](https://github.com/Langspan/Langspan).
-It currently requires access. Setup commands match the source CLI.
+It currently requires access. The page shows single-project hook setup.
+The [core setup guide](https://github.com/Langspan/Langspan/blob/main/docs/usage.md#connect-a-native-agent)
+also covers user-level hooks and MCP registration across Git repositories.
+Both setup paths use the same product and supported-tool limits.
 [Implementation status](https://github.com/Langspan/Langspan/blob/main/docs/IMPLEMENTATION_STATUS.md)
 holds the recorded evidence and remaining verification work.
 [The mission](https://github.com/Langspan/Langspan/blob/main/docs/mission.md)
