@@ -24,8 +24,8 @@ authored illustration, not a recording or measured improvement.
 
 An expandable walkthrough then explains three supported operations:
 
-- Catch an overlap: Agent B tries to edit a file Agent A currently holds, then
-  moves to an unclaimed test file.
+- Catch an overlap: Agent B tries to edit a file under Agent A's whole-file
+  hold, then moves to an unclaimed test file.
 - Share the context: Agent B receives Agent A's task and recent file paths at
   session start, followed by an updated briefing on its next prompt.
 - See the changes: a Git scan finds a shell edit and records it without
@@ -85,9 +85,18 @@ holds the recorded evidence and remaining verification work.
 [The mission](https://github.com/Langspan/Langspan/blob/main/docs/mission.md)
 owns the problem, product hypothesis and success measures. Teams are the main
 audience; one developer running several agents is also a useful entry point.
-The page describes the opt-in remote briefing, check-and-landing commands and
-name-based source index now in the source preview. Interface notices are limited
-to the same physical workspace, and native-agent outcome evidence remains open.
+The page describes opt-in remote briefings, check-and-landing commands,
+region admission, the optional read-only dashboard and the name-based source
+index in the source preview. Interface notices remain within one physical
+workspace.
+
+One [retained native run](https://github.com/Langspan/Langspan/blob/main/docs/evidence/mixed-hosts/README.md)
+records Claude Code and Codex taking sequential turns in one shared checkout:
+Codex completed an edit, Claude preserved its change, and Codex later declined
+to edit without rereading the file. Simultaneous mixed-host conflicts, live
+agents in linked worktrees, a completed two-machine run and comparative
+reductions in rework remain unverified. The page's authored illustrations are
+separate from this retained run.
 
 Copy follows the core repository's `brand-voice`, `anti-slop-writing` and
 `readme-glow-up` skills: one headline, then sentences that name the agent, file
