@@ -40,7 +40,7 @@
     if (paused || document.hidden || !window.Motion?.animate) return;
     let item;
     try {
-      const controls = window.Motion.animate(element, { opacity: [.4, 1], transform: ['translateY(15px)', 'translateY(0)'] }, { duration: .6, delay, ease: [.22, 1, .36, 1] });
+      const controls = window.Motion.animate(element, { opacity: [.65, 1], transform: ['translateY(8px)', 'translateY(0)'] }, { duration: .3, delay, ease: [.2, 0, 0, 1] });
       item = { element, controls }; animations.add(item);
       Promise.resolve(controls).finally(() => { animations.delete(item); element.style.removeProperty('opacity'); element.style.removeProperty('transform'); });
     } catch (_) { element.style.removeProperty('opacity'); element.style.removeProperty('transform'); }

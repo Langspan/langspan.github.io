@@ -1,0 +1,1 @@
+Released v0.1.0 Linux x86-64 binary. Actual loopback dashboard; constructed Claude Code/Codex-shaped events, fictional repo, real local coordinator. No model invoked. No production data or access token in media.
