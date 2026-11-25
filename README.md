@@ -2,15 +2,27 @@
 
 # Your agents. On the same page.
 
-The [LangSpan product website](https://langspan.github.io/). LangSpan tells your
-coding agents what the others are working on and flags overlapping edits.
+The [LangSpan product website](https://langspan.github.io/). LangSpan gives a
+team's coding agents a shared view of work in progress. The goal is to help
+people build connected parts of a project with less avoidable repair and less
+manual relay between their sessions.
 
-[![LangSpan illustrated workflow](assets/product/langspan-overview.svg)](https://langspan.github.io/#demo)
+[![LangSpan illustrated workflow](assets/product/langspan-overview.svg)](https://langspan.github.io/#team-story)
 
-## Follow two agents at work
+## Follow the team story
 
-Three interactive stories show agents receiving briefings, trying overlapping
-edits and inspecting changes. Visitors can play, pause, select a step or replay:
+The page starts with a familiar coordination problem: one person's swarm moves
+ahead of the team's awareness, and teammates step aside to avoid interference.
+An original illustration follows two developers adding session refresh in a
+shared checkout, where both sessions can read the changed file. Alice's
+agent edits the session handler; Bob's agent receives that update at its next
+prompt and inspects the handler before editing the login flow.
+
+The complete story is visible without playback or JavaScript. Play, Pause and
+Replay let visitors follow the update between sessions. The response is an
+authored illustration, not a recording or measured improvement.
+
+Three expandable examples then explain the supported operations:
 
 - Catch an overlap: Agent B tries to edit a file Agent A currently holds, then
   moves to an unclaimed test file.
@@ -19,9 +31,9 @@ edits and inspecting changes. Visitors can play, pause, select a step or replay:
 - See the changes: a Git scan finds a shell edit and records it without
   assigning an author.
 
-The walkthrough is labelled as an interactive illustration. It runs in the
-browser without contacting an agent or daemon; it is not a recording or test
-evidence.
+All examples run in the browser without contacting an agent or daemon. The
+mission section states the outcomes we intend to test, without claiming those
+gains have been demonstrated.
 
 ## Work on the site
 
@@ -39,9 +51,11 @@ story, initial example and setup instructions.
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Agent-focused story, walkthrough shell, setup and availability |
+| `index.html` | Team problem, mission, illustrations, setup and availability |
 | `assets/site.css` | Responsive layout, focus states and reduced-motion support |
 | `assets/site.js` | Walkthrough playback, step selection, setup tabs and copy controls |
+| `assets/team-story.css` | Compact two-session illustration and responsive layout |
+| `assets/team-story.js` | Explicit story playback, pause and replay |
 | `assets/brand/` | Original supplied brand kit and rasterized organization avatar |
 | `assets/product/` | Original product illustration and social preview card |
 | `docs/marketing-refresh-plan.md` | Scope, product basis and validation plan |
@@ -57,10 +71,13 @@ and walkthrough code were created for LangSpan.
 The core repository is [Langspan/Langspan](https://github.com/Langspan/Langspan).
 It currently requires access. Setup commands match the source CLI.
 [Implementation status](https://github.com/Langspan/Langspan/blob/main/docs/IMPLEMENTATION_STATUS.md)
-holds the recorded evidence and remaining verification work. The page starts
-with one developer running several agents. It also describes the opt-in remote
-briefing and check-and-landing commands now in the source preview. The code graph
-remains planned.
+holds the recorded evidence and remaining verification work.
+[The mission](https://github.com/Langspan/Langspan/blob/main/docs/mission.md)
+owns the problem, product hypothesis and success measures. Teams are the main
+audience; one developer running several agents is also a useful entry point.
+The page describes the opt-in remote briefing, check-and-landing commands and
+name-based source index now in the source preview. Interface notices are limited
+to the same physical workspace, and native-agent outcome evidence remains open.
 
 Copy follows the core repository's `brand-voice`, `anti-slop-writing` and
 `readme-glow-up` skills: one headline, then sentences that name the agent, file
