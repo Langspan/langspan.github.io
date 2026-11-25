@@ -25,6 +25,10 @@ for(const width of [1440,1280,768,390,358]){
  const replay=p.getByRole('button',{name:'Replay coordination illustration from the beginning'});await replay.click();
  await p.locator('[data-motion-toggle]').click();assert.equal(await p.locator('html').getAttribute('data-motion-paused'),'true');
  await p.locator('#evidence').scrollIntoViewIfNeeded();
+ await p.locator('.dashboard-proof-image img').scrollIntoViewIfNeeded();
+ await p.locator('.dashboard-proof-image img').evaluate(img=>img.decode());
+ assert.equal(await p.locator('.dashboard-proof-image img').evaluate(img=>img.naturalWidth),2560,'actual dashboard proof loaded');
+ assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false,'proof overflow '+width);
  await p.locator('#evidence').screenshot({path:out+'/'+width+'-evidence.png'});
  await p.locator('#start').scrollIntoViewIfNeeded();
  assert.equal(await p.locator('.download-list a').count(),4);
