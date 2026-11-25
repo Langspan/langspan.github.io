@@ -1,0 +1,70 @@
+name: Build and validate README product cards
+on:
+  push:
+    branches: [design/motion-standard-v1]
+    paths: ['motion/cards/**', '.github/workflows/readme-cards.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fetch exact upstream and initialize real ChanMeng kit
+        run: |
+          git init /tmp/chanmeng
+          git -C /tmp/chanmeng remote add origin https://github.com/ChanMeng666/chanmeng-svg-animation-studio.git
+          git -C /tmp/chanmeng fetch --depth=1 origin 539208618e6ca68963474f77921f62e39713bb0e
+          git -C /tmp/chanmeng checkout --detach FETCH_HEAD
+          test "$(git -C /tmp/chanmeng rev-parse HEAD)" = 539208618e6ca68963474f77921f62e39713bb0e
+          node /tmp/chanmeng/skills/chanmeng-svg-product-card/scripts/init-kit.mjs --dest=motion/cards
+      - name: Install renderer and static fonts
+        working-directory: motion/cards
+        run: |
+          npm install --no-save --ignore-scripts opentype.js@1.3.4 playwright-core@1.65.1 @fontsource/inter@5.2.5 @fontsource/ibm-plex-mono@5.2.5
+          npx playwright-core install --with-deps chromium
+      - name: Build and verify cards
+        run: |
+          node motion/cards/build.mjs
+          node motion/cards/lib/check-card.mjs assets/product/langspan-card-light.svg assets/product/langspan-card-dark.svg --max-kb=300
+          for mode in light dark; do
+            node motion/cards/lib/capture-frames.mjs assets/product/langspan-card-$mode.svg --at=1.2,4.5,8,11 --out=motion/frames
+            node motion/cards/lib/capture-frames.mjs assets/product/langspan-card-$mode-still.svg --at=1,4 --out=motion/frames
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: langspan-card-review
+          path: |
+            assets/product/langspan-card-*.svg
+            motion/frames/
+          if-no-files-found: warn
+  publish-branch:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/design/motion-standard-v1'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: langspan-card-review
+          path: /tmp/card-review
+      - name: Commit only validated SVG outputs to feature branch
+        run: |
+          cp /tmp/card-review/assets/product/langspan-card-*.svg assets/product/
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/product/langspan-card-*.svg
+          if ! git diff --cached --quiet; then
+            git commit -m 'build: generate validated ChanMeng product cards'
+            git push
+          fi
