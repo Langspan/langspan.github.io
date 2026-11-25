@@ -85,3 +85,6 @@ pre:focus-visible{outline:2px solid var(--coral-ink);outline-offset:-2px}
 .scene-heading,.note-eyebrow{text-transform:none;letter-spacing:0}
 .hero .release-line{max-width:100%}
 @media(max-width:600px){.hero h1{text-wrap:initial}.scene-heading{font-size:11px}.session-top small,.session-state,.session-foot,.session-c .session-top small{font-size:10px}.note-eyebrow,.note-source,.flow-caption{font-size:10px}}
+
+/* Contrast on the tinted hold label, verified by the launch review gate. */
+.scope-hold{color:var(--ink)}
