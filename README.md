@@ -1,63 +1,70 @@
-# LangSpan website
+<img src="assets/brand/langspan-lockup-light.svg" alt="LangSpan" width="320" height="80">
 
-The product website for [LangSpan](https://langspan.github.io/), built as static
-HTML, CSS, and JavaScript for the existing GitHub Pages repository. No build step
-or package installation is required.
+# Your agents. On the same page.
 
-## Files
+The [LangSpan product website](https://langspan.github.io/): shared context and
+coordination for the coding agents you already use.
 
-- `index.html`: product narrative, illustrative two-agent workflow, integrations,
-  and practical source-build setup.
-- `assets/site.css`: responsive layout and the supplied brand palette.
-- `assets/site.js`: three selectable demo scenarios and command-copy controls.
-- `assets/brand/`: the owner-supplied SVG kit and `COLORS.txt`, copied unchanged.
+[![LangSpan illustrated workflow](assets/product/langspan-overview.svg)](https://langspan.github.io/#demo)
 
-## Preview
+## The experience
 
-Serve the repository root with any static server. For example:
+Three guided, interactive stories explain what LangSpan brings to independent
+agent sessions. Visitors can play a story, pause, select any step, replay, or
+switch scenarios:
+
+- **Catch an overlap:** a current file claim surfaces an overlapping edit while
+  unrelated work stays available.
+- **Share the context:** relevant peer work reaches another agent's session and
+  prompt context.
+- **See the changes:** complete Git scans provide observations separate from
+  host-reported tool results.
+
+The walkthrough is explicitly an **interactive illustration**, not a recording
+or an acceptance result. It runs in the browser and contacts no agent or daemon.
+
+## Work on the site
+
+This is buildless HTML, CSS and JavaScript for **GitHub Pages**. Serve the
+repository root with your usual static server; no package installation or build
+step is needed. For example:
 
 ```sh
 python3 -m http.server 8080 --bind 127.0.0.1
 ```
 
-Open `http://127.0.0.1:8080/`. The page does not use remote fonts, trackers,
-analytics, cookies, external scripts, or a backend. The demo is a local
-illustration; it does not launch agents or contact a coordinator.
+Open `http://127.0.0.1:8080/`. The page uses no remote fonts, analytics, cookies,
+external scripts or backend. JavaScript is optional for reading the product
+story, initial example and setup instructions.
 
-## Brand and source notes
+| File | Purpose |
+| --- | --- |
+| `index.html` | Agent-focused story, walkthrough shell, setup and availability |
+| `assets/site.css` | Responsive layout, focus states and reduced-motion support |
+| `assets/site.js` | Walkthrough playback, step selection, setup tabs and copy controls |
+| `assets/brand/` | Original supplied brand kit and rasterized organization avatar |
+| `assets/product/` | Original product illustration and social preview card |
+| `docs/marketing-refresh-plan.md` | Scope, product basis and validation plan |
 
-The final supplied kit is Variation B, “Swarm Weave.” Its palette is warm white
-`#F7F6F2`, near-black `#141413`, slate `#3F3F46` (dark mode `#A1A1AA`), and coral
-`#D97757`. The supplied lockups, icons, badges, and favicon are original assets
-provided by the owner. Their SVG content has not been edited, traced, or rebuilt.
-The earlier PNG has been superseded by this kit and is not used.
+## Brand and product basis
 
-The page uses system sans-serif and monospace stacks, with no downloaded font
-dependency. Composition, copy, and demo interface were created for this site;
-no third-party brand assets, testimonials, or performance figures are included.
-Future brand updates should replace the original files in `assets/brand/` and
-update the CSS tokens together.
-
-## Claims and evidence
-
-The terminal-style example is explicitly labelled **Illustrative demo**, including
-its native-host responses. It is not a recording or acceptance result. The page
-separately identifies supported-operation coverage, cooperative/local limits, and
-the Codex adapter's pending native-host acceptance. Actual build instructions and
-available commands are checked against the core CLI source.
+The supplied “Swarm Weave” kit anchors the site: warm white `#F7F6F2`, near-black
+`#141413`, slate `#3F3F46` and coral `#D97757`. Original SVGs remain unchanged.
+`langspan-avatar.png` is a padded raster export of the supplied icon for GitHub.
+The product illustrations use the same original vector paths. Composition, copy
+and walkthrough code were created for LangSpan.
 
 The core repository is [Langspan/Langspan](https://github.com/Langspan/Langspan).
-Repository and documentation links may require access; the public page does not
-claim an anonymously downloadable release or a selected software licence.
+It currently requires access. Setup commands match the source CLI; the page does
+not advertise an anonymous release download or an unselected licence.
 [Implementation status](https://github.com/Langspan/Langspan/blob/main/docs/IMPLEMENTATION_STATUS.md)
-is the detailed authority for delivery and validation. No platform, Pages
-configuration, publication, or repository visibility change is part of these
-website source files.
+holds the retained evidence and remaining acceptance work. The public story is
+agent-first: one developer running several agents is the starting use case;
+teams and cross-machine coordination extend the product direction.
 
-## Review before publication
+## Review changes
 
-Check desktop and narrow mobile layouts, keyboard focus, all three demo states,
-copy controls and their fallback, in-page navigation, and the repository-access
-wording. Review product claims against the corresponding core commit. JavaScript
-is optional: the initial conflict example, product explanation, and setup
-instructions remain readable without it.
+Check every story and step, Play/Pause, replay, keyboard tabs, copy fallback and
+both setup variants. Inspect desktop and narrow layouts with normal and reduced
+motion. Keep current availability beside setup and future capabilities labelled.
+Publish through a feature branch and pull request to this GitHub Pages repo.
