@@ -1,6 +1,6 @@
 # LangSpan website context
 
-Read [README.md](README.md) for the product story, current claims,
+Read [docs/launch-readiness.md](docs/launch-readiness.md) and [README.md](README.md) for the product story, current claims,
 implementation evidence, local preview and review process.
 The current redesign's rationale, provenance and verification belong in
 [docs/marketing-overhaul.md](docs/marketing-overhaul.md).
@@ -32,12 +32,12 @@ The mission is to help teams keep building together as their agents write more c
 Distinguish authored illustrations, observed behavior and outcomes
 the product still needs to demonstrate.
 Use the core repository's current mission, implementation status and retained
-evidence for product claims. Its source preview and live-host verification are
+evidence for product claims. Its published binary availability and live-host verification are
 different statements; local edit checks and remote awareness have different
 scope. Older status notes do not override newer retained evidence.
 
 The page's sequence is shared awareness, a familiar team problem, the primary
-local-collision demonstration, checkout/worktree/remote scope, mission, source
+local-collision demonstration, checkout/worktree/remote scope, mission, release
 setup and FAQ. Motion explains the movement of work and context. Keep the
 agents' choices separate from what LangSpan itself does.
 

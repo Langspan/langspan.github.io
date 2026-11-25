@@ -117,9 +117,10 @@ components; living-canvas informs the hero's visual storytelling rather than
 supplying a copied runtime. Their provenance and licences are recorded with
 the implementation.
 
+The v0.1.0 release provides four macOS/Linux binary archives. The homepage now prioritizes downloading a binary and connecting one checkout; source builds remain available. See [release readiness](docs/launch-readiness.md).
+
 The core repository is [Langspan/LangSpan.dev](https://github.com/Langspan/LangSpan.dev).
-The source is public and installation is currently a source build. Release
-archives and Homebrew have not been published. The page shows single-project
+The source is public and release archives are published. Homebrew is not available. The page shows single-project
 hook setup.
 The [core setup guide](https://github.com/Langspan/LangSpan.dev/blob/main/docs/usage.md#connect-a-native-agent)
 also covers user-level hooks and MCP registration across Git repositories.
