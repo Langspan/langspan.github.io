@@ -27,7 +27,7 @@
       kicker: "Two agents working in one checkout",
       label: "Local coordination",
       steps: ["Work starts", "Overlap found", "Other work moves", "A fresh attempt"],
-      disclosure: "This illustration shows local file conflicts. Native Codex acceptance still needs verification; the agent’s own permissions apply.",
+      disclosure: "This illustration shows a local whole-file conflict. A sequential Claude Code/Codex run is recorded; simultaneous mixed-host conflicts still need verification. The agent’s own permissions apply.",
       scenes: [
         {
           eyebrow: "Work starts",
@@ -107,7 +107,7 @@
       kicker: "A briefing in the receiving agent’s session",
       label: "Local peer context",
       steps: ["Peer activity", "Session starts", "Context updates", "Context received"],
-      disclosure: "This illustration shows local briefings. A recorded Claude Code session received one; whether a briefing changes the agent’s approach still needs testing.",
+      disclosure: "This illustration shows local briefings. A retained sequential Claude Code/Codex run records a response to peer context. Reductions in rework still need measurement.",
       scenes: [
         {
           eyebrow: "Peer activity",
