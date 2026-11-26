@@ -48,3 +48,5 @@ scans at 1440, 1280, 768, 390 and 358 px. Inspect the artifacts before merge.
 Do not treat Hallmark or Impeccable advisory findings as a certification.
 
 First render: the desktop scene matrix and real binary scenario succeeded, but the 1280px browser test timed out while mounting the first scene after tab selection. Trigger loading on explicit selection and named deep links, reconcile active state using a mutation observer, and report mount failures. The desktop result was duplicated below the visual, so keep the semantic live region without redundant visible copy. Compact designs now match the actual available stage width down to 286px, rather than shrinking 358px UI into a narrower shell. Add timed playback and pause checks.
+
+The build-only import workflow was removed after the generated bundle was committed; the ordinary launch-review job verifies byte-for-byte rebuild and checks fallback copy against the canonical catalog. The live verification also tests a named capability deep link and the retained original edit scene.
