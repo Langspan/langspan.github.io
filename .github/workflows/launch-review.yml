@@ -24,6 +24,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Check anchors, version text, hosts and the social card
+        run: node review/link-check.mjs
       - name: Verify generated Stageshow bundle
         working-directory: demo-src
         run: |

@@ -37,8 +37,8 @@ Run agents in parallel. Build as a team.
 
 ## Evidence and media
 
-Use the [parallel-work illustration](https://langspan.dev/#scale) or
-[semantic example](https://langspan.dev/#why) when the post discusses scale
+Use the [parallel-work illustration](https://langspan.dev/technical.html#scale) or
+[semantic example](https://langspan.dev/technical.html#why) when the post discusses scale
 or cross-file compatibility. The published films show a narrower local
 workflow and actual dashboard excerpts from a scripted v0.1.0 run. No live
 model ran in that capture. Do not present the illustrative 5+5 topology as a

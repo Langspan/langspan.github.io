@@ -19,8 +19,8 @@ relay; comparative outcomes remain to be measured.
 
 The [canonical product positioning](https://github.com/Langspan/LangSpan.dev/blob/main/docs/positioning.md)
 owns public messaging and evidence boundaries.
-[LangSpan Live](https://langspan.dev/#langspan-live) · [Parallel work](https://langspan.dev/#scale) · [Semantic conflict](https://langspan.dev/#why) ·
-[Research](https://langspan.dev/#research) · [Recorded evidence](https://langspan.dev/#evidence)
+[LangSpan Live](https://langspan.dev/#langspan-live) · [Parallel work](https://langspan.dev/technical.html#scale) · [Semantic conflict](https://langspan.dev/technical.html#why) ·
+[Research](https://langspan.dev/technical.html#research) · [Recorded evidence](https://langspan.dev/technical.html#evidence)
 
 <a href="https://langspan.dev/#edit-coordination">
   <picture>
@@ -55,12 +55,12 @@ ship in v0.2.0. Same-count type/order checks and
 cross-machine symbol publication remain future work. The four-part architecture groups semantic
 awareness and coordination within LangSpan; agents retain execution.
 
-[Peer briefings](https://langspan.dev/#peer-briefings),
+[Peer briefings](https://langspan.dev/technical.html#peer-briefings),
 [edit coordination](https://langspan.dev/#edit-coordination),
-[source awareness](https://langspan.dev/#source-awareness),
-[commit ownership](https://langspan.dev/#commit-ownership),
-[team awareness](https://langspan.dev/#team-awareness), and
-[integration checks](https://langspan.dev/#integration-checks) use actual
+[source awareness](https://langspan.dev/technical.html#source-awareness),
+[commit ownership](https://langspan.dev/technical.html#commit-ownership),
+[team awareness](https://langspan.dev/technical.html#team-awareness), and
+[integration checks](https://langspan.dev/technical.html#integration-checks) use actual
 vendored Stageshow components and the source-backed scenes in
 `marketing/story.json`. Each has a finite timeline, manual steps, replay,
 a capability-specific scope statement and evidence link. The original
@@ -80,7 +80,7 @@ outcomes we intend to test; it does not claim those gains are already measured.
 
 ## Marketing media
 
-The [marketing workspace](../marketing/README.md) owns the canonical demonstration narrative, version-pinned production tools, film plans, reviewed export manifest and launch copy. The optional [33-second local-coordination film](https://langspan.dev/#film) and short walkthrough use the same Stageshow story and labelled released dashboard evidence. The existing four README-native ChanMeng cards remain lightweight and reproducible.
+The [marketing workspace](../marketing/README.md) owns the canonical demonstration narrative, version-pinned production tools, film plans, reviewed export manifest and launch copy. The optional [33-second local-coordination film](https://langspan.dev/technical.html#film) and short walkthrough use the same Stageshow story and labelled released dashboard evidence. The existing four README-native ChanMeng cards remain lightweight and reproducible.
 
 ## Work on the site
 
@@ -187,8 +187,10 @@ validation, whose evidence files were not published. A [real Codex run](https://
 records a Codex edit refused while a live Claude Code session held the same
 function; that session's edit was waiting at its permission prompt, not
 writing. Two agents writing at the same moment, and comparative reductions in
-team rework or manual relay, remain unverified. Cursor and Gemini CLI adapters are built from documentation and
-have no verified live session. The page's authored illustrations are separate
+team rework or manual relay, remain unverified. The site lists four hosts: Claude Code, Codex, Cursor and Antigravity.
+Cursor support is built from its documentation and has not yet run on a real
+host. Antigravity was corrected after one real run; a repeat run is pending.
+`technical.html#hosts` holds that list for every page. The page's authored illustrations are separate
 from these evidence records.
 
 Supported edit checks do not cover every filesystem write. Writes outside the
