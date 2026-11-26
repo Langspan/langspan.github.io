@@ -10,3 +10,10 @@ html[data-motion-paused=true] .lx-experiment *,html[data-motion-paused=true] .lx
 .arch-diagram .arch-lines[hidden]{display:none!important}
 .arch-diagram .arch-lines path{vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
 .arch-shared{width:fit-content;max-width:100%;margin:0 auto}
+
+/* Stacked cards have no shared horizontal connector band. Use a readable relation instead of a dangling fork. */
+.lx-stacked-caption{display:none}
+@media(max-width:640px){
+  .lx-distribute,.lx-connector{display:none}
+  .lx-stacked-caption{display:block;margin:12px 0;text-align:center;font-size:12px;line-height:1.5;color:var(--lx-muted,#c6c2b8)}
+}

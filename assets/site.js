@@ -10,6 +10,14 @@
   let paused = forcedStatic || reduced.matches || savedPause;
   const motionButton = document.querySelector('[data-motion-toggle]');
   const animations = new Set();
+  const mobileNav = document.querySelector('[data-mobile-nav]');
+  if (mobileNav) {
+    const summary = mobileNav.querySelector('summary');
+    mobileNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { mobileNav.open = false; }));
+    document.addEventListener('pointerdown', event => { if (mobileNav.open && !mobileNav.contains(event.target)) mobileNav.open = false; });
+    mobileNav.addEventListener('keydown', event => { if (event.key === 'Escape' && mobileNav.open) { mobileNav.open = false; summary.focus(); } });
+    matchMedia('(max-width: 900px)').addEventListener('change', () => { mobileNav.open = false; });
+  }
   function finishAnimations() {
     for (const item of animations) { try { item.controls.finish(); } catch (_) {} item.element.style.removeProperty('opacity'); item.element.style.removeProperty('transform'); }
     animations.clear();
