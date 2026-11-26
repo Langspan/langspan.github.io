@@ -15,8 +15,44 @@ for(const width of [1440,1280,768,390,358]){
  await p.goto(base+'/',{waitUntil:'networkidle'});await p.waitForTimeout(400);
  assert.ok(await p.locator('h1').isVisible());assert.ok(await p.locator('.hero-actions a[href="#start"]').isVisible());
  assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false,'horizontal overflow '+width);
- if(width>=1280){const cta=await p.locator('.hero-actions').boundingBox();assert.ok(cta.y+cta.height<=800,'primary CTA below desktop fold');}
+ if(width>=1280){const cta=await p.locator('.hero-actions').boundingBox();if(cta.y+cta.height>800){await p.screenshot({path:out+'/'+width+'-hero-fold-failure.png'});console.error('CTA bounds',width,cta);}assert.ok(cta.y+cta.height<=800,'primary CTA below desktop fold');}
+ const scale=p.locator('[data-parallel-scale]');
+ await scale.locator('[data-scale-count="10"]').waitFor();
+ for(const count of [2,6,10]){
+  await scale.locator('[data-scale-count="'+count+'"]').click();
+  assert.equal(await scale.getAttribute('data-count'),String(count));
+  assert.equal(await scale.locator('[data-scale-slot]:visible').count(),count);
+  assert.equal(await scale.locator('[data-scale-total]').innerText(),String(count));
+ }
+ for(let step=0;step<3;step++){await scale.locator('[data-scale-step="'+step+'"]').click();assert.equal(await scale.getAttribute('data-phase'),String(step));if(width===1440||width===390)await scale.screenshot({path:out+'/'+width+'-scale-'+step+'.png'});}
+ if(width===1440){
+  await p.evaluate(()=>window.LangSpanParallel.seek(12,10));
+  await scale.locator('[data-scale-play]').click();
+  await p.waitForFunction(()=>document.querySelector('[data-parallel-scale]').dataset.phase==='1',{},{timeout:9500});
+  await scale.locator('[data-scale-play]').click();
+  const phase=await scale.getAttribute('data-phase'), elapsed=await p.evaluate(()=>window.LangSpanParallel.snapshot().scale.elapsedMs);
+  await p.waitForTimeout(900);
+  assert.equal(await scale.getAttribute('data-phase'),phase,'scale pause');
+  assert.equal(await p.evaluate(()=>window.LangSpanParallel.snapshot().scale.elapsedMs),elapsed,'pause freezes actual clock');
+ }
+ await scale.locator('[data-scale-count="10"]').click();
+ await p.evaluate(()=>scrollTo(0,0));await p.waitForTimeout(150);
  await p.screenshot({path:out+'/'+width+'-hero.png'});
+ const semantic=p.locator('[data-semantic-story]');
+ await semantic.scrollIntoViewIfNeeded();
+ for(let step=0;step<3;step++){
+  await semantic.locator('[data-sem-step="'+step+'"]').click();
+  assert.equal(await semantic.getAttribute('data-phase'),String(step));
+  assert.equal(await semantic.locator('[data-semantic-beat]:visible').count(),1);
+  if(width===1440||width===390)await semantic.screenshot({path:out+'/'+width+'-semantic-'+step+'.png'});
+ }
+ await p.addScriptTag({content:axe});
+ const semanticAxe=await p.evaluate(()=>axe.run(document.querySelector('[data-semantic-story]'),{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));
+ a11y.push({width,scene:'semantic',violations:semanticAxe.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>n.target)}))});
+ await p.locator('#research').screenshot({path:out+'/'+width+'-research.png'});
+ await p.locator('#workflow').screenshot({path:out+'/'+width+'-mechanism.png'});
+ await p.locator('#capabilities').screenshot({path:out+'/'+width+'-architecture.png'});
+ assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false,'new story overflow '+width);
  perf.push({width,...await p.evaluate(()=>window.__metrics)});
  await p.locator('.hero-actions a[href="#demo"]').click();
  await p.locator('#cap-tab-peer-briefings').waitFor({timeout:15000});
@@ -112,6 +148,9 @@ for(const width of [1440,1280,768,390,358]){
 for(const opts of [{reducedMotion:'reduce'},{javaScriptEnabled:false}]){
  const p=await browser.newPage({viewport:{width:390,height:844},...opts});
  await p.goto(base+'/#start',{waitUntil:'networkidle'});
+ assert.equal(await p.locator('[data-scale-slot]:visible').count(),10);
+ if(opts.javaScriptEnabled===false){assert.equal(await p.locator('[data-semantic-beat]:visible').count(),3);assert.equal(await p.locator('[data-scale-controls]:visible').count(),0);}
+ else {assert.equal(await p.locator('[data-parallel-scale]').getAttribute('data-phase'),'2');assert.equal(await p.locator('[data-semantic-story]').getAttribute('data-phase'),'1');assert.equal(await p.locator('[data-semantic-beat]:visible').count(),1);}
  assert.equal(await p.locator('.download-list a').count(),4);
  assert.ok(await p.locator('#panel-claude').isVisible());if(opts.javaScriptEnabled===false)assert.ok(await p.locator('#panel-codex').isVisible());else assert.equal(await p.locator('html').getAttribute('data-motion-paused'),'true');
  await p.goto(base+'/#demo',{waitUntil:'networkidle'});

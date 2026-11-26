@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "positioning": "The open-source coordination layer for parallel agentic development.",
+  "headline": "Run agents in parallel. Build as a team.",
+  "topology": {
+    "counts": [
+      2,
+      6,
+      10
+    ],
+    "defaultCount": 10,
+    "durationMs": 12000,
+    "offsetsMs": [
+      0,
+      4000,
+      8000
+    ],
+    "localTasks": [
+      "Billing",
+      "Tests",
+      "Login",
+      "Docs",
+      "UI"
+    ],
+    "cloudTasks": [
+      "Invoices",
+      "API",
+      "Migrations",
+      "Checks",
+      "Review"
+    ],
+    "phases": [
+      {
+        "label": "Record",
+        "title": "Local work is recorded.",
+        "body": "L1 reports activity in billing.mjs. Local sessions keep their own host permissions."
+      },
+      {
+        "label": "Publish",
+        "title": "Share metadata through Git.",
+        "body": "With remote sharing enabled, LangSpan publishes branch and file activity, not source contents."
+      },
+      {
+        "label": "Brief",
+        "title": "Related work reaches the next prompt.",
+        "body": "C1 can receive relevant peer context. Its own coordinator handles local work; remote awareness does not lock its files."
+      }
+    ],
+    "boundary": "Illustrated 5+5 workflow, inspired by the maintainer’s local and cloud sessions. Not a measured LangSpan scale test."
+  },
+  "semantic": {
+    "durationMs": 12000,
+    "offsetsMs": [
+      0,
+      4000,
+      8000
+    ],
+    "source": "https://dev.to/mfmatozza/when-every-teammate-runs-a-coding-agent-the-agents-cant-see-each-other-1on1",
+    "beats": [
+      {
+        "label": "Independent edits",
+        "title": "Two useful changes, separately.",
+        "left": "export function grossPrice(amount) { … }",
+        "right": "import { priceWithTax } from './billing.mjs';",
+        "result": "Both branches pass their own tests.",
+        "description": "One agent renames an export. Another adds a caller on a separate branch, based on the old interface."
+      },
+      {
+        "label": "Clean merge",
+        "title": "Git merges. The build breaks.",
+        "left": "export function grossPrice(amount) { … }",
+        "right": "import { priceWithTax } from './billing.mjs';",
+        "result": "Missing export: priceWithTax",
+        "description": "There are no overlapping file edits. A combined check catches the incompatible interface."
+      },
+      {
+        "label": "Coordinate & verify",
+        "title": "Make the related work visible.",
+        "left": "export function grossPrice(amount) { … }",
+        "right": "import { grossPrice } from './billing.mjs';",
+        "result": "Check the exact combined tree.",
+        "description": "A relevant briefing can surface the changed file. The agent still has to inspect it, choose a compatible edit and pass the combined check."
+      }
+    ],
+    "boundary": "The Git example is scripted; no model runs. The briefing-assisted recovery is an illustration, not an observed LangSpan outcome."
+  },
+  "research": [
+    {
+      "name": "CooperBench",
+      "date": "Jan 2026",
+      "href": "https://arxiv.org/abs/2601.13295",
+      "metric": "30% lower",
+      "desc": "Average success rate for cooperating agents versus completing both tasks individually in a collaborative coding benchmark."
+    },
+    {
+      "name": "ParallACT",
+      "date": "Oct 2026",
+      "href": "https://arxiv.org/abs/2611.00314",
+      "metric": "62% → 16%",
+      "desc": "Success on contradictory tasks: one Claude Code agent given both tasks versus two agents working independently (Opus 4.8)."
+    },
+    {
+      "name": "Worse Together",
+      "date": "Nov 2026",
+      "href": "https://alignment.anthropic.com/2026/worse-together/",
+      "metric": "4 of 4",
+      "desc": "Simulated environments in which the peer-to-peer team scored below one coordinator for both Claude models."
+    }
+  ]
+}

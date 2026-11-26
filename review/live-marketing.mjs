@@ -7,8 +7,8 @@ const origin='https://langspan.dev';
 const manifest=JSON.parse(readFileSync('marketing/published-assets.json','utf8'));
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 let html='';
-for(let i=0;i<30;i++){try{const r=await fetch(origin+'/?verify=marketing-v1',{cache:'no-store'});html=await r.text();if(r.ok&&html.includes('data-capability-explorer'))break;}catch{}await new Promise(r=>setTimeout(r,3000));}
-assert.ok(html.includes('data-capability-explorer'),'product explorer not yet deployed');
+for(let i=0;i<30;i++){try{const r=await fetch(origin+'/?verify=marketing-v1',{cache:'no-store'});html=await r.text();if(r.ok&&html.includes('data-parallel-scale'))break;}catch{}await new Promise(r=>setTimeout(r,3000));}
+assert.ok(html.includes('data-parallel-scale'),'parallel development story not yet deployed');
 for(const f of manifest.files){const r=await fetch(origin+'/'+f.path);assert.ok(r.ok,f.path+' HTTP '+r.status);const data=Buffer.from(await r.arrayBuffer());assert.equal(hash(data),f.sha256,f.path+' served hash');}
 const b=await chromium.launch();try{
  const page=await b.newPage({viewport:{width:1440,height:900},reducedMotion:'reduce'});
@@ -17,6 +17,12 @@ const b=await chromium.launch();try{
  assert.ok(await v.isVisible());await v.evaluate(e=>{e.preload='metadata';e.load()});await page.waitForFunction(()=>document.querySelector('.launch-film video').readyState>=1,{},{timeout:20000});
  assert.ok(Math.abs(await v.evaluate(e=>e.duration)-33)<.1);await v.evaluate(async e=>{e.muted=true;await e.play()});await page.waitForFunction(()=>document.querySelector('.launch-film video').currentTime>.1,{},{timeout:15000});await v.evaluate(e=>e.pause());
  console.log('PASS public site and all committed media hashes; actual video playback');
+ await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
+ await page.locator('[data-scale-count="10"]').waitFor();
+ assert.equal(await page.locator('[data-scale-slot]:visible').count(),10);
+ await page.locator('[data-scale-count="6"]').click();assert.equal(await page.locator('[data-scale-slot]:visible').count(),6);
+ await page.locator('[data-sem-step="1"]').click();assert.ok(await page.locator('[data-semantic-beat="1"] .sem-result').isVisible());
+ console.log('PASS live parallel-work topology and semantic conflict story');
  await page.goto(origin+'/#team-awareness',{waitUntil:'domcontentloaded'});
  await page.locator('#team-awareness .cx-demo').waitFor({timeout:20000});
  assert.equal(await page.locator('#cap-tab-team-awareness').getAttribute('aria-selected'),'true');
