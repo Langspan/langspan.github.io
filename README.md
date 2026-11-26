@@ -18,7 +18,10 @@ owns public messaging and evidence boundaries.
 
 <a href="https://langspan.dev/#edit-coordination">
   <picture>
-    <source media="(max-width: 600px)" srcset="assets/product/langspan-overview-compact.svg">
+    <source media="(max-width: 600px) and (prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="assets/product/langspan-card-compact-dark-still.svg">
+    <source media="(max-width: 600px) and (prefers-reduced-motion: reduce)" srcset="assets/product/langspan-card-compact-light-still.svg">
+    <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="assets/product/langspan-card-compact-dark.svg">
+    <source media="(max-width: 600px)" srcset="assets/product/langspan-card-compact-light.svg">
     <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="assets/product/langspan-card-dark-still.svg">
     <source media="(prefers-reduced-motion: reduce)" srcset="assets/product/langspan-card-light-still.svg">
     <source media="(prefers-color-scheme: dark)" srcset="assets/product/langspan-card-dark.svg">

@@ -3,6 +3,8 @@ on:
   push:
     branches: [design/motion-standard-v1]
     paths: ['motion/cards/**', '.github/workflows/readme-cards.yml']
+  pull_request:
+    paths: ['motion/cards/**', 'assets/product/langspan-card-*.svg', 'assets/product/langspan-overview-compact.svg', '.github/workflows/readme-cards.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -33,8 +35,9 @@ jobs:
       - name: Build and verify cards
         run: |
           node motion/cards/build.mjs
-          node motion/cards/lib/check-card.mjs assets/product/langspan-card-light.svg assets/product/langspan-card-dark.svg --max-kb=300
-          for mode in light dark; do
+          git diff --exit-code -- assets/product/
+          node motion/cards/lib/check-card.mjs assets/product/langspan-card-light.svg assets/product/langspan-card-dark.svg assets/product/langspan-card-compact-light.svg assets/product/langspan-card-compact-dark.svg --max-kb=300
+          for mode in light dark compact-light compact-dark; do
             node motion/cards/lib/capture-frames.mjs assets/product/langspan-card-$mode.svg --at=1.2,4.5,8,11 --out=motion/frames
             node motion/cards/lib/capture-frames.mjs assets/product/langspan-card-$mode-still.svg --at=1,4 --out=motion/frames
           done
