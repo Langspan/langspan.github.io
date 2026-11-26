@@ -30,7 +30,7 @@ function SceneWindow({ title, card, compact, side, beat }: { title: string; card
 function SceneLayout({cap,beat,layout,playing}:{cap:Capability;beat:number;layout:string;playing:boolean}){
   const b=cap.beats[beat],compact=layout==='compact'
   const type=cap.layout
-  const bridge=type==='remote'?'Git remote · metadata only':type==='source'?'Compare recorded versions':type==='commit'?'Session attribution':type==='integration'?'Check exact tree':'Related work context'
+  const bridge=type==='remote'?'Git remote, metadata only':type==='source'?'Compare recorded versions':type==='commit'?'Session attribution':type==='integration'?'Check exact tree':'Related work context'
   return <div className="cx-scene" data-layout={layout} data-scenario={type} data-beat={beat} data-playing={playing}>
     <div className="cx-scene-header"><span>{cap.context}</span><span>Illustrated workflow</span></div>
     <SceneWindow title={cap.left} card={b.a} compact={compact} side="a" beat={beat}/>
@@ -95,7 +95,7 @@ function CapabilityDemo({cap,tokens,onReady,initialWidth}:{cap:Capability;tokens
     </div>
     <div className="cx-controls"><div className="cx-steps" role="group" aria-label={cap.name+' steps'}>
       {cap.beats.map((item,i)=><button type="button" key={item.label} className="cx-step" aria-pressed={beat===i} onClick={()=>seek(i)}><span className="cx-step-index">0{i+1}</span><span>{item.label}</span><span className="cx-progress" data-complete={i<=beat} aria-hidden="true"/></button>)}
-    </div><div className="cx-playback">{staticMode?<span>Motion reduced · choose any step</span>:<><button type="button" className="cx-play" disabled={globalPaused} onClick={toggle} aria-label={running?'Pause '+cap.name:finished?'Play again '+cap.name:'Play '+cap.name}>{running?'Pause':finished?'Play again':'Play'}</button><button type="button" className="cx-replay" disabled={globalPaused} onClick={replay} aria-label={'Replay '+cap.name}>Replay</button><span>{globalPaused?'Motion paused':running?'Playing once':finished?'End of illustration':'Paused'}</span></>}</div></div>
+    </div><div className="cx-playback">{staticMode?<span>Motion reduced. Choose any step.</span>:<><button type="button" className="cx-play" disabled={globalPaused} onClick={toggle} aria-label={running?'Pause '+cap.name:finished?'Play again '+cap.name:'Play '+cap.name}>{running?'Pause':finished?'Play again':'Play'}</button><button type="button" className="cx-replay" disabled={globalPaused} onClick={replay} aria-label={'Replay '+cap.name}>Replay</button><span>{globalPaused?'Motion paused':running?'Playing once':finished?'End of illustration':'Paused'}</span></>}</div></div>
     <div className="cx-caption sr-only" aria-live={running?'off':'polite'} aria-atomic="true"><strong>{b.result}</strong><p>{b.event}</p></div>
   </div>
 }

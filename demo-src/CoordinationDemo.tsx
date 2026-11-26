@@ -33,20 +33,20 @@ export const brandTokens = {
 } as const
 
 function AgentA({ compact }: { compact: boolean }) {
-  return <Window chrome="terminal" lights="grey" title="Agent A · session 01" className="ls-terminal ls-agent-a">
+  return <Window chrome="terminal" lights="grey" title="Agent A — session 01" className="ls-terminal ls-agent-a">
     <div className="ls-intent"><span>Working on</span><strong>Session refresh</strong></div>
     <Prompt path="Edit"><span>{STORY.files.shared}</span></Prompt>
     <Code className="ls-diff" numbers={!compact} start={42} lines={[
       { text: 'return session;', kind: 'del' },
       { text: 'return refreshSession(session);', kind: 'add' },
     ]} />
-    <div className="ls-a-status"><span className="ls-status-mark" aria-hidden>✓</span><span>Admitted <span className="ls-dim">· active in this checkout</span></span></div>
+    <div className="ls-a-status"><span className="ls-status-mark" aria-hidden>✓</span><span>Admitted<span className="ls-dim">, active in this checkout</span></span></div>
     <div className="ls-host-note">Host permissions still apply.</div>
   </Window>
 }
 
 function AgentB({ beat, compact }: { beat: number; compact: boolean }) {
-  return <Window chrome="terminal" lights="grey" title="Agent B · session 02" className="ls-terminal ls-agent-b" data-beat={beat}>
+  return <Window chrome="terminal" lights="grey" title="Agent B — session 02" className="ls-terminal ls-agent-b" data-beat={beat}>
     <div className="ls-intent"><span>Working on</span><strong>Refresh test coverage</strong></div>
     <div className="ls-b-start" aria-hidden={beat !== 0} data-visible={beat === 0}>
       <Prompt path="Next"><span>Edit session refresh</span></Prompt>
@@ -63,7 +63,7 @@ function AgentB({ beat, compact }: { beat: number; compact: boolean }) {
         <Prompt path="Edit"><span>{STORY.files.independent}</span></Prompt>
         <div className="ls-test-result" data-visible={beat === 3} aria-hidden={beat < 3}>
           <Code numbers={false} lines={[{ text: compact ? 'it("refreshes sessions", …)' : 'it("refreshes an expired session", …)', kind: 'add' }]} />
-          <div className="ls-admitted"><span className="ls-status-mark" aria-hidden>✓</span><Roll variant="fade">{beat === 3 ? 'Admitted · different file' : 'New request'}</Roll></div>
+          <div className="ls-admitted"><span className="ls-status-mark" aria-hidden>✓</span><Roll variant="fade">{beat === 3 ? 'Admitted, different file' : 'New request'}</Roll></div>
         </div>
       </Collapse>
     </div>
@@ -192,7 +192,7 @@ function Demo({ onReady, initialWidth }: { onReady: () => void; initialWidth: nu
         {SCENES.map((scene, index) => <button type="button" key={scene.label} className="ls-scene-button" aria-pressed={beat === index} onClick={() => seek(index)}><span className="ls-step-number">0{index + 1}</span><span>{scene.label}</span><span className="ls-step-line" aria-hidden data-complete={beat >= index} /></button>)}
       </div>
       <div className="ls-playback">
-        {staticMode ? <span className="ls-static-playback">Motion reduced · choose any step</span> : <>
+        {staticMode ? <span className="ls-static-playback">Motion reduced. Choose any step.</span> : <>
           <button type="button" className="ls-play-button" onClick={togglePlayback} disabled={pagePaused} aria-label={running ? 'Pause coordination illustration' : finished ? 'Replay coordination illustration' : 'Play coordination illustration'}>{running ? 'Pause' : finished ? 'Play again' : 'Play'}</button>
           <button type="button" className="ls-replay-button" onClick={replay} disabled={pagePaused} aria-label="Replay coordination illustration from the beginning">Replay</button>
           <span className="ls-playback-state">{pagePaused ? 'Motion paused' : running ? 'Playing once' : finished ? 'End of illustration' : 'Paused'}</span>

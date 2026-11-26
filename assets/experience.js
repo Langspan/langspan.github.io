@@ -15,8 +15,8 @@
   if(sem){
     const data={
       local:['One checkout','Available in v0.1.0','Local argument-count notice','Possible call break: priceWithTax now takes two arguments. Inspect billing.ts.','Relevant context, not an edit refusal.','Supported Claude Code and Codex writes can receive this advisory with the tool result. Name matching does not resolve types or imports, and the agent chooses how to respond.','The illustrated caller has not been automatically repaired.','https://github.com/Langspan/LangSpan.dev/issues/29'],
-      worktree:['Linked worktrees','Planned · #44','Proposed in-flight signature notice','A related exported signature changed in another worktree, before it was pushed.','Share symbol context across checkouts.','Today, linked worktrees share file activity rather than interface notices. #44 proposes bounded advisory context for relevant uncommitted signatures.','Planned behavior, not a released capability or an observed agent response.','https://github.com/Langspan/LangSpan.dev/issues/44'],
-      remote:['Two machines','Exploratory · not in #44','Current boundary: activity metadata','Opt-in Git publications carry branch and file activity, not symbol signatures.','Investigate cross-machine semantic context.','A separate design would need to evaluate relevance, latency, privacy and opt-in metadata. It would not provide distributed edit locks.','No cross-machine symbol notice or automatic repair is claimed.','https://github.com/Langspan/LangSpan.dev/blob/main/docs/adr/0006-remote-awareness-through-git-refs.md']
+      worktree:['Linked worktrees','Planned in #44','Proposed in-flight signature notice','A related exported signature changed in another worktree, before it was pushed.','Share symbol context across checkouts.','Today, linked worktrees share file activity rather than interface notices. #44 proposes bounded advisory context for relevant uncommitted signatures.','Planned behavior, not a released capability or an observed agent response.','https://github.com/Langspan/LangSpan.dev/issues/44'],
+      remote:['Two machines','Exploratory, not in #44','Current boundary: activity metadata','Opt-in Git publications carry branch and file activity, not symbol signatures.','Investigate cross-machine semantic context.','A separate design would need to evaluate relevance, latency, privacy and opt-in metadata. It would not provide distributed edit locks.','No cross-machine symbol notice or automatic repair is claimed.','https://github.com/Langspan/LangSpan.dev/blob/main/docs/adr/0006-remote-awareness-through-git-refs.md']
     };
     const keys=['scope-label','scope-status','sem-title','sem-message','scope-heading','scope-body','scope-boundary'];
     bind(sem,'[data-lx-scope]',b=>{const k=b.dataset.lxScope;pressed(sem,'[data-lx-scope]','lxScope',k);keys.forEach((key,i)=>put(sem,'[data-lx-'+key+']',data[k][i]));const link=$('[data-lx-scope-link]',sem);link.href=data[k][7];link.textContent=k==='remote'?'Read the remote architecture':'See semantic roadmap';settle($('.lx-notice',sem));});
@@ -57,7 +57,7 @@
     const arms={
       worktrees:['Worktrees alone','Each agent receives its task and isolated checkout. No peer context or LangSpan hooks are added.'],
       awareness_only:['Awareness only','Each agent receives a fixed description of peers and tasks. No LangSpan hooks, holds or refusals are enabled.'],
-      langspan:['LangSpan · coordination enabled','Supply relevant briefings and scoped coordination. The same integration oracle judges the result; no success is assumed.']
+      langspan:['LangSpan, coordination enabled','Supply relevant briefings and scoped coordination. The same integration oracle judges the result; no success is assumed.']
     };
     const beats=[
       ['Seed identical tasks.','Start each condition from the same repository revision, task set, agent versions and permission settings.','Seeded inputs'],

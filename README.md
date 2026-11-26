@@ -122,6 +122,7 @@ records the pinned upstream files and the one local `Stage` extension.
 | `demo-src/` | React demonstration source, selected Stageshow kit, pinned dependencies and build script |
 | `assets/coordination-demo.js` | Generated, self-contained Stageshow demonstration bundle |
 | `assets/vendor/motion-14.14.0/` | Pinned Motion mini build, license and provenance |
+| `assets/fonts/inter-5.2.5/` | Self-hosted Inter variable font (Latin subset), OFL licence and provenance |
 | `assets/brand/` | Exact approved SVG kit, reference image and organization avatar |
 | `assets/product/` | Existing animated README illustrations and social preview card |
 | `docs/marketing-overhaul.md` | Redesign decisions, source provenance and recorded verification |
@@ -172,9 +173,11 @@ to edit without rereading the file. A [Mac/cloud run](https://github.com/Langspa
 also records briefings reaching real sessions in both directions, without a
 change to an agent's edit because of the briefing. The implementation status
 also reports Claude Code linked-worktree briefings in a later launch
-validation, whose evidence files were not published. Simultaneous mixed-host
-conflicts and comparative reductions in team rework or manual relay remain
-unverified. Cursor and Gemini CLI adapters are built from documentation and
+validation, whose evidence files were not published. A [real Codex run](https://github.com/Langspan/LangSpan.dev/blob/main/docs/evidence/codex-real-host/README.md)
+records a Codex edit refused while a live Claude Code session held the same
+function; that session's edit was waiting at its permission prompt, not
+writing. Two agents writing at the same moment, and comparative reductions in
+team rework or manual relay, remain unverified. Cursor and Gemini CLI adapters are built from documentation and
 have no verified live session. The page's authored illustrations are separate
 from these evidence records.
 

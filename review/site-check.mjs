@@ -57,7 +57,7 @@ for(const width of [1440,1280,768,390,358]){
  const sourceMap=p.locator('#semantic-awareness');
  await sourceMap.locator('[data-source-awareness]').scrollIntoViewIfNeeded();
  assert.ok(await sourceMap.getByRole('heading',{name:'Different files. Connected work.'}).isVisible());
- assert.ok(await sourceMap.locator('.source-advisory-status').getByText('Advisory context · no edit refusal').isVisible());
+ assert.ok(await sourceMap.locator('.source-advisory-status').getByText('Advisory context, not an edit refusal').isVisible());
  assert.equal(await sourceMap.locator('a[href*="/blob/v0.1.0/"]').count(),2);
  assert.equal(await sourceMap.locator('a[href$="/issues/29"]').count(),1);
  assert.equal(await sourceMap.locator('a[href$="/issues/44"]').count(),1);
