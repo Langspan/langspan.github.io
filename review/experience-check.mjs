@@ -4,7 +4,7 @@ export async function checkExperience(p,width,out){
  const exp=p.locator('[data-lx-experiment]');
  await exp.scrollIntoViewIfNeeded();
  for(const n of [2,5,10]){await exp.locator('[data-lx-n="'+n+'"]').click();assert.equal(await exp.locator('[data-lx-agents] span').count(),n*3);}
- for(const family of ['interface','rename','contradiction','duplicate','overlap']){
+ for(const family of ['rename','contradiction']){
    await exp.locator('[data-lx-family]').selectOption(family);
    assert.equal(await p.evaluate(()=>window.LangSpanBenchmark.snapshot().family),family);
  }
@@ -12,10 +12,10 @@ export async function checkExperience(p,width,out){
  for(let step=0;step<4;step++){await exp.locator('[data-lx-beat="'+step+'"]').click();assert.equal(await exp.getAttribute('data-beat'),String(step));}
  await p.locator('[data-lx-metric="tokens"]').click();
  assert.equal(await p.locator('[data-lx-metric-title]').innerText(),'Token consumption');
- assert.equal(await p.locator('.lx-metric-detail dd').filter({hasText:'Not measured'}).count(),3);
+ assert.equal(await p.locator('.lx-metric-detail dd').filter({hasText:'Not established'}).count(),3);
  assert.equal(await p.evaluate(()=>window.LangSpanBenchmark.snapshot().manifest.results),null);
  await p.locator('.lx-manifest summary').click();
- assert.equal(JSON.parse(await p.locator('[data-lx-manifest]').innerText()).sessions_per_arm,10);
+ const config=JSON.parse(await p.locator('[data-lx-manifest]').innerText());assert.equal(config.sessions_per_arm,10);assert.equal(config.task_family,'contradictory_defaults');assert.deepEqual(config.conditions,['worktrees','awareness_only','langspan']);
  await p.locator('.lx-manifest summary').click();
  for(const scope of ['local','worktree','remote']){await p.locator('[data-lx-scope="'+scope+'"]').click();assert.equal(await p.locator('[data-lx-scope="'+scope+'"]').getAttribute('aria-pressed'),'true');}
  await checkArchitecture(p,width,out);

@@ -15,11 +15,11 @@
   if(sem){
     const data={
       local:['One checkout','Available in v0.1.0','Local argument-count notice','Possible call break: priceWithTax now takes two arguments. Inspect billing.ts.','Relevant context, not an edit refusal.','Supported Claude Code and Codex writes can receive this advisory with the tool result. Name matching does not resolve types or imports, and the agent chooses how to respond.','The illustrated caller has not been automatically repaired.','https://github.com/Langspan/LangSpan.dev/issues/29'],
-      worktree:['Linked worktrees','Planned in #44','Proposed in-flight signature notice','A related exported signature changed in another worktree, before it was pushed.','Share symbol context across checkouts.','Today, linked worktrees share file activity rather than interface notices. #44 proposes bounded advisory context for relevant uncommitted signatures.','Planned behavior, not a released capability or an observed agent response.','https://github.com/Langspan/LangSpan.dev/issues/44'],
-      remote:['Two machines','Exploratory, not in #44','Current boundary: activity metadata','Opt-in Git publications carry branch and file activity, not symbol signatures.','Investigate cross-machine semantic context.','A separate design would need to evaluate relevance, latency, privacy and opt-in metadata. It would not provide distributed edit locks.','No cross-machine symbol notice or automatic repair is claimed.','https://github.com/Langspan/LangSpan.dev/blob/main/docs/adr/0006-remote-awareness-through-git-refs.md']
+      worktree:['Linked worktrees','On main, not released','In-flight signature notice','A related exported signature changed in another worktree, before it was pushed.','See interface changes across checkouts.','On main, briefings can include relevant uncommitted exported signatures from linked worktrees. Each checkout keeps its own edit domain.','Illustrated behavior from the source build, not an observed agent response or a v0.1.0 capability.','https://github.com/Langspan/LangSpan.dev/pull/180'],
+      remote:['Two machines','Activity metadata only','Current boundary: activity metadata','Opt-in Git publications carry branch and file activity, not symbol signatures.','Investigate cross-machine semantic context.','A separate design would need to evaluate relevance, latency, privacy and opt-in metadata. It would not provide distributed edit locks.','No cross-machine symbol notice or automatic repair is claimed.','https://github.com/Langspan/LangSpan.dev/blob/main/docs/adr/0006-remote-awareness-through-git-refs.md']
     };
     const keys=['scope-label','scope-status','sem-title','sem-message','scope-heading','scope-body','scope-boundary'];
-    bind(sem,'[data-lx-scope]',b=>{const k=b.dataset.lxScope;pressed(sem,'[data-lx-scope]','lxScope',k);keys.forEach((key,i)=>put(sem,'[data-lx-'+key+']',data[k][i]));const link=$('[data-lx-scope-link]',sem);link.href=data[k][7];link.textContent=k==='remote'?'Read the remote architecture':'See semantic roadmap';settle($('.lx-notice',sem));});
+    bind(sem,'[data-lx-scope]',b=>{const k=b.dataset.lxScope;pressed(sem,'[data-lx-scope]','lxScope',k);keys.forEach((key,i)=>put(sem,'[data-lx-'+key+']',data[k][i]));const link=$('[data-lx-scope-link]',sem);link.href=data[k][7];link.textContent=k==='remote'?'Read the remote architecture':k==='worktree'?'Read the implementation':'See semantic roadmap';settle($('.lx-notice',sem));});
     show(sem,'.lx-controls');
   }
   const arch=$('[data-lx-architecture]');
@@ -68,37 +68,34 @@
   if(exp){
     const section=$('#benchmark');
     const families={
-      interface:['Change the pricing signature','billing.ts','Add a checkout caller','checkout.ts','Run the same functional tests on each combined tree. Verify that the changed interface and caller agree.','interface_change'],
-      rename:['Rename parse_config','config.py','Add a caller of parse_config','cli.py','Check that both tasks are represented and every call uses a valid exported name in the combined tree.','rename_vs_new_caller'],
-      contradiction:['Require one behavior','policy.py','Require an incompatible behavior','policy.py','Accept a reconciled result or an explicit contradiction report, according to the seeded task oracle.','contradictory_requirements'],
-      duplicate:['Implement the seeded task','feature.ts','Pick up the same seeded task','feature.ts','Verify the task is implemented correctly; record duplicated implementation work separately.','duplicate_pickup'],
-      overlap:['Update the first region','session.ts','Update a separate region','session.ts','Verify that both intended changes survive integration and the same functional tests pass.','same_file_concurrent_edits']
+      rename:['Rename parse_config to load_config','shelf/config.py','Add a feature using the parser','shelf/features/*.py','Require the renamed parser, updated callers, working new features and passing combined tests.','rename_vs_new_caller'],
+      contradiction:['Set an export batch to 100','shelf/export.py','Set a listing page to 10','shelf/ui.py','Both functions must use their required values. Preserve the conflicting shared default and pass the combined tests.','contradictory_defaults']
     };
     const arms={
-      worktrees:['Worktrees alone','Each agent receives its task and isolated checkout. No peer context or LangSpan hooks are added.'],
-      awareness_only:['Awareness only','Each agent receives a fixed description of peers and tasks. No LangSpan hooks, holds or refusals are enabled.'],
-      langspan:['LangSpan, coordination enabled','Supply relevant briefings and scoped coordination. The same integration oracle judges the result; no success is assumed.']
+      worktrees:['Isolated clones','Each agent receives its own task in a separate Git clone with no remote. No peer context or LangSpan hooks. The runner retains the arm name worktrees.'],
+      awareness_only:['Awareness only','Each agent receives its peers’ task text in the prompt. No remote or LangSpan hooks are added.'],
+      langspan:['LangSpan, coordination enabled','One coordinator per clone shares task lines and file activity through Git. The oracle judges the combined result; no cross-clone edit hold or semantic notice is assumed.']
     };
     const beats=[
       ['Seed identical tasks.','Start each condition from the same repository revision, task set, agent versions and permission settings.','Seeded inputs'],
       ['Execute independently.','Each condition uses its specified coordination mechanism. Record agent decisions without assuming they respond to a notice.','Agent execution'],
       ['Integrate and check.','Combine the changes under the same rules and run the same functional oracle. An ordinary clean merge is not sufficient.','Combined checks'],
-      ['Publish every outcome.','Retain successes, failures, timeouts, model versions and exact starting commits. Compare outcomes only after real runs.','Outcome record']
+      ['Publish every outcome.','Retain successes, failures, timeouts, model versions and the seeded task assignment. Compare outcomes only after valid runs.','Outcome record']
     ];
     const metrics={
       correctness:['Combined correctness','Count runs whose integrated tree satisfies the same functional oracle.','Report successful runs, total runs and uncertainty intervals.'],
-      repair:['Corrective work','Count corrective edits and effort caused by incompatible or duplicated work. Exclude planned iteration.','Requires reviewed evidence of why each correction was necessary.'],
-      relay:['Manual relay','Count human messages that copy task state or changes between agent sessions.','Keep decisions, design discussion and ordinary review separate.'],
-      time:['Elapsed time','Measure time to a working integrated result under comparable conditions.','Retain incomplete and timed-out runs; do not silently discard them.'],
+      semantic:['Semantic conflicts','Record incompatible calls or lost requirements in the combined result.','Inspect the oracle’s conflict details; a clean Git merge is not enough.'],
+      duplicate:['Duplicate work','Record duplicated implementation work identified by the task oracle.','These are fixture-specific observations, not a measure of engineering time saved.'],
+      time:['Elapsed time','Record elapsed time, including unsuccessful or incomplete trials.','Retain incomplete and timed-out runs; do not silently discard them.'],
       tokens:['Token consumption','Record usage only where the host reports it.','Unavailable token counts remain unknown.'],
-      interruptions:['Interruptions','Record human questions, stops and unnecessary blocks separately.','Inspect what happened after a refusal or notice.']
+      interruptions:['Interruptions','Record agent stops, questions, permission denials and LangSpan refusals.','Inspect what happened after a refusal or notice.']
     };
-    let count=2,family='interface',arm='langspan',beat=3,metric='correctness',elapsed=12000,running=false,raf=0,last=0;
+    let count=2,family='rename',arm='langspan',beat=3,metric='correctness',elapsed=12000,running=false,raf=0,last=0;
     const play=$('[data-lx-play]',exp), trace=$('.lx-trace',exp),progress=$('[data-lx-progress]',exp);
     const ms=12000;
     const manifest=()=>({status:'not_run',sessions_per_arm:count,task_family:families[family][5],conditions:Object.keys(arms),starting_commit:null,agent_versions:null,seed:null,oracle:families[family][4],results:null});
     function updateManifest(){put(section,'[data-lx-manifest]',JSON.stringify(manifest(),null,2))}
-    function renderArm(){pressed(exp,'[data-lx-arm]','lxArm',arm);$$('[data-lx-lane]',exp).forEach(l=>l.dataset.selected=String(l.dataset.lxLane===arm));put(exp,'[data-lx-arm-title]',arms[arm][0]);put(exp,'[data-lx-arm-body]',arms[arm][1]);const a=families[family];put(exp,'[data-lx-context]',arm==='worktrees'?'Your task: '+a[2]+'.':arm==='awareness_only'?'Peer A task: '+a[0]+'. Your task: '+a[2]+'.':'Related peer activity: '+a[1]+'. Inspect related work before editing.');}
+    function renderArm(){pressed(exp,'[data-lx-arm]','lxArm',arm);$$('[data-lx-lane]',exp).forEach(l=>l.dataset.selected=String(l.dataset.lxLane===arm));put(exp,'[data-lx-arm-title]',arms[arm][0]);put(exp,'[data-lx-arm-body]',arms[arm][1]);const a=families[family];put(exp,'[data-lx-context]',arm==='worktrees'?'Your task: '+a[2]+'.':arm==='awareness_only'?'Peer A task: '+a[0]+'. Your task: '+a[2]+'.':'Related peer task: '+a[0]+'.');}
     function renderConfig(){const a=families[family];pressed(exp,'[data-lx-n]','lxN',count);put(exp,'[data-lx-count]',count+' sessions / arm');['task-a','file-a','task-b','file-b','oracle'].forEach((k,i)=>put(exp,'[data-lx-'+k+']',a[i]));$('[data-lx-other]',exp).hidden=count===2;put(exp,'[data-lx-other-count]',(count-2)+' further sessions');$$('[data-lx-agents]',exp).forEach(el=>{el.replaceChildren(...Array.from({length:count},(_,i)=>{const n=document.createElement('span');n.textContent=String.fromCharCode(65+i);return n;}))});renderArm();updateManifest();}
     function setBeat(n){beat=n;exp.dataset.beat=String(n);pressed(exp,'[data-lx-beat]','lxBeat',n);put(exp,'[data-lx-beat-title]',beats[n][0]);put(exp,'[data-lx-beat-body]',beats[n][1]);$$('[data-lx-lane-phase]',exp).forEach(x=>x.textContent=beats[n][2]);}
     function draw(t){elapsed=Math.min(ms,Math.max(0,t));const next=Math.min(3,Math.floor(elapsed/3000));if(next!==beat)setBeat(next);progress.style.transform='scaleX('+(elapsed/ms)+')';trace.style.strokeDashoffset=String(1-Math.min(1,elapsed/3000));}
