@@ -60,7 +60,7 @@ jobs:
         run: |
           mkdir -p visual-review-output
           set +e
-          node /tmp/hallmark/skills/hallmark/scripts/sloplint.mjs index.html assets/site.css assets/parallel-story.css assets/experience.css --genre editorial --render --url http://127.0.0.1:8124/ > visual-review-output/hallmark.txt 2>&1
+          node /tmp/hallmark/skills/hallmark/scripts/sloplint.mjs index.html assets/product-first.css --genre editorial --render --url http://127.0.0.1:8124/ > visual-review-output/hallmark.txt 2>&1
           result=$?
           echo "$result" > visual-review-output/hallmark-exit.txt
           exit "$result"

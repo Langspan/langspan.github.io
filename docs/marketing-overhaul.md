@@ -242,3 +242,7 @@ The new demo asset is assembled using exactly the v0.2.0 dashboard page, built-i
 ## Live release metadata
 
 The permanent release CTA follows `/releases/latest`. An unauthenticated, bounded request to the public GitHub API updates the displayed tag and the complete platform/checksum link set, with a validated stable SemVer tag and uploaded assets. No token, new server, duplicate archives or cross-repository workflow is required. The static HTML retains the last reviewed v0.2.0 downloads, including matching checksums, for offline, rate-limited and no-JavaScript visits. Do not replace versioned evidence or product feature claims automatically. Browser regression tests simulate a new stable release, invalid/incomplete releases and rate limits.
+
+## Product-first homepage
+
+The approved shorter preview becomes the main page: inspect a local refusal, read the exact agent messages, try a signature change, explore the released dashboard, and install. The original full technical walkthrough and Stageshow bundle remain unchanged in substance; old technical hashes route to technical.html. The screenshot is the published v0.2.0 binary's labeled simulated demo, with its hash recorded in the media manifest. The website README is a public pointer; maintenance guidance is in docs/website-maintenance.md. No product performance results or unpublished installer claims.

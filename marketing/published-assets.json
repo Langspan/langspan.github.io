@@ -68,6 +68,11 @@
       "source": "demo-src/CoordinationDemo.tsx and CapabilityExplorer.tsx (generated from marketing/story.json; restored geometry and PR #24 copy)",
       "path": "assets/coordination-demo.js",
       "sha256": "f40334871a5ef6f84f1ee78461a0d2524f4b5ecd9b5881b33e88cdf0f6e6f1db"
+    },
+    {
+      "source": "launch-v02-dashboard artifact, workflow 45838672509; published v0.2.0 dashboard --demo, simulated scene 3 of 4, 1440x900",
+      "path": "assets/product/langspan-live-v0.2.0-1440.jpg",
+      "sha256": "7aebe827565870a4e052f6b12703340a3798b4e766537c173ad807d8f5a7a9fe"
     }
   ]
 }

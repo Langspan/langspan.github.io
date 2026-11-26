@@ -1,4 +1,5 @@
 import {chromium} from 'playwright';
+import {checkProductFirst} from './product-first-check.mjs';
 import {checkExperience} from './experience-check.mjs';
 import {mockLatestRelease,checkLatestRelease} from './release-links-check.mjs';
 import {checkCompactNavigation} from './checklist-design-check.mjs';
@@ -12,13 +13,14 @@ const axe=readFileSync(createRequire(import.meta.url).resolve('axe-core/axe.min.
 const browser=await chromium.launch({headless:true});
 const errors=[],a11y=[],perf=[];
 await checkLatestRelease(browser,base);
+await checkProductFirst(browser,base,out,axe);
 for(const width of [1440,1280,768,390,358]){
  const context=await browser.newContext({viewport:{width,height:width>768?900:844},permissions:['clipboard-read','clipboard-write']});
  const p=await context.newPage();p.on('pageerror',e=>{errors.push(width+': '+e.message);console.error('Page error',width,e.message)});p.on('console',m=>{if(m.type()==='error')console.error('Browser console',width,m.text())});
  p.on('response',r=>{if(r.url().startsWith(base)&&r.status()>=400)errors.push(width+': '+r.status()+' '+r.url());});
  await p.addInitScript(()=>{window.__metrics={cls:0,lcp:0};try{new PerformanceObserver(l=>{for(const e of l.getEntries())if(!e.hadRecentInput)window.__metrics.cls+=e.value}).observe({type:'layout-shift',buffered:true});new PerformanceObserver(l=>{for(const e of l.getEntries())window.__metrics.lcp=e.startTime}).observe({type:'largest-contentful-paint',buffered:true});}catch{}});
  await mockLatestRelease(p);
- await p.goto(base+'/',{waitUntil:'networkidle'});await p.waitForTimeout(400);
+ await p.goto(base+'/technical.html',{waitUntil:'networkidle'});await p.waitForTimeout(400);
  assert.ok(await p.locator('h1').isVisible());assert.ok(await p.locator('.hero-actions a[href="#start"]').isVisible());
  assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false,'horizontal overflow '+width);
  if(width>=1280){const cta=await p.locator('.hero-actions').boundingBox();if(cta.y+cta.height>800){await p.screenshot({path:out+'/'+width+'-hero-fold-failure.png'});console.error('CTA bounds',width,cta);}assert.ok(cta.y+cta.height<=800,'primary CTA below desktop fold');}
@@ -182,7 +184,7 @@ for(const width of [1440,1280,768,390,358]){
 for(const opts of [{reducedMotion:'reduce'},{javaScriptEnabled:false}]){
  const p=await browser.newPage({viewport:{width:390,height:844},...opts});
  await mockLatestRelease(p);
- await p.goto(base+'/#start',{waitUntil:'networkidle'});
+ await p.goto(base+'/technical.html#start',{waitUntil:'networkidle'});
  assert.equal(await p.locator('[data-scale-slot]:visible').count(),10);
  assert.ok(await p.locator('#semantic-awareness .source-advisory').isVisible());
  if(opts.reducedMotion==='reduce'){
@@ -194,14 +196,14 @@ for(const opts of [{reducedMotion:'reduce'},{javaScriptEnabled:false}]){
  assert.equal(await p.locator('.download-list a').count(),4);
  await p.locator('#manual-setup summary').click();
  assert.ok(await p.locator('#panel-claude').isVisible());if(opts.javaScriptEnabled===false)assert.ok(await p.locator('#panel-codex').isVisible());else assert.equal(await p.locator('html').getAttribute('data-motion-paused'),'true');
- await p.goto(base+'/#demo',{waitUntil:'networkidle'});
+ await p.goto(base+'/technical.html#demo',{waitUntil:'networkidle'});
  if(opts.javaScriptEnabled===false){assert.ok(await p.locator('.demo-fallback').isVisible());assert.equal(await p.locator('.cap-fallback:visible').count(),5);assert.ok(await p.locator('#team-awareness .cap-fallback').isVisible());}
  else{await p.locator('#peer-briefings .cx-demo').waitFor();assert.equal(await p.locator('#peer-briefings .cx-demo').getAttribute('data-beat'),'2');await p.locator('#cap-tab-edit-coordination').click();await p.locator('.ls-scene-button').last().waitFor();}
 
  await p.screenshot({path:out+'/'+(opts.javaScriptEnabled===false?'no-js':'reduced-motion')+'.png',fullPage:true});await p.close();
 }
 const deep=await browser.newPage({viewport:{width:1280,height:900},reducedMotion:'reduce'});
-await deep.goto(base+'/#commit-ownership',{waitUntil:'networkidle'});await deep.locator('#commit-ownership .cx-demo').waitFor();
+await deep.goto(base+'/technical.html#commit-ownership',{waitUntil:'networkidle'});await deep.locator('#commit-ownership .cx-demo').waitFor();
 assert.equal(await deep.locator('#cap-tab-commit-ownership').getAttribute('aria-selected'),'true');assert.equal(await deep.locator('#commit-ownership .cx-demo').getAttribute('data-beat'),'2');await deep.close();
 await browser.close();
 writeFileSync(out+'/accessibility.json',JSON.stringify(a11y,null,2));writeFileSync(out+'/lab-metrics.json',JSON.stringify(perf,null,2));

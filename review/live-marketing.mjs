@@ -8,18 +8,26 @@ const origin='https://langspan.dev';
 const manifest=JSON.parse(readFileSync('marketing/published-assets.json','utf8'));
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 let html='';
-for(let i=0;i<30;i++){try{const r=await fetch(origin+'/?verify=marketing-v1',{cache:'no-store'});html=await r.text();if(r.ok&&html.includes('data-release-target')&&html.includes('langspan-live-v0.2.0.html'))break;}catch{}await new Promise(r=>setTimeout(r,3000));}
-assert.ok(html.includes('data-release-target')&&html.includes('langspan-live-v0.2.0.html'),'release-aware website not yet deployed');
-for(const path of ['assets/latest-release.js','assets/product/langspan-live-v0.2.0.html']){const r=await fetch(origin+'/'+path,{cache:'no-store'});assert.ok(r.ok,path);assert.equal(hash(Buffer.from(await r.arrayBuffer())),hash(readFileSync(path)),path+' served hash');}
+for(let i=0;i<30;i++){try{const r=await fetch(origin+'/?verify=marketing-v1',{cache:'no-store'});html=await r.text();if(r.ok&&html.includes('data-product-first')&&html.includes('data-release-target'))break;}catch{}await new Promise(r=>setTimeout(r,3000));}
+assert.ok(html.includes('data-product-first')&&html.includes('data-release-target'),'release-aware website not yet deployed');
+for(const path of ['assets/latest-release.js','assets/product-first.js','assets/product-first.css','assets/product/langspan-live-v0.2.0.html','technical.html','walkthrough.html']){const r=await fetch(origin+'/'+path,{cache:'no-store'});assert.ok(r.ok,path);assert.equal(hash(Buffer.from(await r.arrayBuffer())),hash(readFileSync(path)),path+' served hash');}
 for(const f of manifest.files){const r=await fetch(origin+'/'+f.path);assert.ok(r.ok,f.path+' HTTP '+r.status);const data=Buffer.from(await r.arrayBuffer());assert.equal(hash(data),f.sha256,f.path+' served hash');}
 const b=await chromium.launch();try{
  const page=await b.newPage({viewport:{width:1440,height:900},reducedMotion:'reduce'});
- await page.goto(origin+'/#film',{waitUntil:'domcontentloaded'});
+ await page.goto(origin+'/?motion=static',{waitUntil:'domcontentloaded'});
+ assert.ok(await page.locator('[data-product-first]').isVisible());
+ await page.locator('[data-step="1"]').click();assert.equal(await page.locator('[data-event-title]').innerText(),'Overlapping edit refused');
+ await page.locator('[data-open-evidence]').click();assert.equal(await page.locator('.record:visible').count(),2);
+ await page.locator('[data-signature=new]').click();assert.equal(await page.locator('[data-sig-title]').innerText(),'Argument count matches');
+ await page.locator('[data-open-live]').click();const homepageLive=page.frameLocator('#live-embed iframe');await homepageLive.locator('#status-text').getByText('Simulated data',{exact:true}).waitFor();assert.equal(await homepageLive.locator('#kpis li').count(),7);
+ assert.equal(await page.locator('[data-release-target]').count(),4);
+ console.log('PASS live product-first homepage and interactive release dashboard');
+ await page.goto(origin+'/technical.html#film',{waitUntil:'domcontentloaded'});
  const film=page.locator('.launch-film');await film.locator('summary').click();const v=film.locator('video');
  assert.ok(await v.isVisible());await v.evaluate(e=>{e.preload='metadata';e.load()});await page.waitForFunction(()=>document.querySelector('.launch-film video').readyState>=1,{},{timeout:20000});
  assert.ok(Math.abs(await v.evaluate(e=>e.duration)-33)<.1);await v.evaluate(async e=>{e.muted=true;await e.play()});await page.waitForFunction(()=>document.querySelector('.launch-film video').currentTime>.1,{},{timeout:15000});await v.evaluate(e=>e.pause());
  console.log('PASS public site and all committed media hashes; actual video playback');
- await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
+ await page.goto(origin+'/technical.html',{waitUntil:'domcontentloaded'});
  await page.locator('[data-scale-count="10"]').waitFor();
  await page.locator('#langspan-live iframe').scrollIntoViewIfNeeded();
  const live=page.frameLocator('#langspan-live iframe');await live.locator('#status-text').getByText('Simulated data',{exact:true}).waitFor();
@@ -32,13 +40,13 @@ const b=await chromium.launch();try{
  await page.locator('[data-sem-step="1"]').click();assert.ok(await page.locator('[data-semantic-beat="1"] .sem-result').isVisible());
  assert.equal(await page.locator('[data-positioning-contrast] dt').count(),3);
  assert.equal(await page.locator('.evidence-next a[href$="/issues/172"]').count(),1);
- await page.goto(origin+'/#semantic-awareness',{waitUntil:'domcontentloaded'});
+ await page.goto(origin+'/technical.html#semantic-awareness',{waitUntil:'domcontentloaded'});
  assert.ok(await page.locator('#semantic-awareness .source-advisory').isVisible());
  assert.ok(await page.locator('#semantic-awareness .source-advisory-status').getByText('Advisory context, not an edit refusal').isVisible());
  assert.equal(await page.locator('[data-semantic-layer] h4').count(),2);
  console.log('PASS live semantic-awareness section, tagged evidence links and four-part architecture');
  console.log('PASS live parallel-work topology, semantic conflict story, contrast and benchmark link');
- await page.goto(origin+'/#team-awareness',{waitUntil:'domcontentloaded'});
+ await page.goto(origin+'/technical.html#team-awareness',{waitUntil:'domcontentloaded'});
  await page.locator('#team-awareness .cx-demo').waitFor({timeout:20000});
  assert.equal(await page.locator('#cap-tab-team-awareness').getAttribute('aria-selected'),'true');
  assert.equal(await page.locator('#team-awareness .cx-demo').getAttribute('data-beat'),'2');
