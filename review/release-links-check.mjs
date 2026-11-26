@@ -10,8 +10,9 @@ export async function mockLatestRelease(page,tag='v0.2.0'){
  await page.route(api,route=>route.fulfill({json:fixture(tag),headers:{'access-control-allow-origin':'*'}}));
 }
 async function assertVersion(page,tag){
- assert.deepEqual(await page.locator('[data-release-version]').allTextContents(),[tag]);
- assert.deepEqual(await page.locator('[data-release-number]').allTextContents(),[tag.slice(1)]);
+ const versions=await page.locator('[data-release-version]').allTextContents(),numbers=await page.locator('[data-release-number]').allTextContents();
+ assert.ok(versions.length+numbers.length>0,'the page shows the release version');
+ assert.ok(versions.every(v=>v===tag)&&numbers.every(n=>n===tag.slice(1)),'every version label shows '+tag);
  const actual=await page.locator('[data-release-target]').evaluateAll(links=>Object.fromEntries(links.map(a=>[a.dataset.releaseTarget,a.href])));
  for(const t of targets)assert.equal(actual[t],base+'/download/'+tag+'/langspan-'+tag+'-'+t+'.tar.gz');
  assert.equal(await page.locator('[data-release-checksums]').getAttribute('href'),base+'/download/'+tag+'/SHA256SUMS');

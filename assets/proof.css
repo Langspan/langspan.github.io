@@ -2,13 +2,13 @@
    Recorded: verbatim text from a real session, linked to its evidence file.
    Simulated: LangSpan Live's built-in demo data.
    Illustration: authored for the site; not a run. */
-.chip{display:inline-flex;align-items:center;gap:6px;flex:none;font:600 11px/1 Inter,Arial,sans-serif;letter-spacing:.02em;padding:4px 8px 4px 7px;border-radius:4px;border:1px solid var(--chip-line,#d8d6cf);color:var(--chip-fg,#151513);background:transparent;text-decoration:none;white-space:nowrap;vertical-align:middle}
+.chip{display:inline-flex;align-items:center;gap:6px;flex:none;font:600 11px/1 Inter,Arial,sans-serif;letter-spacing:.02em;padding:4px 8px 4px 7px;border-radius:4px;border:1px solid var(--chip-line,var(--line,#d8d6cf));color:var(--chip-fg,var(--ink,#151513));background:transparent;text-decoration:none;white-space:nowrap;vertical-align:middle}
 .chip::before{content:"";width:7px;height:7px;flex:none;box-sizing:border-box}
 .chip-rec::before{border-radius:50%;background:currentColor}
 .chip-sim::before{border-radius:50%;border:1.5px solid currentColor}
 .chip-ill::before{border:1.5px solid currentColor;transform:rotate(45deg) scale(.85)}
 a.chip:hover{border-color:currentColor}
-a.chip:focus-visible{outline:3px solid var(--chip-focus,#a84429);outline-offset:3px}
+a.chip:focus-visible{outline:3px solid var(--chip-focus,var(--accent,#a84429));outline-offset:3px}
 /* On the dark product panels, which are dark in both themes. */
 .on-panel,.demo,.scale-stage{--chip-fg:#f4f3ef;--chip-line:#42423c;--chip-focus:#d87859}
 .chip-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}

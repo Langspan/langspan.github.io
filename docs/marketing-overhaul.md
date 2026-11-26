@@ -286,3 +286,39 @@ Checks run on this revision, locally with Playwright 1.65.1 and Chromium:
 render of `index.html` and `technical.html` at 390 and 1440 px in light and
 dark color schemes: no horizontal scroll, no console errors, no text under
 11 px and no unresolved in-page anchor.
+
+## Layered home page — 26 November 2026
+
+Sections A, B, C1 to C3 of the site review, with the owner's decisions 1 to 9.
+
+- Order: hero, the problem, what each agent sees, get started, LangSpan Live,
+  what runs where and what's verified, questions, go deeper. Get started comes
+  before LangSpan Live. The page stops at eight sections and hands off to
+  `technical.html` by name.
+- Hero: the tagline is the H1. A facts row (runs on your machine, no account,
+  Apache-2.0, version and platforms) and the four hosts sit under the
+  buttons. Until an install script exists, the hero shows the button and no
+  command.
+- Hero loop: HTML, CSS and JavaScript. `assets/product-first.js` holds an
+  equal copy of `marketing/motion/hero-loop/timing.json` and draws every frame
+  from one `renderAt(t)`. It plays three 10-second loops, then holds on the
+  recorded refusal with Replay. The step buttons seek and pause; reduced
+  motion and `?motion=static` show the refusal frame; without JavaScript the
+  refusal frame is the markup's default. `window.LangSpanHero` exposes
+  `element`, `timing` and `renderAt` for the phone cut.
+- Under 480 px the message card leads the loop, three dots replace the step
+  tabs, and the interface example stacks with 13 px code. Under 600 px the
+  dashboard shows two 1:1 crops of the v0.2.0 capture (the counts and the
+  Refused edits block) instead of the shrunken screenshot.
+- Questions: six collapsed answers that state the limits once. The evidence
+  section shows "Local by default" and the host table.
+
+Checks run on this revision, locally with Playwright 1.65.1 and Chromium:
+`node review/link-check.mjs`, `node review/site-check.mjs` (release links,
+the home page at five widths in light and dark, the technical page), and a
+render of `index.html` and `technical.html` at 390 and 1440 px in light and
+dark: no horizontal scroll, no console errors, no text under 11 px, no
+unresolved anchor. At 390 × 844 the hero panel is 370 px tall and the recorded
+refusal line starts at y = 636. The hero's `timing.events`, `easing` and
+`holds_s` equal those in the timing file from pull request #35. Not checked:
+playback on a real phone, and the phone cut's own render and freeze checks.

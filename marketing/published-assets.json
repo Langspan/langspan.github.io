@@ -73,6 +73,16 @@
       "source": "launch-v02-dashboard artifact, workflow 45838672509; published v0.2.0 dashboard --demo, simulated scene 3 of 4, 1440x900",
       "path": "assets/product/langspan-live-v0.2.0-1440.jpg",
       "sha256": "7aebe827565870a4e052f6b12703340a3798b4e766537c173ad807d8f5a7a9fe"
+    },
+    {
+      "source": "assets/product/langspan-live-v0.2.0-1440.jpg cropped 1:1 with ffmpeg crop=1392:126:24:240 (the seven counts)",
+      "path": "assets/product/langspan-live-v0.2.0-stats.png",
+      "sha256": "e80518704407d253f2dccdba7deefb5dec4609ae6ba43992b3c29e94d846d9cc"
+    },
+    {
+      "source": "assets/product/langspan-live-v0.2.0-1440.jpg cropped 1:1 with ffmpeg crop=380:100:1036:800 (Inspector, Refused edits)",
+      "path": "assets/product/langspan-live-v0.2.0-refused.png",
+      "sha256": "8fda85a2cea172f4a3c9084e33d0b701bccc4287696af6718278e99b3d38b0e5"
     }
   ]
 }
