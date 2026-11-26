@@ -104,8 +104,8 @@ for(const mode of ['light','dark']){
    '<g transform="translate(32 28) scale(.7)">'+logo+'</g>'+
    glyphs.text(COPY.headline,{x:32,y:118,fill:theme.text,size:26,font:'display'})+
    rect(0,top,W,H-top,0,ground)+
-   glyphs.text(COPY.stageLabel,{x:24,y:top+32,fill:muted,size:14,font:'sans'})+
-   glyphs.text(COPY.stageNote,{x:W-24,y:top+32,fill:muted,size:13,font:'sans',anchor:'end'})+
+   glyphs.text(COPY.stageLabel,{x:24,y:top+32,fill:muted,size:15,font:'sans'})+
+   glyphs.text(COPY.stageNote,{x:W-24,y:top+32,fill:muted,size:15,font:'sans',anchor:'end'})+
    scene(glyphs,tl,{w:W-48,h,a,b,result:{x:24,y:H-22}});
   const compact=card({title,css:tl.css(),defs:glyphs.defs(),body,loop:timing.duration,width:W,height:H});
   write('langspan-card-compact-'+mode,compact);
