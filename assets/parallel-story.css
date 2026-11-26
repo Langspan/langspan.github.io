@@ -8,7 +8,7 @@
 .parallel-hero .hero-copy{font-size:16px;line-height:1.68;max-width:44ch}
 .parallel-hero .hero-actions{margin-top:26px}
 .parallel-hero .hero-integrations{margin-top:24px;font-size:12px}
-.hero-foot{margin-top:12px;font-size:15px;line-height:1.5;color:var(--muted)}
+.hero-foot{margin-top:24px;font-size:15px;line-height:1.5;color:var(--muted);max-width:46ch}
 .scale-figure.hero-figure{margin:0;width:100%;max-width:none;min-width:0}
 .scale-stage{background:var(--story-dark);color:var(--story-text);padding:clamp(18px,2.15vw,30px);border-radius:14px;overflow:hidden;min-width:0;--scale-cols:5}
 .scale-stage :focus-visible,.semantic-section :focus-visible,.architecture-section :focus-visible{outline-color:var(--coral)}
