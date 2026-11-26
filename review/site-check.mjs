@@ -49,6 +49,10 @@ for(const width of [1440,1280,768,390,358]){
  await p.addScriptTag({content:axe});
  const semanticAxe=await p.evaluate(()=>axe.run(document.querySelector('[data-semantic-story]'),{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));
  a11y.push({width,scene:'semantic',violations:semanticAxe.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>n.target)}))});
+ assert.equal(await p.locator('[data-positioning-contrast] dt').count(),3);
+ assert.ok(await p.locator('[data-positioning-contrast]').isVisible());
+ assert.equal(await p.locator('.evidence-next a[href$="/issues/172"]').count(),1);
+ assert.equal(await p.locator('.evidence-next a[href$="/issues/171"]').count(),1);
  await p.locator('#research').screenshot({path:out+'/'+width+'-research.png'});
  await p.locator('#workflow').screenshot({path:out+'/'+width+'-mechanism.png'});
  await p.locator('#capabilities').screenshot({path:out+'/'+width+'-architecture.png'});

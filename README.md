@@ -2,12 +2,21 @@
 
 # Your agents. On the same page.
 
-The [LangSpan product website](https://langspan.dev/). LangSpan gives a
-team's coding agents a shared view of work in progress. The goal is to help
-people build connected parts of a project with less avoidable repair and less
-manual relay between their sessions.
+**Run agents in parallel. Build as a team.**
 
-<a href="https://langspan.dev/#demo">
+The [LangSpan product website](https://langspan.dev/) introduces the open-source coordination
+layer for parallel agentic development. Worktrees isolate files, not intent.
+LangSpan complements your agents and Git workflows with relevant briefings,
+supported local edit checks, session ownership and exact-tree check evidence.
+The goal is compatible parallel work with less avoidable repair and manual
+relay; comparative outcomes remain to be measured.
+
+The [canonical product positioning](https://github.com/Langspan/LangSpan.dev/blob/main/docs/positioning.md)
+owns public messaging and evidence boundaries.
+[Parallel work](https://langspan.dev/#scale) · [Semantic conflict](https://langspan.dev/#why) ·
+[Research](https://langspan.dev/#research) · [Recorded evidence](https://langspan.dev/#evidence)
+
+<a href="https://langspan.dev/#edit-coordination">
   <picture>
     <source media="(max-width: 600px)" srcset="assets/product/langspan-overview-compact.svg">
     <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="assets/product/langspan-card-dark-still.svg">
@@ -18,7 +27,7 @@ manual relay between their sessions.
 </a>
 
 *An authored 12-second illustration of local coordination, not a session recording.
-[Explore each step](https://langspan.dev/#demo) with Play, Pause and Replay, or open
+[Explore each step](https://langspan.dev/#edit-coordination) with Play, Pause and Replay, or open
 the motionless [light](assets/product/langspan-card-light-still.svg) or
 [dark](assets/product/langspan-card-dark-still.svg) version.*
 
@@ -51,7 +60,7 @@ outcomes we intend to test; it does not claim those gains are already measured.
 
 ## Marketing media
 
-The [marketing workspace](marketing/README.md) owns the canonical demonstration narrative, version-pinned production tools, film plans, reviewed export manifest and launch copy. The optional [33-second launch film](https://langspan.dev/#film) and short walkthrough use the same Stageshow story and labelled released dashboard evidence. The existing four README-native ChanMeng cards remain lightweight and reproducible.
+The [marketing workspace](marketing/README.md) owns the canonical demonstration narrative, version-pinned production tools, film plans, reviewed export manifest and launch copy. The optional [33-second local-coordination film](https://langspan.dev/#film) and short walkthrough use the same Stageshow story and labelled released dashboard evidence. The existing four README-native ChanMeng cards remain lightweight and reproducible.
 
 ## Work on the site
 
