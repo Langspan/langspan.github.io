@@ -8,8 +8,9 @@ const origin='https://langspan.dev';
 const manifest=JSON.parse(readFileSync('marketing/published-assets.json','utf8'));
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 let html='';
-for(let i=0;i<30;i++){try{const r=await fetch(origin+'/?verify=marketing-v1',{cache:'no-store'});html=await r.text();if(r.ok&&html.includes('data-source-awareness')&&html.includes('data-semantic-layer'))break;}catch{}await new Promise(r=>setTimeout(r,3000));}
-assert.ok(html.includes('data-source-awareness')&&html.includes('data-semantic-layer'),'semantic awareness not yet deployed');
+for(let i=0;i<30;i++){try{const r=await fetch(origin+'/?verify=marketing-v1',{cache:'no-store'});html=await r.text();if(r.ok&&html.includes('data-release-target')&&html.includes('langspan-live-v0.2.0.html'))break;}catch{}await new Promise(r=>setTimeout(r,3000));}
+assert.ok(html.includes('data-release-target')&&html.includes('langspan-live-v0.2.0.html'),'release-aware website not yet deployed');
+for(const path of ['assets/latest-release.js','assets/product/langspan-live-v0.2.0.html']){const r=await fetch(origin+'/'+path,{cache:'no-store'});assert.ok(r.ok,path);assert.equal(hash(Buffer.from(await r.arrayBuffer())),hash(readFileSync(path)),path+' served hash');}
 for(const f of manifest.files){const r=await fetch(origin+'/'+f.path);assert.ok(r.ok,f.path+' HTTP '+r.status);const data=Buffer.from(await r.arrayBuffer());assert.equal(hash(data),f.sha256,f.path+' served hash');}
 const b=await chromium.launch();try{
  const page=await b.newPage({viewport:{width:1440,height:900},reducedMotion:'reduce'});
@@ -20,6 +21,10 @@ const b=await chromium.launch();try{
  console.log('PASS public site and all committed media hashes; actual video playback');
  await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
  await page.locator('[data-scale-count="10"]').waitFor();
+ await page.locator('#langspan-live iframe').scrollIntoViewIfNeeded();
+ const live=page.frameLocator('#langspan-live iframe');await live.locator('#status-text').getByText('Simulated data',{exact:true}).waitFor();
+ assert.equal(await live.locator('#kpis li').count(),7);
+ assert.equal(await page.locator('[data-release-target]').count(),4);
  await checkAgentEvidence(page,1440);
  await checkArchitecture(page,1440);
  assert.equal(await page.locator('[data-scale-slot]:visible').count(),10);

@@ -1,5 +1,6 @@
 import {chromium} from 'playwright';
 import {checkExperience} from './experience-check.mjs';
+import {mockLatestRelease,checkLatestRelease} from './release-links-check.mjs';
 import {checkCompactNavigation} from './checklist-design-check.mjs';
 import {checkAgentEvidence} from './agent-evidence-check.mjs';
 import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
@@ -10,11 +11,13 @@ const out='review-output';mkdirSync(out,{recursive:true});
 const axe=readFileSync(createRequire(import.meta.url).resolve('axe-core/axe.min.js'),'utf8');
 const browser=await chromium.launch({headless:true});
 const errors=[],a11y=[],perf=[];
+await checkLatestRelease(browser,base);
 for(const width of [1440,1280,768,390,358]){
  const context=await browser.newContext({viewport:{width,height:width>768?900:844},permissions:['clipboard-read','clipboard-write']});
  const p=await context.newPage();p.on('pageerror',e=>{errors.push(width+': '+e.message);console.error('Page error',width,e.message)});p.on('console',m=>{if(m.type()==='error')console.error('Browser console',width,m.text())});
  p.on('response',r=>{if(r.url().startsWith(base)&&r.status()>=400)errors.push(width+': '+r.status()+' '+r.url());});
  await p.addInitScript(()=>{window.__metrics={cls:0,lcp:0};try{new PerformanceObserver(l=>{for(const e of l.getEntries())if(!e.hadRecentInput)window.__metrics.cls+=e.value}).observe({type:'layout-shift',buffered:true});new PerformanceObserver(l=>{for(const e of l.getEntries())window.__metrics.lcp=e.startTime}).observe({type:'largest-contentful-paint',buffered:true});}catch{}});
+ await mockLatestRelease(p);
  await p.goto(base+'/',{waitUntil:'networkidle'});await p.waitForTimeout(400);
  assert.ok(await p.locator('h1').isVisible());assert.ok(await p.locator('.hero-actions a[href="#start"]').isVisible());
  assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false,'horizontal overflow '+width);
@@ -141,6 +144,13 @@ for(const width of [1440,1280,768,390,358]){
  }
  await film.locator('summary').click();
  await p.locator('#evidence').scrollIntoViewIfNeeded();
+ await p.locator('#langspan-live iframe').scrollIntoViewIfNeeded();
+ const live=p.frameLocator('#langspan-live iframe');
+ await live.locator('#status-text').getByText('Simulated data',{exact:true}).waitFor();
+ assert.equal(await live.locator('#kpis li').count(),7);
+ await live.locator('#demo-prev').click();
+ assert.ok((await live.locator('#demo-caption').innerText()).startsWith('Scene 3 of 4'));
+ if(width===1440||width===390)await p.locator('#langspan-live').screenshot({path:out+'/'+width+'-langspan-live.png'});
  await p.locator('.dashboard-proof').scrollIntoViewIfNeeded();
  assert.equal(await p.locator('.proof-crop img').count(),2);
  for(const img of await p.locator('.proof-crop img').all()){
@@ -171,6 +181,7 @@ for(const width of [1440,1280,768,390,358]){
 }
 for(const opts of [{reducedMotion:'reduce'},{javaScriptEnabled:false}]){
  const p=await browser.newPage({viewport:{width:390,height:844},...opts});
+ await mockLatestRelease(p);
  await p.goto(base+'/#start',{waitUntil:'networkidle'});
  assert.equal(await p.locator('[data-scale-slot]:visible').count(),10);
  assert.ok(await p.locator('#semantic-awareness .source-advisory').isVisible());
