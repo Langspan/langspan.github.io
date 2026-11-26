@@ -8,6 +8,7 @@ import { Collapse } from './vendor/stageshow/kit/motion/Collapse'
 import { StillContext } from './vendor/stageshow/kit/reduced-motion'
 import './coordination-demo.css'
 import STORY from '../marketing/story.json'
+import { mountCapabilityScenes } from './CapabilityExplorer'
 
 // An authored, local-coordination illustration. This is not a terminal
 // recording, a CLI transcript, a filesystem lock, or an autonomous planner.
@@ -18,7 +19,7 @@ const DURATION = STORY.stageshow.durationMs
 type Scene = { beat: number }
 type MotionWindow = { langspanMotionPaused?: boolean }
 
-const brandTokens = {
+export const brandTokens = {
   '--ss-font': 'var(--sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif)', '--ss-mono': '"SFMono-Regular", Consolas, "Liberation Mono", monospace',
   '--ss-canvas': '#151513', '--ss-surface': '#242422', '--ss-chrome': '#242422',
   '--ss-text': '#bab8b0', '--ss-text-strong': '#f4f3ef', '--ss-text-faint': '#9e9b93',
@@ -211,6 +212,7 @@ class DemoBoundary extends Component<{ children: ReactNode; onError: () => void 
 }
 
 function mount() {
+  mountCapabilityScenes(brandTokens)
   const target = document.getElementById('coordination-demo')
   if (!target || target.dataset.demoMounted || !('ResizeObserver' in window) || !('IntersectionObserver' in window)) return
   const fallbacks = Array.from(target.children) as HTMLElement[]

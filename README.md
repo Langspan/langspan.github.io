@@ -22,26 +22,23 @@ manual relay between their sessions.
 the motionless [light](assets/product/langspan-card-light-still.svg) or
 [dark](assets/product/langspan-card-dark-still.svg) version.*
 
-## Follow the team story
+## Explore six capabilities
 
-The page makes shared awareness visible before introducing the machinery:
+The [product page](https://langspan.dev/) follows the approved product-led
+wireframe: shared-awareness hero, before/after problem, three-step explanation,
+interactive capability explorer, technical depth, recorded evidence, and setup.
 
-1. **Shared work.** The hero shows work moving between agent sessions through
-   an original canvas illustration informed by living-canvas. Its labels and
-   meaning remain in ordinary HTML.
-2. **A familiar problem.** One person's swarm moves ahead of the team's
-   awareness, and teammates step aside to avoid interference.
-3. **A concrete interaction.** A Stageshow demonstration follows two agents in
-   one checkout. Agent A holds `src/auth/session.ts`; Agent B's overlapping
-   request is refused. B independently chooses `tests/session.test.ts`, and
-   that request can proceed.
-4. **Where it fits.** One checkout, linked worktrees and other machines each
-   have a different coordination scope. Local edit checks and opt-in remote
-   awareness are explained separately.
-5. **Why it matters.** The mission is to keep people contributing to connected
-   work as their agents write more code.
-6. **A useful next step.** Source-preview setup and the FAQ explain how to
-   connect existing sessions and what the current coverage includes.
+[Peer briefings](https://langspan.dev/#peer-briefings),
+[edit coordination](https://langspan.dev/#edit-coordination),
+[source awareness](https://langspan.dev/#source-awareness),
+[commit ownership](https://langspan.dev/#commit-ownership),
+[team awareness](https://langspan.dev/#team-awareness), and
+[integration checks](https://langspan.dev/#integration-checks) use actual
+vendored Stageshow components and the source-backed scenes in
+`marketing/story.json`. Each has a finite timeline, manual steps, replay,
+a capability-specific scope statement and evidence link. The original
+four-step collision demo remains the edit-coordination tab and canonical
+README/film narrative. All content works as ordinary HTML without JavaScript.
 
 The primary demonstration uses a selectively vendored Stageshow React kit,
 including `Stage`, `Window`, `Prompt`, `Code`, `Roll` and `Collapse`. It is an

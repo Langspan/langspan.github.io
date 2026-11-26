@@ -36,10 +36,7 @@ evidence for product claims. Its published binary availability and live-host ver
 different statements; local edit checks and remote awareness have different
 scope. Older status notes do not override newer retained evidence.
 
-The page's sequence is shared awareness, a familiar team problem, the primary
-local-collision demonstration, checkout/worktree/remote scope, mission, release
-setup and FAQ. Motion explains the movement of work and context. Keep the
-agents' choices separate from what LangSpan itself does.
+The approved page sequence is hero, comparison, three-step explanation, six-capability explorer, technical depth, recorded evidence, release setup and FAQ. The original collision demonstration is retained inside the edit tab. The expanded scenes are owned by marketing/story.json and rendered by demo-src/CapabilityExplorer.tsx using the same vendored Stageshow kit. Keep static fallbacks and per-capability evidence synchronized. Motion explains work and context, not fake agent actions.
 
 ## Source and delivery
 

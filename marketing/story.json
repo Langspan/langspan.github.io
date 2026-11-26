@@ -306,5 +306,574 @@
         ]
       }
     }
+  },
+  "capabilityExplorer": {
+    "version": 2,
+    "durationMs": 10800,
+    "offsetsMs": [
+      0,
+      3600,
+      7200
+    ],
+    "scenes": [
+      {
+        "id": "peer-briefings",
+        "name": "Peer briefings",
+        "heading": "Know what your teammates are changing.",
+        "summary": "Bring related work into an agent’s context at session start or a new prompt.",
+        "scope": "Shared local context. Receiving agents decide how to use the briefing.",
+        "evidence": "https://github.com/Langspan/LangSpan.dev/blob/main/docs/evidence/m4-briefing/README.md",
+        "evidenceLabel": "Native briefing evidence",
+        "layout": "brief",
+        "context": "Session context",
+        "left": "Agent A · Claude Code",
+        "right": "Agent B · Codex",
+        "beats": [
+          {
+            "label": "Work starts",
+            "a": {
+              "label": "Working on",
+              "code": "src/auth/session.ts",
+              "lines": [
+                [
+                  "add",
+                  "return refreshSession(session);"
+                ]
+              ],
+              "foot": "Edit reported"
+            },
+            "b": {
+              "label": "Working on",
+              "code": "src/auth/login.ts",
+              "lines": [
+                [
+                  "plain",
+                  "Review session handling"
+                ]
+              ],
+              "foot": "Awaiting next prompt"
+            },
+            "event": "Agent A’s session reports a related edit.",
+            "result": "Related activity recorded",
+            "tone": "neutral"
+          },
+          {
+            "label": "Context arrives",
+            "a": {
+              "label": "Recent work",
+              "code": "src/auth/session.ts",
+              "lines": [
+                [
+                  "add",
+                  "return refreshSession(session);"
+                ]
+              ],
+              "foot": "Change recorded"
+            },
+            "b": {
+              "label": "New prompt · peer briefing",
+              "code": "Related: src/auth/session.ts",
+              "lines": [
+                [
+                  "plain",
+                  "Agent A updated session refresh."
+                ],
+                [
+                  "plain",
+                  "Inspect related work before editing."
+                ]
+              ],
+              "foot": "Briefing delivered"
+            },
+            "event": "LangSpan includes relevant peer work in the next prompt.",
+            "result": "Peer briefing delivered",
+            "tone": "accent"
+          },
+          {
+            "label": "Next decision",
+            "a": {
+              "label": "Recent work",
+              "code": "src/auth/session.ts",
+              "lines": [
+                [
+                  "add",
+                  "return refreshSession(session);"
+                ]
+              ],
+              "foot": "Change recorded"
+            },
+            "b": {
+              "label": "Context available",
+              "code": "src/auth/login.ts",
+              "lines": [
+                [
+                  "plain",
+                  "Related session refresh change"
+                ],
+                [
+                  "plain",
+                  "Agent chooses next action."
+                ]
+              ],
+              "foot": "Agent retains control"
+            },
+            "event": "The agent has the related change in context; it chooses how to proceed.",
+            "result": "Shared awareness",
+            "tone": "good"
+          }
+        ]
+      },
+      {
+        "id": "edit-coordination",
+        "name": "Edit coordination",
+        "heading": "Catch the overlap. Keep working.",
+        "summary": "Check supported edits against active file or region holds in the same checkout.",
+        "scope": "Supported operations only. Host permissions still apply; writes outside hooks and expired holds can bypass coordination.",
+        "evidence": "https://github.com/Langspan/LangSpan.dev/blob/main/docs/evidence/codex-real-host/README.md",
+        "evidenceLabel": "Native overlap evidence",
+        "layout": "original",
+        "beats": []
+      },
+      {
+        "id": "source-awareness",
+        "name": "Source awareness",
+        "heading": "Don't edit from outdated context.",
+        "summary": "Compare a supported edit with its recorded source version, then ask the agent to reread when it is stale.",
+        "scope": "Recorded source versions only. Codex does not report reads, so its first edit of a file is not compared.",
+        "evidence": "https://github.com/Langspan/LangSpan.dev/blob/main/docs/evidence/codex-real-host/README.md",
+        "evidenceLabel": "Native stale-source evidence",
+        "layout": "source",
+        "context": "One checkout · recorded versions",
+        "left": "Agent A · recorded source",
+        "right": "Current file",
+        "beats": [
+          {
+            "label": "Read source",
+            "a": {
+              "label": "Recorded read · v1",
+              "code": "src/auth/session.ts",
+              "lines": [
+                [
+                  "plain",
+                  "return session;"
+                ]
+              ],
+              "foot": "Source version recorded"
+            },
+            "b": {
+              "label": "Current version · v1",
+              "code": "src/auth/session.ts",
+              "lines": [
+                [
+                  "plain",
+                  "return session;"
+                ]
+              ],
+              "foot": "Versions match"
+            },
+            "event": "A read records the source version used by Agent A.",
+            "result": "Version recorded",
+            "tone": "neutral"
+          },
+          {
+            "label": "Source changes",
+            "a": {
+              "label": "Edit from v1",
+              "code": "src/auth/session.ts",
+              "lines": [
+                [
+                  "del",
+                  "return session;"
+                ],
+                [
+                  "add",
+                  "return session ?? fallback;"
+                ]
+              ],
+              "foot": "Stale edit refused"
+            },
+            "b": {
+              "label": "Peer updated · v2",
+              "code": "src/auth/session.ts",
+              "lines": [
+                [
+                  "add",
+                  "return refreshSession(session);"
+                ]
+              ],
+              "foot": "Peer change retained"
+            },
+            "event": "LangSpan detects the recorded version is stale and refuses the supported edit.",
+            "result": "Stale source — reread required",
+            "tone": "accent"
+          },
+          {
+            "label": "Reread & retry",
+            "a": {
+              "label": "Reread · v2",
+              "code": "src/auth/session.ts",
+              "lines": [
+                [
+                  "plain",
+                  "return refreshSession(session);"
+                ]
+              ],
+              "foot": "Retry admitted"
+            },
+            "b": {
+              "label": "Current version · v2",
+              "code": "src/auth/session.ts",
+              "lines": [
+                [
+                  "add",
+                  "return refreshSession(session);"
+                ]
+              ],
+              "foot": "Versions match"
+            },
+            "event": "The agent reads the updated source and retries against the current version.",
+            "result": "Retry admitted",
+            "tone": "good"
+          }
+        ]
+      },
+      {
+        "id": "commit-ownership",
+        "name": "Commit ownership",
+        "heading": "Commit your work. Keep theirs intact.",
+        "summary": "Inspect session-attributed changes and commit only attributable hunks from your session.",
+        "scope": "Unambiguous attribution is required. Mixed or unknown hunks may be refused; normal Git permissions and hooks apply.",
+        "evidence": "https://github.com/Langspan/LangSpan.dev/blob/main/docs/evidence/codex-real-host/README.md",
+        "evidenceLabel": "Native commit evidence",
+        "layout": "commit",
+        "context": "One checkout · two contributors",
+        "left": "Working tree",
+        "right": "Agent A · Git",
+        "beats": [
+          {
+            "label": "Changes recorded",
+            "a": {
+              "label": "Uncommitted changes",
+              "code": "src/auth/session.ts",
+              "lines": [
+                [
+                  "add",
+                  "A  + refresh handling"
+                ],
+                [
+                  "add",
+                  "B  + test coverage"
+                ]
+              ],
+              "foot": "Two sessions’ changes"
+            },
+            "b": {
+              "label": "Session attribution",
+              "code": "langspan status --mine",
+              "lines": [
+                [
+                  "plain",
+                  "A  mine"
+                ],
+                [
+                  "plain",
+                  "B  other session"
+                ]
+              ],
+              "foot": "Inspect before committing"
+            },
+            "event": "LangSpan records which changes are attributable to each session.",
+            "result": "Session ownership recorded",
+            "tone": "neutral"
+          },
+          {
+            "label": "Select own work",
+            "a": {
+              "label": "Selected hunks",
+              "code": "src/auth/session.ts",
+              "lines": [
+                [
+                  "add",
+                  "A  + refresh handling"
+                ],
+                [
+                  "plain",
+                  "B  + test coverage (retained)"
+                ]
+              ],
+              "foot": "A’s attributable hunk selected"
+            },
+            "b": {
+              "label": "Commit request",
+              "code": "langspan commit --mine",
+              "lines": [
+                [
+                  "plain",
+                  "Commit attributable changes only."
+                ]
+              ],
+              "foot": "Normal Git checks apply"
+            },
+            "event": "The command selects Agent A’s attributable changes without taking B’s hunk.",
+            "result": "Session-owned changes selected",
+            "tone": "accent"
+          },
+          {
+            "label": "Commit result",
+            "a": {
+              "label": "Still uncommitted",
+              "code": "src/auth/session.ts",
+              "lines": [
+                [
+                  "add",
+                  "B  + test coverage"
+                ]
+              ],
+              "foot": "Peer work retained"
+            },
+            "b": {
+              "label": "Git commit",
+              "code": "langspan commit --mine",
+              "lines": [
+                [
+                  "add",
+                  "A  + refresh handling"
+                ]
+              ],
+              "foot": "Own hunk committed"
+            },
+            "event": "A’s changes are committed; B’s uncommitted work remains.",
+            "result": "Own changes committed",
+            "tone": "good"
+          }
+        ]
+      },
+      {
+        "id": "team-awareness",
+        "name": "Team awareness",
+        "heading": "Bring your teammates into view.",
+        "summary": "Share opt-in work metadata between coordinators through the Git remote.",
+        "scope": "Advisory, not remote enforcement. Source contents are excluded; task text requires separate opt-in.",
+        "evidence": "https://github.com/Langspan/LangSpan.dev/blob/main/docs/evidence/two-machine/README.md",
+        "evidenceLabel": "Recorded two-machine run",
+        "layout": "remote",
+        "context": "Two machines · opt-in publication",
+        "left": "Developer A · local",
+        "right": "Developer B · teammate",
+        "beats": [
+          {
+            "label": "Local work",
+            "a": {
+              "label": "Local coordinator",
+              "code": "feature/session-refresh",
+              "lines": [
+                [
+                  "plain",
+                  "src/auth/session.ts"
+                ],
+                [
+                  "plain",
+                  "Session active"
+                ]
+              ],
+              "foot": "Local coordination"
+            },
+            "b": {
+              "label": "Local coordinator",
+              "code": "feature/login",
+              "lines": [
+                [
+                  "plain",
+                  "src/auth/login.ts"
+                ],
+                [
+                  "plain",
+                  "Session active"
+                ]
+              ],
+              "foot": "Local coordination"
+            },
+            "event": "Each machine runs its own coordinator with its own edit domain.",
+            "result": "Independent coordinators",
+            "tone": "neutral"
+          },
+          {
+            "label": "Publish & receive",
+            "a": {
+              "label": "Published work metadata",
+              "code": "Git remote",
+              "lines": [
+                [
+                  "plain",
+                  "feature/session-refresh"
+                ],
+                [
+                  "plain",
+                  "src/auth/session.ts"
+                ]
+              ],
+              "foot": "Source contents excluded"
+            },
+            "b": {
+              "label": "Peer publication",
+              "code": "Developer A",
+              "lines": [
+                [
+                  "plain",
+                  "Related branch and file activity"
+                ]
+              ],
+              "foot": "Peer metadata received"
+            },
+            "event": "Opt-in publications travel through the shared Git remote.",
+            "result": "Teammate activity received",
+            "tone": "accent"
+          },
+          {
+            "label": "Brief next session",
+            "a": {
+              "label": "Local work continues",
+              "code": "feature/session-refresh",
+              "lines": [
+                [
+                  "plain",
+                  "src/auth/session.ts"
+                ]
+              ],
+              "foot": "Local edit domain"
+            },
+            "b": {
+              "label": "Peer briefing",
+              "code": "Related work · Developer A",
+              "lines": [
+                [
+                  "plain",
+                  "Session refresh activity"
+                ],
+                [
+                  "plain",
+                  "Inspect or continue independently."
+                ]
+              ],
+              "foot": "No remote file lock"
+            },
+            "event": "A receiving session sees published activity without a remote lock on its files.",
+            "result": "Cross-machine awareness",
+            "tone": "good"
+          }
+        ]
+      },
+      {
+        "id": "integration-checks",
+        "name": "Integration checks",
+        "heading": "Know whether the changes work together.",
+        "summary": "Test combined branches and bind the result to the exact Git tree before landing.",
+        "scope": "A matching pass and explicit --apply are required. Changed inputs invalidate applicability; conflicts or failed checks can stop landing.",
+        "evidence": "https://github.com/Langspan/LangSpan.dev/blob/main/docs/evidence/demo/README.md",
+        "evidenceLabel": "Executable scenario evidence",
+        "layout": "integration",
+        "context": "Combined tree · explicit landing",
+        "left": "Candidate branches",
+        "right": "Check evidence",
+        "beats": [
+          {
+            "label": "Combine",
+            "a": {
+              "label": "Input branches",
+              "code": "feature/session + feature/login",
+              "lines": [
+                [
+                  "plain",
+                  "feature/session"
+                ],
+                [
+                  "plain",
+                  "feature/login"
+                ]
+              ],
+              "foot": "Temporary combined checkout"
+            },
+            "b": {
+              "label": "Combined revision",
+              "code": "Tree A",
+              "lines": [
+                [
+                  "plain",
+                  "Matching check not recorded"
+                ]
+              ],
+              "foot": "Not ready to land"
+            },
+            "event": "Combine the branches in a temporary checkout; conflicting trees stop here.",
+            "result": "Combined tree prepared",
+            "tone": "neutral"
+          },
+          {
+            "label": "Verify",
+            "a": {
+              "label": "Combined tree",
+              "code": "Tree A",
+              "lines": [
+                [
+                  "plain",
+                  "feature/session"
+                ],
+                [
+                  "plain",
+                  "feature/login"
+                ]
+              ],
+              "foot": "Inputs unchanged"
+            },
+            "b": {
+              "label": "Configured check",
+              "code": "langspan integrate check",
+              "lines": [
+                [
+                  "add",
+                  "Check passed on Tree A"
+                ]
+              ],
+              "foot": "Evidence bound to this tree"
+            },
+            "event": "The configured check succeeds on the exact combined tree.",
+            "result": "Matching check evidence",
+            "tone": "accent"
+          },
+          {
+            "label": "Land explicitly",
+            "a": {
+              "label": "Target recombined",
+              "code": "Tree A",
+              "lines": [
+                [
+                  "plain",
+                  "feature/session"
+                ],
+                [
+                  "plain",
+                  "feature/login"
+                ]
+              ],
+              "foot": "Exact match"
+            },
+            "b": {
+              "label": "Landing request",
+              "code": "langspan land … --apply",
+              "lines": [
+                [
+                  "add",
+                  "Passing evidence matches"
+                ]
+              ],
+              "foot": "Explicit apply required"
+            },
+            "event": "Landing is eligible only when the recombined tree still matches successful evidence.",
+            "result": "Ready for controlled landing",
+            "tone": "good"
+          }
+        ]
+      }
+    ]
   }
 }
