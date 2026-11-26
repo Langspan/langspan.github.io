@@ -102,8 +102,8 @@ and the CLI definitions. The release list was empty during the audit.
 - Remote Git-ref sharing is opt-in and advisory. It never supplies a local
   denial. The page does not imply a streaming cross-machine lock service.
 - Native Claude Code and Codex evidence exists, but simultaneous mixed-host
-  conflicts and comparative team outcomes remain unverified. Cursor and
-  Gemini CLI live-host verification remains open.
+  conflicts and comparative team outcomes remain unverified. Cursor
+  live-host verification and a repeat Antigravity run remain open.
 - Current status reports additional linked-worktree behavior; the website
   no longer repeats the older blanket statement that all live worktree use
   is unverified. The implementation status holds the evidence distinctions.
@@ -250,3 +250,39 @@ The approved shorter preview becomes the main page: inspect a local refusal, rea
 ## First-run and inspector refinement
 
 The approved product-first layout remains. The original two recorded messages move into a single selectable hero disclosure, with byte-identical source text and a no-JavaScript fallback. The existing signature example adds the documented v0.2.0 linked-worktree rename notice, explicitly illustrative. The platform downloads and combined binary-install/setup command are visible immediately after the hero; verification remains linked, not omitted. Research and benchmark details stay in technical.html. No unpublished installer or comparative efficacy claim. Browser tests check the new inspector selection, original hashes, both semantic examples and direct release links; retain existing technical checks.
+
+## Trust fixes and social card — 26 November 2026
+
+Section E and C4 of the site review. What changed:
+
+- Hosts. Every page names the same four hosts: Claude Code, Codex, Cursor and
+  Antigravity. `technical.html#hosts` holds the evidence level for each, and
+  the home page links to it. Gemini CLI no longer appears in public copy.
+- Proof chips. One chip style with three words: **Recorded** (verbatim text
+  from a real session, linked to its evidence file), **Simulated** (LangSpan
+  Live's built-in demo data) and **Illustration** (authored, not a run).
+  `assets/proof.css` owns the style. The home page hero switches between
+  Recorded and Illustration with its step.
+- Social card. `assets/product/social-card.png` is 1280×640 and shows the
+  tagline, the recorded refusal line and the lockup, with no version number.
+  `og:image` and `twitter:image` both name it.
+- Versions. Version text on a page is marked `data-release-version` or
+  `data-release-number`, so `assets/latest-release.js` keeps it current.
+- Anchors. Markdown links to `langspan.dev/#…` sections that live on the
+  technical guide now point to `technical.html#…`.
+- Wording. "Local by default" replaces "Local-first"; dates read
+  25 November 2026; the benchmark heading says "No published result yet";
+  visible copy no longer names the animation kit.
+- Legibility. No visible text is smaller than 11 px at 390 or 1440 px. The
+  phone menu stays on screen at 358 px.
+
+`review/link-check.mjs` checks anchors, version text, hosts and the card's
+declared size, with no dependencies. The launch review workflow runs it.
+
+Checks run on this revision, locally with Playwright 1.65.1 and Chromium:
+`node review/link-check.mjs`, `node review/site-check.mjs` (all passes),
+`node review/check-parallel-story.mjs`, `node review/semantic-git-example.mjs`,
+`sh tools/assemble-site.sh`, `node marketing/scripts/social-card.mjs`, and a
+render of `index.html` and `technical.html` at 390 and 1440 px in light and
+dark color schemes: no horizontal scroll, no console errors, no text under
+11 px and no unresolved in-page anchor.

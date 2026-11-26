@@ -60,9 +60,9 @@
       "sha256": "ff2954513cc729bccf5a5d62c961c65f213ee8cbb9d54ee02c8113d16de65964"
     },
     {
-      "source": "reviewed-social-preview/social-preview.png",
+      "source": "marketing/film/social-card.html, rendered at 1280x640 by marketing/scripts/social-card.mjs; no version number",
       "path": "assets/product/social-card.png",
-      "sha256": "4277de07860e17bf2fd3c41ab191fac82f23c12405a268698fa386ae5c8914bc"
+      "sha256": "a50a082cb02206b765971ffc182ec48b63d0ac8cb67e05057fa2e0dc86d1f153"
     },
     {
       "source": "demo-src/CoordinationDemo.tsx and CapabilityExplorer.tsx (generated from marketing/story.json; restored geometry and PR #24 copy)",

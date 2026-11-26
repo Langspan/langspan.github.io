@@ -16,7 +16,8 @@ export async function checkAgentEvidence(p,width,out){
   assert.ok(await message.locator('pre').evaluate(el=>el.scrollWidth<=el.clientWidth+1),'raw record wraps');
   await summary.click();assert.equal(await message.locator('details').getAttribute('open'),null);
  }
- assert.equal(await section.locator('figcaption a').count(),2);
+ assert.equal(await section.locator('figcaption .proof-links a').count(),2);
+ assert.equal(await section.locator('figcaption a.chip-rec').count(),1,'recorded messages carry the Recorded chip');
  assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false,'evidence overflow '+width);
  if(out)await section.screenshot({path:out+'/'+width+'-agent-sees.png',animations:'disabled'});
 }

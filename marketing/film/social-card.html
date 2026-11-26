@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>LangSpan social card</title>
+<!-- Source of assets/product/social-card.png (1280 x 640). Rendered by
+     marketing/scripts/social-card.mjs. It carries no version number, so a
+     release never makes it stale. The panel quotes the recorded refusal from
+     docs/evidence/codex-real-host/README.md#2-a-conflicting-edit in
+     Langspan/LangSpan.dev at e35aed3, verbatim. -->
+<style>
+@font-face{font-family:Inter;src:url('../../assets/fonts/inter-5.2.5/inter-latin-wght-normal.woff2') format('woff2');font-weight:100 900}
+:root{--paper:#f4f3ef;--ink:#151513;--panel:#151513;--text:#f4f3ef;--line:#42423c;--coral:#d87859;--code:#e9d0c5;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+*{box-sizing:border-box}
+html,body{margin:0;width:1280px;height:640px;overflow:hidden}
+body{background:var(--paper);color:var(--ink);font-family:Inter,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+main{width:1280px;height:640px;display:grid;grid-template-columns:600px 1fr;gap:56px;align-items:center;padding:0 72px}
+.left{display:flex;flex-direction:column;gap:56px}
+.left img{width:340px;height:auto;display:block}
+h1{margin:0;font-size:96px;line-height:1;letter-spacing:-.055em;font-weight:650}
+.panel{background:var(--panel);color:var(--text);border-radius:18px;padding:34px 36px 36px 40px;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;gap:22px}
+.panel::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--coral)}
+.chip{display:inline-flex;align-items:center;gap:10px;font:600 20px/1 Inter,Arial,sans-serif;letter-spacing:.02em;padding:8px 14px 8px 12px;border-radius:7px;border:1px solid var(--line);color:var(--text)}
+.chip::before{content:"";width:12px;height:12px;border-radius:50%;background:currentColor}
+code{font:28px/1.5 var(--mono);color:var(--code)}
+</style>
+</head>
+<body>
+<main>
+  <div class="left">
+    <img src="../../assets/brand/langspan-lockup-light.svg" width="340" height="94" alt="LangSpan">
+    <h1>Your agents. On the same page.</h1>
+  </div>
+  <div class="panel">
+    <span class="chip">Recorded</span>
+    <code>Command blocked by PreToolUse hook: LangSpan coordination conflict.</code>
+  </div>
+</main>
+</body>
+</html>
