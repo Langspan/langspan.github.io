@@ -1,5 +1,6 @@
 import {chromium} from 'playwright';
 import {checkExperience} from './experience-check.mjs';
+import {checkAgentEvidence} from './agent-evidence-check.mjs';
 import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
 import {createRequire} from 'node:module';
 import assert from 'node:assert/strict';
@@ -39,6 +40,7 @@ for(const width of [1440,1280,768,390,358]){
  await scale.locator('[data-scale-count="10"]').click();
  await p.evaluate(()=>scrollTo(0,0));await p.waitForTimeout(150);
  await p.screenshot({path:out+'/'+width+'-hero.png'});
+ await checkAgentEvidence(p,width,out);
  const semantic=p.locator('[data-semantic-story]');
  await semantic.scrollIntoViewIfNeeded();
  for(let step=0;step<3;step++){

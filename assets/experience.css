@@ -4,3 +4,9 @@
 @media(max-width:640px){.lx-semantic,.lx-install{padding:15px}.lx-experiment-head{align-items:start}.lx-benchmark{padding-block:42px}.lx-code-pair,.lx-lanes,.lx-inspect,.lx-proof-inspector{grid-template-columns:1fr}.lx-distribute{height:25px}.lx-distribute path{d:path("M300 0V34")}.lx-lane{gap:8px;padding:12px}.lx-lane-title strong{font-size:16px}.lx-agent-slots{grid-template-columns:repeat(10,minmax(0,1fr))}.lx-inspect>div+div{padding:14px 0 0;border-left:0;border-top:1px solid var(--lx-edge)}.lx-timeline button{padding:8px 6px;min-width:60px}.lx-metric-detail{padding:16px}.lx-inline-link{display:inline-block;margin:8px 0 0}.lx-code-scene,.lx-terminal{padding:12px}.lx-setup{padding-bottom:32px}.lx-install summary span{display:block;margin-left:0}.lx-metric-controls button{font-size:12px}.lx-config>div,.lx-config>label{flex:1 1 100%}.lx-config .lx-play{width:100%}}
 @media(prefers-reduced-motion:reduce){.lx-controls button,.lx-metric-controls button{transition:none}}
 html[data-motion-paused=true] .lx-experiment *,html[data-motion-paused=true] .lx-semantic *,html[data-motion-paused=true] .lx-architecture-visual *{animation:none!important;transition:none!important}
+
+/* Scope-specific topology: only real destinations have connecting lines. */
+.arch-diagram[data-scope="local"] .arch-machines{grid-template-columns:minmax(0,1fr)}
+.arch-diagram .arch-lines[hidden]{display:none!important}
+.arch-diagram .arch-lines path{vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+.arch-shared{width:fit-content;max-width:100%;margin:0 auto}
