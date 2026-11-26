@@ -91,7 +91,7 @@ pre:focus-visible{outline:2px solid var(--coral-ink);outline-offset:-2px}
 
 /* Product proof: two magnified excerpts of the same immutable release capture.
    Coordinates in source pixels, source size 2560 x 2394:
-   denial (110, 1110, 900, 1420); sessions (110, 185, 910, 610).
+   denial (110, 1110, 900, 1420); sessions (110, 185, 990, 610).
    The image is never modified or reconstructed. Full capture is linked. */
 :root{--proof-bg:#151513;--proof-surface:#171b21;--proof-border:#343942;--proof-text:#f4f3ef;--proof-muted:#b8b9b4}
 .dashboard-proof{margin:0 0 42px;padding:clamp(22px,3.2vw,44px);border-radius:12px;background:var(--proof-bg);color:var(--proof-text)}
@@ -108,8 +108,8 @@ pre:focus-visible{outline:2px solid var(--coral-ink);outline-offset:-2px}
 .proof-crop img{position:absolute;display:block;height:auto;max-width:none;border:0;border-radius:0}
 .proof-crop--denial{aspect-ratio:790/310}
 .proof-crop--denial img{width:324.050633%;left:-13.924051%;top:-358.064516%}
-.proof-crop--sessions{aspect-ratio:800/425}
-.proof-crop--sessions img{width:320%;left:-13.75%;top:-43.529412%}
+.proof-crop--sessions{aspect-ratio:880/425}
+.proof-crop--sessions img{width:290.909091%;left:-12.5%;top:-43.529412%}
 .dashboard-proof-foot{display:flex;align-items:start;justify-content:space-between;flex-wrap:wrap;gap:14px 28px;margin-top:21px}
 .dashboard-proof-foot p{color:var(--proof-muted);font-size:13px;line-height:1.6;max-width:56ch}
 .proof-links{display:flex;flex-wrap:wrap;gap:14px 20px}
