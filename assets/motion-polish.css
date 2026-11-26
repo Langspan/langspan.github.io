@@ -103,3 +103,11 @@
 }
 html[data-motion-paused=true] .source-map *,html[data-motion-paused=true] .cx-scene *{animation:none!important;transition:none!important}
 @media(prefers-reduced-motion:reduce){.source-map *,.cx-scene *,.ls-coordination *{animation:none!important;transition:none!important}}
+
+/* The generated island injects its legacy compact styles after host CSS.
+   Explicitly clear their physical offsets in the grid-based composition. */
+.ls-coordination .ls-scene-content[data-layout=compact] .ls-shared-work,
+.cx-scene[data-layout=compact] .cx-bridge,
+.cx-scene[data-layout=compact] .cx-result{inset:auto!important}
+.cx-scene[data-layout=compact] .cx-bridge{height:40px!important}
+.ls-coordination .ls-scene-content[data-layout=compact] .ls-shared-work{width:100%;min-width:0}
