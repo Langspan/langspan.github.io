@@ -1,5 +1,6 @@
 import {chromium} from 'playwright';
 import {checkExperience} from './experience-check.mjs';
+import {checkMotionPolish} from './motion-polish-check.mjs';
 import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
 import {createRequire} from 'node:module';
 import assert from 'node:assert/strict';
@@ -158,6 +159,7 @@ for(const width of [1440,1280,768,390,358]){
  await p.locator('#start').screenshot({path:out+'/'+width+'-setup.png'});
  await p.locator('.faq-list summary').last().click();assert.equal(await p.locator('.faq-list details').last().getAttribute('open'),'');
  await checkExperience(p,width,out);
+ await checkMotionPolish(p,width,out);
  await p.addScriptTag({content:axe});const report=await p.evaluate(()=>axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));
  a11y.push({width,violations:report.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>n.target)}))});
  await p.screenshot({path:out+'/'+width+'-full.png',fullPage:true});
