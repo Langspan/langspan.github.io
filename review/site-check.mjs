@@ -53,6 +53,18 @@ for(const width of [1440,1280,768,390,358]){
  assert.ok(await p.locator('[data-positioning-contrast]').isVisible());
  assert.equal(await p.locator('.evidence-next a[href$="/issues/172"]').count(),1);
  assert.equal(await p.locator('.evidence-next a[href$="/issues/171"]').count(),1);
+ const sourceMap=p.locator('#semantic-awareness');
+ await sourceMap.locator('[data-source-awareness]').scrollIntoViewIfNeeded();
+ assert.ok(await sourceMap.getByRole('heading',{name:'Different files. Connected work.'}).isVisible());
+ assert.ok(await sourceMap.locator('.source-advisory-status').getByText('Advisory context · no edit refusal').isVisible());
+ assert.equal(await sourceMap.locator('a[href*="/blob/v0.1.0/"]').count(),2);
+ assert.equal(await sourceMap.locator('a[href$="/issues/29"]').count(),1);
+ assert.equal(await sourceMap.locator('a[href$="/issues/44"]').count(),1);
+ assert.equal(await p.locator('[data-semantic-layer] h4').count(),2);
+ assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false,'source-awareness overflow '+width);
+ if(width===1440||width===390)await sourceMap.screenshot({path:out+'/'+width+'-source-awareness.png',animations:'disabled'});
+ const sourceAxe=await p.evaluate(()=>axe.run(document.querySelector('#semantic-awareness'),{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));
+ a11y.push({width,scene:'source-awareness',violations:sourceAxe.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>n.target)}))});
  await p.locator('#research').screenshot({path:out+'/'+width+'-research.png'});
  await p.locator('#workflow').screenshot({path:out+'/'+width+'-mechanism.png'});
  await p.locator('#capabilities').screenshot({path:out+'/'+width+'-architecture.png'});
@@ -153,6 +165,10 @@ for(const opts of [{reducedMotion:'reduce'},{javaScriptEnabled:false}]){
  const p=await browser.newPage({viewport:{width:390,height:844},...opts});
  await p.goto(base+'/#start',{waitUntil:'networkidle'});
  assert.equal(await p.locator('[data-scale-slot]:visible').count(),10);
+ assert.ok(await p.locator('#semantic-awareness .source-advisory').isVisible());
+ if(opts.reducedMotion==='reduce'){
+  assert.equal(await p.locator('#semantic-awareness .source-advisory').evaluate(el=>getComputedStyle(el).animationName),'none');
+ }
  if(opts.javaScriptEnabled===false){assert.equal(await p.locator('[data-semantic-beat]:visible').count(),3);assert.equal(await p.locator('[data-scale-controls]:visible').count(),0);}
  else {assert.equal(await p.locator('[data-parallel-scale]').getAttribute('data-phase'),'2');assert.equal(await p.locator('[data-semantic-story]').getAttribute('data-phase'),'1');assert.equal(await p.locator('[data-semantic-beat]:visible').count(),1);}
  assert.equal(await p.locator('.download-list a').count(),4);

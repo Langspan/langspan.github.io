@@ -13,3 +13,7 @@ Use the maintainer's larger development runs as research context only until raw 
 ## Cross-surface maintenance
 
 Use [profile copy](../marketing/profile-copy.md) for repository descriptions, organization and personal profiles. Keep the personal brand separate from the product category. Preserve the existing local-coordination films as evidence of that narrower workflow; do not call them a scale test. A change to the public claim boundaries belongs in the core positioning document first.
+
+## Semantic awareness
+
+The source-aware coordination section explains the v0.1.0 local source index and advisory argument-count alerts. The source index matches names, not resolved scopes, types or imports; interface notices stay in one physical checkout. The alert arrives as context with the supported tool result, not a permission decision. The scripted released-binary fixture is not a live host or agent behavior test. B10 and C7 remain open: keep rename-aware alerts, same-count type/order changes and cross-worktree symbol awareness clearly separate from the release. Keep the coordination category and existing headline; semantic awareness is a mechanism within it.
