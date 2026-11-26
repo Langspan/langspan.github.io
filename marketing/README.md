@@ -46,3 +46,5 @@ The initial production run built the Stageshow bundle but stopped because FFmpeg
 ## First film review and refinement
 
 The first render's upstream audit was clean for the completed landscape, square, vertical and short walkthrough cuts. Visual inspection found that the portrait layout gave the single terminal too much empty space, and the short clip lost the relationship between the two actors. Portrait now uses the existing compact Stageshow component capture rather than cropping the desktop shot. The short walkthrough now keeps both actors, their shared work strip and the exact sequence together on a dark stage; caption changes remain readable outside the UI. Contact sheets use the actual number of rows. The launch and square cuts retain their closer framing. No decorative motion, fake cursor or new product claim was added.
+
+The social preview is an independently composed 1200×630 frame, not a crop of the launch video. Its evidence disclaimer must be visible at the bottom. The full asset production workflow is manual (`workflow_dispatch`) to avoid regenerating all five videos on unrelated documentation edits.

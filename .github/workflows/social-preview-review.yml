@@ -1,0 +1,40 @@
+name: Review social preview and design
+on:
+  push:
+    branches: [design/marketing-asset-pipeline]
+    paths: ['marketing/film/social-preview.html', 'marketing/scripts/social-preview.mjs', '.github/workflows/social-preview-review.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install preview tools
+        run: |
+          command -v ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y ffmpeg)
+          npm install --prefix review --no-save --ignore-scripts playwright@1.65.1
+          npx --prefix review playwright install --with-deps chromium
+      - name: Render and verify complete preview
+        run: node marketing/scripts/social-preview.mjs
+      - name: Impeccable source critique
+        continue-on-error: true
+        run: |
+          set +e
+          npx --yes impeccable@4.11.0 detect --json index.html marketing/film/beats.html marketing/film/social-preview.html > marketing/exports/preview/impeccable.json 2>marketing/exports/preview/impeccable-stderr.txt
+          code=$?
+          echo "$code" > marketing/exports/preview/impeccable-exit.txt
+          set -e
+          [ "$code" = 0 ] || [ "$code" = 2 ]
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reviewed-social-preview
+          path: marketing/exports/preview/

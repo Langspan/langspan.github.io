@@ -1,8 +1,5 @@
 name: Marketing asset production
 on:
-  push:
-    branches: [design/marketing-asset-pipeline]
-    paths: ['marketing/**', 'demo-src/**', 'motion/cards/**', '.github/workflows/marketing-assets.yml']
   workflow_dispatch:
 permissions:
   contents: read

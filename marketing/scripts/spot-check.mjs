@@ -24,6 +24,7 @@ assert.deepEqual(errors,[],'render page errors');if(format==='launch'){
  const p2=await b.newPage({viewport:{width:600,height:315},deviceScaleFactor:2});
  await p2.goto(pathToFileURL(join(work,'social-preview.html')).href);
  await p2.evaluate(()=>Promise.all([...document.images].map(x=>x.decode())));
+ assert.ok(await p2.locator('.proof small').evaluate(e=>{const r=e.getBoundingClientRect();return r.bottom<=innerHeight-8&&r.right<=innerWidth-8;}),'social preview evidence disclosure clipped');
  await p2.screenshot({path:join(dest,'social-preview.png')});await p2.close();
 }
 await b.close();
