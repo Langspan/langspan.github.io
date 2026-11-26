@@ -1,0 +1,38 @@
+{
+  "name": "hero-loop",
+  "contract": "The home page hero loop and its phone cut read these values. When the hero exposes window.LangSpanHero = { element, timing, renderAt(seconds) }, the phone cut renders that element and fails if timing.events differs from this file. Until then it drives the current coordination panel by step.",
+  "fps": 30,
+  "duration_s": 10,
+  "frames": 300,
+  "loops_before_stop": 3,
+  "stop_state": "refusal",
+  "reduced_motion_state": "refusal",
+  "easing": {
+    "entrance": { "curve": [0.16, 1, 0.3, 1], "ms": 280 },
+    "exit": { "curve": [0.7, 0, 0.84, 0], "ms": 160 },
+    "feedback": { "curve": [0.16, 1, 0.3, 1], "ms": 150 },
+    "state": { "curve": [0.16, 1, 0.3, 1], "ms": 280 }
+  },
+  "events": [
+    { "at": 0, "step": 0, "target": "scene", "motion": "none", "text": "Agent A holds src/gate.rs · name(). Agent B has a new prompt." },
+    { "at": 1, "target": "card", "motion": "entrance", "travel_px": 8, "text": "editing now: \"src/gate.rs\"", "provenance": "recorded" },
+    { "at": 3.6, "target": "row-b", "motion": "feedback", "text": "edits src/gate.rs · name()" },
+    { "at": 4, "target": "card", "motion": "exit" },
+    { "at": 4.08, "step": 1, "target": "card", "motion": "entrance", "travel_px": 8, "text": "Command blocked by PreToolUse hook: LangSpan coordination conflict.", "provenance": "recorded" },
+    { "at": 4.08, "target": "refusal-rule", "motion": "state", "text": "Coral left rule grows from 0 to 100% height." },
+    { "at": 7, "step": 2, "target": "card", "motion": "entrance", "travel_px": 8, "text": "Codex picks a different file.", "provenance": "illustration" },
+    { "at": 9.2, "target": "row-a", "motion": "feedback", "text": "Hold released" },
+    { "at": 9.4, "target": "card", "motion": "exit" },
+    { "at": 9.4, "step": 0, "target": "rows", "motion": "state", "text": "Rows return to the frame 0 state." }
+  ],
+  "holds_s": [[0, 1], [1.28, 3.6], [4.36, 7], [7.28, 9.2], [9.68, 10]],
+  "phone_cut": {
+    "width": 540,
+    "height": 675,
+    "scale": 2,
+    "min_text_px": 28,
+    "seek_samples_s": [0.5, 2.5, 5.5, 8.5],
+    "poster_s": 5.5
+  },
+  "source": "Current home page coordination panel. The briefing and refusal lines are verbatim from the recorded Codex session on 25 November 2026; the continuation is illustrative. No agent or daemon runs."
+}
