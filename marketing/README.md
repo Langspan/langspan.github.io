@@ -12,7 +12,7 @@ This directory is the shared demonstration source, not a second product UI. The 
 
 ## Build
 
-From the site root, install the browser tools in `review/` and rebuild the existing demo:
+From the site root, install FFmpeg and the browser tools in `review/` and rebuild the existing demo:
 
 ```sh
 (cd demo-src && npm ci --ignore-scripts && npm run build)
@@ -40,3 +40,5 @@ Website: existing Living Canvas hero and original interactive Stageshow tour; pr
 ## Review
 
 Every render must decode, fit its format, seek independently of prior frames and be inspected at each beat. Check exact claims, clarity at phone widths, no clipped evidence, no invented interface actions, no ornamental zoom, and deliberate scene boundaries. Browser and GitHub rendering are separate gates. Impeccable/Hallmark findings are advisory where legacy styling conflicts with the approved brand; report remaining findings rather than claim certification. A passing render does not establish comparative product outcomes.
+
+The initial production run built the Stageshow bundle but stopped because FFmpeg was absent from the runner. Install it explicitly; no alternative renderer was substituted. The render script checks actual output dimensions, frame rate, silent single-stream encoding, duration and complete decode. The launch review also captures a separately composed 1200×630 social preview from the same released evidence.

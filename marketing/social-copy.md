@@ -4,9 +4,9 @@
 
 Your agents. On the same page.
 
-LangSpan is an open-source coordination layer for existing coding-agent sessions. It brings related work into the next prompt, catches supported local edit overlaps and shares opt-in work updates across machines.
+LangSpan brings shared context into existing coding-agent sessions, catches supported local edit overlaps and shares opt-in work updates across machines.
 
-v0.1.0 is out for macOS and Linux.
+v0.1.0 for macOS and Linux.
 https://langspan.dev/
 
 Attach the 18-second landscape or vertical cut. The walkthrough is an authored illustration with a real dashboard excerpt from a controlled run; it does not show a live model or measured time savings.

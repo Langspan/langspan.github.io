@@ -29,6 +29,8 @@ jobs:
         run: npm ci --ignore-scripts && npm run build
       - name: Install browser and film toolchain
         run: |
+          command -v ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y ffmpeg)
+          ffmpeg -version | head -1
           npm install --prefix review --no-save --ignore-scripts playwright@1.65.1
           npx --prefix review playwright install --with-deps chromium
           git init "$RUNNER_TEMP/product-film"

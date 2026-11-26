@@ -19,5 +19,11 @@ let t=0;for(const [key,d] of story.film.plans[format].beats){
  assert.deepEqual(overflow,[],'clipped composition '+key+' '+format);
  await p.screenshot({path:join(dest,'scene-'+key+'.png')});t+=d;
 }
-assert.deepEqual(errors,[],'render page errors');await b.close();
+assert.deepEqual(errors,[],'render page errors');if(format==='launch'){
+ const p2=await b.newPage({viewport:{width:600,height:315},deviceScaleFactor:2});
+ await p2.goto(pathToFileURL(join(work,'social-preview.html')).href);
+ await p2.evaluate(()=>Promise.all([...document.images].map(x=>x.decode())));
+ await p2.screenshot({path:join(dest,'social-preview.png')});await p2.close();
+}
+await b.close();
 console.log('PASS deterministic scene review '+format);
