@@ -17,17 +17,14 @@
   const staticMode=()=>forced||reduced.matches;
   const setPressed=(els,index,key)=>els.forEach(el=>el.setAttribute('aria-pressed',String(Number(el.dataset[key])===index)));
   function paths(n){
-    for(const dir of ['up','down']){
-      const base=scale.querySelector('[data-wire-base='+dir+']'),active=scale.querySelector('[data-wire-active='+dir+']');
-      const bounds=base.ownerSVGElement.getBoundingClientRect();
-      if(!bounds.width)continue;
-      const cards=[...scale.querySelectorAll('[data-scale-agents='+(dir==='up'?'local':'cloud')+'] [data-scale-slot]:not([hidden])')];
-      const xs=cards.map(card=>{const r=card.getBoundingClientRect();return ((r.left+r.width/2-bounds.left)/bounds.width*500).toFixed(2);});
-      if(xs.length!==n)continue;
-      const a=xs[0],z=xs[xs.length-1];
-      base.setAttribute('d',dir==='up'?'M'+a+' 13H'+z+xs.map(x=>'M'+x+' 0V13').join('')+'M250 13V26':'M250 0V13M'+a+' 13H'+z+xs.map(x=>'M'+x+' 13V26').join(''));
-      active.setAttribute('d',dir==='up'?'M'+a+' 0V13H250V26':'M250 0V13H'+a+'V26');
-    }
+    const xs=Array.from({length:n},(_,i)=>(i+.5)*500/n);
+    const a=xs[0],z=xs[n-1];
+    const baseUp='M'+a+' 13H'+z+xs.map(x=>'M'+x+' 0V13').join('')+'M250 13V26';
+    const baseDown='M250 0V13M'+a+' 13H'+z+xs.map(x=>'M'+x+' 13V26').join('');
+    scale.querySelector('[data-wire-base=up]').setAttribute('d',baseUp);
+    scale.querySelector('[data-wire-base=down]').setAttribute('d',baseDown);
+    scale.querySelector('[data-wire-active=up]').setAttribute('d','M'+a+' 0V13H250V26');
+    scale.querySelector('[data-wire-active=down]').setAttribute('d','M250 0V13H'+a+'V26');
   }
   function setCount(value){
     if(![2,6,10].includes(value))return;
@@ -70,7 +67,7 @@
       s.phase=phase;sem.dataset.phase=String(phase);
       sem.querySelectorAll('[data-semantic-beat]').forEach(el=>{
         const current=Number(el.dataset.semanticBeat)===phase;
-        el.hidden=!current;el.setAttribute('aria-hidden',String(!current));
+        el.hidden=!current;
         el.dataset.enter=String(current&&animate&&!globalPaused&&!staticMode());
       });
       setPressed(sem.querySelectorAll('[data-sem-step]'),phase,'semStep');
@@ -92,7 +89,8 @@
     raf=0;const delta=last===null?0:clamp(now-last,0,100);last=now;
     for(const s of Object.values(state)){
       if(!running(s))continue;
-      s.time=(s.time+delta)%12000;
+      s.time=clamp(s.time+delta,0,12000);
+      if(s.time>=12000)s.finished=true;
       paint(s,false,true);
     }
     // Continue the same clock across frames. Only an external start/resume
@@ -104,10 +102,9 @@
   function play(s){if(staticMode()||globalPaused)return;if(s.finished){s.time=0;s.finished=false;s.phase=-1;s.paused=false;s.started=true;}else if(s.started&&!s.paused){s.paused=true;}else{s.started=true;s.paused=false;}paint(s,true,false);reconcile();}
   function poster(s){s.started=true;s.paused=true;s.finished=true;s.time=s===state.scale?12000:4000;s.phase=-1;paint(s,false,false);}
   setCount(count);
-  if('ResizeObserver'in window){const ro=new ResizeObserver(()=>paths(count/2));ro.observe(scale);ro.observe(scale.querySelector('[data-scale-agents=local]'));ro.observe(scale.querySelector('[data-scale-agents=cloud]'));}
   scale.querySelectorAll('[data-scale-controls]').forEach(el=>el.hidden=false);
   sem.querySelectorAll('[data-semantic-controls]').forEach(el=>el.hidden=false);
-  scale.querySelectorAll('[data-scale-count]').forEach(el=>el.addEventListener('click',()=>{setCount(Number(el.dataset.scaleCount));if(staticMode()){poster(state.scale);}else{state.scale.started=true;if(state.scale.finished){state.scale.finished=false;state.scale.time=0;}paint(state.scale,true,false);}reconcile();}));
+  scale.querySelectorAll('[data-scale-count]').forEach(el=>el.addEventListener('click',()=>{setCount(Number(el.dataset.scaleCount));state.scale.time=12000;state.scale.finished=true;state.scale.paused=true;paint(state.scale,true,false);reconcile();}));
   scale.querySelectorAll('[data-scale-step]').forEach(el=>el.addEventListener('click',()=>seek(state.scale,Number(el.dataset.scaleStep))));
   sem.querySelectorAll('[data-sem-step]').forEach(el=>el.addEventListener('click',()=>seek(state.semantic,Number(el.dataset.semStep))));
   scale.querySelector('[data-scale-play]').addEventListener('click',()=>play(state.scale));

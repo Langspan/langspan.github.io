@@ -30,13 +30,7 @@ jobs:
           npm ci --ignore-scripts
           npm run build
           node check-capability-fallbacks.mjs
-          if ! git diff --quiet -- ../assets/coordination-demo.js; then
-            mkdir -p ../review-output
-            git show HEAD:assets/coordination-demo.js > ../review-output/coordination-demo.committed.js
-            cp ../assets/coordination-demo.js ../review-output/coordination-demo.generated.js
-            echo "::error::Stageshow bundle differs from the pinned source build; inspect the review artifact."
-            exit 1
-          fi
+          git diff --exit-code -- ../assets/coordination-demo.js
       - name: Install pinned browser checks
         working-directory: review
         run: |
