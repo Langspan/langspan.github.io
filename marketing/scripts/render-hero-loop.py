@@ -25,7 +25,8 @@ def document():
     # Inline the home page's own local files. No network request runs, and no
     # agent or daemon starts.
     html = (ROOT / 'index.html').read_text()
-    css = (ROOT / 'assets/product-first.css').read_text()
+    # The page's own styles: layout and the proof chips.
+    css = (ROOT / 'assets/product-first.css').read_text() + '\n' + (ROOT / 'assets/proof.css').read_text()
     css = re.sub(r"url\('(fonts/[^']+)'\)", lambda m: "url('" + data(ROOT / 'assets' / m[1]) + "')", css)
     html = re.sub(r'<link\b[^>]*>', '', html)
     html = re.sub(r'<script\b[^>]*\bsrc=["\'][^"\']+["\'][^>]*>\s*</script>', '', html)
@@ -78,7 +79,7 @@ def main():
                 report['min_text_px'] = m['min_text_px']
             # Frames inside a hold are pixel-identical, so a settled state is
             # captured once. Every timestamp still runs renderAt and the checks.
-            key = page.evaluate("() => JSON.stringify([...document.querySelectorAll('#film [data-coordination-event] *')].map(e => [e.textContent, e.getAttribute('style'), e.getAttribute('aria-pressed'), e.className]))") if reuse else None
+            key = page.evaluate("() => { const panel = window.LangSpanHero ? window.LangSpanHero.element : document.querySelector('#film [data-coordination-event]'); return JSON.stringify([...panel.querySelectorAll('*')].map(e => [e.textContent, e.getAttribute('style'), e.getAttribute('aria-pressed'), e.className])); }") if reuse else None
             if key in cache:
                 return cache[key]
             image = page.screenshot(animations='disabled', type='png')

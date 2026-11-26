@@ -6,6 +6,28 @@ body.film-mode> :not(#film){display:none!important}
 #film .film-header img{width:136px;height:auto;display:block}
 #film .film-context{font-size:14px;font-weight:600;color:var(--muted)}
 #film .film-stage{display:flex;align-items:center;min-height:0}
+/* The home page hero loop (assets/product-first.js, window.LangSpanHero). The film
+   frames the page's own panel; only sizes change, never the content or timing. */
+#film .hl{width:100%;margin:0;min-width:0;border-radius:12px;box-shadow:0 14px 36px #15151313}
+#film .hl-head{padding:12px 16px;font-size:16px;min-height:48px}
+#film .hl-body{padding:14px 16px 16px;gap:12px;grid-template-areas:"card" "rows"}
+#film .hl-tabs,#film .hl-foot,#film .hl-dots{display:none!important}
+#film .hl-row{min-height:66px;padding:10px 12px;grid-template-columns:34px minmax(0,1fr) auto;gap:10px}
+#film .hl-av{width:32px;height:32px;font-size:15px}
+#film .hl-row strong{font-size:16px}
+#film .hl-line{font-size:14px;line-height:1.4}
+#film .hl-line .plain{font-size:15px}
+#film .hl-status{font-size:15px;white-space:nowrap}
+#film .hl-card{padding:16px 18px 18px;gap:10px}
+#film .hl-kind{font-size:17px}
+#film .hl-card code{font-size:17px;line-height:1.45}
+#film .hl-card p{font-size:16px;line-height:1.45}
+#film .chip{font-size:14px;padding:5px 9px 5px 8px;gap:7px}
+#film .chip::before{width:8px;height:8px}
+#film .film-footer{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#film .film-header img{width:136px;height:auto;display:block}
+#film .film-context{font-size:14px;font-weight:600;color:var(--muted)}
+#film .film-stage{display:flex;align-items:center;min-height:0}
 #film .demo{width:100%;margin:0;min-width:0;border-radius:12px;box-shadow:0 14px 36px #15151313}
 #film .demo-head{padding:12px 16px;font-size:15px;min-height:46px}
 #film .demo-head .mode{font-size:14px;white-space:nowrap}
@@ -27,4 +49,4 @@ body.film-mode> :not(#film){display:none!important}
 #film .film-footer{flex-direction:column;align-items:flex-start;gap:2px;border-top:1px solid var(--line);padding-top:10px}
 #film .film-footer strong{font-size:17px;font-weight:650;color:var(--ink)}
 #film .film-footer span{font-size:14px;color:var(--muted)}
-#film .inspector,#film .inspector>*,#film .session-list,#film .status{transition:none!important;animation:none!important}
+#film .hl *{transition:none!important;animation:none!important}

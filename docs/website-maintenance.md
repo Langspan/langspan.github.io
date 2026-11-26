@@ -125,7 +125,9 @@ records the pinned upstream files and the one local `Stage` extension.
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Shared-awareness hero, team problem, demonstration, scope, mission, setup and FAQ |
+| `index.html` | Home page: hero loop, problem, what each agent sees, get started, LangSpan Live, evidence, questions and hand-off |
+| `assets/product-first.css`, `assets/product-first.js` | Home page layout, light and dark themes, the hero loop clock and `window.LangSpanHero` |
+| `assets/proof.css` | Recorded, Simulated and Illustration chips and the host evidence table, shared by both pages |
 | `assets/site.css` | Responsive layout, focus states and reduced-motion support |
 | `assets/site.js` | Page interactions, setup choices, copy controls and motion coordination |
 | `assets/shared-work-canvas.js` | Original hero connection animation informed by living-canvas |

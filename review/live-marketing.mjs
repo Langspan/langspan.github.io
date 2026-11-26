@@ -8,20 +8,20 @@ const origin='https://langspan.dev';
 const manifest=JSON.parse(readFileSync('marketing/published-assets.json','utf8'));
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 let html='';
-for(let i=0;i<30;i++){try{const r=await fetch(origin+'/?verify=marketing-v1',{cache:'no-store'});html=await r.text();if(r.ok&&html.includes('data-record-choice')&&html.includes('data-sig-example')&&html.includes('data-release-target'))break;}catch{}await new Promise(r=>setTimeout(r,3000));}
-assert.ok(html.includes('data-record-choice')&&html.includes('data-sig-example')&&html.includes('data-release-target'),'release-aware website not yet deployed');
+for(let i=0;i<30;i++){try{const r=await fetch(origin+'/?verify=marketing-v1',{cache:'no-store'});html=await r.text();if(r.ok&&html.includes('data-hero-loop')&&html.includes('data-signature')&&html.includes('data-release-target'))break;}catch{}await new Promise(r=>setTimeout(r,3000));}
+assert.ok(html.includes('data-hero-loop')&&html.includes('data-signature')&&html.includes('data-release-target'),'release-aware website not yet deployed');
 for(const path of ['assets/latest-release.js','assets/product-first.js','assets/product-first.css','assets/product/langspan-live-v0.2.0.html','technical.html','walkthrough.html']){const r=await fetch(origin+'/'+path,{cache:'no-store'});assert.ok(r.ok,path);assert.equal(hash(Buffer.from(await r.arrayBuffer())),hash(readFileSync(path)),path+' served hash');}
 for(const f of manifest.files){const r=await fetch(origin+'/'+f.path);assert.ok(r.ok,f.path+' HTTP '+r.status);const data=Buffer.from(await r.arrayBuffer());assert.equal(hash(data),f.sha256,f.path+' served hash');}
 const b=await chromium.launch();try{
  const page=await b.newPage({viewport:{width:1440,height:900},reducedMotion:'reduce'});
  await page.goto(origin+'/?motion=static',{waitUntil:'domcontentloaded'});
  assert.ok(await page.locator('[data-product-first]').isVisible());
- await page.locator('[data-step="1"]').click();assert.equal(await page.locator('[data-event-title]').innerText(),'Overlapping edit refused');
- await page.locator('[data-open-evidence]').click();await page.locator('[data-record="refusal"]').waitFor();assert.equal(await page.locator('.record:visible').count(),1);await page.locator('[data-record-choice="briefing"]').click();assert.ok(await page.locator('[data-record="briefing"]').isVisible());
+ assert.ok(await page.locator('[data-hero-loop] [data-card="1"]').isVisible(),'reduced motion holds on the recorded refusal');
+ assert.equal(await page.evaluate(()=>window.LangSpanHero.timing.events.length),10);
  await page.locator('[data-signature=new]').click();assert.equal(await page.locator('[data-sig-title]').innerText(),'Argument count matches');
- await page.locator('[data-open-live]').click();const homepageLive=page.frameLocator('#live-embed iframe');await homepageLive.locator('#status-text').getByText('Simulated data',{exact:true}).waitFor();assert.equal(await homepageLive.locator('#kpis li').count(),7);
+ assert.equal(await page.locator('#langspan-live figcaption .chip-sim').count(),1);
  assert.equal(await page.locator('[data-release-target]:visible').count(),4);
- console.log('PASS live product-first homepage and interactive release dashboard');
+ console.log('PASS live home page: hero loop, interface example, Simulated dashboard and release links');
  await page.goto(origin+'/technical.html#film',{waitUntil:'domcontentloaded'});
  const film=page.locator('.launch-film');await film.locator('summary').click();const v=film.locator('video');
  assert.ok(await v.isVisible());await v.evaluate(e=>{e.preload='metadata';e.load()});await page.waitForFunction(()=>document.querySelector('.launch-film video').readyState>=1,{},{timeout:20000});
