@@ -1,3 +1,4 @@
 demo-src/node_modules/
 .openai/
 *.baseline
+_site/
