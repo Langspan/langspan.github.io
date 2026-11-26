@@ -4,6 +4,12 @@
 
 **Run agents in parallel. Build as a team.**
 
+[![Latest stable release](https://img.shields.io/github/v/release/Langspan/LangSpan.dev?style=flat-square&labelColor=151513&display_name=tag&sort=date&color=A34A34)](https://github.com/Langspan/LangSpan.dev/releases/latest) [![Website deployment on main](https://github.com/Langspan/langspan.github.io/actions/workflows/pages.yml/badge.svg?branch=main&event=push)](https://github.com/Langspan/langspan.github.io/actions/workflows/pages.yml) [![Live-site verification](https://github.com/Langspan/langspan.github.io/actions/workflows/verify-live-marketing.yml/badge.svg?branch=main&event=push)](https://github.com/Langspan/langspan.github.io/actions/workflows/verify-live-marketing.yml) [![Project website](https://img.shields.io/badge/website-langspan.dev-3F3E44?style=flat-square&labelColor=151513)](https://langspan.dev/)
+
+[![React (pinned on main)](https://img.shields.io/badge/dynamic/json?style=flat-square&labelColor=151513&url=https%3A%2F%2Fraw.githubusercontent.com%2FLangspan%2Flangspan.github.io%2Fmain%2Fdemo-src%2Fpackage.json&query=%24.dependencies.react&label=React&color=3F3E44&logo=react)](https://github.com/Langspan/langspan.github.io/blob/main/demo-src/package.json) [![esbuild (pinned on main)](https://img.shields.io/badge/dynamic/json?style=flat-square&labelColor=151513&url=https%3A%2F%2Fraw.githubusercontent.com%2FLangspan%2Flangspan.github.io%2Fmain%2Fdemo-src%2Fpackage.json&query=%24.devDependencies.esbuild&label=esbuild&color=3F3E44&logo=esbuild)](https://github.com/Langspan/langspan.github.io/blob/main/demo-src/package.json)
+
+<sub>Release badge tracks the core product; React and esbuild badges track the site’s pinned build dependencies. See the [marketing toolchain](marketing/skills.lock.json) for vendored components and upstream revisions.</sub>
+
 The [LangSpan product website](https://langspan.dev/) introduces the open-source coordination
 layer for parallel agentic development. Worktrees isolate files, not intent.
 LangSpan complements your agents and Git workflows with relevant briefings,
@@ -13,7 +19,7 @@ relay; comparative outcomes remain to be measured.
 
 The [canonical product positioning](https://github.com/Langspan/LangSpan.dev/blob/main/docs/positioning.md)
 owns public messaging and evidence boundaries.
-[Parallel work](https://langspan.dev/#scale) · [Semantic conflict](https://langspan.dev/#why) ·
+[LangSpan Live](https://langspan.dev/#langspan-live) · [Parallel work](https://langspan.dev/#scale) · [Semantic conflict](https://langspan.dev/#why) ·
 [Research](https://langspan.dev/#research) · [Recorded evidence](https://langspan.dev/#evidence)
 
 <a href="https://langspan.dev/#edit-coordination">
