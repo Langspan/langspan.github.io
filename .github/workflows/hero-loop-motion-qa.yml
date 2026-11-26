@@ -14,7 +14,8 @@ permissions:
   contents: read
 jobs:
   render:
-    runs-on: ubuntu-latest
+    # Playwright 1.57 supports Chromium on Ubuntu 24.04, not on newer images.
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
