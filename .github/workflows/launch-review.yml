@@ -55,7 +55,7 @@ jobs:
           git -C /tmp/hallmark checkout --detach FETCH_HEAD
           export HALLMARK_PUPPETEER="$PWD/review/node_modules/puppeteer-core"
           export CHROME_PATH="$(node -p 'require("./review/node_modules/playwright").chromium.executablePath()')"
-          node /tmp/hallmark/skills/hallmark/scripts/sloplint.mjs index.html assets/site.css assets/parallel-story.css --genre editorial --render --url http://127.0.0.1:8123/ > review-output/hallmark.txt 2>&1
+          node /tmp/hallmark/skills/hallmark/scripts/sloplint.mjs index.html assets/product-first.css --genre editorial --render --url http://127.0.0.1:8123/ > review-output/hallmark.txt 2>&1
       - uses: actions/upload-artifact@v4
         if: always()
         with:

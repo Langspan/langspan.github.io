@@ -1,7 +1,7 @@
 import {readFileSync} from 'node:fs'
 import assert from 'node:assert/strict'
 const story=JSON.parse(readFileSync(new URL('../marketing/story.json',import.meta.url),'utf8'))
-const html=readFileSync(new URL('../index.html',import.meta.url),'utf8')
+const html=readFileSync(new URL('../technical.html',import.meta.url),'utf8')
 const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;')
 assert.equal(story.capabilityExplorer.scenes.length,6)
 for(const c of story.capabilityExplorer.scenes){

@@ -14,7 +14,7 @@ for(const m of ['light','dark'])copyFileSync(join(root,'assets/brand/langspan-lo
 const b=await chromium.launch({headless:true});
 const p=await b.newPage({viewport:{width:1360,height:920},deviceScaleFactor:2,reducedMotion:'reduce'});
 const errors=[];p.on('pageerror',e=>errors.push(e.message));
-await p.goto('http://127.0.0.1:8123/?motion=static',{waitUntil:'networkidle'});
+await p.goto('http://127.0.0.1:8123/technical.html?motion=static',{waitUntil:'networkidle'});
 await p.locator('.mechanism-figure, .hero-figure:not(.scale-figure)').screenshot({path:join(media,'hero.png'),animations:'disabled'});
 await p.goto('http://127.0.0.1:8123/demo-src/preview.html?motion=static',{waitUntil:'networkidle'});
 const steps=p.locator('.ls-scene-button');await steps.first().waitFor();

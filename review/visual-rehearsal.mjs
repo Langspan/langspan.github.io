@@ -10,7 +10,10 @@ try{
   const page=await browser.newPage({viewport:{width,height},reducedMotion:'reduce',deviceScaleFactor:1});
   page.on('pageerror',e=>findings.push({width,kind:'pageerror',message:e.message}));
   await page.goto('http://127.0.0.1:8124/?motion=static',{waitUntil:'networkidle'});
-  await page.screenshot({path:out+'/'+width+'-hero.png'});
+  await page.screenshot({path:out+'/'+width+'-product-first-hero.png'});
+  await page.screenshot({path:out+'/'+width+'-product-first-full.png',fullPage:true});
+  await page.goto('http://127.0.0.1:8124/technical.html?motion=static',{waitUntil:'networkidle'});
+  await page.screenshot({path:out+'/'+width+'-technical-hero.png'});
   async function capture(name,locator){
    // Capture the real viewport with its sticky header; do not resize
    // the viewport or hide the header to make a long scene fit a screenshot.
