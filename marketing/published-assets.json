@@ -65,10 +65,9 @@
       "sha256": "4277de07860e17bf2fd3c41ab191fac82f23c12405a268698fa386ae5c8914bc"
     },
     {
-      "source": "demo-src/CoordinationDemo.tsx and CapabilityExplorer.tsx (generated from marketing/story.json)",
+      "source": "demo-src/CoordinationDemo.tsx and CapabilityExplorer.tsx (generated from marketing/story.json; restored geometry and PR #24 copy)",
       "path": "assets/coordination-demo.js",
-      "sha256": "7152305d33b5941c10dcc1f359c8a30e3cea822bc731b1fab0326e0bab08ce96",
-      "revision": "83170f25e118f5aca10de4afdafb8ac724347b0c"
+      "sha256": "f40334871a5ef6f84f1ee78461a0d2524f4b5ecd9b5881b33e88cdf0f6e6f1db"
     }
   ]
 }

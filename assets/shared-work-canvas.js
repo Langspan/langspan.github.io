@@ -45,7 +45,7 @@
   function port(box, other) {
     const dx = other.x + other.width / 2 - box.x - box.width / 2;
     const dy = other.y + other.height / 2 - box.y - box.height / 2;
-    const gap = -1;
+    const gap = 5;
     if (Math.abs(dx) / (box.width + other.width) > Math.abs(dy) / (box.height + other.height)) {
       const direction = dx >= 0 ? 1 : -1;
       return { x: box.x + box.width / 2 + direction * (box.width / 2 + gap), y: box.y + box.height / 2, nx: direction, ny: 0 };
