@@ -14,6 +14,9 @@ Use the installed `impeccable-product-pages` guidance or an available
 and the relevant playbook in its `reference/` directory.
 Use existing project context when optional tooling cannot run.
 
+Before any motion or visual content (an animation, demo, loop, film, still
+or README card), read the [motion and visual content playbook](docs/motion-playbook.md).
+
 Treat the marketing page as a Persuade surface: explain the coordination
 problem, show a useful example and help visitors choose their next step.
 
