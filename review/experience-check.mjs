@@ -4,7 +4,7 @@ export async function checkExperience(p,width,out){
  const exp=p.locator('[data-lx-experiment]');
  await exp.scrollIntoViewIfNeeded();
  for(const n of [2,5,10]){await exp.locator('[data-lx-n="'+n+'"]').click();assert.equal(await exp.locator('[data-lx-agents] span').count(),n*3);}
- for(const family of ['rename','contradiction']){
+ for(const family of ['rename','contradiction','discovered']){
    await exp.locator('[data-lx-family]').selectOption(family);
    assert.equal(await p.evaluate(()=>window.LangSpanBenchmark.snapshot().family),family);
  }
@@ -15,7 +15,7 @@ export async function checkExperience(p,width,out){
  assert.equal(await p.locator('.lx-metric-detail dd').filter({hasText:'Not established'}).count(),3);
  assert.equal(await p.evaluate(()=>window.LangSpanBenchmark.snapshot().manifest.results),null);
  await p.locator('.lx-manifest summary').click();
- const config=JSON.parse(await p.locator('[data-lx-manifest]').innerText());assert.equal(config.sessions_per_arm,10);assert.equal(config.task_family,'contradictory_defaults');assert.deepEqual(config.conditions,['worktrees','awareness_only','langspan']);
+ const config=JSON.parse(await p.locator('[data-lx-manifest]').innerText());assert.equal(config.sessions_per_arm,10);assert.equal(config.task_family,'discovered_change');assert.deepEqual(config.conditions,['worktrees','awareness_only','langspan']);
  await p.locator('.lx-manifest summary').click();
  for(const scope of ['local','worktree','remote']){await p.locator('[data-lx-scope="'+scope+'"]').click();assert.equal(await p.locator('[data-lx-scope="'+scope+'"]').getAttribute('aria-pressed'),'true');}
  await checkArchitecture(p,width,out);

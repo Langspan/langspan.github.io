@@ -1,0 +1,1443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="light dark">
+<title>LangSpan Live</title>
+<style>
+/* Design tokens and patterns copied from the LangSpan marketing site's
+   assets/site.css (palette, type stacks, line, radius, button, eyebrow,
+   focus and motion conventions), so the dashboard and the site read as one
+   product. The dark theme uses the site's dark-section tokens (--cap-*,
+   --proof-*). Status colors for checks, refusals and teammates are not in
+   the site; they are derived here for at least 4.5:1 contrast on each
+   surface. Nothing is loaded at run time. */
+:root {
+  --paper: #f4f3ef; --ink: #151513; --slate: #3f3e44; --coral: #d87859; --coral-ink: #a84429;
+  --muted: #66655e; --line: #dcdad2; --white: #fffefa;
+  --mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  --sans: Inter, "Helvetica Neue", Arial, sans-serif;
+  --action-ease: cubic-bezier(.2, 0, 0, 1);
+  --surface: var(--paper); --raised: var(--white); --sunken: #eae8e1; --panel: #f8f7f3;
+  --text: var(--ink); --text-muted: var(--muted); --rule: var(--line); --rule-strong: #cfcdc5;
+  --accent-text: var(--coral-ink); --accent-tint: #f6eee6; --hover: #efede7;
+  --good: #2d6a35; --good-tint: #e8f0e4; --bad: #a8281f; --bad-tint: #f8e7e4;
+  --peer: #0b6469; --peer-tint: #e1f0f0; --warn: #7a5200; --warn-tint: #f5ecd9;
+  --focus: var(--coral-ink);
+  color-scheme: light;
+}
+[data-theme="dark"] {
+  --surface: #151513; --raised: #1d1e1b; --sunken: #242422; --panel: #1a1a18;
+  --text: #f4f3ef; --text-muted: #b8b9b4; --rule: #383931; --rule-strong: #4c4b44;
+  --accent-text: #e8a58d; --accent-tint: #3d2e27; --hover: #2a2a27;
+  --good: #c4d7b3; --good-tint: #2c3428; --bad: #f0928a; --bad-tint: #3a1f1c;
+  --peer: #8dc5c8; --peer-tint: #1c2e2f; --warn: #e0b45c; --warn-tint: #33291a;
+  --focus: #e8a58d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--surface); color: var(--text); font-family: var(--sans);
+  font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, p, dl, dd, ol, ul, figure { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+h1, h2, h3 { font-weight: 650; letter-spacing: -.02em; line-height: 1.2; }
+h1 { font-size: 24px; letter-spacing: -.035em; }
+h2 { font-size: 16px; }
+h3 { font-size: 13px; letter-spacing: -.01em; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; background: none; border: 0; padding: 0; text-align: inherit;
+  -webkit-tap-highlight-color: transparent; }
+button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible,
+[tabindex]:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+[hidden] { display: none !important; }
+::selection { background: #edb7a4; color: var(--ink); }
+code, .mono { font-family: var(--mono); font-size: 12.5px; overflow-wrap: anywhere; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.muted { color: var(--text-muted); }
+.t-good { color: var(--good); } .t-bad { color: var(--bad); } .t-warn { color: var(--warn); }
+.t-peer { color: var(--peer); } .t-accent { color: var(--accent-text); }
+.icon { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.7;
+  stroke-linecap: round; stroke-linejoin: round; vertical-align: -3px; }
+
+/* Site patterns: eyebrow with a coral dash, outline button. */
+.eyebrow { display: flex; align-items: center; gap: 10px; font-size: 12px; line-height: 1.5;
+  font-weight: 650; letter-spacing: .015em; color: var(--text-muted); }
+.coral-dash { width: 24px; height: 2px; background: var(--coral); flex: none; }
+.button { display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 36px; padding: 6px 14px; font-size: 13px; line-height: 1.4; font-weight: 650;
+  border-radius: 7px; border: 1px solid var(--rule-strong); background: transparent;
+  transition: background-color 150ms ease-out, border-color 150ms ease-out; white-space: nowrap; }
+.button:hover { background: var(--raised); border-color: #a7a59c; }
+.button[aria-pressed="true"] { background: var(--text); color: var(--surface); border-color: var(--text); }
+.control { min-height: 36px; border: 1px solid var(--rule-strong); border-radius: 7px;
+  background: var(--raised); padding: 6px 10px; font-size: 13px; max-width: 100%; }
+input.control { min-width: 0; width: 190px; }
+
+/* Header */
+.topbar { border-bottom: 1px solid var(--rule); background: var(--surface); }
+.topbar-inner { display: flex; align-items: center; gap: 20px; min-height: 64px;
+  width: min(1680px, calc(100% - 48px)); margin-inline: auto; flex-wrap: wrap; padding-block: 10px; }
+.brand { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 650;
+  letter-spacing: -.035em; white-space: nowrap; }
+.ls-mark { width: 137px; height: 38px; flex: none; margin-left: -4px; }
+.ls-mark-dark { display: none; }
+[data-theme="dark"] .ls-mark-light { display: none; }
+[data-theme="dark"] .ls-mark-dark { display: block; }
+.brand-product { font-weight: 500; color: var(--text-muted); border-left: 1px solid var(--rule);
+  padding-left: 12px; margin-left: 2px; font-size: 15px; letter-spacing: -.01em; }
+.top-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; flex-wrap: wrap; }
+.status-pill { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600;
+  padding: 5px 10px; border-radius: 999px; border: 1px solid var(--rule-strong); white-space: nowrap; }
+.status-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex: none; }
+.status-pill.is-live { color: var(--good); }
+.status-pill.is-stale { color: var(--bad); border-color: currentColor; }
+.status-pill.is-waiting { color: var(--text-muted); }
+.status-pill.is-demo { color: var(--accent-text); border-color: currentColor; }
+
+/* Page */
+.page { width: min(1680px, calc(100% - 48px)); margin-inline: auto; padding: 22px 0 40px; }
+.intro { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px 24px;
+  flex-wrap: wrap; margin-bottom: 18px; }
+.intro .eyebrow { margin-bottom: 8px; }
+.context { color: var(--text-muted); font-size: 13px; margin-top: 4px; overflow-wrap: anywhere; }
+.demo-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.demo-controls input[type="range"] { accent-color: var(--coral-ink); width: 130px; }
+.demo-caption { font-size: 13px; color: var(--text-muted); max-width: 520px; }
+.banner { margin: 0 0 16px; padding: 10px 14px; border-radius: 7px; border: 1px solid var(--bad);
+  background: var(--bad-tint); color: var(--text); font-size: 13px; overflow-wrap: anywhere; }
+.banner.is-demo { border-color: var(--coral); background: var(--accent-tint); }
+.banner strong { font-weight: 650; }
+
+/* KPI strip: the site's bordered scope grid. */
+.kpis { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border: 1px solid var(--rule);
+  border-radius: 12px; background: var(--panel); overflow: hidden; margin-bottom: 18px; }
+.kpi { padding: 14px 16px 15px; min-width: 0; border-left: 1px solid var(--rule); }
+.kpi:first-child { border-left: 0; }
+.kpi-label { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600;
+  color: var(--text-muted); }
+.kpi-value { font-size: 28px; line-height: 1.15; font-weight: 650; letter-spacing: -.04em;
+  font-variant-numeric: tabular-nums; margin: 6px 0 3px; }
+.kpi-value .bound { font-size: 18px; letter-spacing: 0; margin-left: 1px; color: var(--text-muted); }
+.kpi-note { font-size: 12px; color: var(--text-muted); line-height: 1.45; overflow-wrap: anywhere; }
+
+/* Main grid */
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 18px; align-items: start; }
+.side { display: grid; gap: 18px; min-width: 0; }
+.panel { border: 1px solid var(--rule); border-radius: 12px; background: var(--raised); min-width: 0; }
+.panel-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+  padding: 14px 16px; border-bottom: 1px solid var(--rule); flex-wrap: wrap; }
+.panel-title { display: flex; align-items: center; gap: 9px; min-width: 0; }
+.panel-title .icon { color: var(--accent-text); }
+.panel-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.filters { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.filters label { font-size: 12px; color: var(--text-muted); }
+.filter { display: inline-flex; align-items: center; gap: 8px; max-width: 100%; }
+.panel-foot { padding: 10px 16px 12px; font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--rule); }
+.panel-foot p + p { margin-top: 4px; }
+.empty { padding: 22px 16px; color: var(--text-muted); font-size: 13px; }
+.empty .button { margin-top: 10px; }
+
+/* Traffic scope */
+.scope { overflow: auto; max-height: min(72vh, 900px); scrollbar-width: thin; position: relative; }
+.scope.is-stale { opacity: .6; }
+.grid { border-collapse: separate; border-spacing: 0; table-layout: fixed; }
+.grid th, .grid td { border-bottom: 1px solid var(--rule); border-right: 1px solid var(--rule);
+  padding: 0; vertical-align: middle; font-weight: inherit; text-align: left; }
+.grid tr > :last-child { border-right: 0; }
+.grid thead th { position: sticky; top: 0; z-index: 2; background: var(--sunken); }
+.grid .col-session { position: sticky; left: 0; z-index: 1; width: 250px; min-width: 250px; max-width: 250px;
+  background: var(--raised); }
+.grid thead .col-session { z-index: 3; background: var(--sunken); padding: 10px 12px; font-size: 12px;
+  font-weight: 600; color: var(--text-muted); }
+.grid .col-path { width: 132px; min-width: 132px; max-width: 132px; }
+.path-head { display: flex; flex-direction: column; gap: 1px; width: 100%; min-height: 56px; padding: 8px 9px;
+  font-size: 12px; line-height: 1.35; }
+.path-head:hover, .path-head.is-selected { background: var(--hover); }
+.path-head.is-selected { box-shadow: inset 0 -2px var(--coral); }
+.path-dir, .path-file { display: block; font-family: var(--mono); white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; }
+.path-dir { font-size: 11px; color: var(--text-muted); }
+.path-file { font-size: 12px; font-weight: 600; }
+.path-signal { font-size: 11px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.path-head.has-shared .path-file { color: var(--accent-text); }
+.group-row th { background: var(--panel); padding: 0; }
+.group-button { position: sticky; left: 0; display: flex; align-items: center; gap: 8px; min-height: 36px;
+  padding: 6px 12px; font-size: 12px; color: var(--text-muted); max-width: min(100vw - 80px, 900px); }
+/* On a narrow screen the header's parts wrap whole instead of squeezing. */
+.group-button { flex-wrap: wrap; row-gap: 2px; }
+.group-button > * { flex: none; white-space: nowrap; }
+.group-button > .mono { flex: 0 1 auto; min-width: 0; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+.group-button strong { color: var(--text); font-weight: 650; }
+.group-button .icon { width: 14px; height: 14px; }
+.session { display: flex; align-items: flex-start; gap: 9px; width: 100%; min-height: 54px; padding: 8px 12px; }
+.session:hover, .session.is-selected { background: var(--hover); }
+.session.is-selected { box-shadow: inset 3px 0 var(--coral); }
+.avatar { width: 28px; height: 28px; display: grid; place-items: center; flex: none; border-radius: 7px;
+  background: var(--sunken); color: var(--slate); font: 600 11px var(--mono); }
+[data-theme="dark"] .avatar { color: var(--text-muted); }
+.avatar.is-peer { background: var(--peer-tint); color: var(--peer); }
+.session-text { min-width: 0; flex: 1; }
+.session-name { display: block; font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.session-name .mono { font-weight: 400; color: var(--text-muted); font-size: 12px; }
+.session-task { display: block; font-size: 12px; color: var(--text-muted); white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; }
+.state { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; margin-top: 2px; }
+.state .mono { font-size: 11px; font-weight: 400; white-space: nowrap; }
+.state-editing { color: var(--accent-text); } .state-active, .state-published { color: var(--good); }
+.state-idle, .state-unheard, .state-earlier_run { color: var(--text-muted); }
+.state-ended, .state-exited { color: var(--warn); }
+.cell { width: 132px; height: 54px; background: var(--raised); }
+.cell.is-column { background: var(--hover); }
+.cell-button { display: flex; align-items: center; justify-content: center; width: 100%; height: 54px; padding: 4px; }
+.cell-button:hover { background: var(--hover); }
+.mark { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; line-height: 1.2;
+  padding: 3px 7px; border-radius: 6px; border: 1px solid transparent; white-space: nowrap; }
+.mark .icon { width: 13px; height: 13px; }
+.mark-refused { color: var(--bad); background: var(--bad-tint); border-color: var(--bad); }
+.mark-held { color: var(--accent-text); border-color: var(--coral); background: var(--accent-tint); }
+.mark-editing { color: var(--peer); border-color: var(--peer); }
+.mark-shared { color: var(--accent-text); }
+.mark-notice { color: var(--warn); }
+.mark-published { color: var(--peer); }
+.mark-recent { color: var(--text-muted); font-weight: 500; }
+.mark-extra { font-size: 11px; color: var(--text-muted); font-weight: 600; margin-left: 2px; }
+/* A mark that the coordinator newly reports rings once; nothing else moves. */
+.is-new { animation: ls-arrive 600ms var(--action-ease); }
+@keyframes ls-arrive { from { box-shadow: 0 0 0 3px var(--coral); } to { box-shadow: 0 0 0 0 transparent; } }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 10px 16px; border-top: 1px solid var(--rule); }
+.legend .mark { font-weight: 500; }
+
+/* Feed and inspector */
+.feed { max-height: 560px; overflow: auto; scrollbar-width: thin; }
+.record { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 8px; width: 100%; padding: 11px 16px;
+  border-bottom: 1px solid var(--rule); }
+.record:hover, .record.is-selected { background: var(--hover); }
+.record.is-selected { box-shadow: inset 3px 0 var(--coral); }
+.record .icon { margin-top: 2px; }
+.record-head { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.record-title { font-size: 13px; font-weight: 600; overflow-wrap: anywhere; }
+.record-time { font-size: 11px; color: var(--text-muted); white-space: nowrap; }
+.record-detail { display: block; font-size: 12px; color: var(--text-muted); margin-top: 2px; overflow-wrap: anywhere; }
+.inspector-body { padding: 14px 16px 16px; display: grid; gap: 16px; }
+.inspector-title { font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--accent-text);
+  overflow-wrap: anywhere; margin-top: 2px; }
+.facts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 5px 14px; font-size: 13px; }
+.facts dt { color: var(--text-muted); font-size: 12px; padding-top: 1px; }
+.facts dd { overflow-wrap: anywhere; min-width: 0; }
+.block h3 { display: flex; align-items: center; gap: 7px; margin-bottom: 7px; }
+.block h3 .icon { color: var(--text-muted); }
+.items { display: grid; gap: 6px; }
+.item { font-size: 13px; padding: 8px 10px; border-radius: 7px; background: var(--sunken); overflow-wrap: anywhere; }
+.item .muted { font-size: 12px; }
+.item-button { width: 100%; text-align: left; }
+.item-button:hover { outline: 1px solid var(--rule-strong); }
+.caveat { font-size: 12px; color: var(--text-muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.chip { font-family: var(--mono); font-size: 12px; padding: 1px 6px; border-radius: 4px; background: var(--sunken); overflow-wrap: anywhere; }
+.quote { font-style: italic; }
+
+/* Health */
+.health { margin-top: 18px; }
+.health-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 0; }
+.health-card { padding: 14px 16px; border-bottom: 1px solid var(--rule); min-width: 0; }
+.health-card h3 { margin-bottom: 8px; display: flex; gap: 8px; align-items: center; overflow-wrap: anywhere; }
+.health-card .facts { font-size: 12.5px; }
+.install { display: block; margin-top: 4px; padding: 6px 8px; border-radius: 6px; background: var(--sunken); }
+details.explain { padding: 12px 16px; font-size: 13px; }
+details.explain summary { cursor: pointer; font-weight: 600; }
+details.explain dl { margin-top: 10px; }
+.footer { width: min(1680px, calc(100% - 48px)); margin: 0 auto; padding: 0 0 32px; font-size: 12px;
+  color: var(--text-muted); display: flex; gap: 8px 24px; flex-wrap: wrap; justify-content: space-between; }
+
+@media (max-width: 1279px) {
+  .layout { grid-template-columns: minmax(0, 1fr) 320px; }
+  .kpis { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .kpi:nth-child(5) { border-left: 0; }
+  .kpi:nth-child(n+5) { border-top: 1px solid var(--rule); }
+}
+@media (max-width: 1023px) {
+  .layout { grid-template-columns: minmax(0, 1fr); }
+  .side { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+  .scope { max-height: 70vh; }
+}
+@media (max-width: 767px) {
+  .topbar-inner, .page, .footer { width: calc(100% - 32px); }
+  .brand-product { display: none; }
+  h1 { font-size: 21px; }
+  .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kpi { border-left: 0; border-top: 1px solid var(--rule); }
+  .kpi:nth-child(-n+2) { border-top: 0; }
+  .kpi:nth-child(even) { border-left: 1px solid var(--rule); }
+  .kpi:nth-child(5) { border-left: 0; }
+  .kpi-value { font-size: 24px; }
+  .side { grid-template-columns: minmax(0, 1fr); }
+  .grid .col-session { width: 168px; min-width: 168px; max-width: 168px; }
+  .avatar { display: none; }
+  .grid .col-path, .cell { width: 112px; min-width: 112px; max-width: 112px; }
+  .panel-head { padding: 12px; }
+  input.control { width: 100%; }
+  .filters { width: 100%; }
+  .feed { max-height: 420px; }
+}
+@media (pointer: coarse) { .button, .control, .group-button { min-height: 44px; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important; }
+}
+</style>
+</head>
+<body>
+<template id="icons">
+  <svg class="icon" data-icon="users" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1c0-3 3-5 6-5s6 2 6 5v1M16 5a3 3 0 0 1 0 6m2 3c2 1 3 3 3 5v1"/></svg>
+  <svg class="icon" data-icon="layers" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5ZM3 12l9 5 9-5M3 16l9 5 9-5"/></svg>
+  <svg class="icon" data-icon="lock" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+  <svg class="icon" data-icon="ban" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m6 6 12 12"/></svg>
+  <svg class="icon" data-icon="notice" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6 3 12l5 6m8-12 5 6-5 6M14 4l-4 16"/></svg>
+  <svg class="icon" data-icon="check" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>
+  <svg class="icon" data-icon="fail" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6m0-6-6 6"/></svg>
+  <svg class="icon" data-icon="land" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="19" r="2"/><path d="M6 7v10M18 8c0 6-12 2-12 9"/></svg>
+  <svg class="icon" data-icon="file" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h9l5 5v13H5zM14 3v6h5"/></svg>
+  <svg class="icon" data-icon="edit" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5 5 5M4 20l5-1L20 8l-4-4L5 15z"/></svg>
+  <svg class="icon" data-icon="dot" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/></svg>
+  <svg class="icon" data-icon="down" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+  <svg class="icon" data-icon="right" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+  <svg class="icon" data-icon="machine" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8m-4-4v4"/></svg>
+  <svg class="icon" data-icon="peer" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18a4 4 0 0 1-1-8 6 6 0 0 1 11-2 5 5 0 0 1 2 10Z"/></svg>
+  <svg class="icon" data-icon="message" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H9l-5 4zM8 8h8m-8 4h5"/></svg>
+  <svg class="icon" data-icon="note" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5zM9 8h6m-6 4h6m-6 4h3"/></svg>
+  <svg class="icon" data-icon="turn" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h12l-3-3m3 3-3 3M20 17H8l3-3m-3 3 3 3"/></svg>
+  <svg class="icon" data-icon="warn" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 18H2zM12 9v5m0 3h.01"/></svg>
+  <svg class="icon" data-icon="scope" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+  <svg class="icon" data-icon="health" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg>
+  <svg class="icon" data-icon="inspect" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+</template>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><svg class="ls-mark ls-mark-light" viewBox="0 0 288 80" fill="none" aria-hidden="true" focusable="false">
+  <g transform="translate(8, 8)">
+    <path d="M 42.10 6.55 L 36.95 4.05 L 9.19 18.47 Q 6.35 19.95 6.35 23.15 L 6.35 31.65 Q 6.35 34.85 9.17 36.35 L 21.00 42.65 L 26.55 40.00 L 12.89 32.79 Q 11.30 31.95 11.30 30.15 L 11.30 24.70 Q 11.30 22.90 12.89 22.06 Z M 21.90 57.45 L 27.05 59.95 L 54.81 45.53 Q 57.65 44.05 57.65 40.85 L 57.65 32.35 Q 57.65 29.15 54.83 27.65 L 43.00 21.35 L 37.45 24.00 L 51.11 31.21 Q 52.70 32.05 52.70 33.85 L 52.70 39.30 Q 52.70 41.10 51.11 41.94 Z" fill="#151513"/>
+    <path d="M 48.60 9.90 L 43.45 7.40 L 13.82 22.76 Q 12.40 23.50 12.40 25.10 L 12.40 29.50 Q 12.40 31.10 13.82 31.84 L 28.10 39.30 L 33.40 36.70 L 16.81 27.97 Q 16.10 27.60 16.80 27.22 Z M 15.40 54.10 L 20.55 56.60 L 50.18 41.24 Q 51.60 40.50 51.60 38.90 L 51.60 34.50 Q 51.60 32.90 50.18 32.16 L 35.90 24.70 L 30.60 27.30 L 47.19 36.03 Q 47.90 36.40 47.20 36.78 Z" fill="#D87859"/>
+    <path d="M 55.10 13.20 L 50.00 10.70 L 18.25 27.20 L 23.35 29.70 Z M 8.90 50.80 L 14.00 53.30 L 45.75 36.80 L 40.65 34.30 Z" fill="#3F3E44"/>
+  </g>
+  <path d="M 83.01 51.50 L 102.00 51.50 L 102.00 46.86 L 88.54 46.86 L 88.54 20.95 L 83.01 20.95 L 83.01 51.50 Z M 111.94 51.96 C 115.54 51.96 117.68 50.28 118.67 48.35 L 118.85 48.35 L 118.85 51.50 L 124.04 51.50 L 124.04 36.17 C 124.04 30.11 119.10 28.30 114.73 28.30 C 109.91 28.30 106.22 30.44 105.02 34.61 L 110.06 35.33 C 110.60 33.77 112.12 32.42 114.76 32.42 C 117.27 32.42 118.64 33.71 118.64 35.96 L 118.64 36.05 C 118.64 37.60 117.01 37.67 112.97 38.11 C 108.53 38.59 104.27 39.91 104.27 45.07 C 104.27 49.58 107.57 51.96 111.94 51.96 Z M 113.34 48.00 C 111.09 48.00 109.48 46.97 109.48 44.98 C 109.48 42.91 111.28 42.04 113.70 41.70 C 115.12 41.51 117.95 41.15 118.65 40.58 L 118.65 43.28 C 118.65 45.83 116.59 48.00 113.34 48.00 Z M 134.48 38.08 C 134.48 34.77 136.48 32.86 139.33 32.86 C 142.12 32.86 143.79 34.69 143.79 37.75 L 143.79 51.50 L 149.18 51.50 L 149.18 36.91 C 149.20 31.43 146.07 28.30 141.34 28.30 C 137.91 28.30 135.55 29.94 134.51 32.48 L 134.24 32.48 L 134.24 28.59 L 129.08 28.59 L 129.08 51.50 L 134.48 51.50 L 134.48 38.08 Z M 164.25 60.57 C 170.44 60.57 175.01 57.73 175.01 51.87 L 175.01 28.59 L 169.68 28.59 L 169.68 32.38 L 169.38 32.38 C 168.56 30.72 166.84 28.30 162.81 28.30 C 157.51 28.30 153.35 32.44 153.35 39.97 C 153.35 47.44 157.51 51.17 162.79 51.17 C 166.71 51.17 168.55 49.07 169.38 47.39 L 169.65 47.39 L 169.65 51.72 C 169.65 55.10 167.42 56.48 164.34 56.48 C 161.09 56.48 159.66 54.95 159.00 53.60 L 154.14 54.78 C 155.12 57.99 158.42 60.57 164.25 60.57 Z M 164.30 46.94 C 160.74 46.94 158.85 44.16 158.85 39.94 C 158.85 35.78 160.70 32.72 164.30 32.72 C 167.77 32.72 169.68 35.60 169.68 39.94 C 169.68 44.31 167.74 46.94 164.30 46.94 Z M 196.80 29.35 L 202.12 29.35 C 202.01 24.19 197.62 20.54 191.11 20.54 C 184.70 20.54 179.88 24.15 179.90 29.55 C 179.90 33.93 183.01 36.45 188.04 37.75 L 191.51 38.64 C 194.81 39.48 196.99 40.51 197.01 42.88 C 196.99 45.49 194.51 47.23 190.90 47.23 C 187.44 47.23 184.76 45.69 184.54 42.48 L 179.09 42.48 C 179.31 48.55 183.83 51.96 190.95 51.96 C 198.27 51.96 202.52 48.31 202.54 42.92 C 202.52 37.63 198.15 35.21 193.56 34.12 L 190.69 33.41 C 188.19 32.81 185.47 31.75 185.50 29.20 C 185.52 26.90 187.57 25.22 191.03 25.22 C 194.33 25.22 196.51 26.76 196.80 29.35 Z M 206.72 60.09 L 212.12 60.09 L 212.12 47.89 L 212.34 47.89 C 213.19 49.56 214.97 51.90 218.91 51.90 C 224.30 51.90 228.34 47.62 228.34 40.07 C 228.34 32.44 224.18 28.30 218.89 28.30 C 214.84 28.30 213.16 30.72 212.34 32.38 L 212.03 32.38 L 212.03 28.59 L 206.72 28.59 L 206.72 60.09 Z M 212.02 40.05 C 212.02 35.60 213.93 32.72 217.40 32.72 C 220.99 32.72 222.84 35.78 222.84 40.05 C 222.84 44.34 220.96 47.47 217.40 47.47 C 213.95 47.47 212.02 44.49 212.02 40.05 Z M 239.14 51.96 C 242.74 51.96 244.89 50.28 245.87 48.35 L 246.05 48.35 L 246.05 51.50 L 251.25 51.50 L 251.25 36.17 C 251.25 30.11 246.30 28.30 241.93 28.30 C 237.12 28.30 233.42 30.44 232.23 34.61 L 237.27 35.33 C 237.81 33.77 239.33 32.42 241.97 32.42 C 244.47 32.42 245.84 33.71 245.84 35.96 L 245.84 36.05 C 245.84 37.60 244.22 37.67 240.17 38.11 C 235.73 38.59 231.48 39.91 231.48 45.07 C 231.48 49.58 234.77 51.96 239.14 51.96 Z M 240.55 48.00 C 238.30 48.00 236.68 46.97 236.68 44.98 C 236.68 42.91 238.49 42.04 240.91 41.70 C 242.32 41.51 245.16 41.15 245.86 40.58 L 245.86 43.28 C 245.86 45.83 243.80 48.00 240.55 48.00 Z M 261.69 38.08 C 261.69 34.77 263.68 32.86 266.53 32.86 C 269.32 32.86 270.99 34.69 270.99 37.75 L 270.99 51.50 L 276.39 51.50 L 276.39 36.91 C 276.41 31.43 273.27 28.30 268.55 28.30 C 265.11 28.30 262.76 29.94 261.71 32.48 L 261.45 32.48 L 261.45 28.59 L 256.29 28.59 L 256.29 51.50 L 261.69 51.50 L 261.69 38.08 Z" fill="#151513"/>
+</svg><svg class="ls-mark ls-mark-dark" viewBox="0 0 288 80" fill="none" aria-hidden="true" focusable="false">
+  <rect width="288" height="80" rx="12" fill="#151513"/>
+  <g transform="translate(8, 8)">
+    <path d="M 42.10 6.55 L 36.95 4.05 L 9.19 18.47 Q 6.35 19.95 6.35 23.15 L 6.35 31.65 Q 6.35 34.85 9.17 36.35 L 21.00 42.65 L 26.55 40.00 L 12.89 32.79 Q 11.30 31.95 11.30 30.15 L 11.30 24.70 Q 11.30 22.90 12.89 22.06 Z M 21.90 57.45 L 27.05 59.95 L 54.81 45.53 Q 57.65 44.05 57.65 40.85 L 57.65 32.35 Q 57.65 29.15 54.83 27.65 L 43.00 21.35 L 37.45 24.00 L 51.11 31.21 Q 52.70 32.05 52.70 33.85 L 52.70 39.30 Q 52.70 41.10 51.11 41.94 Z" fill="#F4F3EF"/>
+    <path d="M 48.60 9.90 L 43.45 7.40 L 13.82 22.76 Q 12.40 23.50 12.40 25.10 L 12.40 29.50 Q 12.40 31.10 13.82 31.84 L 28.10 39.30 L 33.40 36.70 L 16.81 27.97 Q 16.10 27.60 16.80 27.22 Z M 15.40 54.10 L 20.55 56.60 L 50.18 41.24 Q 51.60 40.50 51.60 38.90 L 51.60 34.50 Q 51.60 32.90 50.18 32.16 L 35.90 24.70 L 30.60 27.30 L 47.19 36.03 Q 47.90 36.40 47.20 36.78 Z" fill="#D87859"/>
+    <path d="M 55.10 13.20 L 50.00 10.70 L 18.25 27.20 L 23.35 29.70 Z M 8.90 50.80 L 14.00 53.30 L 45.75 36.80 L 40.65 34.30 Z" fill="#A1A1AA"/>
+  </g>
+  <path d="M 83.01 51.50 L 102.00 51.50 L 102.00 46.86 L 88.54 46.86 L 88.54 20.95 L 83.01 20.95 L 83.01 51.50 Z M 111.94 51.96 C 115.54 51.96 117.68 50.28 118.67 48.35 L 118.85 48.35 L 118.85 51.50 L 124.04 51.50 L 124.04 36.17 C 124.04 30.11 119.10 28.30 114.73 28.30 C 109.91 28.30 106.22 30.44 105.02 34.61 L 110.06 35.33 C 110.60 33.77 112.12 32.42 114.76 32.42 C 117.27 32.42 118.64 33.71 118.64 35.96 L 118.64 36.05 C 118.64 37.60 117.01 37.67 112.97 38.11 C 108.53 38.59 104.27 39.91 104.27 45.07 C 104.27 49.58 107.57 51.96 111.94 51.96 Z M 113.34 48.00 C 111.09 48.00 109.48 46.97 109.48 44.98 C 109.48 42.91 111.28 42.04 113.70 41.70 C 115.12 41.51 117.95 41.15 118.65 40.58 L 118.65 43.28 C 118.65 45.83 116.59 48.00 113.34 48.00 Z M 134.48 38.08 C 134.48 34.77 136.48 32.86 139.33 32.86 C 142.12 32.86 143.79 34.69 143.79 37.75 L 143.79 51.50 L 149.18 51.50 L 149.18 36.91 C 149.20 31.43 146.07 28.30 141.34 28.30 C 137.91 28.30 135.55 29.94 134.51 32.48 L 134.24 32.48 L 134.24 28.59 L 129.08 28.59 L 129.08 51.50 L 134.48 51.50 L 134.48 38.08 Z M 164.25 60.57 C 170.44 60.57 175.01 57.73 175.01 51.87 L 175.01 28.59 L 169.68 28.59 L 169.68 32.38 L 169.38 32.38 C 168.56 30.72 166.84 28.30 162.81 28.30 C 157.51 28.30 153.35 32.44 153.35 39.97 C 153.35 47.44 157.51 51.17 162.79 51.17 C 166.71 51.17 168.55 49.07 169.38 47.39 L 169.65 47.39 L 169.65 51.72 C 169.65 55.10 167.42 56.48 164.34 56.48 C 161.09 56.48 159.66 54.95 159.00 53.60 L 154.14 54.78 C 155.12 57.99 158.42 60.57 164.25 60.57 Z M 164.30 46.94 C 160.74 46.94 158.85 44.16 158.85 39.94 C 158.85 35.78 160.70 32.72 164.30 32.72 C 167.77 32.72 169.68 35.60 169.68 39.94 C 169.68 44.31 167.74 46.94 164.30 46.94 Z M 196.80 29.35 L 202.12 29.35 C 202.01 24.19 197.62 20.54 191.11 20.54 C 184.70 20.54 179.88 24.15 179.90 29.55 C 179.90 33.93 183.01 36.45 188.04 37.75 L 191.51 38.64 C 194.81 39.48 196.99 40.51 197.01 42.88 C 196.99 45.49 194.51 47.23 190.90 47.23 C 187.44 47.23 184.76 45.69 184.54 42.48 L 179.09 42.48 C 179.31 48.55 183.83 51.96 190.95 51.96 C 198.27 51.96 202.52 48.31 202.54 42.92 C 202.52 37.63 198.15 35.21 193.56 34.12 L 190.69 33.41 C 188.19 32.81 185.47 31.75 185.50 29.20 C 185.52 26.90 187.57 25.22 191.03 25.22 C 194.33 25.22 196.51 26.76 196.80 29.35 Z M 206.72 60.09 L 212.12 60.09 L 212.12 47.89 L 212.34 47.89 C 213.19 49.56 214.97 51.90 218.91 51.90 C 224.30 51.90 228.34 47.62 228.34 40.07 C 228.34 32.44 224.18 28.30 218.89 28.30 C 214.84 28.30 213.16 30.72 212.34 32.38 L 212.03 32.38 L 212.03 28.59 L 206.72 28.59 L 206.72 60.09 Z M 212.02 40.05 C 212.02 35.60 213.93 32.72 217.40 32.72 C 220.99 32.72 222.84 35.78 222.84 40.05 C 222.84 44.34 220.96 47.47 217.40 47.47 C 213.95 47.47 212.02 44.49 212.02 40.05 Z M 239.14 51.96 C 242.74 51.96 244.89 50.28 245.87 48.35 L 246.05 48.35 L 246.05 51.50 L 251.25 51.50 L 251.25 36.17 C 251.25 30.11 246.30 28.30 241.93 28.30 C 237.12 28.30 233.42 30.44 232.23 34.61 L 237.27 35.33 C 237.81 33.77 239.33 32.42 241.97 32.42 C 244.47 32.42 245.84 33.71 245.84 35.96 L 245.84 36.05 C 245.84 37.60 244.22 37.67 240.17 38.11 C 235.73 38.59 231.48 39.91 231.48 45.07 C 231.48 49.58 234.77 51.96 239.14 51.96 Z M 240.55 48.00 C 238.30 48.00 236.68 46.97 236.68 44.98 C 236.68 42.91 238.49 42.04 240.91 41.70 C 242.32 41.51 245.16 41.15 245.86 40.58 L 245.86 43.28 C 245.86 45.83 243.80 48.00 240.55 48.00 Z M 261.69 38.08 C 261.69 34.77 263.68 32.86 266.53 32.86 C 269.32 32.86 270.99 34.69 270.99 37.75 L 270.99 51.50 L 276.39 51.50 L 276.39 36.91 C 276.41 31.43 273.27 28.30 268.55 28.30 C 265.11 28.30 262.76 29.94 261.71 32.48 L 261.45 32.48 L 261.45 28.59 L 256.29 28.59 L 256.29 51.50 L 261.69 51.50 L 261.69 38.08 Z" fill="#F4F3EF"/>
+</svg><span class="sr-only">LangSpan</span><span class="brand-product">Live</span></div>
+    <div class="top-actions">
+      <span id="status" class="status-pill is-waiting" role="status"><span class="status-dot"></span><span id="status-text">Connecting</span></span>
+      <button id="theme" class="button" type="button">Dark theme</button>
+    </div>
+  </div>
+</header>
+<main class="page" id="main">
+  <div class="intro">
+    <div>
+      <p class="eyebrow"><span class="coral-dash"></span><span id="eyebrow">Read-only coordination view</span></p>
+      <h1>Shared work, in view</h1>
+      <p class="context" id="context">Waiting for the coordinator.</p>
+    </div>
+    <div class="demo-controls" id="demo-controls" hidden>
+      <p class="demo-caption" id="demo-caption"></p>
+      <button class="button" type="button" id="demo-prev" aria-label="Previous scene">Previous</button>
+      <label class="sr-only" for="demo-scene">Scene</label>
+      <input type="range" id="demo-scene" min="0" max="0" value="0">
+      <button class="button" type="button" id="demo-next" aria-label="Next scene">Next</button>
+      <button class="button" type="button" id="demo-play" aria-pressed="false">Play scenes</button>
+    </div>
+  </div>
+  <div id="banner" class="banner" hidden></div>
+  <section aria-labelledby="kpi-heading">
+    <h2 id="kpi-heading" class="sr-only">Counts from the current view</h2>
+    <ul class="kpis" id="kpis"></ul>
+  </section>
+  <div class="layout">
+    <section class="panel" aria-labelledby="scope-heading">
+      <div class="panel-head">
+        <div class="panel-title" id="scope-title-icon"><div><h2 id="scope-heading">Traffic scope</h2><p class="panel-sub" id="scope-sub"></p></div></div>
+        <div class="filters">
+          <span class="filter"><label for="path-view">Paths</label>
+          <select class="control" id="path-view">
+            <option value="signals">Coordination signals</option>
+            <option value="all">All observed paths</option>
+          </select></span>
+          <span class="filter"><label for="session-view">Sessions</label>
+          <select class="control" id="session-view">
+            <option value="current">Current</option>
+            <option value="all">All listed</option>
+            <option value="local">This machine</option>
+            <option value="peer">Teammates</option>
+          </select></span>
+          <label class="sr-only" for="path-text">Filter paths</label>
+          <input class="control" id="path-text" type="search" placeholder="Filter paths" autocomplete="off" spellcheck="false">
+        </div>
+      </div>
+      <div class="scope" id="scope" tabindex="0" role="region" aria-label="Traffic scope table; scroll to see more paths and sessions"></div>
+      <div class="legend" id="legend"></div>
+      <div class="panel-foot" id="scope-foot"></div>
+    </section>
+    <div class="side">
+      <section class="panel" aria-labelledby="inspector-heading" id="inspector">
+        <div class="panel-head">
+          <div class="panel-title" id="inspector-title-icon"><div><h2 id="inspector-heading">Inspector</h2><p class="inspector-title" id="inspector-subject"></p></div></div>
+          <button class="button" type="button" id="inspector-clear" hidden>Clear</button>
+        </div>
+        <div class="inspector-body" id="inspector-body"></div>
+      </section>
+      <section class="panel" aria-labelledby="feed-heading">
+        <div class="panel-head">
+          <div class="panel-title" id="feed-title-icon"><div><h2 id="feed-heading">Coordination evidence</h2><p class="panel-sub" id="feed-sub"></p></div></div>
+        </div>
+        <ol class="feed" id="feed" aria-labelledby="feed-heading"></ol>
+        <div class="panel-foot" id="feed-foot"></div>
+      </section>
+    </div>
+  </div>
+  <section class="panel health" aria-labelledby="health-heading">
+    <div class="panel-head">
+      <div class="panel-title" id="health-title-icon"><div><h2 id="health-heading">Coordinator health</h2><p class="panel-sub" id="health-sub"></p></div></div>
+    </div>
+    <div class="health-grid" id="health"></div>
+    <details class="explain">
+      <summary>How the counts are made</summary>
+      <dl class="facts" id="definitions"></dl>
+    </details>
+  </section>
+</main>
+<footer class="footer">
+  <span>Read-only. This page shows what this coordinator reports, within its limits, and changes nothing.</span>
+  <span id="footer-refresh"></span>
+</footer>
+<script>
+'use strict';
+// Every value from the coordinator is placed with textContent or as an
+// attribute value, never parsed as markup: task lines, paths, names and
+// messages are data. Nothing is fetched except /api/state on this origin.
+// langspan-demo-scenes-v1: fictional, deterministic scenes for
+// `langspan dashboard --demo`. They use the coordinator's view format so the
+// live renderer draws them, and the page labels them as simulated. They are
+// not coordinator data and not a measured result. The live page never
+// contains this file.
+const DEMO_SCENES = (() => {
+  const repo = 'repository:demo-repo';
+  const ids = {
+    upload: 'claude-code.6f1c2a90-upload',
+    caller: 'codex.9b7e4d21-caller',
+    retry: 'codex.3c8a5f10-retry',
+    tests: 'claude-code.d42e7b63-tests',
+  };
+  const local = (id, workspace, branchName, task, editing, recent, state) => ({
+    id: 'local:' + id, group: repo, local: true, machine: null, host: id.split('.')[0],
+    session: id.split('.')[1].slice(0, 8), session_id: id, workspace_id: workspace,
+    branch_ref: 'refs/heads/' + branchName, task, intent: null, editing,
+    recent: recent.map(([path, age]) => ({ path, age_ms: age })), more_files: 0,
+    state: state || (editing.length ? 'editing' : 'active'), liveness: null, active_age_ms: 4000, heard_age_ms: null,
+  });
+  const peer = (participant, name, host, session, branchName, task, editing, recent, heard) => ({
+    id: 'peer:' + participant + ':' + host + ':' + session, group: repo, local: false, machine: name, host, session,
+    session_id: null, workspace_id: 'shop', branch_ref: 'refs/heads/' + branchName, task, intent: null, editing,
+    recent: recent.map((path) => ({ path, age_ms: null })), more_files: 0, state: editing.length ? 'editing' : 'published',
+    liveness: null, active_age_ms: null, heard_age_ms: heard,
+  });
+  const overlap = (path, members, editing) => ({
+    workspace_id: 'shop', path, group: repo, editing, more_agents: 0,
+    agents: members.map((m) => m[1]), members: members.map((m) => m[0]),
+  });
+  const workspaces = [
+    { workspace_id: 'shop', group: repo, root: '/example/shop', branch_ref: 'refs/heads/main', sessions: 2,
+      scan_failure: null, teammates: 2, coverage: { scanned: true, indexable_files: 214, current_files: 214, partial_files: 0 },
+      publishing: { remote: 'origin', name: 'Demo laptop', enabled: true, withdrawn: false, share_task: true, sequence: 41 } },
+    { workspace_id: 'shop-retry', group: repo, root: '/example/shop-retry', branch_ref: 'refs/heads/feat/retry', sessions: 2,
+      scan_failure: null, teammates: 0, coverage: { scanned: true, indexable_files: 214, current_files: 212, partial_files: 2 },
+      publishing: null },
+  ];
+  const scene = (n) => {
+    const notice = n >= 1, refused = n >= 2, landed = n >= 3;
+    const agents = [
+      local(ids.upload, 'shop', 'main', 'Add resumable uploads to the API', ['src/api.rs'], [['src/upload.rs', 9000]]),
+      local(ids.caller, 'shop', 'main', 'Call the upload API from the CLI', [], [['src/cli.rs', 15000], ['src/api.rs', 40000]]),
+      local(ids.retry, 'shop-retry', 'feat/retry', 'Retry failed uploads', landed ? [] : ['src/retry.rs'], landed ? [['src/retry.rs', 20000]] : [], landed ? 'active' : undefined),
+      local(ids.tests, 'shop-retry', 'feat/retry', 'Integration tests for retries', [], [['tests/upload.rs', 12000], ...(refused ? [['src/retry.rs', 30000]] : [])]),
+      peer('0a1b2c3d4e5f60718293a4b5c6d7e8f9', 'Rowan', 'codex', 'c0ffee00', 'feat/resume', 'Resume interrupted uploads', [], ['src/upload.rs', 'src/api.rs'], 18000),
+      peer('f9e8d7c6b5a4938271605f4e3d2c1b0a', 'Sam', 'claude-code', 'ab12cd34', 'docs/upload', null, [], ['docs/upload.md'], 65000),
+    ];
+    const label = (id) => {
+      const row = agents.find((a) => a.id === id);
+      return row.local ? row.host + ' ' + row.session : row.machine + ': ' + row.host + ' ' + row.session;
+    };
+    const member = (id) => [id, label(id)];
+    const peerRowan = agents[4].id;
+    const overlaps = [
+      overlap('src/api.rs', [member(peerRowan), member('local:' + ids.caller), member('local:' + ids.upload)].sort((a, b) => a[1].localeCompare(b[1])), true),
+      overlap('src/upload.rs', [member(peerRowan), member('local:' + ids.upload)].sort((a, b) => a[1].localeCompare(b[1])), false),
+    ];
+    if (refused) overlaps.push(overlap('src/retry.rs', [member('local:' + ids.retry), member('local:' + ids.tests)].sort((a, b) => a[1].localeCompare(b[1])), !landed));
+    const checks = [];
+    if (refused) checks.push({ workspace_id: 'shop-retry', name: 'integration', result: { type: 'failed', exit_code: 101 },
+      tree_oid: '8a21bd5c884e0f3f2a9d1b7c6e5d4a3b2c1d0e9f', combined: true, applies: landed ? 'stale' : 'unknown', duration_ms: 7800, age_ms: landed ? 61000 : 7000 });
+    if (landed) checks.unshift({ workspace_id: 'shop-retry', name: 'integration', result: { type: 'passed' },
+      tree_oid: 'f73c90b2d8281a4e5b6c7d8e9f0a1b2c3d4e5f60', combined: true, applies: 'unknown', duration_ms: 8400, age_ms: 3000 });
+    return {
+      generation: 7, uptime_ms: 5400000, active_agents: 6, teammates_heard: 2, teammates_known: 2,
+      agents, more_agents: 0,
+      editing: [
+        { workspace_id: 'shop', path: 'src/api.rs', session_id: ids.upload, expires_in_ms: 27000, base_unknown: false },
+        ...(landed ? [] : [{ workspace_id: 'shop-retry', path: 'src/retry.rs', session_id: ids.retry, expires_in_ms: 21000, base_unknown: false }]),
+      ],
+      more_editing: 0, overlaps, more_overlaps: 0,
+      interface_changes: notice ? [{ workspace_id: 'shop', path: 'src/api.rs', by_session: ids.upload,
+        changes: [{ name: 'upload', kind: 'function', change: 'signature_changed' }], more_changes: 0,
+        dependents: ['src/cli.rs', 'src/upload.rs'], more_dependents: 0, age_ms: 24000 }] : [],
+      more_interface_changes: 0,
+      denials: { conflicts: refused ? [{ session_id: ids.tests, paths: ['src/retry.rs'], more_paths: 0, holders: [ids.retry], age_ms: null }] : [],
+        more_conflicts: false, stale_refusals: [], more_stale_refusals: false, window: 5000 },
+      checks, more_checks: 0,
+      landings: landed ? [{ workspace_id: 'shop-retry', onto: 'main', commit_oid: '83b41c907c29d5e6f7a8b9c0d1e2f3a4b5c6d7e8',
+        tree_oid: 'f73c90b2d8281a4e5b6c7d8e9f0a1b2c3d4e5f60', check_id: 'check-0042', inputs: 2 }] : [],
+      more_landings: 0, push_turns: [], more_push_turns: 0,
+      messages: notice ? [{ workspace_id: 'shop', from: ids.upload, to: { kind: 'session', session_id: ids.caller },
+        text: 'upload() now takes a resume token; update the CLI call before you add the flag.', paths: ['src/api.rs'], acknowledged: refused ? 1 : 0 }] : [],
+      more_messages: 0,
+      notes: [{ workspace_id: 'shop', author: null, text: 'Keep the upload API backward compatible until the next release.', paths: ['src/api.rs'] }],
+      more_notes: 0, workspaces, more_workspaces: 0, uninstalled_hosts: [],
+    };
+  };
+  return [
+    { caption: 'Four local sessions in two worktrees and two teammates. Two files have recent shared activity.', dashboard: scene(0) },
+    { caption: 'An interface changes in src/api.rs; the view names the files that use it, and a message is waiting.', dashboard: scene(1) },
+    { caption: 'A session in the linked worktree is refused an edit of a held file; a combined check fails.', dashboard: scene(2) },
+    { caption: 'The hold is released, the combined check passes on a new tree, and the landing is recorded.', dashboard: scene(3) },
+  ];
+})();
+
+const LIVE = DEMO_SCENES === null;
+const token = LIVE ? (new URLSearchParams(window.location.search).get('t') || '') : '';
+const byId = (id) => document.getElementById(id);
+const MAX_COLUMNS = 40;
+const ACTIVE = ['editing', 'active', 'published'];
+const CURRENT = ['editing', 'active', 'published', 'idle'];
+
+const ui = {
+  pathView: 'signals', sessionView: 'current', pathText: '', collapsed: new Set(),
+  selection: null, autoSelected: false, themeChosen: false, previousMarks: new Set(), fresh: new Set(),
+};
+let view = null;
+let advice = {};
+let monthCount = null;
+let lastSuccess = 0;
+let failure = '';
+let model = null;
+
+// ---- Small, safe DOM helpers ------------------------------------------
+function el(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined && text !== null) node.textContent = String(text);
+  return node;
+}
+function add(parent, ...children) {
+  for (const child of children) {
+    if (child === null || child === undefined || child === false) continue;
+    parent.appendChild(typeof child === 'string' ? document.createTextNode(child) : child);
+  }
+  return parent;
+}
+function icon(name, className) {
+  const source = byId('icons').content.querySelector('[data-icon="' + name + '"]');
+  const node = source.cloneNode(true);
+  if (className) node.classList.add(...className.split(' '));
+  return node;
+}
+function button(className, action, key, ...children) {
+  const node = add(el('button', className), ...children);
+  node.type = 'button';
+  node.dataset.action = action;
+  node.dataset.key = key;
+  node.dataset.focus = action + '\u0000' + key;
+  return node;
+}
+const list = (value) => Array.isArray(value) ? value.filter((item) => item !== null && typeof item === 'object' && !Array.isArray(item)) : [];
+const strings = (value) => Array.isArray(value) ? value.filter((item) => typeof item === 'string') : [];
+const str = (value) => typeof value === 'string' ? value : (value === null || value === undefined ? '' : String(value));
+const num = (value) => typeof value === 'number' && Number.isFinite(value) && value >= 0 ? value : null;
+const count = (value) => num(value) === null ? 0 : Math.trunc(value);
+const plural = (n, one, many) => n + ' ' + (n === 1 ? one : (many || one + 's'));
+function ago(ms) {
+  if (num(ms) === null) return 'time not recorded';
+  const s = Math.round(ms / 1000);
+  if (s < 60) return s + ' s ago';
+  if (s < 3600) return Math.round(s / 60) + ' min ago';
+  if (s < 172800) return Math.round(s / 3600) + ' h ago';
+  return Math.round(s / 86400) + ' days ago';
+}
+function duration(ms) {
+  if (num(ms) === null) return 'unknown';
+  const s = Math.floor(ms / 1000);
+  const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60);
+  return h > 0 ? h + ' h ' + m + ' min' : m > 0 ? m + ' min ' + (s % 60) + ' s' : s + ' s';
+}
+const short = (oid) => str(oid).slice(0, 12);
+const branch = (ref) => str(ref).replace(/^refs\/heads\//, '');
+const quoted = (text) => '“' + text + '”';
+const HOSTS = { 'claude-code': 'Claude Code', codex: 'Codex', 'gemini-cli': 'Gemini CLI', cursor: 'Cursor' };
+const hostName = (host) => HOSTS[str(host)] || str(host) || 'Agent';
+const initials = (host) => ({ 'claude-code': 'CC', codex: 'CX', 'gemini-cli': 'GM', cursor: 'CU' })[str(host)] || str(host).slice(0, 2).toUpperCase() || '?';
+function splitPath(path) {
+  const cut = path.lastIndexOf('/');
+  return cut < 0 ? ['', path] : [path.slice(0, cut + 1), path.slice(cut + 1)];
+}
+function facts(pairs) {
+  const node = el('dl', 'facts');
+  for (const [label, value] of pairs) {
+    if (value === null || value === undefined || value === false) continue;
+    add(node, el('dt', null, label), typeof value === 'string' || typeof value === 'number' ? el('dd', null, value) : add(el('dd'), value));
+  }
+  return node;
+}
+function block(iconName, title, ...children) {
+  return add(el('section', 'block'), add(el('h3'), icon(iconName), title), ...children);
+}
+function chips(paths) {
+  const node = el('div', 'chips');
+  for (const path of paths) add(node, el('span', 'chip', path));
+  return node;
+}
+
+// ---- The model: rows, path columns and records, joined by identity --------
+function sessionLabel(row, rows) {
+  if (!row.local) return str(row.machine) + ': ' + str(row.host) + ' ' + str(row.session);
+  let label = str(row.host) + ' ' + str(row.session);
+  const id = str(row.session_id);
+  const parent = rows.filter((other) => other !== row && other.local && other.session_id && id.startsWith(str(other.session_id) + '.'))
+    .sort((a, b) => str(b.session_id).length - str(a.session_id).length)[0];
+  row.subagent = parent ? id.slice(str(parent.session_id).length + 1).slice(0, 8) : '';
+  if (parent) label += ' subagent ' + row.subagent;
+  return label;
+}
+
+function buildModel(d) {
+  const rows = list(d.agents).map((row) => Object.assign({}, row));
+  const seen = new Map();
+  const byIdentity = new Map(), byLabel = new Map(), bySession = new Map();
+  const index = (map, key, row) => { if (!map.has(key)) map.set(key, []); map.get(key).push(row); };
+  let identified = rows.length > 0;
+  for (const row of rows) {
+    row.local = row.local === true;
+    row.editing = strings(row.editing);
+    row.recent = list(row.recent).filter((file) => typeof file.path === 'string');
+    const id = typeof row.id === 'string' && row.id ? row.id : null;
+    if (!id) identified = false;
+    const base = JSON.stringify(id ? [id, str(row.workspace_id)]
+      : row.local ? ['local', str(row.session_id), str(row.workspace_id)]
+      : ['peer', str(row.workspace_id), str(row.machine), str(row.host), str(row.session)]);
+    const n = seen.get(base) || 0;
+    seen.set(base, n + 1);
+    row.key = n ? base + '#' + n : base;
+    row.label = sessionLabel(row, rows);
+    if (id) index(byIdentity, id, row);
+    index(byLabel, row.label, row);
+    if (row.local && row.session_id) index(bySession, str(row.session_id), row);
+  }
+  const groupOfWorkspace = new Map();
+  for (const w of list(d.workspaces)) if (typeof w.group === 'string') groupOfWorkspace.set(str(w.workspace_id), w.group);
+  for (const row of rows) if (typeof row.group === 'string' && !groupOfWorkspace.has(str(row.workspace_id))) groupOfWorkspace.set(str(row.workspace_id), row.group);
+  const workspaceGroup = (workspace) => groupOfWorkspace.get(str(workspace)) || 'workspace:' + str(workspace);
+  const rowGroup = (row) => typeof row.group === 'string' ? row.group : workspaceGroup(row.workspace_id);
+
+  const columns = new Map();
+  function column(group, path, workspace) {
+    const key = JSON.stringify([group, path]);
+    if (!columns.has(key)) {
+      columns.set(key, { key, group, path, workspaces: new Set(), touches: new Map(), members: new Set(),
+        unmatched: [], overlap: null, holds: [], notices: [], refusals: [] });
+    }
+    const col = columns.get(key);
+    if (workspace !== undefined) col.workspaces.add(str(workspace));
+    return col;
+  }
+  const touch = (col, row, kind) => {
+    const order = ['recent', 'published', 'editing', 'held'];
+    const before = col.touches.get(row.key);
+    if (!before || order.indexOf(kind) > order.indexOf(before)) col.touches.set(row.key, kind);
+  };
+
+  for (const o of list(d.overlaps)) {
+    if (typeof o.path !== 'string') continue;
+    const group = typeof o.group === 'string' ? o.group : workspaceGroup(o.workspace_id);
+    const col = column(group, o.path, o.workspace_id);
+    col.overlap = o;
+    const labels = strings(o.agents);
+    const members = strings(o.members);
+    // Peer identities and labels repeat across repositories, so a member
+    // joins only rows in the overlap's own repository group.
+    const inGroup = (found) => (found || []).filter((row) => rowGroup(row) === col.group);
+    labels.forEach((label, i) => {
+      // With identities, a member names its rows exactly; without them, a
+      // label counts only when it names one visible row.
+      const byName = inGroup(byLabel.get(label));
+      const matches = members.length === labels.length ? inGroup(byIdentity.get(members[i]))
+        : (byName.length === 1 ? byName : []);
+      if (matches.length) for (const row of matches) col.members.add(row.key);
+      else col.unmatched.push(label);
+    });
+  }
+  for (const row of rows) {
+    const group = rowGroup(row);
+    for (const path of row.editing) touch(column(group, path, row.workspace_id), row, row.local ? 'held' : 'editing');
+    for (const file of row.recent) touch(column(group, file.path, row.workspace_id), row, row.local ? 'recent' : 'published');
+  }
+  for (const hold of list(d.editing)) {
+    if (typeof hold.path !== 'string') continue;
+    const col = column(workspaceGroup(hold.workspace_id), hold.path, hold.workspace_id);
+    col.holds.push(hold);
+    for (const row of bySession.get(str(hold.session_id)) || []) if (str(row.workspace_id) === str(hold.workspace_id)) touch(col, row, 'held');
+  }
+  for (const notice of list(d.interface_changes)) {
+    if (typeof notice.path !== 'string') continue;
+    column(workspaceGroup(notice.workspace_id), notice.path, notice.workspace_id).notices.push(notice);
+  }
+  const denials = d.denials && typeof d.denials === 'object' ? d.denials : null;
+  const refusals = denials ? [
+    ...list(denials.conflicts).map((r) => Object.assign({ kind: 'conflict' }, r)),
+    ...list(denials.stale_refusals).map((r) => Object.assign({ kind: 'stale' }, r)),
+  ] : [];
+  for (const refusal of refusals) {
+    refusal.rows = (bySession.get(str(refusal.session_id)) || []).map((row) => row.key);
+    for (const row of bySession.get(str(refusal.session_id)) || []) {
+      for (const path of strings(refusal.paths)) {
+        const col = column(rowGroup(row), path, row.workspace_id);
+        col.refusals.push(Object.assign({ row: row.key }, refusal));
+      }
+    }
+  }
+  const rowsByKey = new Map(rows.map((row) => [row.key, row]));
+  for (const col of columns.values()) {
+    // The coordinator bounds its editing list separately from each row's, so a
+    // row can list a held path the list omits: still a hold, details unknown.
+    col.unleased = [...col.touches].filter(([key, kind]) => kind === 'held'
+      && !col.holds.some((h) => (bySession.get(str(h.session_id)) || []).some((row) => row.key === key)))
+      .map(([key]) => rowsByKey.get(key)).filter(Boolean);
+    col.held = col.holds.length > 0 || col.unleased.length > 0;
+    col.score = col.refusals.length ? 5 : col.held ? 4 : col.overlap ? 3 : col.notices.length ? 2 : 1;
+    col.signal = col.score > 1;
+  }
+  const sorted = [...columns.values()].sort((a, b) => b.score - a.score || a.path.localeCompare(b.path) || a.group.localeCompare(b.group));
+  return { rows, rowsByKey, columns: sorted, columnsByKey: columns, refusals, denials, bySession, identified,
+    workspaceGroup, rowGroup, records: records(d, refusals) };
+}
+
+function cellMark(col, row) {
+  const marks = [];
+  if (col.refusals.some((r) => r.row === row.key)) marks.push(['refused', 'ban', 'Refused']);
+  const kind = col.touches.get(row.key);
+  if (kind === 'held') marks.push(['held', 'lock', 'Held']);
+  if (kind === 'editing') marks.push(['editing', 'edit', 'Editing']);
+  if (col.members.has(row.key)) marks.push(['shared', 'layers', 'Shared']);
+  if (row.local && col.notices.some((n) => n.by_session && str(n.by_session) === str(row.session_id))) marks.push(['notice', 'notice', 'Notice']);
+  if (kind === 'published') marks.push(['published', 'peer', 'Published']);
+  if (kind === 'recent') marks.push(['recent', 'dot', 'Recent']);
+  return marks;
+}
+
+// ---- Records: the evidence the view carries, as recorded -----------------
+function recordKey(kind, parts) { return JSON.stringify([kind, ...parts.map(str)]); }
+function records(d, refusals) {
+  const out = [];
+  const push = (record) => {
+    let key = record.key, n = 1;
+    while (out.some((other) => other.key === key)) key = record.key + '#' + n++;
+    record.key = key;
+    out.push(record);
+  };
+  for (const r of refusals) {
+    const paths = strings(r.paths);
+    push({ kind: r.kind, object: r, icon: 'ban', tone: 't-bad', age: num(r.age_ms), paths,
+      key: recordKey(r.kind, [r.session_id, paths.join('\n'), strings(r.holders).join('\n')]),
+      title: r.kind === 'conflict' ? 'Edit refused: held by another session' : 'Edit refused: file changed since it was read',
+      detail: str(r.session_id) + ' · ' + paths.join(', ') + (count(r.more_paths) ? ' and ' + count(r.more_paths) + ' more' : '') });
+  }
+  for (const n of list(d.interface_changes)) {
+    const changes = list(n.changes);
+    const dependents = strings(n.dependents).length + count(n.more_dependents);
+    push({ kind: 'notice', object: n, icon: 'notice', tone: 't-warn', age: num(n.age_ms), paths: [str(n.path)],
+      key: recordKey('notice', [n.workspace_id, n.path]),
+      title: 'Interface changed in ' + str(n.path),
+      detail: changes.map((c) => str(c.kind) + ' ' + str(c.name) + ': ' + str(c.change).replace(/_/g, ' ') + (c.after_name ? ' to ' + str(c.after_name) : '')).join('; ')
+        + (count(n.more_changes) ? '; ' + count(n.more_changes) + ' more' : '') + ' · ' + plural(dependents, 'possible dependent') });
+  }
+  for (const c of list(d.checks)) {
+    const result = c.result && typeof c.result === 'object' ? c.result : {};
+    const type = str(result.type);
+    push({ kind: 'check', object: c, icon: type === 'passed' ? 'check' : type === 'failed' ? 'fail' : 'warn',
+      tone: type === 'passed' ? 't-good' : type === 'failed' ? 't-bad' : 't-warn', age: num(c.age_ms), paths: [],
+      key: recordKey('check', [c.workspace_id, c.name, c.tree_oid, c.combined]),
+      title: 'Check ' + str(c.name) + ' ' + (type === 'passed' ? 'passed' : type === 'failed' ? 'failed (exit ' + str(result.exit_code) + ')' : 'inconclusive'),
+      detail: 'tree ' + short(c.tree_oid) + (c.combined ? ' · combined branches' : '') + (c.applies === 'stale' ? ' · files changed since' : ' · no change seen since') });
+  }
+  for (const l of list(d.landings)) {
+    push({ kind: 'landing', object: l, icon: 'land', tone: 't-good', age: null, paths: [],
+      key: recordKey('landing', [l.workspace_id, l.onto, l.commit_oid]),
+      title: 'Landed onto ' + str(l.onto),
+      detail: 'commit ' + short(l.commit_oid) + ' · tree ' + short(l.tree_oid) + ' · ' + plural(count(l.inputs), 'branch', 'branches') });
+  }
+  for (const t of list(d.push_turns)) {
+    const waiting = list(t.waiting).length + count(t.more_waiting);
+    push({ kind: 'turn', object: t, icon: 'turn', tone: 'muted', age: null, paths: [],
+      key: recordKey('turn', [t.workspace_id, t.onto]),
+      title: 'Push turn for ' + str(t.onto) + (t.holder ? ': held' : ': free'),
+      detail: (t.holder ? 'held by ' + str(t.holder_session || 'a terminal') + ' for ' + duration(t.held_ms) + ' · ' : '') + plural(waiting, 'landing') + ' waiting' });
+  }
+  for (const m of list(d.messages)) {
+    const to = m.to && typeof m.to === 'object' ? m.to : {};
+    push({ kind: 'message', object: m, icon: 'message', tone: 't-peer', age: null, paths: strings(m.paths),
+      key: recordKey('message', [m.workspace_id, m.from, to.kind, to.session_id, m.text]),
+      title: m.retracted ? 'Message withdrawn' : to.kind === 'next_session' ? 'Handoff to the next session' : to.kind === 'everyone' ? 'Message to everyone' : 'Message to ' + str(to.session_id),
+      detail: (m.from === null || m.from === undefined ? 'owner' : str(m.from)) + ': ' + quoted(str(m.text)) });
+  }
+  for (const n of list(d.notes)) {
+    push({ kind: 'note', object: n, icon: 'note', tone: 'muted', age: null, paths: strings(n.paths),
+      key: recordKey('note', [n.workspace_id, n.author, n.text]),
+      title: 'Note in ' + str(n.workspace_id), detail: quoted(str(n.text)) });
+  }
+  // Keys never include an age, which grows with every poll: a selected
+  // record stays selected. Timed records first, newest first; untimed ones
+  // keep the coordinator's order. No time is invented for a record that has
+  // none.
+  return out.map((record, i) => Object.assign(record, { order: i }))
+    .sort((a, b) => (a.age === null) - (b.age === null) || (a.age === null ? a.order - b.order : a.age - b.age));
+}
+
+// ---- Rendering ----------------------------------------------------------
+function kpi(iconName, label, value, bound, note, tone) {
+  const valueNode = el('p', 'kpi-value' + (tone ? ' ' + tone : ''), value);
+  if (bound) add(valueNode, el('span', 'bound', '+'));
+  return add(el('li', 'kpi'), add(el('p', 'kpi-label'), icon(iconName), label), valueNode, el('p', 'kpi-note', note));
+}
+function renderKpis(d) {
+  const shown = model.rows.filter((row) => ACTIVE.includes(row.state));
+  const local = shown.filter((row) => row.local).length;
+  const more = count(d.more_agents);
+  const total = (items, omitted) => list(items).length + count(omitted);
+  const denials = model.denials;
+  const refusalCount = model.refusals.length;
+  const truncated = denials && (denials.more_conflicts === true || denials.more_stale_refusals === true);
+  const checks = list(d.checks);
+  const failed = checks.filter((c) => c.result && c.result.type === 'failed').length;
+  const stale = checks.filter((c) => c.applies === 'stale').length;
+  byId('kpis').replaceChildren(
+    kpi('users', 'Active sessions', num(d.active_agents) === null ? '—' : count(d.active_agents), false,
+      'Listed: ' + local + ' on this machine, ' + (shown.length - local) + ' from teammates' + (more ? '; ' + more + ' rows not listed' : '')),
+    kpi('layers', 'Shared paths', total(d.overlaps, d.more_overlaps), false, 'Touched by 2+ sessions in 30 min', 't-accent'),
+    kpi('lock', 'Held files', total(d.editing, d.more_editing), false, 'Admitted edits now, this machine'),
+    kpi('ban', 'Refusals', denials ? refusalCount : '—', !!truncated,
+      denials ? (truncated ? 'At least this many; ' : '') + 'in the newest ' + count(denials.window).toLocaleString() + ' records' : 'Could not be read from the store', 't-bad'),
+    kpi('notice', 'Interface notices', total(d.interface_changes, d.more_interface_changes), false, 'Name matches, advisory'),
+    kpi('check', 'Checks', total(checks, d.more_checks), false,
+      checks.length ? failed + ' failed · ' + stale + ' with files changed since' : 'None recorded', failed ? 't-bad' : ''),
+    kpi('land', 'Landings', total(d.landings, d.more_landings), false, 'Recorded with their check', 't-good'));
+}
+
+function rowVisible(row) {
+  if (ui.sessionView === 'all') return true;
+  if (ui.sessionView === 'local') return row.local;
+  if (ui.sessionView === 'peer') return !row.local;
+  return CURRENT.includes(row.state);
+}
+function columnsFor() {
+  const text = ui.pathText.trim().toLowerCase();
+  return model.columns.filter((col) => (ui.pathView === 'all' || col.signal) && (!text || col.path.toLowerCase().includes(text)));
+}
+function groupOf(row) {
+  if (row.local) {
+    return { key: JSON.stringify(['local', str(row.workspace_id)]), icon: 'machine', name: 'This machine',
+      detail: str(row.workspace_id), branch: branch(row.branch_ref) };
+  }
+  return { key: JSON.stringify(['peer', str(row.machine), str(row.workspace_id), str(row.branch_ref)]), icon: 'peer',
+    name: str(row.machine), detail: 'received by ' + str(row.workspace_id), branch: branch(row.branch_ref) };
+}
+function signalText(col) {
+  const parts = [];
+  if (col.refusals.length) parts.push(plural(col.refusals.length, 'refusal'));
+  if (col.held) parts.push('held');
+  if (col.overlap) parts.push(plural(strings(col.overlap.agents).length + count(col.overlap.more_agents), 'session') + ' shared');
+  if (col.notices.length) parts.push('notice');
+  return parts.length ? parts.join(' · ') : 'observed';
+}
+
+// Every primary mark in the whole model, whatever the filters show: what a
+// new view is compared with, so only marks the coordinator newly reports
+// are highlighted, never ones a filter change reveals.
+function allMarks() {
+  const marks = new Set();
+  for (const col of model.columns) {
+    for (const row of model.rows) {
+      const found = cellMark(col, row);
+      if (found.length) marks.add(row.key + '\u0000' + col.key + '\u0000' + found[0][0]);
+    }
+  }
+  return marks;
+}
+function renderScope(d) {
+  const scope = byId('scope');
+  const rows = model.rows.filter(rowVisible);
+  const allColumns = columnsFor();
+  const columns = allColumns.slice(0, MAX_COLUMNS);
+  const listed = model.rows.length;
+  byId('scope-sub').textContent = rows.length + ' of ' + plural(listed, 'listed session') + ' · ' + plural(columns.length, 'path')
+    + (count(d.more_agents) ? ' · ' + count(d.more_agents) + ' more sessions not listed by the coordinator' : '');
+  const selected = ui.selection;
+  if (!listed) {
+    scope.replaceChildren(el('p', 'empty', 'No sessions are registered yet. Sessions appear when an agent with LangSpan hooks starts work here, or when a teammate’s publication arrives.'));
+    renderScopeFoot(d, allColumns.length, columns.length);
+    return;
+  }
+  if (!rows.length) {
+    const reset = button('button', 'sessions-all', 'all', 'Show all listed sessions');
+    scope.replaceChildren(add(el('div', 'empty'), el('p', null, 'No listed session matches this filter.'), reset));
+    renderScopeFoot(d, allColumns.length, columns.length);
+    return;
+  }
+  const table = el('table', 'grid');
+  add(table, el('caption', 'sr-only', 'Sessions in rows, file paths in columns; each cell shows how a session relates to a path.'));
+  const headRow = el('tr');
+  add(headRow, el('th', 'col-session', 'Session and task'));
+  headRow.firstChild.scope = 'col';
+  for (const col of columns) {
+    const [dir, file] = splitPath(col.path);
+    const isSelected = selected && selected.kind === 'path' && selected.key === col.key;
+    const head = button('path-head' + (col.overlap ? ' has-shared' : '') + (isSelected ? ' is-selected' : ''), 'path', col.key,
+      el('span', 'sr-only', 'Inspect '), el('span', 'path-dir', dir ||' '), el('span', 'path-file', file),
+      el('span', 'sr-only', ': '), el('span', 'path-signal', signalText(col)));
+    // The accessible name is the visible text plus hidden words, never an
+    // aria-label that replaces it (WCAG 2.5.3, label in name).
+    head.title = col.path;
+    if (isSelected) head.setAttribute('aria-current', 'true');
+    const th = add(el('th', 'col-path'), head);
+    th.scope = 'col';
+    add(headRow, th);
+  }
+  if (!columns.length) {
+    const th = el('th', 'col-path', ui.pathView === 'signals' ? 'No signals' : 'No paths');
+    th.scope = 'col';
+    add(headRow, th);
+  }
+  add(table, add(el('thead'), headRow));
+  const groups = new Map();
+  for (const row of rows) {
+    const g = groupOf(row);
+    if (!groups.has(g.key)) groups.set(g.key, Object.assign(g, { rows: [] }));
+    groups.get(g.key).rows.push(row);
+  }
+  for (const g of groups.values()) {
+    const body = el('tbody');
+    const collapsed = ui.collapsed.has(g.key);
+    const toggle = button('group-button', 'group', g.key, icon(collapsed ? 'right' : 'down'), icon(g.icon),
+      el('strong', null, g.name), el('span', 'mono', g.detail), g.branch ? el('span', 'mono', g.branch) : null,
+      el('span', null, plural(g.rows.length, 'session')));
+    toggle.setAttribute('aria-expanded', String(!collapsed));
+    const th = add(el('th'), toggle);
+    th.colSpan = 1 + Math.max(1, columns.length);
+    th.scope = 'rowgroup';
+    add(body, add(el('tr', 'group-row'), th));
+    if (!collapsed) {
+      for (const row of g.rows) {
+        const tr = el('tr');
+        const isSelected = selected && selected.kind === 'session' && selected.key === row.key;
+        const state = str(row.state).replace(/_/g, ' ');
+        const avatar = el('span', 'avatar' + (row.local ? '' : ' is-peer'), initials(row.host));
+        avatar.setAttribute('aria-hidden', 'true');
+        const sessionButton = button('session' + (isSelected ? ' is-selected' : ''), 'session', row.key,
+          el('span', 'sr-only', 'Inspect session '), avatar,
+          add(el('span', 'session-text'),
+            // A subagent shares its parent's short session name; say which.
+            add(el('span', 'session-name'), hostName(row.host) + ' ', el('span', 'mono', str(row.session))),
+            el('span', 'session-task', row.task || row.intent || (row.local ? 'Task not recorded' : 'Task not shared')),
+            add(el('span', 'state state-' + str(row.state)), el('span', 'status-dot'), state || 'unknown',
+              row.subagent ? el('span', 'mono muted', ' · subagent ' + row.subagent) : null)));
+        sessionButton.title = row.label;
+        if (isSelected) sessionButton.setAttribute('aria-current', 'true');
+        const th2 = add(el('th', 'col-session'), sessionButton);
+        th2.scope = 'row';
+        add(tr, th2);
+        for (const col of columns) {
+          const columnSelected = selected && selected.kind === 'path' && selected.key === col.key;
+          const td = el('td', 'cell' + (columnSelected ? ' is-column' : ''));
+          const found = cellMark(col, row);
+          if (found.length) {
+            const [kind, iconName, text] = found[0];
+            const mark = add(el('span', 'mark mark-' + kind), icon(iconName), text);
+            const extra = found.length > 1 ? el('span', 'mark-extra', '+' + (found.length - 1)) : null;
+            if (extra) extra.setAttribute('aria-hidden', 'true');
+            const cell = button('cell-button', 'path', col.key, mark, extra,
+              el('span', 'sr-only', (found.length > 1 ? ', ' + found.slice(1).map((m) => m[2]).join(', ') : '')
+                + ': ' + row.label + ', ' + col.path));
+            cell.dataset.focus = 'cell\u0000' + row.key + '\u0000' + col.key;
+            cell.title = found.map((m) => m[2]).join(', ');
+            if (ui.fresh.has(row.key + '\u0000' + col.key + '\u0000' + kind)) mark.classList.add('is-new');
+            add(td, cell);
+          }
+          add(tr, td);
+        }
+        if (!columns.length) add(tr, el('td', 'cell'));
+        add(body, tr);
+      }
+    }
+    add(table, body);
+  }
+  scope.replaceChildren(table);
+  if (!columns.length && ui.pathView === 'signals' && model.columns.length) {
+    const more = button('button', 'paths-all', 'all', 'Show all ' + plural(model.columns.length, 'observed path'));
+    add(scope, add(el('div', 'empty'), el('p', null, 'No shared paths, holds, interface notices or refusals right now.'), more));
+  }
+  renderScopeFoot(d, allColumns.length, columns.length);
+}
+function renderScopeFoot(d, matching, shown) {
+  const notes = [el('p', null, 'A shared path is recent activity by several sessions, not a conflict. Holds and refusals are this machine’s; a teammate’s work is shown as they published it.')];
+  if (matching > shown) notes.push(el('p', null, (matching - shown) + ' more matching paths are not drawn; filter by path to find them.'));
+  const omitted = [['agents', 'sessions'], ['editing', 'held files'], ['overlaps', 'shared paths'], ['interface_changes', 'interface notices']]
+    .filter(([key]) => count(d['more_' + key])).map(([key, what]) => count(d['more_' + key]) + ' ' + what);
+  if (omitted.length) notes.push(el('p', null, 'Not shown by the coordinator: ' + omitted.join(', ') + '.'));
+  const cut = model.rows.filter((row) => count(row.more_files)).length;
+  if (cut) notes.push(el('p', null, plural(cut, 'session') + ' listed more files than a row carries; see each session for the count.'));
+  if (!model.identified && model.rows.length) notes.push(el('p', 't-warn', 'This coordinator does not report session identities, so shared-path members are matched by label; a label that names several sessions is listed in the inspector, not drawn.'));
+  byId('scope-foot').replaceChildren(...notes);
+}
+function renderLegend() {
+  const items = [['refused', 'ban', 'Refused edit'], ['held', 'lock', 'Held here'], ['editing', 'edit', 'Teammate editing'],
+    ['shared', 'layers', 'Shared path'], ['notice', 'notice', 'Interface notice'], ['published', 'peer', 'Teammate published'], ['recent', 'dot', 'Recent']];
+  byId('legend').replaceChildren(...items.map(([kind, name, text]) => add(el('span', 'mark mark-' + kind), icon(name), text)));
+}
+
+// This local month's refusals, as `langspan count` counts them (H5). The
+// demo has no count; the live page says when the coordinator could not give one.
+function monthRefusals(m) {
+  if (!LIVE) return null;
+  if (!m || typeof m !== 'object' || m.error || typeof m.line !== 'string') {
+    return el('p', 't-warn', 'This month’s refusal count could not be read' + (m && typeof m.error === 'string' ? ': ' + m.error : '.'));
+  }
+  // The daemon's own line: the count, its kinds and any truncation.
+  return el('p', 'month-refusals', m.line + ', once per session, kind and files a day. ' + str(m.note));
+}
+
+function renderFeed(d) {
+  const feed = byId('feed');
+  const selected = ui.selection;
+  const items = model.records.map((record) => {
+    const isSelected = selected && selected.kind === 'record' && selected.key === record.key;
+    const row = button('record' + (isSelected ? ' is-selected' : ''), 'record', record.key, icon(record.icon, record.tone),
+      add(el('span'), add(el('span', 'record-head'), el('span', 'record-title', record.title),
+        el('span', 'record-time', record.age === null ? '—' : ago(record.age))), el('span', 'record-detail', record.detail)));
+    if (record.age === null) row.querySelector('.record-time').title = 'Time not recorded';
+    if (isSelected) row.setAttribute('aria-current', 'true');
+    return add(el('li'), row);
+  });
+  feed.replaceChildren(...items);
+  if (!items.length) feed.replaceChildren(el('li', 'empty', 'No refusals, notices, checks, landings, push turns, messages or notes in this view.'));
+  byId('feed-sub').textContent = plural(items.length, 'record') + ' · timed first, newest first';
+  const notes = [];
+  const omitted = [['checks', 'checks'], ['landings', 'landings'], ['push_turns', 'push turns'], ['messages', 'messages'], ['notes', 'notes'], ['interface_changes', 'interface notices']]
+    .filter(([key]) => count(d['more_' + key])).map(([key, what]) => count(d['more_' + key]) + ' ' + what);
+  if (omitted.length) notes.push(el('p', null, 'Not shown by the coordinator: ' + omitted.join(', ') + '.'));
+  const denials = model.denials;
+  if (!denials) notes.push(el('p', 't-warn', 'Refusals could not be read from the store.'));
+  else {
+    notes.push(el('p', null, (denials.more_conflicts === true || denials.more_stale_refusals === true ? 'More refusals exist than are shown. ' : '')
+      + 'Refusals are searched in the newest ' + count(denials.window).toLocaleString() + ' recorded events and receipts; a held-file refusal is recorded without a time.'));
+  }
+  const month = monthRefusals(monthCount);
+  if (month) notes.push(month);
+  notes.push(el('p', null, 'A dash means no time was recorded. This is the current view, not an event log.'));
+  byId('feed-foot').replaceChildren(...notes);
+}
+
+function participantItems(col) {
+  const items = [];
+  for (const key of col.members) {
+    const row = model.rowsByKey.get(key);
+    if (row) items.push(add(button('item item-button', 'session', key), el('span', null, row.label), el('span', 'muted', ' · ' + str(row.state).replace(/_/g, ' '))));
+  }
+  for (const label of col.unmatched) items.push(add(el('div', 'item'), el('span', null, label), el('span', 'muted', ' · not matched to one listed session')));
+  if (!col.overlap) {
+    for (const [key, kind] of col.touches) {
+      const row = model.rowsByKey.get(key);
+      if (row) items.push(add(button('item item-button', 'session', key), el('span', null, row.label), el('span', 'muted', ' · ' + kind)));
+    }
+  }
+  return items;
+}
+function inspectPath(col, d) {
+  const out = [];
+  const overlap = col.overlap;
+  const participants = overlap ? strings(overlap.agents).length + count(overlap.more_agents) : col.touches.size;
+  out.push(facts([['Path', el('code', null, col.path)], ['Workspaces', [...col.workspaces].join(', ') || 'not recorded'],
+    ['Signals', signalText(col)], ['Sessions', overlap ? String(participants) + (overlap.more_agents === undefined && strings(overlap.agents).length >= 8 ? ' or more' : '') : String(participants)]]));
+  const items = participantItems(col);
+  out.push(block('users', overlap ? 'Sessions that touched it in the last 30 minutes' : 'Sessions listing it',
+    items.length ? add(el('div', 'items'), ...items) : el('p', 'caveat', 'No listed session.'),
+    overlap && count(overlap.more_agents) ? el('p', 'caveat', count(overlap.more_agents) + ' more not listed.') : null,
+    overlap && overlap.editing ? el('p', 'caveat', 'At least one of them is editing it now.') : null));
+  if (col.held) {
+    out.push(block('lock', 'Held on this machine', add(el('div', 'items'), ...col.holds.map((h) => add(el('div', 'item'),
+      el('div', 'mono', str(h.session_id)), el('div', 'muted', 'in ' + str(h.workspace_id) + ' · held for ' + Math.ceil(count(h.expires_in_ms) / 1000) + ' s more'
+        + (h.base_unknown ? ' · no recorded read to compare' : '')))),
+      ...col.unleased.map((row) => add(el('div', 'item'),
+        el('div', 'mono', str(row.session_id)), el('div', 'muted', 'in ' + str(row.workspace_id) + ' · hold details not in this view'))))));
+  }
+  if (col.refusals.length) {
+    out.push(block('ban', 'Refused edits', add(el('div', 'items'), ...col.refusals.map((r) => add(el('div', 'item'),
+      el('div', 't-bad', r.kind === 'conflict' ? 'Held by ' + (strings(r.holders).join(', ') || 'another session') : 'The file changed since it was read'),
+      el('div', 'mono', str(r.session_id)), el('div', 'muted', ago(r.age_ms)))))));
+  }
+  for (const n of col.notices) {
+    out.push(block('notice', 'Interface notice', add(el('div', 'items'), ...list(n.changes).map((c) =>
+      el('div', 'item mono', str(c.kind) + ' ' + str(c.name) + ': ' + str(c.change).replace(/_/g, ' ') + (c.after_name ? ' to ' + str(c.after_name) : '')))),
+      count(n.more_changes) ? el('p', 'caveat', count(n.more_changes) + ' more changes') : null,
+      strings(n.dependents).length ? add(el('div'), el('p', 'caveat', 'Files that name it:'), chips(strings(n.dependents))) : null,
+      count(n.more_dependents) ? el('p', 'caveat', count(n.more_dependents) + ' more files') : null,
+      n.by_session ? el('p', 'caveat', 'Last edited by ' + str(n.by_session) + ' (correlation, not proof)') : null,
+      el('p', 'caveat', ago(n.age_ms) + '. A name match is advisory; it does not prove a break.')));
+  }
+  // Paths are relative, so a record matches only in the column's overlap
+  // group: linked worktrees share it, unrelated repositories do not.
+  const related = model.records.filter((r) => (r.kind === 'message' || r.kind === 'note') && r.paths.includes(col.path)
+    && model.workspaceGroup(r.object.workspace_id) === col.group);
+  if (related.length) out.push(block('message', 'Messages and notes about it', add(el('div', 'items'), ...related.map((r) => add(button('item item-button', 'record', r.key), el('div', null, r.title), el('div', 'muted', r.detail))))));
+  out.push(el('p', 'caveat', 'Checks apply to whole recorded trees, not single files.'));
+  return out;
+}
+function inspectSession(row) {
+  const out = [];
+  out.push(facts([['Host', hostName(row.host)], ['Session', el('span', 'mono', row.local ? str(row.session_id) : str(row.session))],
+    ['State', str(row.state).replace(/_/g, ' ') + (row.liveness ? ' · process ' + str(row.liveness) : '')],
+    [row.local ? 'Workspace' : 'Teammate', row.local ? str(row.workspace_id) : str(row.machine) + ', received by ' + str(row.workspace_id)],
+    ['Branch', branch(row.branch_ref) || 'not recorded'],
+    [row.local ? 'Last activity' : 'Last heard', row.local ? (num(row.active_age_ms) === null ? 'none this run' : ago(row.active_age_ms))
+      : (num(row.heard_age_ms) === null ? 'before this coordinator started' : ago(row.heard_age_ms))],
+    ['Task', row.task ? quoted(str(row.task)) : (row.local ? 'not recorded' : 'not shared')],
+    ['Intent', row.intent ? quoted(str(row.intent)) : null],
+    ['Uncommitted work adopted by', row.adopted_by ? el('span', 'mono', str(row.adopted_by)) : null],
+    ['Adopted the uncommitted work of', strings(row.adopted).length ? el('span', 'mono', strings(row.adopted).join(', ')) : null]]));
+  if (row.editing.length) out.push(block(row.local ? 'lock' : 'edit', row.local ? 'Held now' : 'Editing, as published', chips(row.editing)));
+  if (row.recent.length) {
+    out.push(block('file', 'Recent files', add(el('div', 'items'), ...row.recent.map((file) =>
+      add(el('div', 'item'), el('span', 'mono', file.path), el('span', 'muted', ' · ' + (num(file.age_ms) === null ? 'no comparable time' : ago(file.age_ms))))))));
+  }
+  if (count(row.more_files)) out.push(el('p', 'caveat', count(row.more_files) + ' more files not listed.'));
+  if (!row.editing.length && !row.recent.length) out.push(el('p', 'caveat', 'No files listed.'));
+  const related = model.records.filter((r) => (r.kind === 'conflict' || r.kind === 'stale') ? str(r.object.session_id) === str(row.session_id) && row.local
+    : r.kind === 'message' ? row.local && (str(r.object.from) === str(row.session_id) || (r.object.to && str(r.object.to.session_id) === str(row.session_id))) : false);
+  if (related.length) out.push(block('ban', 'Records about this session', add(el('div', 'items'), ...related.map((r) => add(button('item item-button', 'record', r.key), el('div', null, r.title), el('div', 'muted', r.detail))))));
+  if (!row.local) out.push(el('p', 'caveat', 'A teammate’s session shows only what they published: no file ages and no holds here.'));
+  return out;
+}
+function inspectRecord(r) {
+  const x = r.object;
+  const out = [];
+  if (r.kind === 'conflict' || r.kind === 'stale') {
+    out.push(facts([['Refused', el('span', 'mono', str(x.session_id))], ['Files', chips(strings(x.paths))],
+      ['More files', count(x.more_paths) ? String(count(x.more_paths)) : null],
+      ['Held by', r.kind === 'conflict' ? (strings(x.holders).join(', ') || 'not recorded') : null], ['When', ago(x.age_ms)]]));
+    out.push(el('p', 'caveat', r.kind === 'conflict' ? 'The edit was refused because another session held the file. A held-file refusal is recorded without a time.'
+      : 'The edit was refused once because the file changed after the session read it.'));
+  } else if (r.kind === 'notice') {
+    out.push(...inspectPath(model.columnsByKey.get(JSON.stringify([model.workspaceGroup(x.workspace_id), str(x.path)])) || { path: str(x.path), workspaces: new Set([str(x.workspace_id)]), touches: new Map(), members: new Set(), unmatched: [], overlap: null, holds: [], refusals: [], notices: [x] }));
+  } else if (r.kind === 'check') {
+    const result = x.result || {};
+    out.push(facts([['Check', str(x.name)], ['Result', str(result.type) + (result.type === 'failed' ? ' (exit ' + str(result.exit_code) + ')' : '')],
+      ['Workspace', str(x.workspace_id)], ['Tree', el('code', null, str(x.tree_oid))], ['Scope', x.combined ? 'combined branches' : 'a working tree'],
+      ['Took', num(x.duration_ms) === null ? 'unknown' : count(x.duration_ms) + ' ms'], ['Recorded', ago(x.age_ms)]]));
+    out.push(el('p', 'caveat', x.applies === 'stale' ? 'Files changed after this check, so it does not apply to the current tree.'
+      : 'No change was seen since this check; the current tree was not compared. langspan check status compares trees.'));
+  } else if (r.kind === 'landing') {
+    out.push(facts([['Onto', str(x.onto)], ['Workspace', str(x.workspace_id)], ['Commit', el('code', null, str(x.commit_oid))],
+      ['Tree', el('code', null, str(x.tree_oid))], ['Check', el('code', null, str(x.check_id))], ['Inputs', plural(count(x.inputs), 'branch', 'branches')]]));
+    out.push(el('p', 'caveat', 'A landing is recorded with the check of its exact tree. It does not record a pull request merge or a deployment.'));
+  } else if (r.kind === 'turn') {
+    out.push(facts([['Onto', str(x.onto)], ['Workspace', str(x.workspace_id)],
+      ['Holder', x.holder ? str(x.holder) + ' (' + str(x.holder_session || 'a terminal') + ')' : 'free'], ['Held for', x.holder ? duration(x.held_ms) : null]]));
+    const waiting = list(x.waiting);
+    if (waiting.length) out.push(block('turn', 'Waiting', add(el('div', 'items'), ...waiting.map((w) => add(el('div', 'item'),
+      el('span', 'mono', count(w.position) + '. ' + str(w.ticket)), el('div', 'muted', str(w.session_id || 'a terminal') + ' · waiting ' + duration(w.waited_ms) + ' · gives up in ' + duration(w.wait_left_ms)))))));
+    if (count(x.more_waiting)) out.push(el('p', 'caveat', count(x.more_waiting) + ' more waiting.'));
+  } else if (r.kind === 'message') {
+    const to = x.to || {};
+    out.push(facts([['From', x.from === null || x.from === undefined ? 'the owner' : el('span', 'mono', str(x.from))],
+      ['To', to.kind === 'session' ? str(to.session_id) : to.kind === 'everyone' ? 'everyone' : 'the next session'],
+      ['Workspace', str(x.workspace_id)], ['Acknowledged by', plural(count(x.acknowledged), 'session')], ['Status', x.retracted ? 'withdrawn' : 'waiting']]));
+    out.push(add(el('p', 'quote'), quoted(str(x.text))));
+    if (strings(x.paths).length) out.push(block('file', 'About', chips(strings(x.paths))));
+    out.push(el('p', 'caveat', 'Recorded as sent. Receipt and what a session did with it are not recorded here.'));
+  } else if (r.kind === 'note') {
+    out.push(facts([['Workspace', str(x.workspace_id)], ['From', x.author === null || x.author === undefined ? 'the owner' : str(x.author)]]));
+    out.push(add(el('p', 'quote'), quoted(str(x.text))));
+    if (strings(x.paths).length) out.push(block('file', 'About', chips(strings(x.paths))));
+  }
+  return out;
+}
+function renderInspector(d) {
+  const selection = ui.selection;
+  const body = byId('inspector-body');
+  const subject = byId('inspector-subject');
+  byId('inspector-clear').hidden = !selection;
+  if (!selection) {
+    subject.textContent = '';
+    body.replaceChildren(el('p', 'caveat', 'Select a path, a session, a cell or a record to see its evidence.'));
+    return;
+  }
+  let content = null;
+  if (selection.kind === 'path') {
+    const col = model.columnsByKey.get(selection.key);
+    if (col) { subject.textContent = col.path; content = inspectPath(col, d); }
+  } else if (selection.kind === 'session') {
+    const row = model.rowsByKey.get(selection.key);
+    if (row) { subject.textContent = row.label; content = inspectSession(row); }
+  } else if (selection.kind === 'record') {
+    const record = model.records.find((r) => r.key === selection.key);
+    if (record) { subject.textContent = record.title; content = inspectRecord(record); }
+  }
+  if (!content) {
+    subject.textContent = selection.label || '';
+    body.replaceChildren(el('p', 'caveat', 'This item is no longer in the coordinator’s view. It may have ended, expired or been left out by the view’s limits.'));
+    return;
+  }
+  selection.label = subject.textContent;
+  body.replaceChildren(...content);
+}
+
+function coverage(c) {
+  if (!c || typeof c !== 'object') return 'not available';
+  if (!c.scanned) return 'no complete scan yet';
+  return count(c.current_files) + ' of ' + count(c.indexable_files) + ' files current' + (count(c.partial_files) ? ', ' + count(c.partial_files) + ' partial' : '');
+}
+function publishing(w) {
+  const p = w.publishing;
+  if (!p || typeof p !== 'object') return 'Not publishing to teammates';
+  if (!p.enabled) return p.withdrawn ? 'Publishing turned off' : 'Publishing turned off; removing the published ref';
+  return 'Publishing to ' + str(p.remote) + ' as ' + quoted(str(p.name)) + ', sequence ' + count(p.sequence)
+    + (p.share_task ? ', task lines shared' : ', task lines not shared') + '; ' + plural(count(w.teammates), 'teammate') + ' received';
+}
+function renderHealth(d) {
+  const cards = [];
+  cards.push(add(el('div', 'health-card'), add(el('h3'), icon('health'), 'Coordinator'), facts([
+    ['Generation', str(d.generation)], ['Up', num(d.uptime_ms) === null ? 'unknown' : duration(d.uptime_ms)],
+    ['Active sessions', str(count(d.active_agents))], ['Teammates heard', count(d.teammates_heard) + ' of ' + count(d.teammates_known)],
+    ['Refreshed', LIVE ? (lastSuccess ? new Date(lastSuccess).toLocaleTimeString() : 'not yet') : 'simulated']])));
+  for (const w of list(d.workspaces)) {
+    const scan = w.scan_failure && typeof w.scan_failure === 'object'
+      ? el('span', 't-bad', 'Last scan failed ' + ago(w.scan_failure.age_ms) + ': ' + str(w.scan_failure.detail))
+      : el('span', 't-good', 'Scans completing');
+    cards.push(add(el('div', 'health-card'), add(el('h3'), icon('machine'), str(w.workspace_id)), facts([
+      ['Root', el('span', 'mono', str(w.root))], ['Branch', branch(w.branch_ref) || 'not recorded'],
+      ['Sessions', plural(count(w.sessions), 'session') + ' this run'], ['Scans', scan],
+      ['Publishing', publishing(w)], ['Source index', coverage(w.coverage)]])));
+  }
+  if (!list(d.workspaces).length) cards.push(el('p', 'empty', 'No workspace is registered.'));
+  if (count(d.more_workspaces)) cards.push(el('p', 'empty', count(d.more_workspaces) + ' more workspaces not shown.'));
+  const hosts = strings(d.uninstalled_hosts);
+  const hostCard = add(el('div', 'health-card'), add(el('h3'), icon('warn'), 'Agent hosts'));
+  if (!hosts.length) add(hostCard, el('p', 'caveat', 'Every agent host found on this machine has a LangSpan install.'));
+  for (const host of hosts) {
+    add(hostCard, add(el('div', 'item'), add(el('div'), el('span', 't-warn', 'Not coordinated: '), el('strong', null, host),
+      el('span', 'muted', ' has a configuration directory but no LangSpan hooks.')),
+      el('div', 'muted', 'Preview the install with this command, then add --apply:'),
+      el('code', 'install', Object.prototype.hasOwnProperty.call(advice, host) ? str(advice[host]) : 'langspan install --hosts ' + host)));
+  }
+  cards.push(hostCard);
+  cards.push(add(el('div', 'health-card'), add(el('h3'), icon('peer'), 'Publication'),
+    el('p', 'caveat', 'Publication failures are written to the daemon’s log, not recorded in state; a sequence that keeps rising means publications are being pushed. Teammates’ work is advisory and never refuses a local edit.')));
+  byId('health').replaceChildren(...cards);
+  // Problems are counted in the summary, so a reader sees them without
+  // reading every workspace card.
+  const failedScans = list(d.workspaces).filter((w) => w.scan_failure && typeof w.scan_failure === 'object').length;
+  byId('health-sub').replaceChildren(plural(list(d.workspaces).length, 'workspace') + ' · ',
+    failedScans ? el('span', 't-bad', failedScans + ' with a failed last scan') : 'scans completing',
+    ' · ' + plural(hosts.length, 'host') + ' not coordinated');
+}
+function renderDefinitions() {
+  byId('definitions').replaceChildren(...[
+    ['Active sessions', 'The coordinator’s count of sessions editing, active in the last 30 minutes, or published by a teammate heard recently, on every machine. The note counts only listed rows.'],
+    ['Shared paths', 'Files that two or more sessions touched in the last 30 minutes, in one repository, counting linked worktrees together. Activity, not conflicts.'],
+    ['Held files', 'File paths with a current edit admission on this machine: paths, not sessions or requests.'],
+    ['Refusals', 'Held-file and stale-source refusals found in the newest recorded events and receipts. A + means more exist than are listed: the number is a lower bound. Not a daily count, and not rework avoided.'],
+    ['Interface notices', 'Definitions whose interface changed, matched to other files by name. Advisory.'],
+    ['Checks and landings', 'Recorded results for exact Git trees, and landings recorded with their check. Shown and omitted rows are counted together.'],
+  ].flatMap(([term, text]) => [el('dt', null, term), el('dd', null, text)]));
+}
+
+function ensureSelection() {
+  if (ui.selection || ui.autoSelected) return;
+  const first = model.columns.find((col) => col.signal);
+  if (first) { ui.selection = { kind: 'path', key: first.key }; ui.autoSelected = true; }
+}
+// Draw the current view. `arrived` is true when the view itself is new
+// (a poll or a scene), false when only the filters or selection changed.
+function render(arrived) {
+  if (!view) return;
+  const focused = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.focus : null;
+  const scope = byId('scope');
+  const scroll = [scope.scrollLeft, scope.scrollTop];
+  if (arrived || !model) {
+    model = buildModel(view);
+    const marks = allMarks();
+    ui.fresh = new Set(ui.previousMarks.size ? [...marks].filter((mark) => !ui.previousMarks.has(mark)) : []);
+    ui.previousMarks = marks;
+  } else {
+    ui.fresh = new Set();
+  }
+  ensureSelection();
+  renderKpis(view);
+  renderScope(view);
+  renderFeed(view);
+  renderInspector(view);
+  renderHealth(view);
+  [scope.scrollLeft, scope.scrollTop] = scroll;
+  if (focused) {
+    for (const node of document.querySelectorAll('[data-focus]')) {
+      if (node.dataset.focus === focused) { node.focus({ preventScroll: true }); break; }
+    }
+  }
+  const workspaces = list(view.workspaces).map((w) => str(w.workspace_id));
+  byId('context').textContent = LIVE
+    ? (workspaces.length ? plural(workspaces.length, 'workspace') + ': ' + workspaces.slice(0, 4).join(', ') + (workspaces.length > 4 ? ' and more' : '') : 'No workspace registered') + ' · generation ' + str(view.generation)
+    : 'Simulated repository with fictional sessions';
+  byId('footer-refresh').textContent = LIVE ? (lastSuccess ? 'Last refreshed ' + new Date(lastSuccess).toLocaleTimeString() : '') : 'Simulated data';
+}
+
+// ---- Status, theme and controls -------------------------------------------
+function setStatus(kind, text) {
+  const pill = byId('status');
+  pill.className = 'status-pill is-' + kind;
+  byId('status-text').textContent = text;
+}
+function banner(text, demo) {
+  const node = byId('banner');
+  node.hidden = !text;
+  node.className = 'banner' + (demo ? ' is-demo' : '');
+  node.replaceChildren();
+  if (text) add(node, text);
+  byId('scope').classList.toggle('is-stale', !!text && !demo && lastSuccess > 0);
+}
+function setTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  const toggle = byId('theme');
+  toggle.textContent = theme === 'dark' ? 'Light theme' : 'Dark theme';
+  toggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to the light theme' : 'Switch to the dark theme');
+}
+const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+setTheme(darkQuery.matches ? 'dark' : 'light');
+darkQuery.addEventListener('change', (event) => { if (!ui.themeChosen) setTheme(event.matches ? 'dark' : 'light'); });
+byId('theme').addEventListener('click', () => {
+  ui.themeChosen = true;
+  setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+});
+for (const [id, name] of [['scope-title-icon', 'scope'], ['inspector-title-icon', 'inspect'], ['feed-title-icon', 'check'], ['health-title-icon', 'health']]) {
+  byId(id).prepend(icon(name));
+}
+function choose(action, key) {
+  if (action === 'group') {
+    if (ui.collapsed.has(key)) ui.collapsed.delete(key); else ui.collapsed.add(key);
+  } else if (action === 'paths-all') {
+    ui.pathView = 'all'; byId('path-view').value = 'all';
+  } else if (action === 'sessions-all') {
+    ui.sessionView = 'all'; byId('session-view').value = 'all';
+  } else {
+    ui.selection = { kind: action, key };
+  }
+  render();
+}
+document.addEventListener('click', (event) => {
+  const target = event.target.closest('button[data-action]');
+  if (target) choose(target.dataset.action, target.dataset.key);
+});
+byId('inspector-clear').addEventListener('click', () => { ui.selection = null; render(); byId('scope').focus(); });
+byId('path-view').addEventListener('change', (event) => { ui.pathView = event.target.value; render(); });
+byId('session-view').addEventListener('change', (event) => { ui.sessionView = event.target.value; render(); });
+byId('path-text').addEventListener('input', (event) => { ui.pathText = event.target.value; render(); });
+renderLegend();
+renderDefinitions();
+
+// ---- Live: poll this origin's /api/state ------------------------------------
+async function refresh() {
+  const controller = new AbortController();
+  const timer = window.setTimeout(() => controller.abort(), 8000);
+  try {
+    const response = await fetch('/api/state', { headers: { 'X-LangSpan-Token': token }, cache: 'no-store', signal: controller.signal });
+    if (response.status === 401 || response.status === 403) {
+      failure = 'auth';
+      setStatus('stale', 'Not authorized');
+      banner('This page’s access token is missing or no longer valid. Restart langspan dashboard and open the link it prints.');
+      return;
+    }
+    const body = await response.json();
+    if (!response.ok || !body || body.available !== true || !body.dashboard || typeof body.dashboard !== 'object') {
+      unavailable(str(body && body.error) || 'HTTP ' + response.status);
+      return;
+    }
+    view = body.dashboard;
+    advice = body.install_advice && typeof body.install_advice === 'object' ? body.install_advice : {};
+    monthCount = body.refusals_this_month;
+    lastSuccess = Date.now();
+    failure = '';
+    setStatus('live', 'Live');
+    banner(null);
+    render(true);
+  } catch (error) {
+    unavailable(error && error.name === 'AbortError' ? 'the dashboard server did not answer within 8 s'
+      : 'the dashboard server did not answer (' + str(error && error.message) + ')');
+  } finally {
+    window.clearTimeout(timer);
+  }
+}
+function unavailable(reason) {
+  failure = reason;
+  setStatus('stale', lastSuccess ? 'Stale' : 'Unavailable');
+  const since = lastSuccess ? ' Showing what was known ' + ago(Date.now() - lastSuccess) + '.' : ' No coordinator data has been received yet.';
+  banner('Coordinator unavailable: ' + reason + '.' + since);
+}
+function tick() { refresh().finally(() => window.setTimeout(tick, 2000)); }
+
+// ---- Demo: the same renderer over fictional, labeled scenes -------------------
+function startDemo() {
+  const scenes = DEMO_SCENES;
+  let index = 0;
+  let timer = null;
+  const range = byId('demo-scene');
+  range.max = String(scenes.length - 1);
+  byId('demo-controls').hidden = false;
+  byId('eyebrow').textContent = 'Simulated data';
+  setStatus('demo', 'Simulated data');
+  banner('Simulated data: fictional sessions that show how the page reads. Not a coordinator and not a measured result.', true);
+  const show = (n) => {
+    index = Math.max(0, Math.min(scenes.length - 1, n));
+    range.value = String(index);
+    view = scenes[index].dashboard;
+    byId('demo-caption').textContent = 'Scene ' + (index + 1) + ' of ' + scenes.length + ': ' + scenes[index].caption;
+    render(true);
+  };
+  const stop = () => { if (timer) window.clearInterval(timer); timer = null; byId('demo-play').setAttribute('aria-pressed', 'false'); byId('demo-play').textContent = 'Play scenes'; };
+  byId('demo-prev').addEventListener('click', () => { stop(); show(index - 1); });
+  byId('demo-next').addEventListener('click', () => { stop(); show(index + 1); });
+  range.addEventListener('input', () => { stop(); show(Number(range.value)); });
+  byId('demo-play').addEventListener('click', () => {
+    if (timer) { stop(); return; }
+    byId('demo-play').setAttribute('aria-pressed', 'true');
+    byId('demo-play').textContent = 'Pause scenes';
+    show(0);
+    timer = window.setInterval(() => { if (index >= scenes.length - 1) stop(); else show(index + 1); }, 4000);
+  });
+  show(scenes.length - 1);
+}
+
+if (LIVE) tick(); else startDemo();
+</script>
+</body>
+</html>

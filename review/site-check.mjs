@@ -156,9 +156,11 @@ for(const width of [1440,1280,768,390,358]){
  await p.locator('#start').scrollIntoViewIfNeeded();
  assert.equal(await p.locator('.download-list a').count(),4);
  const urls=await p.locator('.download-list a').evaluateAll(links=>links.map(a=>a.href));
- for(const target of ['aarch64-apple-darwin','x86_64-apple-darwin','aarch64-unknown-linux-gnu','x86_64-unknown-linux-gnu'])assert.ok(urls.some(u=>u.endsWith('langspan-v0.1.0-'+target+'.tar.gz')));
+ for(const target of ['aarch64-apple-darwin','x86_64-apple-darwin','aarch64-unknown-linux-gnu','x86_64-unknown-linux-gnu'])assert.ok(urls.some(u=>u.endsWith('langspan-v0.2.0-'+target+'.tar.gz')));
+ await p.locator('#manual-setup summary').click();
  await p.locator('#tab-claude').focus();await p.keyboard.press('ArrowRight');assert.equal(await p.locator('#tab-codex').getAttribute('aria-selected'),'true');assert.ok(await p.locator('#panel-codex').isVisible());
- await p.locator('[data-copy=daemon-command]').click();assert.equal(await p.evaluate(()=>navigator.clipboard.readText()),'langspan daemon');
+ await p.locator('#manual-setup summary').click();
+ await p.locator('[data-copy=setup-command]').click();assert.equal(await p.evaluate(()=>navigator.clipboard.readText()),'langspan setup');
  await p.locator('#start').screenshot({path:out+'/'+width+'-setup.png'});
  await p.locator('.faq-list summary').last().click();assert.equal(await p.locator('.faq-list details').last().getAttribute('open'),'');
  await checkExperience(p,width,out);
@@ -179,6 +181,7 @@ for(const opts of [{reducedMotion:'reduce'},{javaScriptEnabled:false}]){
  if(opts.javaScriptEnabled===false){assert.equal(await p.locator('[data-lx-arm]:visible').count(),0);assert.equal(await p.locator('.lx-lane:visible').count(),3);assert.equal(await p.locator('[data-semantic-beat]:visible').count(),3);assert.equal(await p.locator('[data-scale-controls]:visible').count(),0);}
  else {assert.equal(await p.locator('[data-parallel-scale]').getAttribute('data-phase'),'2');assert.equal(await p.locator('[data-semantic-story]').getAttribute('data-phase'),'1');assert.equal(await p.locator('[data-semantic-beat]:visible').count(),1);}
  assert.equal(await p.locator('.download-list a').count(),4);
+ await p.locator('#manual-setup summary').click();
  assert.ok(await p.locator('#panel-claude').isVisible());if(opts.javaScriptEnabled===false)assert.ok(await p.locator('#panel-codex').isVisible());else assert.equal(await p.locator('html').getAttribute('data-motion-paused'),'true');
  await p.goto(base+'/#demo',{waitUntil:'networkidle'});
  if(opts.javaScriptEnabled===false){assert.ok(await p.locator('.demo-fallback').isVisible());assert.equal(await p.locator('.cap-fallback:visible').count(),5);assert.ok(await p.locator('#team-awareness .cap-fallback').isVisible());}
