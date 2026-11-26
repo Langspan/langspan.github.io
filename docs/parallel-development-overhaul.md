@@ -25,3 +25,5 @@ The maintainer reported a larger multi-environment development run. Retain raw m
 The original three-session illustration is moved, not deleted. Existing film regeneration targets that original mechanism figure; the new scale story has a separate deterministic capture contract. No new video is represented as published.
 
 The first CI pass reproduced the Git failure and manual repair, but the primary desktop action was below the 800px fold gate. The new hero aligns the copy to the top and caps desktop headline size while retaining the diagram; failure screenshots now capture CTA bounds.
+
+The second CI pass cleared the desktop fold check and detected that the new animation clock reset its previous timestamp on every frame. Preserve the timestamp while scheduling a continuous playback frame; reset only on external start or stop. The review now checks actual elapsed time as well as the phase after Pause.

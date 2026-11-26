@@ -30,9 +30,10 @@ for(const width of [1440,1280,768,390,358]){
   await scale.locator('[data-scale-play]').click();
   await p.waitForFunction(()=>document.querySelector('[data-parallel-scale]').dataset.phase==='1',{},{timeout:9500});
   await scale.locator('[data-scale-play]').click();
-  const phase=await scale.getAttribute('data-phase');
+  const phase=await scale.getAttribute('data-phase'), elapsed=await p.evaluate(()=>window.LangSpanParallel.snapshot().scale.elapsedMs);
   await p.waitForTimeout(900);
   assert.equal(await scale.getAttribute('data-phase'),phase,'scale pause');
+  assert.equal(await p.evaluate(()=>window.LangSpanParallel.snapshot().scale.elapsedMs),elapsed,'pause freezes actual clock');
  }
  await scale.locator('[data-scale-count="10"]').click();
  await p.evaluate(()=>scrollTo(0,0));await p.waitForTimeout(150);

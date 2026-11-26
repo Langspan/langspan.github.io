@@ -93,7 +93,10 @@
       if(s.time>=12000)s.finished=true;
       paint(s,false,true);
     }
-    reconcile();
+    // Continue the same clock across frames. Only an external start/resume
+    // resets last; resetting it here would leave every delta at zero.
+    if(Object.values(state).some(running))raf=requestAnimationFrame(tick);
+    else last=null;
   }
   function seek(s,step){s.time=durations[step];s.started=true;s.paused=true;s.finished=false;paint(s,true,false);reconcile();}
   function play(s){if(staticMode()||globalPaused)return;if(s.finished){s.time=0;s.finished=false;s.phase=-1;s.paused=false;s.started=true;}else if(s.started&&!s.paused){s.paused=true;}else{s.started=true;s.paused=false;}paint(s,true,false);reconcile();}
@@ -120,6 +123,7 @@
   // A deterministic render contract for capture; manual seeking stops playback.
   window.LangSpanParallel=Object.freeze({
     duration:12,
+    snapshot(){return Object.fromEntries(Object.entries(state).map(([name,s])=>[name,{elapsedMs:s.time,phase:s.phase,running:running(s),count:name==='scale'?count:undefined}]))},
     seek(seconds,n=10){setCount(n);state.scale.paused=true;state.scale.started=true;state.scale.finished=seconds>=12;state.scale.time=clamp(seconds*1000,0,12000);paint(state.scale);reconcile();},
     semantic(seconds){state.semantic.paused=true;state.semantic.started=true;state.semantic.finished=seconds>=12;state.semantic.time=clamp(seconds*1000,0,12000);paint(state.semantic);reconcile();}
   });
