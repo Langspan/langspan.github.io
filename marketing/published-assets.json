@@ -67,8 +67,8 @@
     {
       "source": "demo-src/CoordinationDemo.tsx and CapabilityExplorer.tsx (generated from marketing/story.json)",
       "path": "assets/coordination-demo.js",
-      "sha256": "d771be71b6c1b972a9731a4b9231ad3de67b2903bb5f602a9407cf069e6e13eb",
-      "revision": "d8131462f95665a5e7e7f021dc848c2ae22b0deb"
+      "sha256": "7152305d33b5941c10dcc1f359c8a30e3cea822bc731b1fab0326e0bab08ce96",
+      "revision": "83170f25e118f5aca10de4afdafb8ac724347b0c"
     }
   ]
 }
