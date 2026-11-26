@@ -1,0 +1,26 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.000
+Agents move fast. Teams need shared context. One agent changes session refresh. Another builds against it.
+
+00:00:04.000 --> 00:00:08.000
+Your agents. On the same page. Open-source coordination for the coding agents your team already uses.
+
+00:00:08.000 --> 00:00:12.500
+One file. An active edit. Agent A holds the session file in a shared checkout.
+
+00:00:12.500 --> 00:00:17.500
+Catch the overlap. LangSpan refuses the supported edit while Agent A’s hold is active.
+
+00:00:17.500 --> 00:00:21.500
+The agent chooses what to do next. Agent B independently requests a different file.
+
+00:00:21.500 --> 00:00:25.500
+Separate work keeps moving. The independent edit is admitted. Host permissions still apply.
+
+00:00:25.500 --> 00:00:30.000
+See the recorded result. The released dashboard shows two active sessions and a recorded refusal.
+
+00:00:30.000 --> 00:00:33.000
+Keep building. Together. Get LangSpan v0.1.0 for macOS and Linux.
+

@@ -1,0 +1,14 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.400
+One file. An active edit. Agent A holds the session file in a shared checkout.
+
+00:00:03.400 --> 00:00:07.000
+Catch the overlap. LangSpan refuses the supported edit while Agent A’s hold is active.
+
+00:00:07.000 --> 00:00:10.600
+The agent chooses what to do next. Agent B independently requests a different file.
+
+00:00:10.600 --> 00:00:14.300
+Separate work keeps moving. The independent edit is admitted. Host permissions still apply.
+
