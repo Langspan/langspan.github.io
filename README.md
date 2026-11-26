@@ -76,7 +76,18 @@ The [marketing workspace](marketing/README.md) owns the canonical demonstration 
 
 GitHub Pages serves static HTML, CSS and JavaScript. The generated demonstration
 bundle is committed, so previewing or deploying the site needs no package
-installation or whole-site build. Serve the repository root, for example:
+installation or whole-site build.
+
+Only the public site is published. The `Deploy website` workflow
+(`.github/workflows/pages.yml`) runs `tools/assemble-site.sh`, which copies
+`index.html`, `404.html`, `robots.txt`, `sitemap.xml`, `CNAME` and `assets/`
+into `_site` and deploys that folder. Documentation, review scripts, marketing
+sources, `demo-src/` and agent instructions stay in the repository and are not
+served. A new public file outside `assets/` must be added to that script.
+Run `sh tools/assemble-site.sh` to check the allowlist and the page's local
+references before opening a pull request.
+
+Serve the repository root for a preview, for example:
 
 ```sh
 python3 -m http.server 8080 --bind 127.0.0.1
@@ -110,7 +121,6 @@ records the pinned upstream files and the one local `Stage` extension.
 | `assets/shared-work-canvas.js` | Original hero connection animation informed by living-canvas |
 | `demo-src/` | React demonstration source, selected Stageshow kit, pinned dependencies and build script |
 | `assets/coordination-demo.js` | Generated, self-contained Stageshow demonstration bundle |
-| `assets/motion-enhancements.js` | Optional page transitions using locally included Motion mini |
 | `assets/vendor/motion-14.14.0/` | Pinned Motion mini build, license and provenance |
 | `assets/brand/` | Exact approved SVG kit, reference image and organization avatar |
 | `assets/product/` | Existing animated README illustrations and social preview card |
