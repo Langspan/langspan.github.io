@@ -54,6 +54,10 @@ agents or a coordinator. Playback has a useful final frame, visible controls,
 reduced-motion behavior and a static fallback. The mission describes the team
 outcomes we intend to test; it does not claim those gains are already measured.
 
+## Marketing media
+
+The [marketing workspace](marketing/README.md) owns the canonical demonstration narrative, version-pinned production tools, film plans, reviewed export manifest and launch copy. The optional [33-second launch film](https://langspan.dev/#film) and short walkthrough use the same Stageshow story and labelled released dashboard evidence. The existing four README-native ChanMeng cards remain lightweight and reproducible.
+
 ## Work on the site
 
 GitHub Pages serves static HTML, CSS and JavaScript. The generated demonstration

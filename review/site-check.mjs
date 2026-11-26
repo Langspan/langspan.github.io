@@ -24,6 +24,21 @@ for(const width of [1440,1280,768,390,358]){
  for(let i=0;i<await scenes.count();i++){await scenes.nth(i).click();assert.equal(await scenes.nth(i).getAttribute('aria-pressed'),'true');if(width===1440||width===390)await p.locator('#coordination-demo').screenshot({path:out+'/'+width+'-demo-'+i+'.png'});}
  const replay=p.getByRole('button',{name:'Replay coordination illustration from the beginning'});await replay.click();
  await p.locator('[data-motion-toggle]').click();assert.equal(await p.locator('html').getAttribute('data-motion-paused'),'true');
+ await p.locator('#film').scrollIntoViewIfNeeded();
+ const film=p.locator('.launch-film'),v=film.locator('video');
+ assert.equal(await v.getAttribute('autoplay'),null,'no autoplay');assert.equal(await v.getAttribute('preload'),'none');
+ assert.equal(await film.getAttribute('open'),null,'film initially closed');
+ await film.locator('summary').click();assert.ok(await v.isVisible());
+ if(width===1440||width===390){
+  await v.evaluate(e=>{e.preload='metadata';e.load();});
+  await p.waitForFunction(()=>document.querySelector('.launch-film video').readyState>=1,{},{timeout:15000});
+  assert.ok(Math.abs(await v.evaluate(e=>e.duration)-33)<.1,'launch duration');
+  await v.evaluate(async e=>{e.muted=true;await e.play();});
+  await p.waitForFunction(()=>document.querySelector('.launch-film video').currentTime>0.1,{},{timeout:10000});
+  await v.evaluate(e=>e.pause());
+  await p.locator('#film').screenshot({path:out+'/'+width+'-launch-film.png'});
+ }
+ await film.locator('summary').click();
  await p.locator('#evidence').scrollIntoViewIfNeeded();
  await p.locator('.dashboard-proof').scrollIntoViewIfNeeded();
  assert.equal(await p.locator('.proof-crop img').count(),2);
