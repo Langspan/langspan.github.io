@@ -27,7 +27,7 @@ try{
     }
    }
   }
-  for(const selector of ['[data-semantic-story]','#semantic-awareness','#capabilities','#benchmark','#evidence','#start']){
+  for(const selector of ['#agent-sees','[data-semantic-story]','#semantic-awareness','#capabilities','#benchmark','#evidence','#start']){
    const el=page.locator(selector).first();
    await capture(selector.replace(/[^a-z-]/g,''),el);
   }

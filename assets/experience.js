@@ -24,15 +24,35 @@
   }
   const arch=$('[data-lx-architecture]');
   if(arch){
-    const diagram=$('.arch-diagram',arch), machines=$$('.arch-machine',arch), cores=$$('.arch-core',arch);
-    const defaults={label:diagram.getAttribute('aria-label'),titles:machines.map(m=>m.firstElementChild.textContent),locals:machines.map(m=>$('.arch-local',m).textContent),core:$('.arch-core small',machines[0]).textContent,git:$('.arch-git span',diagram).textContent,small:$('.arch-git small',diagram).textContent};
+    const diagram=$('.arch-diagram',arch), machines=$$('.arch-machine',arch), cores=machines.map(m=>$('.arch-core',m));
+    const lines=$('.arch-lines',diagram), git=$('.arch-git',diagram), shared=$('.arch-shared',diagram);
+    const defaults={titles:machines.map(m=>m.firstElementChild.textContent),locals:machines.map(m=>$('.arch-local',m).textContent),git:$('.arch-git span',diagram).textContent,small:$('.arch-git small',diagram).textContent};
     const states={
       local:['One checkout. Shared coordination.','One coordinator can compare supported writes against active local holds and recorded source versions.','Local activity and scoped source notices','No remote publication without opt-in','Local supported operations only; host permissions remain in charge.','Shared checkout','Peer session','Same checkout','Same local edit domain','Local working tree','Git + configured checks'],
       worktree:['Linked worktrees. Separate edit domains.','A local coordinator can brief sessions about activity in related worktrees, while each checkout retains its own edit domain.','Related branch and file activity','Interface notices stay in one physical checkout in v0.1.0','Local holds do not lock a separate worktree.','Worktree A','Worktree B','Local edit domain A','Local edit domain B','Common Git repository','Shared work metadata'],
       remote:['Separate coordinators. Shared awareness.','Each machine has its own coordinator. Opt-in Git metadata gives the other session related work context, without remote locks.','Branch and file activity','Source contents, local holds and SQLite state','Remote awareness is advisory; host permissions remain authoritative.',...defaults.titles,...defaults.locals,defaults.git,defaults.small]
     };
-    function choose(k){const s=states[k];pressed(arch,'[data-lx-arch]','lxArch',k);['title','description','shared','private','authority'].forEach((v,i)=>put(arch,'[data-lx-arch-'+v+']',s[i]));machines.forEach((m,i)=>{m.firstElementChild.textContent=s[5+i];$('.arch-local',m).textContent=s[7+i]});machines[1].hidden=k==='local';cores[1].hidden=k!=='remote';diagram.dataset.scope=k;$('.arch-lines',diagram).hidden=k==='local';put(diagram,'.arch-git span',s[9]);put(diagram,'.arch-git small',s[10]);put(diagram,'.arch-caption',s[0]);diagram.setAttribute('aria-label',s[0]+' '+s[1]);settle(diagram);}
+    function connect(){
+      if(lines.hasAttribute('hidden'))return;
+      const r=lines.getBoundingClientRect();if(!r.width)return;
+      const xs=machines.map(m=>{const b=m.getBoundingClientRect();return 400*(b.left+b.width/2-r.left)/r.width});
+      $('path',lines).setAttribute('d','M'+xs[0]+' 0V16Q'+xs[0]+' 30 '+(xs[0]+14)+' 30H200V60M'+xs[1]+' 0V16Q'+xs[1]+' 30 '+(xs[1]-14)+' 30H200');
+    }
+    function choose(k){
+      const s=states[k],local=k==='local',remote=k==='remote';
+      pressed(arch,'[data-lx-arch]','lxArch',k);
+      ['title','description','shared','private','authority'].forEach((v,i)=>put(arch,'[data-lx-arch-'+v+']',s[i]));
+      machines.forEach((m,i)=>{m.firstElementChild.textContent=s[5+i];$('.arch-local',m).textContent=s[7+i];});
+      machines[1].hidden=local;cores.forEach((el,i)=>el.hidden=!(remote||(local&&i===0)));
+      // SVG elements do not reflect the HTMLElement.hidden property.
+      lines.toggleAttribute('hidden',local);git.hidden=!remote;shared.hidden=k!=='worktree';
+      diagram.dataset.scope=k;
+      if(remote)$('path',lines).setAttribute('stroke-dasharray','5 4');else $('path',lines).removeAttribute('stroke-dasharray');
+      put(diagram,'.arch-caption',s[0]);diagram.setAttribute('aria-label',s[0]+' '+s[1]);connect();
+    }
     bind(arch,'[data-lx-arch]',b=>choose(b.dataset.lxArch));show(arch,'.lx-controls');choose('remote');
+    if('ResizeObserver'in window)new ResizeObserver(connect).observe(diagram);
+
   }
   const proof=$('[data-lx-evidence]');
   if(proof){

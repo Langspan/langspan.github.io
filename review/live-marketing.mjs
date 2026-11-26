@@ -2,6 +2,7 @@ import {createRequire} from 'node:module';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
+import {checkAgentEvidence,checkArchitecture} from './agent-evidence-check.mjs';
 const {chromium}=createRequire(new URL('./package.json',import.meta.url))('playwright');
 const origin='https://langspan.dev';
 const manifest=JSON.parse(readFileSync('marketing/published-assets.json','utf8'));
@@ -19,6 +20,8 @@ const b=await chromium.launch();try{
  console.log('PASS public site and all committed media hashes; actual video playback');
  await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
  await page.locator('[data-scale-count="10"]').waitFor();
+ await checkAgentEvidence(page,1440);
+ await checkArchitecture(page,1440);
  assert.equal(await page.locator('[data-scale-slot]:visible').count(),10);
  await page.locator('[data-scale-count="6"]').click();assert.equal(await page.locator('[data-scale-slot]:visible').count(),6);
  await page.locator('[data-sem-step="1"]').click();assert.ok(await page.locator('[data-semantic-beat="1"] .sem-result').isVisible());

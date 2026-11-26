@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {checkArchitecture} from './agent-evidence-check.mjs';
 export async function checkExperience(p,width,out){
  const exp=p.locator('[data-lx-experiment]');
  await exp.scrollIntoViewIfNeeded();
@@ -17,7 +18,7 @@ export async function checkExperience(p,width,out){
  assert.equal(JSON.parse(await p.locator('[data-lx-manifest]').innerText()).sessions_per_arm,10);
  await p.locator('.lx-manifest summary').click();
  for(const scope of ['local','worktree','remote']){await p.locator('[data-lx-scope="'+scope+'"]').click();assert.equal(await p.locator('[data-lx-scope="'+scope+'"]').getAttribute('aria-pressed'),'true');}
- for(const scope of ['local','worktree','remote']){await p.locator('[data-lx-arch="'+scope+'"]').click();assert.equal(await p.locator('.arch-diagram').getAttribute('data-scope'),scope);}
+ await checkArchitecture(p,width,out);
  for(const type of ['host','remote','fixture']){await p.locator('[data-lx-proof="'+type+'"]').click();assert.equal(await p.locator('.evidence-item:visible').count(),1);}
  await p.locator('[data-lx-proof="host"]').click();
  await p.locator('[data-lx-install] summary').click();
