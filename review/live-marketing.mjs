@@ -7,8 +7,8 @@ const origin='https://langspan.dev';
 const manifest=JSON.parse(readFileSync('marketing/published-assets.json','utf8'));
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 let html='';
-for(let i=0;i<30;i++){try{const r=await fetch(origin+'/?verify=marketing-v1',{cache:'no-store'});html=await r.text();if(r.ok&&html.includes('data-positioning-contrast'))break;}catch{}await new Promise(r=>setTimeout(r,3000));}
-assert.ok(html.includes('data-positioning-contrast'),'positioning contrast not yet deployed');
+for(let i=0;i<30;i++){try{const r=await fetch(origin+'/?verify=marketing-v1',{cache:'no-store'});html=await r.text();if(r.ok&&html.includes('data-source-awareness')&&html.includes('data-semantic-layer'))break;}catch{}await new Promise(r=>setTimeout(r,3000));}
+assert.ok(html.includes('data-source-awareness')&&html.includes('data-semantic-layer'),'semantic awareness not yet deployed');
 for(const f of manifest.files){const r=await fetch(origin+'/'+f.path);assert.ok(r.ok,f.path+' HTTP '+r.status);const data=Buffer.from(await r.arrayBuffer());assert.equal(hash(data),f.sha256,f.path+' served hash');}
 const b=await chromium.launch();try{
  const page=await b.newPage({viewport:{width:1440,height:900},reducedMotion:'reduce'});
@@ -24,6 +24,11 @@ const b=await chromium.launch();try{
  await page.locator('[data-sem-step="1"]').click();assert.ok(await page.locator('[data-semantic-beat="1"] .sem-result').isVisible());
  assert.equal(await page.locator('[data-positioning-contrast] dt').count(),3);
  assert.equal(await page.locator('.evidence-next a[href$="/issues/172"]').count(),1);
+ await page.goto(origin+'/#semantic-awareness',{waitUntil:'domcontentloaded'});
+ assert.ok(await page.locator('#semantic-awareness .source-advisory').isVisible());
+ assert.ok(await page.locator('#semantic-awareness .source-advisory-status').getByText('Advisory context · no edit refusal').isVisible());
+ assert.equal(await page.locator('[data-semantic-layer] h4').count(),2);
+ console.log('PASS live semantic-awareness section, tagged evidence links and four-part architecture');
  console.log('PASS live parallel-work topology, semantic conflict story, contrast and benchmark link');
  await page.goto(origin+'/#team-awareness',{waitUntil:'domcontentloaded'});
  await page.locator('#team-awareness .cx-demo').waitFor({timeout:20000});

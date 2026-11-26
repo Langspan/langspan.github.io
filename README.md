@@ -33,7 +33,17 @@ the motionless [light](assets/product/langspan-card-light-still.svg) or
 
 ## Explore six capabilities
 
-The [product page](https://langspan.dev/) leads with parallel agentic development: an interactive 2/6/10-session local/cloud illustration, a reproducible clean-merge semantic failure, attributed independent research, the coordination layer, six-capability explorer, local-first architecture, recorded evidence and setup. The scale illustration is not a concurrency benchmark. The semantic example is reproduced with real Git and Node in `review/semantic-git-example.mjs`; no model or LangSpan runs in that fixture. The hypothetical briefing-assisted recovery is explicitly labelled.
+The [product page](https://langspan.dev/) leads with parallel agentic development: an interactive 2/6/10-session local/cloud illustration, a reproducible clean-merge semantic failure, source-index awareness, attributed independent research, the coordination layer, six-capability explorer, local-first architecture, recorded evidence and setup. The scale illustration is not a concurrency benchmark. The semantic example is reproduced with real Git and Node in `review/semantic-git-example.mjs`; no model or LangSpan runs in that fixture. The hypothetical briefing-assisted recovery is explicitly labelled.
+
+[Semantic awareness](https://langspan.dev/#semantic-awareness) shows the narrower
+v0.1.0 source-index mechanism: local name matching and advisory argument-count
+alerts, not resolved dependencies or automatic repair. Run
+`LANGSPAN_BIN=/path/to/langspan node review/source-awareness-proof.mjs` to
+exercise the released Linux binary with synthetic events in a temporary Git
+repository. The fixture checks an admitted incompatible caller request and its
+actual advisory output. No model runs. Rename-aware alerts and cross-worktree
+symbol awareness remain roadmap work. The four-part architecture groups semantic
+awareness and coordination within LangSpan; agents retain execution.
 
 [Peer briefings](https://langspan.dev/#peer-briefings),
 [edit coordination](https://langspan.dev/#edit-coordination),

@@ -88,6 +88,12 @@ jobs:
           curl -fsSL https://raw.githubusercontent.com/Langspan/LangSpan.dev/8cbd13dadd942a4405d8cb9353aaae37b8358936/scripts/demo-two-developers.sh -o /tmp/ls-demo.sh
           set -o pipefail
           LANGSPAN=/tmp/ls-release/langspan-v0.1.0-x86_64-unknown-linux-gnu/langspan bash /tmp/ls-demo.sh | tee review-output/released-binary-demo.txt
+      - name: Reproduce source awareness with released binary
+        env:
+          LANGSPAN_BIN: /tmp/ls-release/langspan-v0.1.0-x86_64-unknown-linux-gnu/langspan
+        run: |
+          set -o pipefail
+          node review/source-awareness-proof.mjs | tee review-output/source-awareness-proof.txt
       - name: Install browser capture tools
         working-directory: review
         run: |

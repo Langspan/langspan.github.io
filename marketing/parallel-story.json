@@ -106,5 +106,34 @@
       "metric": "4 of 4",
       "desc": "Simulated environments in which the peer-to-peer team scored below one coordinator for both Claude models."
     }
-  ]
+  ],
+  "sourceAwareness": {
+    "version": 1,
+    "title": "Different files. Connected work.",
+    "category": "Semantic awareness",
+    "summary": "LangSpan uses a local source index to identify possible relationships between changes, not just the files an agent touches.",
+    "scope": "Same checkout · TypeScript · illustrated v0.1.0 mechanism",
+    "definitionFile": "billing.ts",
+    "callerFile": "invoices.ts",
+    "symbol": "priceWithTax",
+    "oldSignature": "priceWithTax(amount)",
+    "newSignature": "priceWithTax(amount, rate)",
+    "call": "priceWithTax(100)",
+    "relation": "Matched by name · 1 argument → 2 required",
+    "advisory": "Potential call break",
+    "message": "priceWithTax now takes 2 arguments. This call supplies 1. Inspect billing.ts.",
+    "decision": "Advisory context · no edit refusal",
+    "detail": "The index compares exported signatures. It can notify a related session at its next prompt; supported Claude Code and Codex writes can receive an argument-count alert with the tool result.",
+    "indexScope": "Rust, Python, TypeScript/JavaScript and Go. Relationships are name matches, not resolved types or imports. Interface notices are local to one physical checkout.",
+    "planned": "Rename-aware alerts, same-count type and order changes, and symbol-level awareness across linked worktrees remain roadmap work.",
+    "disclosure": "Illustrated mechanism, not a live recording or literal tool output. The agent chooses how to respond.",
+    "sources": {
+      "index": "https://github.com/Langspan/LangSpan.dev/blob/v0.1.0/docs/adr/0008-derived-source-index.md",
+      "alerts": "https://github.com/Langspan/LangSpan.dev/blob/v0.1.0/docs/adr/0029-break-alerts-at-write-time.md",
+      "tests": "https://github.com/Langspan/LangSpan.dev/blob/v0.1.0/tests/break_alerts.rs",
+      "rename": "https://github.com/Langspan/LangSpan.dev/issues/29",
+      "worktrees": "https://github.com/Langspan/LangSpan.dev/issues/44",
+      "fixture": "https://github.com/Langspan/langspan.github.io/blob/main/review/source-awareness-proof.mjs"
+    }
+  }
 }

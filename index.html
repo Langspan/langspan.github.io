@@ -85,14 +85,62 @@
         </dl>
       </div>
     </section>
+    <section class="source-awareness-section" id="semantic-awareness" aria-labelledby="semantic-awareness-title">
+      <div class="wrap source-awareness-layout">
+        <div class="source-awareness-copy">
+          <h2 id="semantic-awareness-title">Different files. Connected work.</h2>
+          <p class="source-category">Semantic awareness</p>
+          <p class="source-summary">LangSpan uses a local source index to identify possible relationships between changes, not just the files an agent touches.</p>
+          <p>The index compares exported signatures. It can notify a related session at its next prompt; supported Claude Code and Codex writes can receive an argument-count alert with the tool result.</p>
+          <a class="text-link" href="https://github.com/Langspan/LangSpan.dev/blob/v0.1.0/docs/adr/0008-derived-source-index.md">Explore the local source index</a>
+        </div>
+        <figure class="source-map-figure">
+          <div class="source-map" data-source-awareness data-story-motion>
+            <div class="source-map-top"><span>Same checkout · TypeScript · illustrated v0.1.0 mechanism</span><span class="source-map-key"><span aria-hidden="true"></span>Related work</span></div>
+            <div class="source-file-pair">
+              <div class="source-file">
+                <div class="source-file-label"><span>Agent A · changed export</span><code>billing.ts</code></div>
+                <div class="source-code">
+                  <div class="source-code-line source-old"><span aria-hidden="true">−</span><code>priceWithTax(amount)</code></div>
+                  <div class="source-code-line source-new"><span aria-hidden="true">+</span><code>priceWithTax(amount, rate)</code></div>
+                </div>
+                <div class="source-file-foot">Signature changed</div>
+              </div>
+              <div class="source-file source-dependent">
+                <div class="source-file-label"><span>Agent B · proposed write</span><code>invoices.ts</code></div>
+                <div class="source-code"><div class="source-code-line source-call"><span aria-hidden="true">→</span><code>priceWithTax(100)</code></div></div>
+                <div class="source-file-foot">Uses the old argument count</div>
+              </div>
+            </div>
+            <svg class="source-connector source-join" viewBox="0 0 600 46" preserveAspectRatio="none" aria-hidden="true">
+              <path class="source-path-base" d="M150 0V12Q150 23 161 23H300V46M450 0V12Q450 23 439 23H300"/>
+              <path class="source-path-active" pathLength="1" d="M150 0V12Q150 23 161 23H300V46"/>
+              <path class="source-path-active source-path-peer" pathLength="1" d="M450 0V12Q450 23 439 23H300"/>
+            </svg>
+            <div class="source-index-node"><img src="assets/brand/langspan-icon-dark.svg" alt="" width="34" height="34"><div><strong>Local source index</strong><p>Matched by name · 1 argument → 2 required</p></div><span class="source-index-kind">Tree-sitter</span></div>
+            <svg class="source-connector source-down" viewBox="0 0 600 34" preserveAspectRatio="none" aria-hidden="true"><path class="source-path-base" d="M300 0V34"/><path class="source-path-active" pathLength="1" d="M300 0V34"/></svg>
+            <div class="source-advisory">
+              <span class="source-notice-icon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 3v9m0 4h.01"/></svg></span>
+              <div><span class="source-notice-type">Example notice · with tool result</span><strong>Potential call break</strong><p>priceWithTax now takes 2 arguments. This call supplies 1. Inspect billing.ts.</p></div>
+              <span class="source-advisory-status">Advisory context · no edit refusal</span>
+            </div>
+          </div>
+          <figcaption>Illustrated mechanism, not a live recording or literal tool output. The agent chooses how to respond.</figcaption>
+        </figure>
+        <div class="source-boundary">
+          <div><h3>Available in v0.1.0</h3><p>Rust, Python, TypeScript/JavaScript and Go. Relationships are name matches, not resolved types or imports. Interface notices are local to one physical checkout.</p><div class="source-links"><a class="text-link" href="https://github.com/Langspan/LangSpan.dev/blob/v0.1.0/docs/adr/0029-break-alerts-at-write-time.md">Alert behavior and limits</a><a class="text-link" href="https://github.com/Langspan/langspan.github.io/blob/main/review/source-awareness-proof.mjs">Reproduce with the released binary</a></div></div>
+          <div><h3>Next on the roadmap</h3><p>Rename-aware alerts, same-count type and order changes, and symbol-level awareness across linked worktrees remain roadmap work.</p><div class="source-links"><a class="text-link" href="https://github.com/Langspan/LangSpan.dev/issues/29">Rename and signature alerts</a><a class="text-link" href="https://github.com/Langspan/LangSpan.dev/issues/44">Cross-worktree symbol awareness</a></div></div>
+        </div>
+      </div>
+    </section>
     <section class="research-section wrap" id="research" aria-labelledby="research-title"><div class="section-heading"><h2 id="research-title">Coordination is the bottleneck.</h2><p>Independent research identifies a real gap between individual agent capability and collective results.</p></div><div class="research-ledger"><article class="research-item"><div class="research-number">30% lower</div><div><h3>CooperBench</h3><p>Average success rate for cooperating agents versus completing both tasks individually in a collaborative coding benchmark.</p><a href="https://arxiv.org/abs/2601.13295" class="text-link">Read the study · Jan 2026</a></div></article><article class="research-item"><div class="research-number">62% → 16%</div><div><h3>ParallACT</h3><p>Success on contradictory tasks: one Claude Code agent given both tasks versus two agents working independently (Opus 4.8).</p><a href="https://arxiv.org/abs/2611.00314" class="text-link">Read the study · Oct 2026</a></div></article><article class="research-item"><div class="research-number">4 of 4</div><div><h3>Worse Together</h3><p>Simulated environments in which the peer-to-peer team scored below one coordinator for both Claude models.</p><a href="https://alignment.anthropic.com/2026/worse-together/" class="text-link">Read the study · Nov 2026</a></div></article></div><p class="research-boundary">These are external research results, not LangSpan benchmarks. They describe different tasks and experimental settings; they do not establish LangSpan's effectiveness.</p></section>
     <section class="coordination-section" id="workflow" aria-labelledby="workflow-title"><div class="wrap">
       <div class="section-heading"><h2 id="workflow-title">One coordination layer.<br>Your existing tools.</h2><p>Connect agents, not another orchestrator. Keep tasks, permissions and execution in the tools you already use.</p></div>
       <div class="mechanism-layout">
         <div class="coordination-stack">
           <div class="stack-tier"><div class="stack-index">01</div><div><h3>Execution</h3><p>Claude Code, Codex, your own agent sessions.</p></div></div>
-          <div class="stack-tier primary"><img src="assets/brand/langspan-icon-dark.svg" width="38" height="38" alt=""><div><h3>LangSpan · coordination</h3><p>Relevant work context, supported edit checks, session ownership.</p><div class="stack-links"><a href="#peer-briefings">Briefings</a><a href="#edit-coordination">Edit checks</a><a href="#commit-ownership">Ownership</a></div></div></div>
-          <div class="stack-tier"><div class="stack-index">03</div><div><h3>Isolation and integration</h3><p>Git, branches, worktrees and configured checks.</p></div></div>
+          <div class="stack-tier primary stack-layer" data-semantic-layer><img src="assets/brand/langspan-icon-dark.svg" width="38" height="38" alt=""><div class="stack-layer-content"><h3>LangSpan · coordination layer</h3><div class="stack-layer-row"><span class="stack-layer-index">02</span><div><h4>Semantic awareness</h4><p>Local symbols, interface changes and potential related callers.</p><div class="stack-links"><a href="#semantic-awareness">Explore source relationships</a></div></div></div><div class="stack-layer-row"><span class="stack-layer-index">03</span><div><h4>Coordination</h4><p>Relevant briefings, supported edit checks and session ownership.</p><div class="stack-links"><a href="#peer-briefings">Briefings</a><a href="#edit-coordination">Edit checks</a><a href="#commit-ownership">Ownership</a></div></div></div></div></div>
+          <div class="stack-tier"><div class="stack-index">04</div><div><h3>Verification and integration</h3><p>Git branches and worktrees, your configured checks, and LangSpan's exact-tree check evidence.</p><a class="text-link stack-verify-link" href="#integration-checks">Explore integration checks</a></div></div>
           <p class="stack-foot">Works locally with native hooks, CLI and MCP. Optional Git-based teammate awareness extends the context.</p>
         </div>
         <figure class="mechanism-figure">
@@ -137,6 +185,7 @@
 <section class="cap-panel" id="source-awareness" aria-label="Source awareness" data-cap-panel="source-awareness">
 <div class="cap-scene-host" data-cap-scene="source-awareness"><div class="cap-fallback"><div class="cap-fallback-heading"><p>Compare a supported edit with its recorded source version, then ask the agent to reread when it is stale.</p><h3>Don't edit from outdated context.</h3></div><ol><li><strong>Read source</strong><p>A read records the source version used by Agent A.</p><span>Version recorded</span></li><li><strong>Source changes</strong><p>LangSpan detects the recorded version is stale and refuses the supported edit.</p><span>Stale source — reread required</span></li><li><strong>Reread &amp; retry</strong><p>The agent reads the updated source and retries against the current version.</p><span>Retry admitted</span></li></ol><p class="cap-fallback-label">Illustrated workflow</p></div></div>
 <div class="cap-scope"><p>Recorded source versions only. Codex does not report reads, so its first edit of a file is not compared.</p><a class="text-link" href="https://github.com/Langspan/LangSpan.dev/blob/main/docs/evidence/codex-real-host/README.md">Native stale-source evidence</a></div>
+<p class="source-explorer-note">Recorded-version checks are distinct from cross-file awareness. <a class="text-link" href="#semantic-awareness">Explore semantic awareness</a>.</p>
 </section>
 <section class="cap-panel" id="commit-ownership" aria-label="Commit ownership" data-cap-panel="commit-ownership">
 <div class="cap-scene-host" data-cap-scene="commit-ownership"><div class="cap-fallback"><div class="cap-fallback-heading"><p>Inspect session-attributed changes and commit only attributable hunks from your session.</p><h3>Commit your work. Keep theirs intact.</h3></div><ol><li><strong>Changes recorded</strong><p>LangSpan records which changes are attributable to each session.</p><span>Session ownership recorded</span></li><li><strong>Select own work</strong><p>The command selects Agent A’s attributable changes without taking B’s hunk.</p><span>Session-owned changes selected</span></li><li><strong>Commit result</strong><p>A’s changes are committed; B’s uncommitted work remains.</p><span>Own changes committed</span></li></ol><p class="cap-fallback-label">Illustrated workflow</p></div></div>
