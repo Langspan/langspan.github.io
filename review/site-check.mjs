@@ -15,7 +15,7 @@ for(const width of [1440,1280,768,390,358]){
  await p.goto(base+'/',{waitUntil:'networkidle'});await p.waitForTimeout(400);
  assert.ok(await p.locator('h1').isVisible());assert.ok(await p.locator('.hero-actions a[href="#start"]').isVisible());
  assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false,'horizontal overflow '+width);
- if(width>=1280){const cta=await p.locator('.hero-actions').boundingBox();assert.ok(cta.y+cta.height<=800,'primary CTA below desktop fold');}
+ if(width>=1280){const cta=await p.locator('.hero-actions').boundingBox();if(cta.y+cta.height>800){await p.screenshot({path:out+'/'+width+'-hero-fold-failure.png'});console.error('CTA bounds',width,cta);}assert.ok(cta.y+cta.height<=800,'primary CTA below desktop fold');}
  const scale=p.locator('[data-parallel-scale]');
  await scale.locator('[data-scale-count="10"]').waitFor();
  for(const count of [2,6,10]){
