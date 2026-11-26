@@ -1,0 +1,12 @@
+{
+  "family": "Inter (variable, weight axis 100-900)",
+  "version": "@fontsource-variable/inter 5.2.5",
+  "source_file": "package/files/inter-latin-wght-normal.woff2 (Latin subset)",
+  "source_tarball": "https://registry.npmjs.org/@fontsource-variable/inter/-/inter-5.2.5.tgz",
+  "tarball_integrity": "sha512-TrWffUAFOnT8zroE9YmGybagoOgM/HjRqMQ8k9R0vVgXlnUh/vnpbGPAS/Caz1KIlOPnPGh6fvJbb7DHbFCncA==",
+  "sha256": "f052ee44c3728dfd23aba8a4567150bc314d23903026fbb6ad089422c2df56af",
+  "bytes": 48444,
+  "license": "SIL Open Font License 1.1 (OFL.txt)",
+  "upstream": "https://github.com/rsms/inter",
+  "modified": false
+}

@@ -26,7 +26,7 @@ const b=await chromium.launch();try{
  assert.equal(await page.locator('.evidence-next a[href$="/issues/172"]').count(),1);
  await page.goto(origin+'/#semantic-awareness',{waitUntil:'domcontentloaded'});
  assert.ok(await page.locator('#semantic-awareness .source-advisory').isVisible());
- assert.ok(await page.locator('#semantic-awareness .source-advisory-status').getByText('Advisory context · no edit refusal').isVisible());
+ assert.ok(await page.locator('#semantic-awareness .source-advisory-status').getByText('Advisory context, not an edit refusal').isVisible());
  assert.equal(await page.locator('[data-semantic-layer] h4').count(),2);
  console.log('PASS live semantic-awareness section, tagged evidence links and four-part architecture');
  console.log('PASS live parallel-work topology, semantic conflict story, contrast and benchmark link');

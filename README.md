@@ -122,6 +122,7 @@ records the pinned upstream files and the one local `Stage` extension.
 | `demo-src/` | React demonstration source, selected Stageshow kit, pinned dependencies and build script |
 | `assets/coordination-demo.js` | Generated, self-contained Stageshow demonstration bundle |
 | `assets/vendor/motion-14.14.0/` | Pinned Motion mini build, license and provenance |
+| `assets/fonts/inter-5.2.5/` | Self-hosted Inter variable font (Latin subset), OFL licence and provenance |
 | `assets/brand/` | Exact approved SVG kit, reference image and organization avatar |
 | `assets/product/` | Existing animated README illustrations and social preview card |
 | `docs/marketing-overhaul.md` | Redesign decisions, source provenance and recorded verification |

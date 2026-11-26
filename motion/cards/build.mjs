@@ -12,7 +12,7 @@ const site=readFileSync(join(root,'index.html'),'utf8');
 for(const s of ['src/auth/session.ts','tests/session.test.ts','B independently chooses']) {
  if(!source.includes(s)) throw Error('Stageshow narrative changed: '+s);
 }
-for(const s of ['Shared checkout','Overlapping edit caught.','Admitted · different file','Agents choose their next action.']) {
+for(const s of ['Shared checkout','overlapping edit denied.','Admitted, different file','Agents choose their next action.']) {
  if(!site.includes(s)) throw Error('Website illustration changed: '+s);
 }
 const font=(family,weight)=>join(here,'node_modules','@fontsource',family,'files',family+'-latin-'+weight+'-normal.woff');

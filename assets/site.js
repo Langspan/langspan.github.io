@@ -20,7 +20,6 @@
       motionButton.hidden = false;
       motionButton.setAttribute('aria-pressed', String(paused));
       motionButton.disabled = forcedStatic || reduced.matches;
-      motionButton.setAttribute('aria-label', forcedStatic || reduced.matches ? 'Page motion reduced' : paused ? 'Resume page motion' : 'Pause page motion');
       motionButton.querySelector('[data-motion-label]').textContent = forcedStatic || reduced.matches ? 'Motion reduced' : paused ? 'Resume motion' : 'Pause motion';
       motionButton.querySelector('[data-motion-symbol]').textContent = '';
       motionButton.querySelector('[data-motion-symbol]').dataset.play = String(paused);

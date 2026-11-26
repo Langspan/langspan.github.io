@@ -133,7 +133,7 @@
         "title": "See the recorded result.",
         "body": "The released dashboard shows two active sessions and a recorded refusal.",
         "kind": "proof",
-        "scope": "Actual v0.1.0 capture · scripted hook events · no live model"
+        "scope": "Actual v0.1.0 capture from scripted hook events; no live model"
       },
       "cta": {
         "title": "Keep building.\\nTogether.",
@@ -326,8 +326,8 @@
         "evidenceLabel": "Native briefing evidence",
         "layout": "brief",
         "context": "Session context",
-        "left": "Agent A · Claude Code",
-        "right": "Agent B · Codex",
+        "left": "Agent A — Claude Code",
+        "right": "Agent B — Codex",
         "beats": [
           {
             "label": "Work starts",
@@ -371,7 +371,7 @@
               "foot": "Change recorded"
             },
             "b": {
-              "label": "New prompt · peer briefing",
+              "label": "New prompt with a peer briefing",
               "code": "Related: src/auth/session.ts",
               "lines": [
                 [
@@ -443,14 +443,14 @@
         "evidence": "https://github.com/Langspan/LangSpan.dev/blob/main/docs/evidence/codex-real-host/README.md",
         "evidenceLabel": "Native stale-source evidence",
         "layout": "source",
-        "context": "One checkout · recorded versions",
-        "left": "Agent A · recorded source",
+        "context": "One checkout, recorded versions",
+        "left": "Agent A — recorded source",
         "right": "Current file",
         "beats": [
           {
             "label": "Read source",
             "a": {
-              "label": "Recorded read · v1",
+              "label": "Recorded read: v1",
               "code": "src/auth/session.ts",
               "lines": [
                 [
@@ -461,7 +461,7 @@
               "foot": "Source version recorded"
             },
             "b": {
-              "label": "Current version · v1",
+              "label": "Current version: v1",
               "code": "src/auth/session.ts",
               "lines": [
                 [
@@ -493,7 +493,7 @@
               "foot": "Stale edit refused"
             },
             "b": {
-              "label": "Peer updated · v2",
+              "label": "Peer updated: v2",
               "code": "src/auth/session.ts",
               "lines": [
                 [
@@ -510,7 +510,7 @@
           {
             "label": "Reread & retry",
             "a": {
-              "label": "Reread · v2",
+              "label": "Reread: v2",
               "code": "src/auth/session.ts",
               "lines": [
                 [
@@ -521,7 +521,7 @@
               "foot": "Retry admitted"
             },
             "b": {
-              "label": "Current version · v2",
+              "label": "Current version: v2",
               "code": "src/auth/session.ts",
               "lines": [
                 [
@@ -546,9 +546,9 @@
         "evidence": "https://github.com/Langspan/LangSpan.dev/blob/main/docs/evidence/codex-real-host/README.md",
         "evidenceLabel": "Native commit evidence",
         "layout": "commit",
-        "context": "One checkout · two contributors",
+        "context": "One checkout, two contributors",
         "left": "Working tree",
-        "right": "Agent A · Git",
+        "right": "Agent A — Git",
         "beats": [
           {
             "label": "Changes recorded",
@@ -657,9 +657,9 @@
         "evidence": "https://github.com/Langspan/LangSpan.dev/blob/main/docs/evidence/two-machine/README.md",
         "evidenceLabel": "Recorded two-machine run",
         "layout": "remote",
-        "context": "Two machines · opt-in publication",
-        "left": "Developer A · local",
-        "right": "Developer B · teammate",
+        "context": "Two machines, opt-in publication",
+        "left": "Developer A — local",
+        "right": "Developer B — teammate",
         "beats": [
           {
             "label": "Local work",
@@ -744,7 +744,7 @@
             },
             "b": {
               "label": "Peer briefing",
-              "code": "Related work · Developer A",
+              "code": "Related work from Developer A",
               "lines": [
                 [
                   "plain",
@@ -772,7 +772,7 @@
         "evidence": "https://github.com/Langspan/LangSpan.dev/blob/main/docs/evidence/demo/README.md",
         "evidenceLabel": "Executable scenario evidence",
         "layout": "integration",
-        "context": "Combined tree · explicit landing",
+        "context": "Combined tree, explicit landing",
         "left": "Candidate branches",
         "right": "Check evidence",
         "beats": [
