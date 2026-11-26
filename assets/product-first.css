@@ -254,8 +254,8 @@ img{max-width:100%;height:auto;display:block}
   .code-card pre{font-size:13px;white-space:pre;overflow-wrap:normal;overflow-x:auto}
   .downloads{grid-template-columns:1fr}
   .facts{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px}
-  .facts li+li::before{display:none}
-  .facts li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--ink);margin-right:8px;flex:none}
+  /* Every item gets the same 5 px ink dot in the two-column grid. */
+  .facts li::before,.facts li+li::before{content:"";display:block;width:5px;height:5px;border-radius:50%;background:var(--ink);margin:0 8px 0 0;flex:none}
 }
 @media (max-width:370px){.wrap{width:calc(100% - 28px)}.brand img{width:116px}.top-header{gap:6px}.nav-cta{padding-inline:9px}.actions .btn{padding:10px 13px;font-size:13px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
