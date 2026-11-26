@@ -70,8 +70,8 @@ function CapabilityDemo({cap,tokens,onReady,initialWidth}:{cap:Capability;tokens
     if(!running)return
     let raf=0,last=performance.now()
     const tick=(now:number)=>{
-      elapsed.current=Math.min(DURATION,elapsed.current+Math.min(100,now-last));last=now
-      const next=OFFSETS.findLastIndex(x=>elapsed.current>=x)
+      elapsed.current=Math.max(0,Math.min(DURATION,elapsed.current+Math.max(0,Math.min(100,now-last))));last=now
+      const next=Math.max(0,OFFSETS.findLastIndex(x=>elapsed.current>=x))
       if(next!==beatRef.current)setStep(next)
       if(elapsed.current>=DURATION){setFinished(true);return}
       raf=requestAnimationFrame(tick)
