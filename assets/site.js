@@ -52,6 +52,18 @@
   }
   document.addEventListener('visibilitychange', () => { if (document.hidden) finishAnimations(); });
   const explorer = document.querySelector('[data-capability-explorer]');
+  const demo = explorer || document.getElementById('coordination-demo');
+  let demoRequested = false;
+  function loadDemo() {
+    if (demoRequested || !demo) return;
+    demoRequested = true;
+    const script = document.createElement('script');
+    script.src = 'assets/coordination-demo.js'; script.defer = true;
+    script.onload = () => { demo.dataset.loadState = 'ready'; };
+    script.onerror = () => { demo.dataset.loadState = 'fallback'; demoRequested = false; script.remove(); };
+    document.body.appendChild(script);
+  }
+
   if (explorer) {
     const capTabs = [...explorer.querySelectorAll('[data-cap-tab]')];
     const capPanels = [...explorer.querySelectorAll('[data-cap-panel]')];
@@ -70,13 +82,16 @@
         p.removeAttribute('aria-label');
       });
       explorer.dataset.active = id;
-      if (updateHash) history.replaceState(history.state, '', '#'+id);
+      if (updateHash) { history.replaceState(history.state, '', '#'+id); loadDemo(); }
       dispatchEvent(new CustomEvent('langspan:capability', {detail:{id}}));
     };
     const fromHash = () => {
       const id = location.hash.slice(1);
-      if (id === 'coordination-demo') choose('edit-coordination');
-      else if (capTabs.some(t => t.dataset.capTab === id)) choose(id);
+      const target = id === 'coordination-demo' ? 'edit-coordination' : id;
+      if (capTabs.some(t => t.dataset.capTab === target)) {
+        choose(target); loadDemo();
+        requestAnimationFrame(() => document.getElementById('demo')?.scrollIntoView({block:'start',behavior:paused?'instant':'smooth'}));
+      }
     };
     list.hidden = false; choose('peer-briefings'); fromHash();
     capTabs.forEach((tab, i) => {
@@ -100,16 +115,6 @@
       }
     },{threshold:.25});
     document.querySelectorAll('[data-story-motion]').forEach(e=>storyMotion.observe(e));
-  }
-  const demo = explorer || document.getElementById('coordination-demo');
-  let demoRequested = false;
-  function loadDemo() {
-    if (demoRequested || !demo) return;
-    demoRequested = true;
-    const script = document.createElement('script');
-    script.src = 'assets/coordination-demo.js'; script.defer = true;
-    script.onerror = () => { demo.dataset.loadState = 'fallback'; };
-    document.body.appendChild(script);
   }
   if (demo && 'IntersectionObserver' in window) {
     const preload = new IntersectionObserver(entries => { if (entries.some(entry => entry.isIntersecting)) { loadDemo(); preload.disconnect(); } }, { rootMargin: '650px 0px' });

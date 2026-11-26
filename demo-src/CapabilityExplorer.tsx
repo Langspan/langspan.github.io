@@ -83,12 +83,12 @@ function CapabilityDemo({cap,tokens,onReady,initialWidth}:{cap:Capability;tokens
   const replay=()=>{elapsed.current=0;setStep(0);setFinished(false);setPaused(false);setStarted(true)}
   const toggle=()=>{if(finished)replay();else{setStarted(true);setPaused(running)}}
   const b=cap.beats[beat]
-  const cw=Math.min(620,Math.max(358,width||358))
+  const cw=Math.min(620,Math.max(286,width||358))
   return <div className="cx-demo" ref={host} data-capability={cap.id} data-beat={beat} data-playing={running} data-static={staticMode}>
     <div className="cx-heading"><h3>{cap.heading}</h3><p>{cap.summary}</p></div>
     <div className="cx-stage" ref={stage} aria-hidden="true">
       <StillContext.Provider value={!running}>
-        <Stage<Scene> width={1100} height={430} compact={{below:840,width:cw,height:600}} controlled={{beat}} poster={{beat}} tokens={tokens} theme="dark" accent="#D87859" fidelity="realistic" className="cx-stageshow">
+        <Stage<Scene> width={1100} height={407} compact={{below:840,width:cw,height:633}} controlled={{beat}} poster={{beat}} tokens={tokens} theme="dark" accent="#D87859" fidelity="realistic" className="cx-stageshow">
           {(scene,_rect,layout)=><SceneLayout cap={cap} beat={scene.beat} layout={layout} playing={running}/>}
         </Stage>
       </StillContext.Provider>
@@ -96,14 +96,14 @@ function CapabilityDemo({cap,tokens,onReady,initialWidth}:{cap:Capability;tokens
     <div className="cx-controls"><div className="cx-steps" role="group" aria-label={cap.name+' steps'}>
       {cap.beats.map((item,i)=><button type="button" key={item.label} className="cx-step" aria-pressed={beat===i} onClick={()=>seek(i)}><span className="cx-step-index">0{i+1}</span><span>{item.label}</span><span className="cx-progress" data-complete={i<=beat} aria-hidden="true"/></button>)}
     </div><div className="cx-playback">{staticMode?<span>Motion reduced · choose any step</span>:<><button type="button" className="cx-play" disabled={globalPaused} onClick={toggle} aria-label={running?'Pause '+cap.name:finished?'Play again '+cap.name:'Play '+cap.name}>{running?'Pause':finished?'Play again':'Play'}</button><button type="button" className="cx-replay" disabled={globalPaused} onClick={replay} aria-label={'Replay '+cap.name}>Replay</button><span>{globalPaused?'Motion paused':running?'Playing once':finished?'End of illustration':'Paused'}</span></>}</div></div>
-    <div className="cx-caption" aria-live={running?'off':'polite'} aria-atomic="true"><strong>{b.result}</strong><p>{b.event}</p></div>
+    <div className="cx-caption sr-only" aria-live={running?'off':'polite'} aria-atomic="true"><strong>{b.result}</strong><p>{b.event}</p></div>
   </div>
 }
 
 class SceneBoundary extends Component<{children:ReactNode;restore:()=>void},{failed:boolean}>{
   state={failed:false}
   static getDerivedStateFromError(){return{failed:true}}
-  componentDidCatch(){this.props.restore()}
+  componentDidCatch(error:Error){console.error('LangSpan capability scene:',error.message);this.props.restore()}
   render(){return this.state.failed?null:this.props.children}
 }
 export function mountCapabilityScenes(tokens:LookTokens){
@@ -118,10 +118,12 @@ export function mountCapabilityScenes(tokens:LookTokens){
    target.dataset.cxMounted='true'
    const fallback=target.querySelector<HTMLElement>('.cap-fallback'), mount=document.createElement('div')
    mount.hidden=true;target.append(mount)
-   const restore=()=>{mount.hidden=true;if(fallback)fallback.hidden=false;delete target.dataset.cxReady}
+   const restore=()=>{mount.hidden=true;if(fallback)fallback.hidden=false;target.dataset.cxError='true';delete target.dataset.cxReady}
    const onReady=()=>{mount.hidden=false;if(fallback)fallback.hidden=true;target.dataset.cxReady='true'}
    try{createRoot(mount,{onUncaughtError:restore}).render(<SceneBoundary restore={restore}><CapabilityDemo cap={cap} tokens={tokens} onReady={onReady} initialWidth={target.clientWidth||1100}/></SceneBoundary>)}catch{restore()}
  }
- show(explorer.dataset.active||'peer-briefings')
- window.addEventListener('langspan:capability',(e:Event)=>show((e as CustomEvent<{id:string}>).detail.id))
+ const showActive=()=>show(explorer.dataset.active||'peer-briefings')
+ window.addEventListener('langspan:capability',showActive)
+ new MutationObserver(showActive).observe(explorer,{attributes:true,attributeFilter:['data-active']})
+ showActive()
 }

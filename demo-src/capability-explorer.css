@@ -7,7 +7,7 @@
 .cx-stageshow.ss-stage{background:transparent}
 .cx-scene{position:relative;width:100%;height:100%;font-family:var(--ss-font);color:#f4f3ef}
 .cx-scene-header{position:absolute;top:0;left:0;right:0;height:30px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #4c4b44;font:12px/1.4 var(--ss-font);color:#c6c2b8}
-.cx-window{position:absolute;width:505px;height:238px;top:48px}
+.cx-window{position:absolute;width:505px;height:218px;top:48px}
 .cx-window-a{left:0}
 .cx-window-b{right:0;--ss-term-bg:#292924}
 .cx-window .ss-window__bar{border-bottom:1px solid #4c4b44}
@@ -21,7 +21,7 @@
 .cx-code{margin:11px -3px 9px;min-height:46px}
 .cx-code.ss-code,.cx-code .ss-code__text{font-size:13px;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere}
 .cx-window-foot{font-size:12px;line-height:1.4;color:#c6c2b8;margin-top:9px}
-.cx-bridge{position:absolute;left:100px;right:100px;top:302px;height:29px;display:grid;grid-template-columns:1fr auto 1fr;gap:13px;align-items:center;color:#c6c2b8}
+.cx-bridge{position:absolute;left:100px;right:100px;top:279px;height:29px;display:grid;grid-template-columns:1fr auto 1fr;gap:13px;align-items:center;color:#c6c2b8}
 .cx-bridge>span{height:1px;background:#8e8375;transform-origin:center}
 .cx-bridge>div{display:flex;align-items:center;gap:7px;font-size:12px;line-height:1.4}
 .cx-bridge img{display:block;width:20px;height:20px}
@@ -45,18 +45,18 @@
 @keyframes cx-arrive{from{opacity:.55;transform:translateY(5px)}to{opacity:1;transform:none}}
 @keyframes cx-flow{from{transform:scaleX(.15);opacity:.4}to{transform:scaleX(1);opacity:1}}
 .cx-scene[data-layout=compact] .cx-scene-header{font-size:10.5px;height:27px}
-.cx-scene[data-layout=compact] .cx-window{left:0;right:0;width:100%;top:37px;height:204px}
-.cx-scene[data-layout=compact] .cx-window-b{top:273px;height:207px}
+.cx-scene[data-layout=compact] .cx-window{left:0;right:0;width:100%;top:37px;height:217px}
+.cx-scene[data-layout=compact] .cx-window-b{top:286px;height:220px}
 .cx-scene[data-layout=compact] .cx-window .ss-window__body{padding:11px 12px}
 .cx-scene[data-layout=compact] .cx-window-label{font-size:14px;margin-bottom:9px}
-.cx-scene[data-layout=compact] .cx-window .ss-term__prompt{font-size:12px;line-height:1.5}
+.cx-scene[data-layout=compact] .cx-window .ss-term__prompt{font-size:13px;line-height:1.5}
 .cx-scene[data-layout=compact] .cx-code{margin:8px -2px 6px;min-height:36px}
-.cx-scene[data-layout=compact] .cx-code.ss-code,.cx-scene[data-layout=compact] .cx-code .ss-code__text{font-size:12px;line-height:1.5}
-.cx-scene[data-layout=compact] .cx-window-foot{font-size:11px;margin-top:5px}
-.cx-scene[data-layout=compact] .cx-bridge{left:0;right:0;top:245px;height:23px;gap:8px}
+.cx-scene[data-layout=compact] .cx-code.ss-code,.cx-scene[data-layout=compact] .cx-code .ss-code__text{font-size:12.5px;line-height:1.5}
+.cx-scene[data-layout=compact] .cx-window-foot{font-size:12px;margin-top:5px}
+.cx-scene[data-layout=compact] .cx-bridge{left:0;right:0;top:259px;height:23px;gap:8px}
 .cx-scene[data-layout=compact] .cx-bridge>div{font-size:11px}
 .cx-scene[data-layout=compact] .cx-bridge img{width:17px;height:17px}
-.cx-scene[data-layout=compact] .cx-result{left:0;right:0;bottom:0;min-height:101px;gap:10px;padding:10px 12px}
+.cx-scene[data-layout=compact] .cx-result{left:0;right:0;bottom:0;min-height:113px;gap:10px;padding:10px 12px}
 .cx-scene[data-layout=compact] .cx-result strong{font-size:15px}
 .cx-scene[data-layout=compact] .cx-result p{font-size:12px}
 .cx-controls{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px;align-items:center;margin-top:18px}
@@ -76,3 +76,5 @@
 @media(max-width:480px){.cx-heading h3{font-size:28px}.cx-heading p{font-size:14px}.cx-step{display:block;font-size:12px;padding-bottom:14px}.cx-step-index{display:block;margin-bottom:4px}.cx-steps{gap:9px}.cx-caption p{font-size:13px}}
 @media(prefers-reduced-motion:reduce){.cx-scene *{animation:none!important;transition:none!important}}
 html[data-motion-paused=true] .cx-scene *{animation:none!important;transition:none!important}
+
+.cx-caption.sr-only{border:0;margin:0;padding:0}

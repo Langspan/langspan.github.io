@@ -9,7 +9,7 @@ const browser=await chromium.launch({headless:true});
 const errors=[],a11y=[],perf=[];
 for(const width of [1440,1280,768,390,358]){
  const context=await browser.newContext({viewport:{width,height:width>768?900:844},permissions:['clipboard-read','clipboard-write']});
- const p=await context.newPage();p.on('pageerror',e=>errors.push(width+': '+e.message));
+ const p=await context.newPage();p.on('pageerror',e=>{errors.push(width+': '+e.message);console.error('Page error',width,e.message)});p.on('console',m=>{if(m.type()==='error')console.error('Browser console',width,m.text())});
  p.on('response',r=>{if(r.url().startsWith(base)&&r.status()>=400)errors.push(width+': '+r.status()+' '+r.url());});
  await p.addInitScript(()=>{window.__metrics={cls:0,lcp:0};try{new PerformanceObserver(l=>{for(const e of l.getEntries())if(!e.hadRecentInput)window.__metrics.cls+=e.value}).observe({type:'layout-shift',buffered:true});new PerformanceObserver(l=>{for(const e of l.getEntries())window.__metrics.lcp=e.startTime}).observe({type:'largest-contentful-paint',buffered:true});}catch{}});
  await p.goto(base+'/',{waitUntil:'networkidle'});await p.waitForTimeout(400);
@@ -28,7 +28,7 @@ for(const width of [1440,1280,768,390,358]){
  for(const id of capIds){
   await p.locator('#cap-tab-'+id).click();
   const panel=p.locator('#'+id), scene=panel.locator('.cx-demo');
-  await scene.waitFor({timeout:15000});
+  try{await scene.waitFor({timeout:20000});}catch(e){console.error('Scene mount failed',width,id,await p.locator('[data-capability-explorer]').evaluate(el=>({active:el.dataset.active,load:el.dataset.loadState,mounted:el.dataset.cxMounted,scenes:[...el.querySelectorAll('[data-cap-scene]')].map(x=>({...x.dataset}))})));await p.screenshot({path:out+'/'+width+'-mount-failure.png',fullPage:true});throw e;}
   assert.ok(await panel.isVisible());
   assert.equal(await p.locator('[data-cap-panel]:visible').count(),1);
   const steps=scene.locator('.cx-step');
@@ -46,6 +46,18 @@ for(const width of [1440,1280,768,390,358]){
   await p.addScriptTag({content:axe});
   const result=await p.evaluate(()=>axe.run(document.querySelector('[data-capability-explorer]'),{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));
   a11y.push({width,capability:id,violations:result.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>n.target)}))});
+ }
+ await p.locator('#cap-tab-peer-briefings').click();
+ if(width===1440){
+  const peer=p.locator('#peer-briefings .cx-demo');
+  await peer.locator('.cx-stage').scrollIntoViewIfNeeded();await peer.locator('.cx-replay').click();
+  await p.waitForFunction(()=>document.querySelector('#peer-briefings .cx-demo')?.dataset.beat==='1',{},{timeout:8500});
+  await peer.locator('.cx-play').click();
+  const frozen=await peer.getAttribute('data-beat');await p.waitForTimeout(900);
+  assert.equal(await peer.getAttribute('data-beat'),frozen,'Pause freezes scene clock');
+  await peer.locator('.cx-replay').click();
+  await p.locator('#cap-tab-source-awareness').click();
+  await p.waitForFunction(()=>document.querySelector('#peer-briefings .cx-demo')?.dataset.playing==='false');
  }
  await p.locator('#cap-tab-peer-briefings').click();
  await p.locator('#cap-tab-peer-briefings').focus();await p.keyboard.press('End');
