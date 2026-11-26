@@ -196,3 +196,18 @@ changes, manifest, setup, reduced motion and no-JavaScript fallback. Repository
 CI is the required rendered-browser validation; the implementation environment
 cannot clone GitHub or retrieve the production bundle over its network. Do not
 claim a fresh passing production build until the branch checks complete.
+
+## Source-build copy refresh — November 26, 2026
+
+Compared website commit 0f4e1788 with core commit efa5f8b7.
+The latest published binary remains v0.1.0. Update the existing semantic
+scope, dashboard proof, benchmark, verification and setup copy without
+changing styling, layout, animation clocks or the generated Stageshow bundle.
+Preserve released evidence and distinguish implementation on main from a
+released capability. K1's implemented task families are rename_vs_new_caller
+and contradictory_defaults; the worktrees arm now uses isolated clones.
+The first 12-trial pilot did not establish efficacy, and dry runs are not
+model evidence. No results are invented. The setup preview no longer shows
+the unpublished Homebrew tap as an installation step. Keep the v0.1.0
+installation path unchanged. Sources: core PRs #178, #179, #180, #184,
+#197, #190, #192, #199 and #183; benchmark README, tasks.py and ADR 0035.

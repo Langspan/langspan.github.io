@@ -44,8 +44,9 @@ alerts, not resolved dependencies or automatic repair. Run
 `LANGSPAN_BIN=/path/to/langspan node review/source-awareness-proof.mjs` to
 exercise the released Linux binary with synthetic events in a temporary Git
 repository. The fixture checks an admitted incompatible caller request and its
-actual advisory output. No model runs. Rename-aware alerts and cross-worktree
-symbol awareness remain roadmap work. The four-part architecture groups semantic
+actual advisory output. No model runs. Rename and removal alerts and linked-worktree uncommitted signature notices
+are implemented on main, not in v0.1.0. Same-count type/order checks and
+cross-machine symbol publication remain future work. The four-part architecture groups semantic
 awareness and coordination within LangSpan; agents retain execution.
 
 [Peer briefings](https://langspan.dev/#peer-briefings),
@@ -211,7 +212,8 @@ Publish through a feature branch and pull request to this GitHub Pages repo.
 
 ## Interactive experience
 
-The benchmark explorer at `#benchmark` presents the planned K1 experiment, not
-measured results. The scope and evidence selectors and planned setup preview
+The benchmark explorer at `#benchmark` presents the implemented K1 harness
+(two task families, isolated clones, three arms), not valid comparative
+results. The scope and evidence selectors and source-build setup preview
 extend the existing site in `assets/experience.css` and `assets/experience.js`.
 The real Stageshow bundle and current release installation remain unchanged.
