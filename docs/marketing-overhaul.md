@@ -246,3 +246,7 @@ The permanent release CTA follows `/releases/latest`. An unauthenticated, bounde
 ## Product-first homepage
 
 The approved shorter preview becomes the main page: inspect a local refusal, read the exact agent messages, try a signature change, explore the released dashboard, and install. The original full technical walkthrough and Stageshow bundle remain unchanged in substance; old technical hashes route to technical.html. The screenshot is the published v0.2.0 binary's labeled simulated demo, with its hash recorded in the media manifest. The website README is a public pointer; maintenance guidance is in docs/website-maintenance.md. No product performance results or unpublished installer claims.
+
+## First-run and inspector refinement
+
+The approved product-first layout remains. The original two recorded messages move into a single selectable hero disclosure, with byte-identical source text and a no-JavaScript fallback. The existing signature example adds the documented v0.2.0 linked-worktree rename notice, explicitly illustrative. The platform downloads and combined binary-install/setup command are visible immediately after the hero; verification remains linked, not omitted. Research and benchmark details stay in technical.html. No unpublished installer or comparative efficacy claim. Browser tests check the new inspector selection, original hashes, both semantic examples and direct release links; retain existing technical checks.
