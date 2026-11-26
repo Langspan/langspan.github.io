@@ -40,11 +40,12 @@ left visible if required observers are unavailable or rendering fails.
   the viewport. All CSS is contained in the bundle and scoped to the demo or the
   vendored kit's `ss-` classes.
 - Use the page's dark `#151513` background. The demo is at most 1100px wide.
-  The wide stage is 1100×504px; below 840px it changes to a distinct, stacked
-  layout, 358–620px wide and 610px high. Controls and captions sit outside the
+  The wide edit stage is 1100×550px; below 840px it changes to a stacked
+  layout, 286–620px wide and 710px high. The capability stages are 1100×465px
+  or 680px high in compact mode. Host framing is in assets/motion-polish.css. Controls and captions sit outside the
   scale-to-fit stage. Reserve room for the fallback before lazy loading.
-- Playback begins once at 35% visibility, advances through four beats over
-  14.3 seconds, then holds the final frame. It pauses when hidden or offscreen.
+- Playback begins at 35% visibility and repeats the four beats over
+  14.3 seconds, holding the last beat before restarting. It pauses when hidden or offscreen.
   Play/Pause, Replay and manual step buttons remain visible. Manual selection
   pauses autoplay.
 - `?motion=static` and `prefers-reduced-motion: reduce` show the completed poster.
