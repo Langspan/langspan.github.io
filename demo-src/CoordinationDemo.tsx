@@ -138,7 +138,7 @@ function Demo({ onReady, initialWidth }: { onReady: () => void; initialWidth: nu
       previous = now
       const next = Math.max(0, OFFSETS.findLastIndex(at => elapsed.current >= at))
       if (next !== beatRef.current) { beatRef.current = next; setBeat(next) }
-      if (elapsed.current >= DURATION) { elapsed.current = 0; beatRef.current = 0; setBeat(0); frame = requestAnimationFrame(tick); return }
+      if (elapsed.current >= DURATION) { setFinished(true); return }
       frame = requestAnimationFrame(tick)
     }
     frame = requestAnimationFrame(tick)
@@ -169,14 +169,14 @@ function Demo({ onReady, initialWidth }: { onReady: () => void; initialWidth: nu
     setStarted(true); setUserPaused(running)
   }
 
-  const compactWidth = Math.min(620, Math.max(286, width))
+  const compactWidth = Math.min(620, Math.max(358, width))
   const snapshot = { beat }
   const showStill = staticMode || userPaused || pagePaused || finished
   return <div ref={host} className="ls-coordination" data-playing={running} data-static={staticMode} data-paused={!running}>
     <div className="ls-demo-topline"><span>One checkout. Two independent sessions.</span><span>Authored illustration</span></div>
     <div ref={stageArea} className="ls-demo-stage" aria-hidden="true">
       <StillContext.Provider value={showStill}>
-        <Stage<Scene> width={1100} height={550} compact={{ below: 840, width: compactWidth, height: 710 }} controlled={snapshot} poster={snapshot} theme="dark" tokens={brandTokens} accent="#D87859" fidelity="realistic" className="ls-scene">
+        <Stage<Scene> width={1100} height={504} compact={{ below: 840, width: compactWidth, height: 610 }} controlled={snapshot} poster={snapshot} theme="dark" tokens={brandTokens} accent="#D87859" fidelity="realistic" className="ls-scene">
           {(scene, _rect, layout) => <div className="ls-scene-content" data-beat={scene.beat} data-layout={layout}>
             <div className="ls-checkout-label"><span className="ls-checkout-path">~/shared-checkout</span><span>Local coordination</span></div>
             <AgentA compact={layout === 'compact'} />
@@ -195,7 +195,7 @@ function Demo({ onReady, initialWidth }: { onReady: () => void; initialWidth: nu
         {staticMode ? <span className="ls-static-playback">Motion reduced. Choose any step.</span> : <>
           <button type="button" className="ls-play-button" onClick={togglePlayback} disabled={pagePaused} aria-label={running ? 'Pause coordination illustration' : finished ? 'Replay coordination illustration' : 'Play coordination illustration'}>{running ? 'Pause' : finished ? 'Play again' : 'Play'}</button>
           <button type="button" className="ls-replay-button" onClick={replay} disabled={pagePaused} aria-label="Replay coordination illustration from the beginning">Replay</button>
-          <span className="ls-playback-state">{pagePaused ? 'Motion paused' : running ? 'Looping' : finished ? 'End of illustration' : 'Paused'}</span>
+          <span className="ls-playback-state">{pagePaused ? 'Motion paused' : running ? 'Playing once' : finished ? 'End of illustration' : 'Paused'}</span>
         </>}
       </div>
     </div>
