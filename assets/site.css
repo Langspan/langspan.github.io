@@ -89,4 +89,32 @@ pre:focus-visible{outline:2px solid var(--coral-ink);outline-offset:-2px}
 /* Contrast on the tinted hold label, verified by the launch review gate. */
 .scope-hold{color:var(--ink)}
 
-.dashboard-proof{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:44px;align-items:center;margin:46px 0 30px;padding:32px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.dashboard-proof-copy h3{font-size:clamp(25px,3vw,36px);line-height:1.12;letter-spacing:-.04em;margin:14px 0 16px}.dashboard-proof-copy p:not(.eyebrow){font-size:15px;line-height:1.7;margin:0 0 14px}.dashboard-proof-copy p.dashboard-proof-note{font-size:13px;line-height:1.65;color:var(--muted)}.dashboard-proof-image{display:block;min-width:0;text-decoration:none;color:var(--ink)}.dashboard-proof-image img{display:block;width:100%;height:auto;border-radius:8px;border:1px solid var(--line)}.dashboard-proof-image span{display:block;font-size:12px;text-decoration:underline;margin-top:10px}.dashboard-proof-image:focus-visible{outline:2px solid var(--coral-ink);outline-offset:4px}.dashboard-proof-image:hover span{color:var(--coral-ink)}@media(max-width:768px){.dashboard-proof{grid-template-columns:1fr;gap:22px;margin:28px 0;padding:24px 0}.dashboard-proof-copy h3{font-size:28px}.dashboard-proof-image{width:100%}}
+/* Product proof: two magnified excerpts of the same immutable release capture.
+   Coordinates in source pixels, source size 2560 x 2394:
+   denial (110, 1110, 900, 1420); sessions (110, 185, 990, 610).
+   The image is never modified or reconstructed. Full capture is linked. */
+:root{--proof-bg:#151513;--proof-surface:#171b21;--proof-border:#343942;--proof-text:#f4f3ef;--proof-muted:#b8b9b4}
+.dashboard-proof{margin:0 0 42px;padding:clamp(22px,3.2vw,44px);border-radius:12px;background:var(--proof-bg);color:var(--proof-text)}
+.dashboard-proof-copy{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(22px,4vw,56px);align-items:end;margin-bottom:32px}
+.proof-kicker{font-size:13px;line-height:1.5;font-weight:650;color:var(--coral);margin-bottom:14px}
+.dashboard-proof-copy h3{font-size:clamp(30px,4.3vw,56px);line-height:1.04;letter-spacing:-.045em;color:var(--proof-text)}
+.dashboard-proof-copy>p{font-size:16px;line-height:1.65;color:var(--proof-muted);max-width:35ch}
+.proof-excerpts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.proof-excerpt{min-width:0;display:flex;flex-direction:column;background:var(--proof-surface);border:1px solid var(--proof-border);border-radius:8px;overflow:hidden}
+.proof-excerpt-heading{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 16px;padding:17px 18px 15px;border-bottom:1px solid var(--proof-border)}
+.proof-excerpt-heading h4{font-size:15px;font-weight:650;letter-spacing:-.01em;color:var(--proof-text);line-height:1.4}
+.proof-excerpt-heading code{font:12px/1.5 var(--mono);color:var(--proof-muted);overflow-wrap:anywhere}
+.proof-crop{position:relative;overflow:hidden;flex:none;isolation:isolate;width:100%;background:var(--proof-surface)}
+.proof-crop img{position:absolute;display:block;height:auto;max-width:none;border:0;border-radius:0}
+.proof-crop--denial{aspect-ratio:790/310}
+.proof-crop--denial img{width:324.050633%;left:-13.924051%;top:-358.064516%}
+.proof-crop--sessions{aspect-ratio:880/425}
+.proof-crop--sessions img{width:290.909091%;left:-12.5%;top:-43.529412%}
+.dashboard-proof-foot{display:flex;align-items:start;justify-content:space-between;flex-wrap:wrap;gap:14px 28px;margin-top:21px}
+.dashboard-proof-foot p{color:var(--proof-muted);font-size:13px;line-height:1.6;max-width:56ch}
+.proof-links{display:flex;flex-wrap:wrap;gap:14px 20px}
+.proof-links .text-link{color:var(--proof-text);font-size:13px;text-decoration:underline;text-underline-offset:4px}
+.proof-links .text-link:hover{color:var(--coral)}
+.proof-links .text-link:focus-visible{outline:2px solid var(--coral);outline-offset:4px}
+@media(max-width:820px){.dashboard-proof-copy{grid-template-columns:1fr;gap:14px;margin-bottom:24px}.dashboard-proof-copy>p{max-width:58ch}.proof-excerpts{grid-template-columns:1fr;gap:12px}.proof-excerpt-heading{padding:14px 12px}.dashboard-proof{padding:18px;margin-bottom:28px}.dashboard-proof-copy h3{font-size:clamp(30px,6.5vw,45px)}.dashboard-proof-foot{margin-top:18px}.proof-links{gap:12px 18px}}
+@media(max-width:400px){.dashboard-proof{padding:14px}.proof-excerpt-heading{display:block}.proof-excerpt-heading code{display:block;margin-top:4px;font-size:11px}}

@@ -25,9 +25,16 @@ for(const width of [1440,1280,768,390,358]){
  const replay=p.getByRole('button',{name:'Replay coordination illustration from the beginning'});await replay.click();
  await p.locator('[data-motion-toggle]').click();assert.equal(await p.locator('html').getAttribute('data-motion-paused'),'true');
  await p.locator('#evidence').scrollIntoViewIfNeeded();
- await p.locator('.dashboard-proof-image img').scrollIntoViewIfNeeded();
- await p.locator('.dashboard-proof-image img').evaluate(img=>img.decode());
- assert.equal(await p.locator('.dashboard-proof-image img').evaluate(img=>img.naturalWidth),2560,'actual dashboard proof loaded');
+ await p.locator('.dashboard-proof').scrollIntoViewIfNeeded();
+ assert.equal(await p.locator('.proof-crop img').count(),2);
+ for(const img of await p.locator('.proof-crop img').all()){
+   await img.evaluate(img=>img.decode());
+   assert.equal(await img.evaluate(img=>img.naturalWidth),2560,'original dashboard proof loaded');
+   assert.equal(await img.evaluate(img=>img.naturalHeight),2394,'original capture height');
+ }
+ assert.equal(await p.getByRole('link',{name:'Full dashboard capture'}).getAttribute('href'),'assets/evidence/dashboard-v0.1.0.png');
+ assert.ok(await p.locator('.dashboard-proof').getByText('Scripted hook events, no live model invoked.',{exact:false}).isVisible());
+ await p.locator('.dashboard-proof').screenshot({path:out+'/'+width+'-dashboard-proof.png'});
  assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false,'proof overflow '+width);
  await p.locator('#evidence').screenshot({path:out+'/'+width+'-evidence.png'});
  await p.locator('#start').scrollIntoViewIfNeeded();
