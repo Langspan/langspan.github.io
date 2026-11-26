@@ -1,0 +1,90 @@
+name: Visual design review
+on:
+  pull_request:
+    paths:
+      - '**.html'
+      - '**.css'
+      - '**.js'
+      - 'demo-src/**'
+      - 'review/**'
+      - '.github/workflows/visual-design-review.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  rehearsal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Package exact candidate source for independent visual review
+        run: |
+          mkdir -p visual-review-output
+          git archive --format=tar.gz --output=visual-review-output/candidate-source.tar.gz HEAD
+          git rev-parse HEAD > visual-review-output/revision.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: exact-candidate-source
+          path: visual-review-output/
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned browser tools
+        run: |
+          npm install --prefix review --no-save --ignore-scripts playwright@1.65.1 puppeteer-core@24.39.0
+          npx --prefix review playwright install --with-deps chromium
+          echo "CHROME_PATH=$(node -p 'require("./review/node_modules/playwright").chromium.executablePath()')" >> "$GITHUB_ENV"
+      - name: Fetch pinned design audit implementations
+        run: |
+          git init /tmp/hallmark
+          git -C /tmp/hallmark remote add origin https://github.com/nutlope/hallmark.git
+          git -C /tmp/hallmark fetch --depth=1 origin 04977e15f3dfd6ee4b74c887dac3eb52665d6c92
+          git -C /tmp/hallmark checkout --detach FETCH_HEAD
+          git init /tmp/taste
+          git -C /tmp/taste remote add origin https://github.com/Leonxlnx/taste-skill.git
+          git -C /tmp/taste sparse-checkout init --cone
+          git -C /tmp/taste sparse-checkout set skills/taste-skill
+          git -C /tmp/taste fetch --depth=1 --filter=blob:none origin d1a2bb41d927083ac7118f60cfc9cdf711810ea0
+          git -C /tmp/taste checkout --detach FETCH_HEAD
+      - name: Start exact candidate website
+        run: |
+          python3 -m http.server 8124 --bind 127.0.0.1 > /tmp/visual-review-server.log 2>&1 &
+          for i in $(seq 1 20); do curl -fsS http://127.0.0.1:8124/ > /dev/null && exit 0; sleep 1; done
+          exit 1
+      - name: Hallmark audit and actual browser render
+        if: always()
+        env:
+          HALLMARK_PUPPETEER: ${{ github.workspace }}/review/node_modules/puppeteer-core
+        run: |
+          mkdir -p visual-review-output
+          set +e
+          node /tmp/hallmark/skills/hallmark/scripts/sloplint.mjs index.html assets/site.css assets/parallel-story.css assets/experience.css --genre editorial --render --url http://127.0.0.1:8124/ > visual-review-output/hallmark.txt 2>&1
+          result=$?
+          echo "$result" > visual-review-output/hallmark-exit.txt
+          exit "$result"
+      - name: Taste Skill copy and rendered consistency audit
+        if: always()
+        run: |
+          mkdir -p visual-review-output
+          set +e
+          taste=/tmp/taste/skills/taste-skill
+          node "$taste/scripts/copy-lint.mjs" index.html --kind tech > visual-review-output/taste-copy.txt 2>&1
+          copy=$?
+          node "$taste/scripts/consistency.mjs" index.html --quick --widths 1440,390 --profile .taste-skill/chrome-review --page tech --category "open-source coordination for coding agents" --primary "Get LangSpan" > visual-review-output/taste-consistency.txt 2>&1
+          consistency=$?
+          printf 'copy=%s\nconsistency=%s\n' "$copy" "$consistency" > visual-review-output/taste-exit.txt
+          [ "$copy" -eq 0 ] && [ "$consistency" -eq 0 ]
+      - name: Capture actual desktop and phone viewport frames
+        if: always()
+        run: |
+          node review/visual-rehearsal.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: visual-design-review
+          path: |
+            visual-review-output/
+            .taste-skill/gate/
+          if-no-files-found: error
