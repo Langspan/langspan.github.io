@@ -46,7 +46,7 @@
         "body": "C1 can receive relevant peer context. Its own coordinator handles local work; remote awareness does not lock its files."
       }
     ],
-    "boundary": "Illustrated topology inspired by five local and five cloud sessions. Not a measured LangSpan scale test."
+    "boundary": "Illustrated 5+5 workflow, inspired by the maintainer’s local and cloud sessions. Not a measured LangSpan scale test."
   },
   "semantic": {
     "durationMs": 12000,
@@ -104,7 +104,7 @@
       "date": "Nov 2026",
       "href": "https://alignment.anthropic.com/2026/worse-together/",
       "metric": "4 of 4",
-      "desc": "Simulated environments in which separate agents produced worse group outcomes than a single coordinator."
+      "desc": "Simulated environments in which the peer-to-peer team scored below one coordinator for both Claude models."
     }
   ]
 }
