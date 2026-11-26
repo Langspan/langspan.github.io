@@ -2,3 +2,7 @@ demo-src/node_modules/
 .openai/
 *.baseline
 _site/
+motion/cards/lib/
+motion/cards/node_modules/
+motion/cards/fonts/
+motion/frames/
