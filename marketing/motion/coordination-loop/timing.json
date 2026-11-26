@@ -1,0 +1,17 @@
+{
+  "width": 960,
+  "height": 540,
+  "scale": 2,
+  "fps": 30,
+  "duration_s": 12,
+  "transition_s": 0.30,
+  "beats": [
+    {"at": 0, "step": 0, "label": "Briefing", "title": "See the other edit.", "body": "Codex learns what Claude Code is already working on."},
+    {"at": 3.2, "step": 1, "label": "Refusal", "title": "Catch the overlap.", "body": "LangSpan refuses the overlapping supported edit."},
+    {"at": 7.2, "step": 2, "label": "Continue", "title": "Keep working.", "body": "The agent can choose different work or retry later."},
+    {"at": 11.2, "step": 0, "label": "Briefing", "title": "See the other edit.", "body": "Codex learns what Claude Code is already working on."}
+  ],
+  "intentional_holds_s": [[0,3.05],[3.5,7.05],[7.5,11.05],[11.5,12]],
+  "source": "Current homepage's authored coordination panel; refusal excerpt from recorded Codex session on 25 Nov 2026. Continuation is illustrative.",
+  "output": "Silent product loop; no agent or daemon is run."
+}

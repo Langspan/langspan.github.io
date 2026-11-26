@@ -1,0 +1,40 @@
+name: Coordination motion QA
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'marketing/motion/coordination-loop/**'
+      - 'marketing/scripts/*coordination-loop.py'
+      - '.github/workflows/coordination-motion-qa.yml'
+      - 'index.html'
+      - 'assets/product-first.*'
+      - 'assets/brand/**'
+      - 'assets/fonts/**'
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install render tools
+        run: |
+          command -v ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y ffmpeg)
+          python -m pip install playwright==1.57.0
+          python -m playwright install --with-deps chromium
+      - name: Render and validate the real coordination panel
+        run: |
+          python marketing/scripts/render-coordination-loop.py --out marketing/exports/coordination-loop
+          python marketing/scripts/check-coordination-loop.py marketing/exports/coordination-loop
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coordination-motion-review
+          path: marketing/exports/coordination-loop/
+          if-no-files-found: warn

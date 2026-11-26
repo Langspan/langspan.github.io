@@ -57,3 +57,7 @@ Earlier validation documents describe earlier page versions; record the
 checks actually run for this revision in `docs/marketing-overhaul.md`.
 Use the existing preview and pull-request workflow.
 A design refinement follows the established identity and requested scope.
+
+## Motion production and review
+
+For product animation and films, use the repository-local [LangSpan motion skill](.agents/skills/langspan-motion/SKILL.md). Define timing before motion, reuse real components, inspect stills before rendering, and validate decoded video against declared reading holds and loop seams. Do not replace motion QA with still-frame review or infer live product behavior from illustrative scenes.
