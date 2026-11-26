@@ -162,3 +162,37 @@ loaded by the page. CNAME and the existing Pages hosting remain unchanged.
 ## Semantic awareness refinement
 
 Add a source-aware coordination section between the clean-merge problem and external research. The original semantic-conflict repair remains a hypothetical illustration. Use a same-checkout TypeScript signature change with a mismatched argument count, grounded in v0.1.0 ADRs 0008 and 0029 and the tagged break-alert tests. The HTML/SVG illustration is a finite one-shot reveal using existing visibility and motion controls; all labels and conclusions remain present without scripts. The source index matches names, not resolved dependencies; the resulting alert is advisory. The four-part architecture groups semantic awareness and coordination inside LangSpan, leaving execution and verification in the existing workflow. The six existing Stageshow scenes, hero, media, release downloads and real dashboard evidence are preserved. The release-binary review exercises the new illustrated signature change in an isolated temporary Git project with constructed hook events. It checks admission, real advisory context, once-per-notice behavior and a compatible call that does not alert. No model runs; the script does not execute or repair the proposed caller. Validate the canonical story, five widths, accessibility, global/reduced motion, no-script fallback, binary scenario and production deployment. Do not claim a live-host rename or cross-worktree symbol demonstration.
+
+## Experience refinement — November 25, 2026
+
+The approved preview extends the existing homepage rather than replacing the
+production Stageshow island. The brand SVGs, 2/6/10 topology, original semantic
+Git reproduction, six capability scenes, dashboard evidence, film, release
+archives and current installation steps remain intact.
+
+- The hero names the engineering outcome and uses concrete developer language.
+- Semantic scope controls distinguish released local argument-count notices,
+  proposed linked-worktree signatures (#44), and exploratory cross-machine
+  semantic metadata (not included in #44).
+- Architecture scope and evidence selection expose the boundaries of each
+  implementation and observation.
+- The benchmark explorer models the proposed K1 protocol (#172): 2, 5, 10
+  sessions, five task families, three comparison arms, one integration oracle,
+  a seekable 12-second protocol, selectable metric definitions, and an
+  illustrative manifest with null results. No benchmark runs in the browser.
+- The planned setup preview (#159) only illustrates the proposed workflow. The
+  existing released setup remains the only installation instructions.
+
+The new enhancements live in assets/experience.css and assets/experience.js.
+They use the existing brand tokens and locally vendored Motion mini for
+short state transitions, plus deterministic browser playback for the protocol.
+Stageshow's generated bundle and vendored source are unchanged. The benchmark
+scene is original browser code informed by the previously reviewed Stageshow,
+Living Canvas, Better Motion and Impeccable guidance, not a new Stageshow React
+component. No new external dependencies or remote scripts are introduced.
+
+The review suite now exercises the new selectors, unmeasured outcomes, scope
+changes, manifest, setup, reduced motion and no-JavaScript fallback. Repository
+CI is the required rendered-browser validation; the implementation environment
+cannot clone GitHub or retrieve the production bundle over its network. Do not
+claim a fresh passing production build until the branch checks complete.
