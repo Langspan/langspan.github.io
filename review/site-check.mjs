@@ -1,4 +1,5 @@
 import {chromium} from 'playwright';
+import {checkExperience} from './experience-check.mjs';
 import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
 import {createRequire} from 'node:module';
 import assert from 'node:assert/strict';
@@ -156,6 +157,7 @@ for(const width of [1440,1280,768,390,358]){
  await p.locator('[data-copy=daemon-command]').click();assert.equal(await p.evaluate(()=>navigator.clipboard.readText()),'langspan daemon');
  await p.locator('#start').screenshot({path:out+'/'+width+'-setup.png'});
  await p.locator('.faq-list summary').last().click();assert.equal(await p.locator('.faq-list details').last().getAttribute('open'),'');
+ await checkExperience(p,width,out);
  await p.addScriptTag({content:axe});const report=await p.evaluate(()=>axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));
  a11y.push({width,violations:report.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>n.target)}))});
  await p.screenshot({path:out+'/'+width+'-full.png',fullPage:true});
@@ -168,8 +170,9 @@ for(const opts of [{reducedMotion:'reduce'},{javaScriptEnabled:false}]){
  assert.ok(await p.locator('#semantic-awareness .source-advisory').isVisible());
  if(opts.reducedMotion==='reduce'){
   assert.equal(await p.locator('#semantic-awareness .source-advisory').evaluate(el=>getComputedStyle(el).animationName),'none');
+  assert.equal(await p.locator('[data-lx-play]').isVisible(),false);
  }
- if(opts.javaScriptEnabled===false){assert.equal(await p.locator('[data-semantic-beat]:visible').count(),3);assert.equal(await p.locator('[data-scale-controls]:visible').count(),0);}
+ if(opts.javaScriptEnabled===false){assert.equal(await p.locator('[data-lx-arm]:visible').count(),0);assert.equal(await p.locator('.lx-lane:visible').count(),3);assert.equal(await p.locator('[data-semantic-beat]:visible').count(),3);assert.equal(await p.locator('[data-scale-controls]:visible').count(),0);}
  else {assert.equal(await p.locator('[data-parallel-scale]').getAttribute('data-phase'),'2');assert.equal(await p.locator('[data-semantic-story]').getAttribute('data-phase'),'1');assert.equal(await p.locator('[data-semantic-beat]:visible').count(),1);}
  assert.equal(await p.locator('.download-list a').count(),4);
  assert.ok(await p.locator('#panel-claude').isVisible());if(opts.javaScriptEnabled===false)assert.ok(await p.locator('#panel-codex').isVisible());else assert.equal(await p.locator('html').getAttribute('data-motion-paused'),'true');

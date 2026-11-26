@@ -135,5 +135,6 @@
       "worktrees": "https://github.com/Langspan/LangSpan.dev/issues/44",
       "fixture": "https://github.com/Langspan/langspan.github.io/blob/main/review/source-awareness-proof.mjs"
     }
-  }
+  },
+  "heroSupportingLine": "Your coding agents work independently. Their code still needs to work together."
 }

@@ -192,3 +192,10 @@ normal and reduced motion, JavaScript disabled, and behavior when the page or
 demonstration is offscreen. Keep availability beside setup. Report only checks
 actually performed, with the source revision and remaining limitations.
 Publish through a feature branch and pull request to this GitHub Pages repo.
+
+## Interactive experience
+
+The benchmark explorer at `#benchmark` presents the planned K1 experiment, not
+measured results. The scope and evidence selectors and planned setup preview
+extend the existing site in `assets/experience.css` and `assets/experience.js`.
+The real Stageshow bundle and current release installation remain unchanged.
