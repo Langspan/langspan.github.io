@@ -201,3 +201,5 @@ html[data-motion-paused=true] [data-story-motion] *{animation:none!important}
 .hero-foot a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 @media(max-width:900px){.agent-sees-copy,.agent-sees-messages,.agent-sees-foot{grid-template-columns:minmax(0,1fr)}.agent-sees-copy{gap:14px}}
 @media(max-width:600px){.agent-sees{padding-top:28px;margin-bottom:28px}.agent-message{padding:16px}.agent-message pre{font-size:13px}.agent-sees-copy p{font-size:16px}}
+.agent-sees-section{padding-block:8px 72px}.agent-sees-lead{border-top:0;padding-top:0;margin-bottom:0}
+@media(max-width:600px){.agent-sees-section{padding-block:0 48px}}
