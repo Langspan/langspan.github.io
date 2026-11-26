@@ -61,11 +61,30 @@ h1{font-size:clamp(26px,4.1vw,45px);font-weight:700;line-height:1.02;letter-spac
  .footer{min-height:40px}.scene[data-kind=text] h1,.scene[data-kind=cta] h1{font-size:61px}
  .scene[data-kind=text] .body,.scene[data-kind=cta] .body{font-size:23px}
 }
+/* Format-specific framing: portrait uses the compact two-agent UI;
+   walkthrough keeps both actors spatially anchored throughout. */
+#stage[data-format=walkthrough] .scene{padding:19px 26px 15px;grid-template-rows:27px minmax(0,1fr) 22px;gap:8px;background:var(--ink);color:var(--paper)}
+#stage[data-format=walkthrough] .top,#stage[data-format=walkthrough] .footer{color:#c6c2b8}
+#stage[data-format=walkthrough] .footer{border-color:#3f3e39;font-size:11px;min-height:22px;padding-top:5px}
+#stage[data-format=walkthrough] .top img{width:100px}
+#stage[data-format=walkthrough] .content{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);gap:8px;align-items:start}
+#stage[data-format=walkthrough] .copy{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:center}
+#stage[data-format=walkthrough] .copy h1{font-size:27px;line-height:1.07;white-space:normal;margin:0;color:var(--paper)}
+#stage[data-format=walkthrough] .copy .body{font-size:14px;color:#c6c2b8;max-width:48ch}
+#stage[data-format=walkthrough] .art.stage{height:100%;padding:0;border-radius:0;box-shadow:none;background:var(--ink)}
+#stage[data-format=walkthrough] .art.stage img{width:auto;height:100%;max-width:100%;max-height:100%;object-fit:contain}
+@media(max-width:640px) and (min-height:750px){
+ #stage[data-format=vertical] .scene[data-kind=workflow] .content{gap:16px;grid-template-rows:auto minmax(0,1fr)}
+ #stage[data-format=vertical] .scene[data-kind=workflow] .copy h1{font-size:38px;line-height:1.05;margin-bottom:8px}
+ #stage[data-format=vertical] .scene[data-kind=workflow] .copy .body{font-size:18px;line-height:1.45}
+ #stage[data-format=vertical] .scene[data-kind=workflow] .art.stage{height:100%;align-self:start;align-items:flex-start;padding:8px}
+ #stage[data-format=vertical] .scene[data-kind=workflow] .art.stage img{width:100%;height:auto;max-height:100%;object-fit:contain}
+}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head><body><main id="stage"></main><script src="story-data.js"></script><script>
 'use strict';
 const q=new URLSearchParams(location.search), name=q.get('format')||'launch', spec=STORY.film.plans[name]||STORY.film.plans.launch;
-const stage=document.getElementById('stage'), elements=[];
+const stage=document.getElementById('stage'), elements=[];stage.dataset.format=name;
 for(const [k,v] of Object.entries({paper:STORY.brand.paper,ink:STORY.brand.ink,slate:STORY.brand.slate,coral:STORY.brand.coral,accent:STORY.brand.coralInk,muted:STORY.brand.muted,surface:STORY.brand.surface}))document.documentElement.style.setProperty('--'+k,v);
 const create=(tag,cls,text)=>{let e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e};
 const img=(src,alt)=>{let e=create('img');e.src=src;e.alt=alt;return e};
@@ -73,9 +92,9 @@ let start=0;
 for(let i=0;i<spec.beats.length;i++){
  const [key,duration]=spec.beats[i], item=STORY.film.scenes[key];
  const scene=create('section','scene');scene.dataset.kind=item.kind;scene.dataset.key=key;scene.id='scene-'+i;
- const top=create('div','top');top.append(img('media/logo-'+(item.kind==='cta'?'dark':'light')+'.svg','LangSpan'),create('span','edition',STORY.release));scene.append(top);
+ const top=create('div','top');top.append(img('media/logo-'+(item.kind==='cta'||name==='walkthrough'?'dark':'light')+'.svg','LangSpan'),create('span','edition',STORY.release));scene.append(top);
  const content=create('div','content'),copy=create('div','copy');copy.append(create('h1','headline',item.title.replaceAll('\\n','\n')),create('p','body',item.body));content.append(copy);
- if(item.kind==='intro'||item.kind==='workflow'){const art=create('div','art '+(item.kind==='intro'?'hero':'stage'));art.append(img('media/'+item.asset+'.png',item.scope));content.append(art);}
+ if(item.kind==='intro'||item.kind==='workflow'){const art=create('div','art '+(item.kind==='intro'?'hero':'stage'));const beatIndex=['hold','denial','choose','outcome'].indexOf(key);const asset=item.kind==='workflow'&&name==='vertical'?'compact-stage-'+beatIndex:item.kind==='workflow'&&name==='walkthrough'?'stage-'+beatIndex:item.asset;art.append(img('media/'+asset+'.png',item.scope));content.append(art);}
  if(item.kind==='proof'){const art=create('div','art');const p=create('div','proof');for(const [caption,asset] of [['Recorded overlap refusal','denial'],['Independent work in progress','sessions']]){const group=create('div');group.append(create('p','proof-caption',caption),img('media/proof-'+asset+'.png',caption));p.append(group);}art.append(p);content.append(art);}
  if(item.kind==='cta')copy.append(create('div','url','langspan.dev'));
  scene.append(content);

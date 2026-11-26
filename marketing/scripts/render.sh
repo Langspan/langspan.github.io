@@ -15,7 +15,8 @@ ffmpeg -v error -y -framerate "$FPS" -i "$FILM_WORK/frames/$FORMAT/story/f_%05d.
 cp "$FILM_WORK/$FORMAT.vtt" "marketing/exports/$FORMAT/$FORMAT.vtt"
 ffprobe -v error -show_entries stream=width,height,r_frame_rate:format=duration,size -of json "marketing/exports/$FORMAT/$FORMAT.mp4" > "marketing/exports/$FORMAT/spec.json"
 ffmpeg -v error -y -ss "$([ "$FORMAT" = launch ] && echo 9 || echo 5)" -i "marketing/exports/$FORMAT/$FORMAT.mp4" -frames:v 1 "marketing/exports/$FORMAT/poster.png"
-ffmpeg -v error -y -i "marketing/exports/$FORMAT/$FORMAT.mp4" -vf "fps=1/2,scale=320:-2,tile=4x5:padding=5:margin=5:color=white" -frames:v 1 "marketing/exports/$FORMAT/contact-sheet.jpg"
+ROWS="$(node -p 'Math.ceil(Math.ceil(require("./marketing/story.json").film.plans[process.argv[1]].beats.reduce((a,b)=>a+b[1],0)/2)/4)' "$FORMAT")"
+ffmpeg -v error -y -i "marketing/exports/$FORMAT/$FORMAT.mp4" -vf "fps=1/2,scale=320:-2,tile=4x${ROWS}:padding=5:margin=5:color=white" -frames:v 1 "marketing/exports/$FORMAT/contact-sheet.jpg"
 if [ "$FORMAT" = walkthrough ]; then
  ffmpeg -v error -y -i "marketing/exports/$FORMAT/$FORMAT.mp4" -vf scale=1280:720 -c:v libx264 -preset fast -crf 23 -movflags +faststart -an "marketing/exports/$FORMAT/website-loop.mp4"
 fi

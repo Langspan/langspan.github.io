@@ -17,6 +17,7 @@ let t=0;for(const [key,d] of story.film.plans[format].beats){
  assert.equal(await p.locator('.scene.active').innerText(),before,'stateful seek '+key);
  const overflow=await p.locator('.scene.active').evaluate(el=>{const v=el.getBoundingClientRect();return [...el.querySelectorAll('.top,.copy,.body,.headline,.art,.footer')].filter(x=>x.getClientRects().length).map(x=>({name:x.className,b:x.getBoundingClientRect()})).filter(x=>x.b.left<v.left-1||x.b.right>v.right+1||x.b.top<v.top-1||x.b.bottom>v.bottom+1).map(x=>x.name);});
  assert.deepEqual(overflow,[],'clipped composition '+key+' '+format);
+ if((format==='walkthrough'||format==='vertical')&&story.film.scenes[key].kind==='workflow'){const src=await p.locator('.scene.active .art img').getAttribute('src');assert.ok(src.includes(format==='vertical'?'compact-stage-':'media/stage-'),'format-specific actual Stageshow framing');}
  await p.screenshot({path:join(dest,'scene-'+key+'.png')});t+=d;
 }
 assert.deepEqual(errors,[],'render page errors');if(format==='launch'){
