@@ -1,0 +1,23 @@
+name: Verify live marketing deployment
+on:
+  push:
+    branches: [main]
+    paths: ['assets/product/marketing/**', 'assets/product/social-card.png', 'index.html', 'marketing/published-assets.json', '.github/workflows/verify-live-marketing.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  public:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          npm install --prefix review --no-save --ignore-scripts playwright@1.65.1
+          npx --prefix review playwright install --with-deps chromium
+      - run: node review/live-marketing.mjs

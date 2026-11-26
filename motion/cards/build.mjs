@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import kit from './lib/index.cjs';
 const {card,panel,createTimeline,createGlyphSet}=kit;
 const here=dirname(fileURLToPath(import.meta.url)), root=join(here,'../..');
+const story=JSON.parse(readFileSync(join(root,'marketing/story.json'),'utf8'));
 const source=readFileSync(join(root,'demo-src/README.md'),'utf8');
 const site=readFileSync(join(root,'index.html'),'utf8');
 for(const s of ['src/auth/session.ts','tests/session.test.ts','B independently chooses']) {
@@ -26,7 +27,8 @@ for(const mode of ['light','dark']){
  const logo=readFileSync(join(root,'assets/brand/langspan-lockup-'+mode+'.svg'),'utf8').trim();
  if(!logo.includes('viewBox="0 0 288 80"')) throw Error('Wordmark dimensions changed');
  const mark='<g transform="scale(.82)">'+logo+'</g>';
- const tl=createTimeline({duration:12,prefix:'ls'});
+ const timing=story.readme;
+ const tl=createTimeline({duration:timing.duration,prefix:'ls'});
  const group=(attrs,inner)=>'<g '+attrs+'>'+inner+'</g>';
  const reveal=(t,inner)=>group(tl.on(t,{fade:.3}).attrs,inner);
  const transient=(a,b,inner)=>group(tl.span(a,b,{fade:.25}).attrs,inner);
@@ -42,17 +44,17 @@ for(const mode of ['light','dark']){
   text('Illustrated local workflow',1256,35,muted,13,'sans','end')+
   '<g class="'+tl.dip()+'">'+
   window(ax,'Agent A','Update session refresh')+
-  file(ax+20,153,'src/auth/session.ts')+
-  reveal(.4,state(ax+20,225,'Admitted · active hold',ink))+
+  file(ax+20,153,story.files.shared)+
+  reveal(timing.hold,state(ax+20,225,'Admitted · active hold',ink))+
   window(bx,'Agent B','Extend session coverage')+
-  transient(0,5.8,file(bx+20,153,'src/auth/session.ts'))+
-  transient(3.2,5.8,state(bx+20,225,'Overlapping edit refused',coral))+
-  reveal(6.1,file(bx+20,153,'tests/session.test.ts'))+
-  reveal(6.6,state(bx+20,225,'Admitted · different file',ink))+
-  reveal(6.6,text('Overlap caught. Separate work continues.',528,325,muted,16,'sansBold'))+
+  transient(0,timing.redirect,file(bx+20,153,story.files.shared))+
+  transient(timing.deny,timing.redirect,state(bx+20,225,'Overlapping edit refused',coral))+
+  reveal(timing.request,file(bx+20,153,story.files.independent))+
+  reveal(timing.admit,state(bx+20,225,'Admitted · different file',ink))+
+  reveal(timing.admit,text('Overlap caught. Separate work continues.',528,325,muted,16,'sansBold'))+
   '</g>';
- const panelSvg=panel(glyphs,{theme,eyebrow:'LOCAL COORDINATION',wordmark:mark,headline:'Your agents. On the same page.',headlineSize:23,sub:'Agents choose their next action.'});
- const svg=card({title,css:tl.css(),defs:glyphs.defs(),panelSvg,stageSvg:stage,loop:12});
+ const panelSvg=panel(glyphs,{theme,eyebrow:'LOCAL COORDINATION',wordmark:mark,headline:story.identity,headlineSize:23,sub:'Agents choose their next action.'});
+ const svg=card({title,css:tl.css(),defs:glyphs.defs(),panelSvg,stageSvg:stage,loop:timing.duration});
  if(Buffer.byteLength(svg)>300*1024)throw Error('Card exceeds 300 KiB');
  writeFileSync(join(out,'langspan-card-'+mode+'.svg'),svg);
  writeFileSync(join(out,'langspan-card-'+mode+'-still.svg'),svg.replace(/<style>[\s\S]*?<\/style>/,'<style>*{animation:none!important}</style>'));

@@ -1,0 +1,10 @@
+import {createRequire} from 'node:module';import {readFileSync,mkdirSync,copyFileSync,writeFileSync} from 'node:fs';import {resolve,join} from 'node:path';import {pathToFileURL} from 'node:url';import {execFileSync} from 'node:child_process';import {createHash} from 'node:crypto';import assert from 'node:assert/strict';
+const {chromium}=createRequire(new URL('../../review/package.json',import.meta.url))('playwright');
+const s=JSON.parse(readFileSync('marketing/story.json','utf8')),work=resolve('marketing/.preview-work'),media=join(work,'media'),out=resolve('marketing/exports/preview');mkdirSync(media,{recursive:true});mkdirSync(out,{recursive:true});
+assert.equal(createHash('sha256').update(readFileSync(s.evidence.source)).digest('hex'),s.evidence.sha256);
+for(const [name,[x,y,w,h]] of Object.entries(s.evidence.crops))execFileSync('ffmpeg',['-v','error','-y','-i',s.evidence.source,'-vf','crop='+w+':'+h+':'+x+':'+y,'-frames:v','1',join(media,'proof-'+name+'.png')]);
+copyFileSync('assets/brand/langspan-lockup-light.svg',join(media,'logo-light.svg'));copyFileSync('marketing/film/social-preview.html',join(work,'social-preview.html'));
+const b=await chromium.launch();const p=await b.newPage({viewport:{width:600,height:315},deviceScaleFactor:2});
+await p.goto(pathToFileURL(join(work,'social-preview.html')).href);await p.evaluate(()=>Promise.all([...document.images].map(x=>x.decode())));
+const note=await p.locator('.proof small').boundingBox();assert.ok(note.y+note.height<=307,'evidence disclosure clipped');
+await p.screenshot({path:join(out,'social-preview.png')});await b.close();console.log('PASS social preview: 1200 x 630 and complete proof disclosure');

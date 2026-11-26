@@ -1,0 +1,73 @@
+{
+  "storyRevision": "b8438635d779d0251d9e5b095555ec4af12bc7e7",
+  "filmRun": 45726965079,
+  "previewRun": 45727089617,
+  "previewRevision": "20d21399fb0a309a93f3032754e84606959add7e",
+  "files": [
+    {
+      "source": "marketing-launch/launch.mp4",
+      "path": "assets/product/marketing/launch.mp4",
+      "sha256": "f645154fa53ad87eaca8723736686ad4527fc8f3749a5170badbcfeae443da8d"
+    },
+    {
+      "source": "marketing-launch/launch.vtt",
+      "path": "assets/product/marketing/launch.vtt",
+      "sha256": "4fbd52c236691ee50e97aca148a7e9ba5d5ebe639988a327fdb06374bc8be3c4"
+    },
+    {
+      "source": "marketing-launch/poster.png",
+      "path": "assets/product/marketing/launch-poster.png",
+      "sha256": "a7c6472cccf7afb4606009461b11ae7ddcc47ee8b4ce06a45fcd534d3067ee9b"
+    },
+    {
+      "source": "marketing-teaser/teaser.mp4",
+      "path": "assets/product/marketing/teaser.mp4",
+      "sha256": "dc99536f98831a8c9c1b82c88589045d20f8e6704eca434efbb4d9969f4b4582"
+    },
+    {
+      "source": "marketing-teaser/teaser.vtt",
+      "path": "assets/product/marketing/teaser.vtt",
+      "sha256": "515e1161e008466a534d8643489dd41e32289b979011dc4950ca985e92c8ab26"
+    },
+    {
+      "source": "marketing-square/square.mp4",
+      "path": "assets/product/marketing/square.mp4",
+      "sha256": "265072ef110a41ef45d7dbe9426c4ac2e5f6ea689fe5e98557ddbd7fa462a661"
+    },
+    {
+      "source": "marketing-vertical/vertical.mp4",
+      "path": "assets/product/marketing/vertical.mp4",
+      "sha256": "299158ebde92ecc45011d3090bd96228cba0a4aed1e7ed28f8565fd89c68328d"
+    },
+    {
+      "source": "marketing-walkthrough/website-loop.mp4",
+      "path": "assets/product/marketing/website-loop.mp4",
+      "sha256": "dd4bf692d9f2b7d9e7980b2a09f942f66cf79a811684efd4810ee133253e5d90"
+    },
+    {
+      "source": "marketing-walkthrough/walkthrough.mp4",
+      "path": "assets/product/marketing/walkthrough.mp4",
+      "sha256": "c695ca7f9b13387ad9cfc8fcef3912075969dd5f69141f6c45304766e50d7706"
+    },
+    {
+      "source": "marketing-walkthrough/walkthrough.vtt",
+      "path": "assets/product/marketing/walkthrough.vtt",
+      "sha256": "37d5d0b0d265cd2886fb5923d8b1b05a6586ebd3e615f891f9a5e785fd9de2dc"
+    },
+    {
+      "source": "marketing-walkthrough/poster.png",
+      "path": "assets/product/marketing/walkthrough-poster.png",
+      "sha256": "ff2954513cc729bccf5a5d62c961c65f213ee8cbb9d54ee02c8113d16de65964"
+    },
+    {
+      "source": "reviewed-social-preview/social-preview.png",
+      "path": "assets/product/social-card.png",
+      "sha256": "4277de07860e17bf2fd3c41ab191fac82f23c12405a268698fa386ae5c8914bc"
+    },
+    {
+      "source": "marketing-stage-bundle/coordination-demo.js",
+      "path": "assets/coordination-demo.js",
+      "sha256": "e38f38521014bdb6b95fad36f6f98cdb6af4586c878b520964f06fb09ba02236"
+    }
+  ]
+}

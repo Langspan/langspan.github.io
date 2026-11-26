@@ -1,0 +1,110 @@
+name: Marketing asset production
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  film:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    strategy:
+      fail-fast: false
+      matrix:
+        format: [launch, teaser, square, vertical, walkthrough]
+    env:
+      PLAYWRIGHT_DIR: ${{ github.workspace }}/review
+      FILM_WORK: ${{ github.workspace }}/marketing/.work
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build actual Stageshow components
+        working-directory: demo-src
+        run: npm ci --ignore-scripts && npm run build
+      - name: Install browser and film toolchain
+        run: |
+          command -v ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y ffmpeg)
+          ffmpeg -version | head -1
+          npm install --prefix review --no-save --ignore-scripts playwright@1.65.1
+          npx --prefix review playwright install --with-deps chromium
+          git init "$RUNNER_TEMP/product-film"
+          git -C "$RUNNER_TEMP/product-film" remote add origin https://github.com/display-dev/product-film.git
+          git -C "$RUNNER_TEMP/product-film" fetch --depth=1 origin fd9db88a76945bbd1d678739cad411c1a61bce1e
+          git -C "$RUNNER_TEMP/product-film" checkout --detach FETCH_HEAD
+          test "$(git -C "$RUNNER_TEMP/product-film" rev-parse HEAD)" = fd9db88a76945bbd1d678739cad411c1a61bce1e
+          bash "$RUNNER_TEMP/product-film/skills/product-film/templates/new-film.sh" walkthrough "$FILM_WORK"
+          cp "$RUNNER_TEMP/product-film/LICENSE" "$FILM_WORK/LICENSE"
+          node marketing/scripts/prepare.mjs
+      - name: Capture actual components and released dashboard
+        run: |
+          python3 -m http.server 8123 --bind 127.0.0.1 >/tmp/marketing-http.log 2>&1 &
+          node marketing/scripts/capture.mjs
+      - name: Review all beats and seek determinism
+        env:
+          FORMAT: ${{ matrix.format }}
+        run: |
+          node marketing/scripts/spot-check.mjs "$FORMAT"
+          FPS=12 node "$FILM_WORK/audit.js" "plan-$FORMAT.json" > "marketing/exports/$FORMAT/upstream-audit.txt"
+      - name: Render with actual upstream Product-film engine
+        env:
+          FORMAT: ${{ matrix.format }}
+        run: bash marketing/scripts/render.sh "$FORMAT"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: marketing-${{ matrix.format }}
+          path: marketing/exports/${{ matrix.format }}/
+          if-no-files-found: warn
+  readme:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build exact upstream ChanMeng kit
+        run: |
+          git init "$RUNNER_TEMP/chanmeng"
+          git -C "$RUNNER_TEMP/chanmeng" remote add origin https://github.com/ChanMeng666/chanmeng-svg-animation-studio.git
+          git -C "$RUNNER_TEMP/chanmeng" fetch --depth=1 origin 539208618e6ca68963474f77921f62e39713bb0e
+          git -C "$RUNNER_TEMP/chanmeng" checkout --detach FETCH_HEAD
+          node "$RUNNER_TEMP/chanmeng/skills/chanmeng-svg-product-card/scripts/init-kit.mjs" --dest=motion/cards
+          npm install --prefix motion/cards --no-save --ignore-scripts opentype.js@1.3.4 playwright-core@1.65.1 @fontsource/inter@5.2.5 @fontsource/ibm-plex-mono@5.2.5
+          npx --prefix motion/cards playwright-core install --with-deps chromium
+          node motion/cards/build.mjs
+          node motion/cards/lib/check-card.mjs assets/product/langspan-card-light.svg assets/product/langspan-card-dark.svg --max-kb=300
+          for mode in light dark; do
+            node motion/cards/lib/capture-frames.mjs assets/product/langspan-card-$mode.svg --at=1.2,4.5,8,11 --out=marketing/card-review
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: marketing-readme
+          path: |
+            assets/product/langspan-card-*.svg
+            marketing/card-review/
+      - name: Verify generated cards remain reproducible
+        run: git diff --exit-code -- assets/product/langspan-card-*.svg
+  stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Rebuild existing Stageshow bundle from canonical story
+        working-directory: demo-src
+        run: npm ci --ignore-scripts && npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: marketing-stage-bundle
+          path: assets/coordination-demo.js

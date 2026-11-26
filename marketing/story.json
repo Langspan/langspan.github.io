@@ -1,0 +1,310 @@
+{
+  "version": 1,
+  "release": "v0.1.0",
+  "identity": "Your agents. On the same page.",
+  "website": "https://langspan.dev/",
+  "brand": {
+    "paper": "#F4F3EF",
+    "ink": "#151513",
+    "slate": "#3F3E44",
+    "coral": "#D87859",
+    "coralInk": "#A84429",
+    "surface": "#242422",
+    "muted": "#66655E"
+  },
+  "files": {
+    "shared": "src/auth/session.ts",
+    "independent": "tests/session.test.ts"
+  },
+  "evidence": {
+    "source": "assets/evidence/dashboard-v0.1.0.png",
+    "sha256": "7daf31796a8207b89c0c2cdee70820b17b105fc6b064c53e3502c3cc547d6eb3",
+    "run": 45724200921,
+    "shared": "src/session.ts",
+    "independent": "tests/session.test.ts",
+    "scope": "Actual v0.1.0 dashboard, scripted hook events. No live model invoked.",
+    "crops": {
+      "denial": [
+        110,
+        1110,
+        790,
+        310
+      ],
+      "sessions": [
+        110,
+        185,
+        880,
+        425
+      ]
+    }
+  },
+  "stageshow": {
+    "offsetsMs": [
+      0,
+      3400,
+      7000,
+      10600
+    ],
+    "durationMs": 14300,
+    "scenes": [
+      {
+        "label": "A starts an edit",
+        "title": "One agent is already working here.",
+        "description": "Agent A is working in src/auth/session.ts in this checkout."
+      },
+      {
+        "label": "Overlap is caught",
+        "title": "The overlapping request gets a clear answer.",
+        "description": "Agent B requests the same file. LangSpan denies that request because Agent A still holds it."
+      },
+      {
+        "label": "B chooses tests",
+        "title": "The agent chooses its next move.",
+        "description": "Agent B independently chooses tests/session.test.ts and makes a new edit request."
+      },
+      {
+        "label": "Both keep moving",
+        "title": "Separate work keeps moving.",
+        "description": "B’s test-file edit can proceed while A keeps working. The agent tools keep their own permission checks."
+      }
+    ]
+  },
+  "readme": {
+    "duration": 12,
+    "hold": 0.4,
+    "deny": 3.2,
+    "redirect": 5.8,
+    "request": 6.1,
+    "admit": 6.6
+  },
+  "motion": {
+    "enterMs": 300,
+    "feedbackMs": 150,
+    "pressScale": 0.96,
+    "curve": "cubic-bezier(.2,0,0,1)",
+    "frameRate": 24,
+    "captureScale": 2,
+    "autoplay": false
+  },
+  "film": {
+    "scenes": {
+      "problem": {
+        "title": "Agents move fast.\\nTeams need shared context.",
+        "body": "One agent changes session refresh. Another builds against it.",
+        "kind": "text",
+        "scope": ""
+      },
+      "intro": {
+        "title": "Your agents.\\nOn the same page.",
+        "body": "Open-source coordination for the coding agents your team already uses.",
+        "kind": "intro",
+        "asset": "hero",
+        "scope": "Illustrated shared awareness"
+      },
+      "hold": {
+        "title": "One file.\\nAn active edit.",
+        "body": "Agent A holds the session file in a shared checkout.",
+        "kind": "workflow",
+        "asset": "agent-a",
+        "scope": "Illustrated local workflow"
+      },
+      "denial": {
+        "title": "Catch the overlap.",
+        "body": "LangSpan refuses the supported edit while Agent A’s hold is active.",
+        "kind": "workflow",
+        "asset": "agent-b-1",
+        "scope": "Illustrated local workflow"
+      },
+      "choose": {
+        "title": "The agent chooses\\nwhat to do next.",
+        "body": "Agent B independently requests a different file.",
+        "kind": "workflow",
+        "asset": "agent-b-2",
+        "scope": "Illustrated local workflow"
+      },
+      "outcome": {
+        "title": "Separate work\\nkeeps moving.",
+        "body": "The independent edit is admitted. Host permissions still apply.",
+        "kind": "workflow",
+        "asset": "agent-b-3",
+        "scope": "Illustrated local workflow"
+      },
+      "proof": {
+        "title": "See the recorded result.",
+        "body": "The released dashboard shows two active sessions and a recorded refusal.",
+        "kind": "proof",
+        "scope": "Actual v0.1.0 capture · scripted hook events · no live model"
+      },
+      "cta": {
+        "title": "Keep building.\\nTogether.",
+        "body": "Get LangSpan v0.1.0 for macOS and Linux.",
+        "kind": "cta",
+        "scope": "Apache-2.0"
+      }
+    },
+    "plans": {
+      "launch": {
+        "w": 960,
+        "h": 540,
+        "beats": [
+          [
+            "problem",
+            4
+          ],
+          [
+            "intro",
+            4
+          ],
+          [
+            "hold",
+            4.5
+          ],
+          [
+            "denial",
+            5
+          ],
+          [
+            "choose",
+            4
+          ],
+          [
+            "outcome",
+            4
+          ],
+          [
+            "proof",
+            4.5
+          ],
+          [
+            "cta",
+            3
+          ]
+        ]
+      },
+      "teaser": {
+        "w": 960,
+        "h": 540,
+        "beats": [
+          [
+            "problem",
+            2
+          ],
+          [
+            "intro",
+            2
+          ],
+          [
+            "hold",
+            2.5
+          ],
+          [
+            "denial",
+            3
+          ],
+          [
+            "choose",
+            2.5
+          ],
+          [
+            "proof",
+            3.5
+          ],
+          [
+            "cta",
+            2.5
+          ]
+        ]
+      },
+      "square": {
+        "w": 540,
+        "h": 540,
+        "beats": [
+          [
+            "problem",
+            2
+          ],
+          [
+            "intro",
+            2
+          ],
+          [
+            "hold",
+            2.5
+          ],
+          [
+            "denial",
+            3
+          ],
+          [
+            "choose",
+            2.5
+          ],
+          [
+            "proof",
+            3.5
+          ],
+          [
+            "cta",
+            2.5
+          ]
+        ]
+      },
+      "vertical": {
+        "w": 540,
+        "h": 960,
+        "beats": [
+          [
+            "problem",
+            2
+          ],
+          [
+            "intro",
+            2
+          ],
+          [
+            "hold",
+            2.5
+          ],
+          [
+            "denial",
+            3
+          ],
+          [
+            "choose",
+            2.5
+          ],
+          [
+            "proof",
+            3.5
+          ],
+          [
+            "cta",
+            2.5
+          ]
+        ]
+      },
+      "walkthrough": {
+        "w": 960,
+        "h": 540,
+        "beats": [
+          [
+            "hold",
+            3.4
+          ],
+          [
+            "denial",
+            3.6
+          ],
+          [
+            "choose",
+            3.6
+          ],
+          [
+            "outcome",
+            3.7
+          ]
+        ]
+      }
+    }
+  }
+}
