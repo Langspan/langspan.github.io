@@ -108,3 +108,41 @@ jobs:
         with:
           name: launch-binary-review
           path: review-output/
+
+  release-v02:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Download and verify v0.2.0
+        run: |
+          mkdir -p /tmp/ls-v02 review-output
+          cd /tmp/ls-v02
+          base=https://github.com/Langspan/LangSpan.dev/releases/download/v0.2.0
+          name=langspan-v0.2.0-x86_64-unknown-linux-gnu
+          curl -fsSL --retry 3 "$base/$name.tar.gz" -o "$name.tar.gz"
+          curl -fsSL --retry 3 "$base/SHA256SUMS" -o SHA256SUMS
+          grep " $name.tar.gz$" SHA256SUMS | sha256sum -c
+          echo "e5ef93878b89d957a24f7fc5f1684ff4568e505a0d60d47bdf21d4a5a7abba39  $name.tar.gz" | sha256sum -c
+          tar -xzf "$name.tar.gz"
+          "$PWD/$name/langspan" --version | grep -Fx 'langspan 0.2.0'
+          "$PWD/$name/langspan" setup --help
+      - name: Install browser capture tools
+        working-directory: review
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.65.1
+          npx playwright install --with-deps chromium
+      - name: Capture and verify released LangSpan Live
+        env:
+          LANGSPAN_BIN: /tmp/ls-v02/langspan-v0.2.0-x86_64-unknown-linux-gnu/langspan
+        run: node review/capture-dashboard-v02.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: launch-v02-dashboard
+          path: review-output/

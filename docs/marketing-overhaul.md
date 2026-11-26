@@ -232,3 +232,13 @@ so fresh candidate visual and browser validation has not completed. The
 existing browser suite now checks navigation availability, target size,
 keyboard dismissal, viewport geometry and compact diagram states.
 Do not claim the new page has passed rendered review before the checks run.
+
+## v0.2.0 release refresh
+
+The release tag dc6df450f44b9146f0156563bd658c69ab4be5d4 publishes the four supported binary archives, SBOMs, checksums and provenance. Keep historical v0.1.0 recordings unchanged. Present released semantic awareness, baseline-aware checks, LangSpan Live and one-command setup. The K1 comparison has three families; its LangSpan condition uses linked worktrees and one local coordinator. Neither the pilots nor dry runs establish comparative effectiveness. The newest fixture hardening and hookless check-write command are on main only.
+
+The new demo asset is assembled using exactly the v0.2.0 dashboard page, built-in demo-scenes file and official SVG lockups according to dashboard.rs. The release verification job compares those bytes against the actual published binary's response, runs the real demo renderer, and saves captures. The iframe is sandboxed and the demo never polls the coordinator; its data is fictional and labeled. Actual v0.1.0 hook evidence remains separately available.
+
+## Live release metadata
+
+The permanent release CTA follows `/releases/latest`. An unauthenticated, bounded request to the public GitHub API updates the displayed tag and the complete platform/checksum link set, with a validated stable SemVer tag and uploaded assets. No token, new server, duplicate archives or cross-repository workflow is required. The static HTML retains the last reviewed v0.2.0 downloads, including matching checksums, for offline, rate-limited and no-JavaScript visits. Do not replace versioned evidence or product feature claims automatically. Browser regression tests simulate a new stable release, invalid/incomplete releases and rate limits.

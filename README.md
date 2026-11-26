@@ -45,7 +45,7 @@ alerts, not resolved dependencies or automatic repair. Run
 exercise the released Linux binary with synthetic events in a temporary Git
 repository. The fixture checks an admitted incompatible caller request and its
 actual advisory output. No model runs. Rename and removal alerts and linked-worktree uncommitted signature notices
-are implemented on main, not in v0.1.0. Same-count type/order checks and
+ship in v0.2.0. Same-count type/order checks and
 cross-machine symbol publication remain future work. The four-part architecture groups semantic
 awareness and coordination within LangSpan; agents retain execution.
 
@@ -213,7 +213,15 @@ Publish through a feature branch and pull request to this GitHub Pages repo.
 ## Interactive experience
 
 The benchmark explorer at `#benchmark` presents the implemented K1 harness
-(two task families, isolated clones, three arms), not valid comparative
+(three task families, isolated-clone controls and linked worktrees with one coordinator in the LangSpan arm), not valid comparative
 results. The scope and evidence selectors and source-build setup preview
 extend the existing site in `assets/experience.css` and `assets/experience.js`.
 The real Stageshow bundle and current release installation remain unchanged.
+
+## v0.2.0 website
+
+The current installation path uses the v0.2.0 binaries and `langspan setup`. The [LangSpan Live demo](https://langspan.dev/#langspan-live) uses the release's actual renderer and labeled fictional scenes; the older dashboard evidence remains unchanged. The benchmark explorer reflects the current harness design, not comparative results.
+
+## Release links
+
+The stable release page is https://github.com/Langspan/LangSpan.dev/releases/latest. On the website, `assets/latest-release.js` resolves the public latest-release API once per page load. A complete stable release updates the version label, four platform links, matching checksums and tag link as one set. If the API is unavailable or the assets are incomplete, the labeled v0.2.0 fallback remains usable. A new release does not require a website deployment. Capability and evidence statements remain versioned and are reviewed separately.

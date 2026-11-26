@@ -17,3 +17,19 @@ html[data-motion-paused=true] .lx-experiment *,html[data-motion-paused=true] .lx
   .lx-distribute,.lx-connector{display:none}
   .lx-stacked-caption{display:block;margin:12px 0;text-align:center;font-size:12px;line-height:1.5;color:var(--lx-muted,#c6c2b8)}
 }
+
+/* The release's own read-only demo renderer, not a reconstructed dashboard. */
+.live-showcase{margin:0 0 48px}
+.live-showcase .section-heading{margin-bottom:24px}
+.live-preview{margin:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--paper)}
+.live-preview iframe{display:block;width:100%;height:640px;border:0;background:var(--paper)}
+.live-preview figcaption{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px 24px;padding:16px 20px;border-top:1px solid var(--line)}
+.live-preview figcaption p{font-size:13px;line-height:1.6;color:var(--muted);max-width:68ch}
+.live-launch{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center;margin:22px 0 10px}
+.live-launch h3{font-size:19px;margin-bottom:8px}
+.live-launch p{font-size:14px;line-height:1.65;color:var(--muted)}
+.live-launch .code-block{margin:0}
+@media(max-width:900px){.live-preview iframe{height:560px}.live-launch{grid-template-columns:1fr;gap:12px}}
+@media(max-width:640px){.live-preview iframe{height:480px}.live-preview figcaption{padding:14px}.live-showcase{margin-bottom:32px}}
+
+.setup-manual summary{cursor:pointer;font-weight:650;min-height:44px;padding:10px 0}.setup-manual>p{margin-top:12px}

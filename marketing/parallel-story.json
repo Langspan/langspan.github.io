@@ -124,8 +124,8 @@
     "message": "priceWithTax now takes 2 arguments. This call supplies 1. Inspect billing.ts.",
     "decision": "Advisory context, not an edit refusal",
     "detail": "The index compares exported signatures. It can notify a related session at its next prompt; supported Claude Code and Codex writes can receive an argument-count alert with the tool result.",
-    "indexScope": "Rust, Python, TypeScript/JavaScript and Go. Relationships are name matches, not resolved types or imports. Interface notices are local to one physical checkout.",
-    "planned": "Rename and removal alerts, Java indexing and uncommitted signature notices across linked worktrees are implemented on main, not yet in a release. Same-count type and order changes remain future work.",
+    "indexScope": "Rust, Python, TypeScript/JavaScript, Go and Java are indexed. Relationships are name matches, not resolved types or imports.",
+    "planned": "Version 0.2.0 adds rename and removal alerts and uncommitted signature notices across linked worktrees. Same-count type and order checks remain future work.",
     "disclosure": "Illustrated mechanism, not a live recording or literal tool output. The agent chooses how to respond.",
     "sources": {
       "index": "https://github.com/Langspan/LangSpan.dev/blob/v0.1.0/docs/adr/0008-derived-source-index.md",
