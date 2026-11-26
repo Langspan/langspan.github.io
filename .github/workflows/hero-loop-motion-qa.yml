@@ -1,0 +1,42 @@
+name: Hero loop motion QA
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'marketing/motion/hero-loop/**'
+      - 'marketing/scripts/*hero-loop.py'
+      - '.github/workflows/hero-loop-motion-qa.yml'
+      - 'index.html'
+      - 'assets/product-first.*'
+      - 'assets/brand/**'
+      - 'assets/fonts/**'
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install render tools
+        run: |
+          command -v ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y ffmpeg)
+          python -m pip install playwright==1.57.0
+          python -m playwright install --with-deps chromium
+      - name: Render the phone cut and check its motion
+        run: |
+          python marketing/scripts/render-hero-loop.py --out marketing/exports/hero-loop
+          python marketing/scripts/check-hero-loop.py marketing/exports/hero-loop
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hero-loop-motion-review
+          path: |
+            marketing/exports/hero-loop/
+            !marketing/exports/hero-loop/frames/
+          if-no-files-found: warn
