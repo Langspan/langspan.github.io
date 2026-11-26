@@ -14,6 +14,13 @@ Use the installed `impeccable-product-pages` guidance or an available
 and the relevant playbook in its `reference/` directory.
 Use existing project context when optional tooling cannot run.
 
+Before any motion or media work (an animation, loop, film, still, video,
+poster or README card), read the
+[LangSpan motion standard](.agents/skills/langspan-motion/SKILL.md). Its
+reference is the [motion playbook](docs/motion-playbook.md). Write the timing
+before the motion, reuse the page's own components, and check decoded video
+against the declared holds and the loop seam, not only stills.
+
 Treat the marketing page as a Persuade surface: explain the coordination
 problem, show a useful example and help visitors choose their next step.
 
