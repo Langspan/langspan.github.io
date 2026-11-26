@@ -175,3 +175,13 @@ html[data-motion-paused=true] .semantic-lab *,html[data-motion-paused=true] .sca
 
 /* Keep the main action above the desktop fold independently of diagram height. */
 @media(min-width:901px){.parallel-hero.hero{align-items:start;padding-top:48px}.parallel-hero .hero-content{padding-top:12px}.parallel-hero h1{font-size:clamp(44px,4.6vw,65px);line-height:1.03;margin-block:18px}.parallel-hero .hero-category{font-size:18px;line-height:1.35;margin-bottom:12px}.parallel-hero .hero-copy{font-size:15px;line-height:1.65}.parallel-hero .hero-actions{margin-top:22px}.parallel-hero .hero-integrations{margin-top:19px}.parallel-hero .hero-foot{margin-top:9px}}
+
+/* Contrast the coordination layer with complementary tools, not competitors. */
+.positioning-contrast{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:26px 0 0;padding:0;border-block:1px solid var(--story-edge)}
+.positioning-contrast>div{min-width:0;padding:19px 22px 19px 0}
+.positioning-contrast>div+div{padding-left:22px;border-left:1px solid var(--story-edge)}
+.positioning-contrast dt{font-size:16px;line-height:1.4;font-weight:650;color:var(--story-text);margin:0 0 8px}
+.positioning-contrast dd{font-size:14px;line-height:1.65;margin:0;color:var(--story-muted)}
+.positioning-contrast>div:last-child dt{color:var(--story-accent)}
+.evidence-next .text-link{display:inline-block;margin-top:12px;color:var(--coral-ink);font-size:13px}
+@media(max-width:640px){.positioning-contrast{grid-template-columns:1fr;margin-top:20px}.positioning-contrast>div,.positioning-contrast>div+div{padding:14px 0;border-left:0}.positioning-contrast>div+div{border-top:1px solid var(--story-edge)}.positioning-contrast dt{font-size:15px;margin-bottom:5px}}

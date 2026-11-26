@@ -2,23 +2,45 @@
 
 ## X
 
-Your agents. On the same page.
+Parallel execution is easy. Coordinated development is hard.
 
-LangSpan brings shared context into existing coding-agent sessions, catches supported local edit overlaps and shares opt-in work updates across machines.
+LangSpan connects your existing coding agents across sessions, worktrees and machines.
 
-v0.1.0 for macOS and Linux.
+Run agents in parallel. Build as a team.
+
+Open source for macOS and Linux.
 https://langspan.dev/
 
-Attach the 18-second landscape or vertical cut. The walkthrough is an authored illustration with a real dashboard excerpt from a controlled run; it does not show a live model or measured time savings.
+Attach the existing local-coordination teaser only with its illustration and
+controlled-run labels. It is not a ten-session recording.
 
 ## LinkedIn
 
-When several developers work on the same feature with coding agents, the agents can move faster than the team can share context.
+Worktrees isolate files, not intent.
 
-LangSpan gives existing Claude Code and Codex sessions a shared view of related work. In one checkout it can refuse supported overlapping edits; across worktrees and machines it shares context without imposing a remote file lock.
+One agent renames a function. Another adds a caller on a different branch.
+Git merges both changes without a textual conflict, but the combined tests fail.
 
-The goal is to help people keep contributing to connected work instead of stepping aside to avoid interfering. That team-level outcome still needs comparative evidence.
+I'm building LangSpan, an open-source coordination layer for parallel agentic
+development. Keep your existing agents and Git workflow. Bring relevant work
+into their sessions, coordinate supported local edits, track session-owned
+changes, and verify the combined tree.
 
-LangSpan v0.1.0 is open source and available for macOS and Linux. See the interactive workflow, recorded evidence and quickstart at https://langspan.dev/.
+The goal is compatible parallel work with less manual relay and avoidable
+repair. Comparative results still need evidence.
 
-Attach the square or landscape teaser; preserve the visible illustration and controlled-run labels.
+LangSpan v0.1.0 is available for macOS and Linux. Explore the illustrated
+parallel workflow, the reproducible Git example and the recorded product
+evidence at https://langspan.dev/.
+
+Run agents in parallel. Build as a team.
+
+## Evidence and media
+
+Use the [parallel-work illustration](https://langspan.dev/#scale) or
+[semantic example](https://langspan.dev/#why) when the post discusses scale
+or cross-file compatibility. The published films show a narrower local
+workflow and actual dashboard excerpts from a scripted v0.1.0 run. No live
+model ran in that capture. Do not present the illustrative 5+5 topology as a
+measured benchmark. Link the [benchmark specification](https://github.com/Langspan/LangSpan.dev/issues/172)
+for the planned comparative evaluation.
