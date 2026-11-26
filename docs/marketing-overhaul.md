@@ -211,3 +211,24 @@ model evidence. No results are invented. The setup preview no longer shows
 the unpublished Homebrew tap as an installation step. Keep the v0.1.0
 installation path unchanged. Sources: core PRs #178, #179, #180, #184,
 #197, #190, #192, #199 and #183; benchmark README, tasks.py and ADR 0035.
+
+## Checklist Design refinement — November 26, 2026
+
+Reviewed the current deployed design using PR #27's retained desktop and mobile
+browser captures and the pinned Checklist Design landing page, tabs,
+accordion, spacing/grid and accessibility checklists. Preserve the established
+hero, brand, real product evidence and primary installation action.
+
+Three narrow changes: a native compact navigation disclosure restores links
+at tablet and mobile widths; the benchmark heading explicitly describes the
+experiment rather than implying established results; stacked semantic and
+benchmark illustrations use readable relation labels in place of orphaned
+horizontal connectors. Desktop animation layouts and clocks are untouched.
+
+Existing raw evidence, release labels, canonical story and generated Stageshow
+bundle are unchanged. Source-level checks passed on the local prototype.
+This environment blocked both localhost and file URL navigation in Chromium,
+so fresh candidate visual and browser validation has not completed. The
+existing browser suite now checks navigation availability, target size,
+keyboard dismissal, viewport geometry and compact diagram states.
+Do not claim the new page has passed rendered review before the checks run.

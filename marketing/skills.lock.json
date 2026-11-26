@@ -76,6 +76,13 @@
       "ref": "aed9cfd3277740755f6bfc1155c7aa645403b760",
       "path": "skills/gsap-performance",
       "role": "transform/opacity performance guidance; no GSAP runtime needed"
+    },
+    {
+      "repo": "Checklist-Design/skills",
+      "ref": "bfae71e507b1b7c03c12e0756402b60eb80f5d14",
+      "path": "skills/checklist-design",
+      "role": "rendered landing-page, navigation, spacing, tabs, accordion and accessibility review guidance",
+      "license": "MIT"
     }
   ]
 }
