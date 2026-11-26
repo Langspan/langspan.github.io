@@ -20,11 +20,18 @@ export async function checkProductFirst(browser,base,out,axe){
   await p.locator('[data-step="1"]').click();
   await p.locator('[data-open-evidence]').click();
   assert.equal(await p.locator('#agent-evidence').getAttribute('open'),'');
+  assert.equal(await p.locator('.record:visible').count(),1);
+  assert.equal(await p.locator('[data-record="refusal"]').isVisible(),true);
+  await p.locator('[data-record-choice="briefing"]').click();assert.equal(await p.locator('[data-record="briefing"]').isVisible(),true);
+  await p.locator('[data-record-choice="refusal"]').click();assert.equal(await p.locator('[data-record="refusal"]').isVisible(),true);
   const records=await p.locator('.record pre code').allTextContents();
   assert.deepEqual(records.map(x=>createHash('sha256').update(x).digest('hex')),hashes);
   await p.locator('#agent-evidence summary').click();
   await p.locator('[data-signature=new]').click();assert.equal(await p.locator('[data-sig-title]').innerText(),'Argument count matches');
   await p.locator('[data-signature=old]').click();assert.equal(await p.locator('[data-sig-title]').innerText(),'Potential call break');
+  await p.locator('[data-sig-example=rename]').click();assert.equal(await p.locator('[data-sig-title]').innerText(),'Function renamed');assert.ok((await p.locator('[data-sig-msg]').innerText()).includes('which was renamed to "load_config"'));
+  await p.locator('[data-signature=new]').click();assert.equal(await p.locator('[data-sig-title]').innerText(),'Updated function name');
+  await p.locator('[data-sig-example=count]').click();
   if(width===1440||width===390)await p.locator('#semantic-awareness').screenshot({path:out+'/'+width+'-product-first-signature.png'});
   await p.locator('.live-media img').evaluate(img=>img.decode());
   assert.equal(await p.locator('.live-media img').evaluate(img=>img.naturalWidth),1440);
@@ -42,10 +49,9 @@ export async function checkProductFirst(browser,base,out,axe){
    assert.equal(await tour.locator('#cap-tab-edit-coordination').getAttribute('aria-selected'),'true');
    await p.locator('#demo summary').click();
   }
-  await p.locator('[data-copy=setup-command]').click();assert.equal(await p.evaluate(()=>navigator.clipboard.readText()),'langspan setup');
-  await p.locator('.platform-downloads summary').click();
+  await p.locator('[data-copy=setup-command]').click();assert.equal(await p.evaluate(()=>navigator.clipboard.readText()),(await p.locator('#setup-command').textContent()).trim());
   assert.equal(await p.locator('[data-release-target]:visible').count(),4);
-  await p.locator('.platform-downloads summary').click();
+  assert.ok(await p.locator('#start').evaluate(el=>!!(el.compareDocumentPosition(document.querySelector('#semantic-awareness'))&Node.DOCUMENT_POSITION_FOLLOWING)));
   assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false);
   await p.addScriptTag({content:axe});const report=await p.evaluate(()=>axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));
   assert.deepEqual(report.violations.map(x=>({id:x.id,nodes:x.nodes.map(n=>n.target)})),[],'homepage accessibility '+width);
