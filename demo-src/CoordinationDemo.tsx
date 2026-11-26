@@ -7,18 +7,14 @@ import { Roll } from './vendor/stageshow/kit/motion/Roll'
 import { Collapse } from './vendor/stageshow/kit/motion/Collapse'
 import { StillContext } from './vendor/stageshow/kit/reduced-motion'
 import './coordination-demo.css'
+import STORY from '../marketing/story.json'
 
 // An authored, local-coordination illustration. This is not a terminal
 // recording, a CLI transcript, a filesystem lock, or an autonomous planner.
 // Four causal beats follow the real same-checkout admission boundary.
-const SCENES = [
-  { label: 'A starts an edit', title: 'One agent is already working here.', description: 'Agent A is working in src/auth/session.ts in this checkout.' },
-  { label: 'Overlap is caught', title: 'The overlapping request gets a clear answer.', description: 'Agent B requests the same file. LangSpan denies that request because Agent A still holds it.' },
-  { label: 'B chooses tests', title: 'The agent chooses its next move.', description: 'Agent B independently chooses tests/session.test.ts and makes a new edit request.' },
-  { label: 'Both keep moving', title: 'Separate work keeps moving.', description: 'B’s test-file edit can proceed while A keeps working. The agent tools keep their own permission checks.' },
-] as const
-const OFFSETS = [0, 3400, 7000, 10600]
-const DURATION = 14300
+const SCENES = STORY.stageshow.scenes
+const OFFSETS = STORY.stageshow.offsetsMs
+const DURATION = STORY.stageshow.durationMs
 type Scene = { beat: number }
 type MotionWindow = { langspanMotionPaused?: boolean }
 
@@ -38,7 +34,7 @@ const brandTokens = {
 function AgentA({ compact }: { compact: boolean }) {
   return <Window chrome="terminal" lights="grey" title="Agent A · session 01" className="ls-terminal ls-agent-a">
     <div className="ls-intent"><span>Working on</span><strong>Session refresh</strong></div>
-    <Prompt path="Edit"><span>src/auth/session.ts</span></Prompt>
+    <Prompt path="Edit"><span>{STORY.files.shared}</span></Prompt>
     <Code className="ls-diff" numbers={!compact} start={42} lines={[
       { text: 'return session;', kind: 'del' },
       { text: 'return refreshSession(session);', kind: 'add' },
@@ -58,12 +54,12 @@ function AgentB({ beat, compact }: { beat: number; compact: boolean }) {
     </div>
     <div className="ls-b-events" data-visible={beat >= 1} aria-hidden={beat < 1}>
       <div className="ls-denied-request">
-        <Prompt path="Edit"><span>src/auth/session.ts</span></Prompt>
+        <Prompt path="Edit"><span>{STORY.files.shared}</span></Prompt>
         <div className="ls-denial"><span className="ls-denial-bar" aria-hidden /><div><strong>Overlapping edit denied</strong><span>Agent A currently holds this file.</span></div></div>
       </div>
       <Collapse open={beat >= 2} reveal="drop" className="ls-next-request">
         <div className="ls-agent-choice">Agent B chooses another task</div>
-        <Prompt path="Edit"><span>tests/session.test.ts</span></Prompt>
+        <Prompt path="Edit"><span>{STORY.files.independent}</span></Prompt>
         <div className="ls-test-result" data-visible={beat === 3} aria-hidden={beat < 3}>
           <Code numbers={false} lines={[{ text: compact ? 'it("refreshes sessions", …)' : 'it("refreshes an expired session", …)', kind: 'add' }]} />
           <div className="ls-admitted"><span className="ls-status-mark" aria-hidden>✓</span><Roll variant="fade">{beat === 3 ? 'Admitted · different file' : 'New request'}</Roll></div>
@@ -77,8 +73,8 @@ function SharedWork({ beat }: { beat: number }) {
   return <div className="ls-shared-work">
     <div className="ls-shared-title"><img src="assets/brand/langspan-icon-dark.svg" alt="" width="24" height="24" /><span>LangSpan</span><span className="ls-shared-scope">shared work context</span></div>
     <div className="ls-work-files">
-      <div className="ls-work-file"><span className="ls-owner">A</span><code>src/auth/session.ts</code><span className="ls-file-state">held</span></div>
-      <div className="ls-work-file ls-second-file" data-visible={beat >= 2} aria-hidden={beat < 2}><span className="ls-owner ls-owner-b">B</span><code>tests/session.test.ts</code><span className="ls-file-state"><Roll variant="fade">{beat === 3 ? 'admitted' : 'requested'}</Roll></span></div>
+      <div className="ls-work-file"><span className="ls-owner">A</span><code>{STORY.files.shared}</code><span className="ls-file-state">held</span></div>
+      <div className="ls-work-file ls-second-file" data-visible={beat >= 2} aria-hidden={beat < 2}><span className="ls-owner ls-owner-b">B</span><code>{STORY.files.independent}</code><span className="ls-file-state"><Roll variant="fade">{beat === 3 ? 'admitted' : 'requested'}</Roll></span></div>
     </div>
   </div>
 }

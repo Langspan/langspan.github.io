@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "skills": [
+    {
+      "repo": "benjitaylor/skills",
+      "ref": "299140fafd08df55a9c234e610c3f64af3f45531",
+      "path": "stageshow",
+      "role": "vendored actual kit",
+      "license": "MIT + NOTICE"
+    },
+    {
+      "repo": "ChanMeng666/chanmeng-svg-animation-studio",
+      "ref": "539208618e6ca68963474f77921f62e39713bb0e",
+      "path": "skills/chanmeng-svg-product-card",
+      "role": "actual init-kit, card, glyphs, timelines, check and capture",
+      "license": "MIT"
+    },
+    {
+      "repo": "display-dev/product-film",
+      "ref": "fd9db88a76945bbd1d678739cad411c1a61bce1e",
+      "path": "skills/product-film",
+      "role": "actual new-film, walkthrough/render and audit",
+      "license": "MIT"
+    },
+    {
+      "repo": "jakubkrehel/skills",
+      "ref": "672ae44ace6aaed65b86cbb1e2fd6fbea0e79578",
+      "path": "skills/better-motion",
+      "role": "motion and UI review guidance"
+    },
+    {
+      "repo": "shouvik12/living-canvas",
+      "ref": "14a4a4f160d951d9745090a8c7f4822edd32bb18",
+      "path": ".",
+      "role": "existing original deterministic canvas informed by skill; no copied runtime",
+      "license": "MIT"
+    },
+    {
+      "repo": "pbakaus/impeccable",
+      "ref": "9e460a87ef338ee9d12c7beed8fedc597a5af5f7",
+      "path": ".agents/skills/impeccable",
+      "role": "critique and optional detector"
+    },
+    {
+      "repo": "latent-spaces/brag",
+      "ref": "06379432a9243c951dfcc051153be18d2d261044",
+      "path": "skills/brag",
+      "role": "social format and pacing guidance; Hyperframes not needed"
+    },
+    {
+      "repo": "Anshgrover23/product-demo-playbook",
+      "ref": "3a0810b57b9f48aba5fe3a2c169a90e71021bd01",
+      "path": "skills/product-demo",
+      "role": "read workflow guidance; no code reuse; no root LICENSE found"
+    },
+    {
+      "repo": "rossark0/rossark-motion-skill",
+      "ref": "9b20964e32f07f8ac7e2948cd175746fa4a7712f",
+      "path": ".",
+      "role": "calm motion guidance only; mascot rig irrelevant"
+    },
+    {
+      "repo": "rizaardiyanto1412/stageshow-js",
+      "ref": "462eae8bcec7d4e039ccb325a842fe594a7cb725",
+      "path": ".",
+      "role": "reviewed alternative; existing React island avoids duplication"
+    },
+    {
+      "repo": "emilkowalski/skills",
+      "ref": "64eb3deb9a5fbfa041faf783e0bc3fd635872e9c",
+      "path": "skills/choreograph",
+      "role": "sequence/interrupt review"
+    },
+    {
+      "repo": "greensock/gsap-skills",
+      "ref": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+      "path": "skills/gsap-performance",
+      "role": "transform/opacity performance guidance; no GSAP runtime needed"
+    }
+  ]
+}

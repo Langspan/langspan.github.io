@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>LangSpan marketing film</title>
+<style>
+:root{--paper:#F4F3EF;--ink:#151513;--slate:#3F3E44;--coral:#D87859;--accent:#A84429;--muted:#66655E;--surface:#242422;--line:#DCDAD2}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--paper);color:var(--ink);font:400 16px/1.4 Arial,Helvetica,sans-serif}
+#stage{position:relative;width:100%;height:100%;overflow:hidden}
+.scene{position:absolute;inset:0;padding:30px 36px 24px;display:none;grid-template-rows:34px minmax(0,1fr) auto;gap:14px;background:var(--paper)}
+.scene.active{display:grid}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;min-width:0;color:var(--muted);font-size:12px}
+.top img{display:block;width:124px;height:auto}
+.top .edition{font-weight:600}
+.content{min-width:0;min-height:0;display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);align-items:center;gap:28px}
+.copy{min-width:0}
+h1{font-size:clamp(26px,4.1vw,45px);font-weight:700;line-height:1.02;letter-spacing:-.055em;white-space:pre-line;margin:0 0 17px;overflow-wrap:break-word}
+.body{font-size:clamp(15px,1.9vw,20px);line-height:1.47;color:var(--slate);margin:0;max-width:32ch}
+.art{min-width:0;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.art img{display:block;width:100%;height:auto;max-height:100%;object-fit:contain}
+.art.stage{border-radius:9px;background:var(--ink);padding:12px;box-shadow:0 1px 0 var(--line)}
+.art.stage img{max-height:330px}
+.art.hero img{max-height:340px}
+.proof{display:grid;grid-template-rows:auto auto;gap:12px;width:100%;padding:10px;border-radius:8px;background:var(--ink)}
+.proof img{width:100%;max-height:160px;object-fit:contain}
+.proof-caption{font-size:11px;font-weight:650;color:var(--paper);margin:1px 0 5px;line-height:1.3}
+.footer{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:9px;font-size:12px;color:var(--muted);align-items:center;min-height:30px}
+.footer .scope{max-width:75%;line-height:1.3}
+.footer .step{font-variant-numeric:tabular-nums}
+.scene[data-kind=text] .content,.scene[data-kind=cta] .content{grid-template-columns:1fr}
+.scene[data-kind=text] .copy,.scene[data-kind=cta] .copy{max-width:700px}
+.scene[data-kind=text] h1,.scene[data-kind=cta] h1{font-size:clamp(44px,7.2vw,80px);line-height:.99;letter-spacing:-.06em}
+.scene[data-kind=text] .body,.scene[data-kind=cta] .body{max-width:50ch;font-size:clamp(18px,2.5vw,24px)}
+.scene[data-kind=cta]{background:var(--ink);color:var(--paper)}
+.scene[data-kind=cta] .body,.scene[data-kind=cta] .top,.scene[data-kind=cta] .footer{color:#c6c2b8}
+.scene[data-kind=cta] .footer{border-color:#3F3E39}
+.url{display:inline-block;margin-top:25px;color:var(--coral);font-size:24px;font-weight:600}
+@media(max-width:640px){
+ .scene{padding:22px 23px 18px;grid-template-rows:29px minmax(0,1fr) auto;gap:9px}
+ .top img{width:108px}.top,.footer{font-size:11px}
+ .content{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);align-items:start;gap:13px;align-content:center}
+ .copy h1{font-size:clamp(27px,6.2vw,39px);margin-bottom:8px;white-space:normal}
+ .copy .body{font-size:15px;max-width:50ch;line-height:1.4}
+ .art{align-items:center;justify-content:center;height:100%}
+ .art.stage{padding:8px}.art.stage img{max-height:100%;width:auto;max-width:100%}
+ .art.hero img{max-height:100%;width:auto;max-width:100%}
+ .proof{gap:6px;padding:8px;height:100%;grid-template-rows:minmax(0,1fr) minmax(0,1fr)}
+ .proof>div{min-height:0;display:flex;flex-direction:column}
+ .proof img{min-height:0;flex:1;max-height:100%;width:100%;object-fit:contain}
+ .proof-caption{font-size:10px;flex:none}
+ .footer .scope{max-width:85%}
+ .scene[data-kind=text] .content,.scene[data-kind=cta] .content{grid-template-rows:1fr;align-items:center}
+ .scene[data-kind=text] h1,.scene[data-kind=cta] h1{font-size:clamp(44px,10vw,65px);margin-bottom:16px;white-space:pre-line}
+ .scene[data-kind=text] .body,.scene[data-kind=cta] .body{font-size:20px}
+}
+@media(max-width:640px) and (min-height:750px){
+ .scene{padding:38px 30px 28px;gap:26px;grid-template-rows:40px minmax(0,1fr) auto}
+ .top img{width:144px}.top,.footer{font-size:14px}
+ .content{grid-template-rows:auto minmax(0,1fr);gap:30px;align-content:center}
+ .copy h1{font-size:45px;line-height:1.04;white-space:pre-line}
+ .copy .body{font-size:20px;line-height:1.5;max-width:30ch}
+ .art.stage,.art.hero{align-self:center;height:auto;max-height:100%}
+ .proof{height:auto;gap:18px;padding:12px}.proof img{max-height:260px}.proof-caption{font-size:13px}
+ .footer{min-height:40px}.scene[data-kind=text] h1,.scene[data-kind=cta] h1{font-size:61px}
+ .scene[data-kind=text] .body,.scene[data-kind=cta] .body{font-size:23px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body><main id="stage"></main><script src="story-data.js"></script><script>
+'use strict';
+const q=new URLSearchParams(location.search), name=q.get('format')||'launch', spec=STORY.film.plans[name]||STORY.film.plans.launch;
+const stage=document.getElementById('stage'), elements=[];
+const create=(tag,cls,text)=>{let e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e};
+const img=(src,alt)=>{let e=create('img');e.src=src;e.alt=alt;return e};
+let start=0;
+for(let i=0;i<spec.beats.length;i++){
+ const [key,duration]=spec.beats[i], item=STORY.film.scenes[key];
+ const scene=create('section','scene');scene.dataset.kind=item.kind;scene.id='scene-'+i;
+ const top=create('div','top');top.append(img('media/logo-'+(item.kind==='cta'?'dark':'light')+'.svg','LangSpan'),create('span','edition',STORY.release));scene.append(top);
+ const content=create('div','content'),copy=create('div','copy');copy.append(create('h1','headline',item.title.replaceAll('\\n','\n')),create('p','body',item.body));content.append(copy);
+ if(item.kind==='intro'||item.kind==='workflow'){const art=create('div','art '+(item.kind==='intro'?'hero':'stage'));art.append(img('media/'+item.asset+'.png',item.scope));content.append(art);}
+ if(item.kind==='proof'){const art=create('div','art');const p=create('div','proof');for(const [caption,asset] of [['Recorded overlap refusal','denial'],['Independent work in progress','sessions']]){const group=create('div');group.append(create('p','proof-caption',caption),img('media/proof-'+asset+'.png',caption));p.append(group);}art.append(p);content.append(art);}
+ if(item.kind==='cta')copy.append(create('div','url','langspan.dev'));
+ scene.append(content);
+ const footer=create('div','footer');footer.append(create('span','scope',item.scope||'Coordination for existing coding agents'),create('span','step',String(i+1).padStart(2,'0')+' / '+String(spec.beats.length).padStart(2,'0')));scene.append(footer);
+ stage.append(scene);elements.push({scene,copy,start,duration});start+=duration;
+}
+window.READY=Promise.all([...document.images].map(i=>i.decode()));
+window.seek=function(t){t=Math.max(0,Math.min(start-.00001,t));const active=elements.findLastIndex(e=>t>=e.start);
+ for(let i=0;i<elements.length;i++){const e=elements[i];e.scene.classList.toggle('active',i===active);e.scene.setAttribute('aria-hidden',String(i!==active));e.copy.style.opacity='1';e.copy.style.transform='none';}
+ // Hard editorial cuts are intentional: don't animate a fake cursor or UI state.
+};
+window.seek(0);
+</script></body></html>
