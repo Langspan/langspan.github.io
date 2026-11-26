@@ -98,7 +98,7 @@
       for (const k in s.layers) {
         const el = layerEls[k], v = s.layers[k];
         if (!el) continue;
-        if (k === 'rule') el.style.transform = 'scaleY(' + v.toFixed(4) + ')';
+        if (k === 'rule') { el.style.transform = 'scaleY(' + v.toFixed(4) + ')'; el.style.opacity = '1'; el.style.visibility = v < 0.001 ? 'hidden' : 'visible'; }
         else { el.style.opacity = v.toFixed(4); el.style.visibility = v < 0.001 ? 'hidden' : 'visible'; }
       }
       s.cards.forEach(([o, y], i) => {
