@@ -8,6 +8,7 @@ import { Collapse } from './vendor/stageshow/kit/motion/Collapse'
 import { StillContext } from './vendor/stageshow/kit/reduced-motion'
 import './coordination-demo.css'
 import STORY from '../marketing/story.json'
+import { mountCapabilityScenes } from './CapabilityExplorer'
 
 // An authored, local-coordination illustration. This is not a terminal
 // recording, a CLI transcript, a filesystem lock, or an autonomous planner.
@@ -18,7 +19,7 @@ const DURATION = STORY.stageshow.durationMs
 type Scene = { beat: number }
 type MotionWindow = { langspanMotionPaused?: boolean }
 
-const brandTokens = {
+export const brandTokens = {
   '--ss-font': 'var(--sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif)', '--ss-mono': '"SFMono-Regular", Consolas, "Liberation Mono", monospace',
   '--ss-canvas': '#151513', '--ss-surface': '#242422', '--ss-chrome': '#242422',
   '--ss-text': '#bab8b0', '--ss-text-strong': '#f4f3ef', '--ss-text-faint': '#9e9b93',
@@ -133,9 +134,9 @@ function Demo({ onReady, initialWidth }: { onReady: () => void; initialWidth: nu
     let frame = 0
     let previous = performance.now()
     const tick = (now: number) => {
-      elapsed.current = Math.min(DURATION, elapsed.current + Math.min(now - previous, 100))
+      elapsed.current = Math.max(0, Math.min(DURATION, elapsed.current + Math.max(0, Math.min(now - previous, 100))))
       previous = now
-      const next = OFFSETS.findLastIndex(at => elapsed.current >= at)
+      const next = Math.max(0, OFFSETS.findLastIndex(at => elapsed.current >= at))
       if (next !== beatRef.current) { beatRef.current = next; setBeat(next) }
       if (elapsed.current >= DURATION) { setFinished(true); return }
       frame = requestAnimationFrame(tick)
@@ -206,11 +207,11 @@ function Demo({ onReady, initialWidth }: { onReady: () => void; initialWidth: nu
 class DemoBoundary extends Component<{ children: ReactNode; onError: () => void }, { failed: boolean }> {
   state = { failed: false }
   static getDerivedStateFromError() { return { failed: true } }
-  componentDidCatch() { this.props.onError() }
+  componentDidCatch(error:Error) { console.error('LangSpan edit scene:',error.message); this.props.onError() }
   render() { return this.state.failed ? null : this.props.children }
 }
 
-function mount() {
+function mountOriginal() {
   const target = document.getElementById('coordination-demo')
   if (!target || target.dataset.demoMounted || !('ResizeObserver' in window) || !('IntersectionObserver' in window)) return
   const fallbacks = Array.from(target.children) as HTMLElement[]
@@ -237,6 +238,16 @@ function mount() {
     root.render(<DemoBoundary onError={restore}><Demo onReady={onReady} initialWidth={target.clientWidth || 1100} /></DemoBoundary>)
     target.dataset.demoMounted = 'true'
   } catch { restore() }
+}
+
+function mount() {
+  mountCapabilityScenes(brandTokens)
+  const explorer=document.querySelector<HTMLElement>('[data-capability-explorer]')
+  if(!explorer){mountOriginal();return}
+  const showOriginal=()=>{if(explorer.dataset.active==='edit-coordination')mountOriginal()}
+  window.addEventListener('langspan:capability',showOriginal)
+  new MutationObserver(showOriginal).observe(explorer,{attributes:true,attributeFilter:['data-active']})
+  showOriginal()
 }
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount, { once: true })

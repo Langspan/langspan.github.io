@@ -5,6 +5,8 @@ on:
       - '**.html'
       - '**.css'
       - '**.js'
+      - 'demo-src/**'
+      - 'marketing/story.json'
       - 'review/**'
       - '.github/workflows/launch-review.yml'
   workflow_dispatch:
@@ -21,6 +23,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Verify generated Stageshow bundle
+        working-directory: demo-src
+        run: |
+          npm ci --ignore-scripts
+          npm run build
+          node check-capability-fallbacks.mjs
+          git diff --exit-code -- ../assets/coordination-demo.js
       - name: Install pinned browser checks
         working-directory: review
         run: |
