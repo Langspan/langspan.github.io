@@ -2,7 +2,7 @@ name: Verify live marketing deployment
 on:
   push:
     branches: [main]
-    paths: ['assets/product/marketing/**', 'assets/product/social-card.png', 'index.html', 'marketing/published-assets.json', '.github/workflows/verify-live-marketing.yml']
+    paths: ['assets/product/marketing/**', 'assets/product/social-card.png', 'index.html', 'assets/parallel-story.*', 'review/live-marketing.mjs', 'marketing/parallel-story.json', 'marketing/published-assets.json', '.github/workflows/verify-live-marketing.yml']
   workflow_dispatch:
 permissions:
   contents: read

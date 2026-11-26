@@ -24,9 +24,7 @@ the motionless [light](assets/product/langspan-card-light-still.svg) or
 
 ## Explore six capabilities
 
-The [product page](https://langspan.dev/) follows the approved product-led
-wireframe: shared-awareness hero, before/after problem, three-step explanation,
-interactive capability explorer, technical depth, recorded evidence, and setup.
+The [product page](https://langspan.dev/) leads with parallel agentic development: an interactive 2/6/10-session local/cloud illustration, a reproducible clean-merge semantic failure, attributed independent research, the coordination layer, six-capability explorer, local-first architecture, recorded evidence and setup. The scale illustration is not a concurrency benchmark. The semantic example is reproduced with real Git and Node in `review/semantic-git-example.mjs`; no model or LangSpan runs in that fixture. The hypothetical briefing-assisted recovery is explicitly labelled.
 
 [Peer briefings](https://langspan.dev/#peer-briefings),
 [edit coordination](https://langspan.dev/#edit-coordination),

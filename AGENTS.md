@@ -36,7 +36,7 @@ evidence for product claims. Its published binary availability and live-host ver
 different statements; local edit checks and remote awareness have different
 scope. Older status notes do not override newer retained evidence.
 
-The approved page sequence is hero, comparison, three-step explanation, six-capability explorer, technical depth, recorded evidence, release setup and FAQ. The original collision demonstration is retained inside the edit tab. The expanded scenes are owned by marketing/story.json and rendered by demo-src/CapabilityExplorer.tsx using the same vendored Stageshow kit. Keep static fallbacks and per-capability evidence synchronized. Motion explains work and context, not fake agent actions.
+The current page leads with the 2/6/10-session parallel-work hero, semantic conflict, external research, existing-stack coordination layer, six-capability explorer, local-first architecture, recorded evidence, release setup and FAQ. `marketing/parallel-story.json` is the canonical scale/semantic/research narrative. `assets/parallel-story.js` exposes a deterministic seek contract, and `review/semantic-git-example.mjs` reproduces a clean Git merge with failing combined tests. Do not represent the scale illustration or the hypothetical briefing-assisted recovery as a measured LangSpan outcome. The original collision demonstration is retained inside the edit tab. The expanded scenes are owned by marketing/story.json and rendered by demo-src/CapabilityExplorer.tsx using the same vendored Stageshow kit. Keep static fallbacks and per-capability evidence synchronized. Motion explains work and context, not fake agent actions.
 
 ## Source and delivery
 
