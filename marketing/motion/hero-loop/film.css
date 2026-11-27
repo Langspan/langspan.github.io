@@ -1,52 +1,52 @@
-/* Phone cut, 540 x 675 CSS px at 2x = 1080 x 1350. Every visible text is at least 14 CSS px (28 px in the frame). */
+/* Phone cut, 540 x 675 CSS px at 2x = 1080 x 1350. Every visible text is at least 14 CSS px (28 px in the frame).
+   The film frames the home page's own hero (assets/product-first.js, window.LangSpanHero) in its narrow
+   layout: time runs top to bottom in two lane columns. Only sizes and positions change here, and the
+   inspector becomes a compact bottom sheet; the content, the cards and the timing are the page's own. */
 body.film-mode{margin:0;overflow:hidden;background:var(--paper);color:var(--ink)}
 body.film-mode> :not(#film){display:none!important}
-#film{position:relative;width:540px;height:675px;padding:26px 24px 20px;overflow:hidden;display:grid;grid-template-rows:auto 1fr auto;gap:16px;background:var(--paper)}
+#film{position:relative;width:540px;height:675px;padding:22px 24px 18px;overflow:hidden;display:grid;grid-template-rows:auto 1fr auto;gap:14px;background:var(--paper)}
 #film .film-header,#film .film-footer{display:flex;align-items:center;justify-content:space-between;gap:12px}
 #film .film-header img{width:136px;height:auto;display:block}
 #film .film-context{font-size:14px;font-weight:600;color:var(--muted)}
-#film .film-stage{display:flex;align-items:center;min-height:0}
-/* The home page hero loop (assets/product-first.js, window.LangSpanHero). The film
-   frames the page's own panel; only sizes change, never the content or timing. */
-#film .hl{width:100%;margin:0;min-width:0;border-radius:12px;box-shadow:0 14px 36px #15151313}
-#film .hl-head{padding:12px 16px;font-size:16px;min-height:48px}
-#film .hl-body{padding:14px 16px 16px;gap:12px;grid-template-areas:"card" "rows"}
-#film .hl-tabs,#film .hl-foot,#film .hl-dots{display:none!important}
-#film .hl-row{min-height:66px;padding:10px 12px;grid-template-columns:34px minmax(0,1fr) auto;gap:10px}
-#film .hl-av{width:32px;height:32px;font-size:15px}
-#film .hl-row strong{font-size:16px}
-#film .hl-line{font-size:14px;line-height:1.4}
-#film .hl-line .plain{font-size:15px}
-#film .hl-status{font-size:15px;white-space:nowrap}
-#film .hl-card{padding:16px 18px 18px;gap:10px}
-#film .hl-kind{font-size:17px}
-#film .hl-card code{font-size:17px;line-height:1.45}
-#film .hl-card p{font-size:16px;line-height:1.45}
-#film .chip{font-size:14px;padding:5px 9px 5px 8px;gap:7px}
-#film .chip::before{width:8px;height:8px}
-#film .film-footer{display:flex;align-items:center;justify-content:space-between;gap:12px}
-#film .film-header img{width:136px;height:auto;display:block}
-#film .film-context{font-size:14px;font-weight:600;color:var(--muted)}
-#film .film-stage{display:flex;align-items:center;min-height:0}
-#film .demo{width:100%;margin:0;min-width:0;border-radius:12px;box-shadow:0 14px 36px #15151313}
-#film .demo-head{padding:12px 16px;font-size:15px;min-height:46px}
-#film .demo-head .mode{font-size:14px;white-space:nowrap}
-#film .demo-body{padding:14px 16px 16px}
-#film .timeline{margin-bottom:12px;padding:4px;gap:4px}
-#film .timeline button{font-size:14px;min-height:38px;padding:6px}
-#film .session-title{font-size:14px;letter-spacing:.02em;margin-bottom:8px}
-#film .session{min-height:64px;padding:10px 12px;grid-template-columns:34px minmax(0,1fr) auto;gap:10px}
-#film .session strong{font-size:16px}
-#film .session code{font-size:14px;line-height:1.4}
-#film .status{font-size:14px;white-space:nowrap}
-#film .avatar{font-size:14px}
-#film .inspector{height:178px;min-height:178px;max-height:none;padding:14px 16px;gap:8px;margin-top:12px}
-#film .inspector-head strong{font-size:17px;line-height:1.35}
-#film .inspector-head span{font-size:14px}
-#film .inspector code{font-size:15px;line-height:1.45}
-#film .inspector p{font-size:15px;line-height:1.45}
-#film .demo-foot,#film .progress,#film .hero-evidence,#film .evidence-disclosure{display:none!important}
+#film .film-stage{display:flex;min-height:0}
 #film .film-footer{flex-direction:column;align-items:flex-start;gap:2px;border-top:1px solid var(--line);padding-top:10px}
 #film .film-footer strong{font-size:17px;font-weight:650;color:var(--ink)}
 #film .film-footer span{font-size:14px;color:var(--muted)}
-#film .hl *{transition:none!important;animation:none!important}
+
+#film .live{width:100%;margin:0}
+#film .live-band{padding:0;background:none;border-radius:0;height:100%}
+#film .live-frame{height:100%;border-radius:12px;border:1px solid var(--line);box-shadow:0 14px 36px #15151313}
+#film .live-bar,#film .live-tools,#film .live-foot,#film .lane-head span span:last-child{display:none!important}
+#film .live-main{display:block;position:relative;height:100%}
+#film .live-canvas{height:100%}
+#film .live-status{top:10px;left:12px;font-size:14px}
+#film .lane-head{top:36px!important;width:43%}
+#film .lane-head.lane-a{left:2%}#film .lane-head.lane-b{left:55%}
+#film .lane-head strong{font-size:15px}
+#film .lane-head span span{font-size:14px}
+#film .lane-line.lane-a{left:23.5%}#film .lane-line.lane-b{left:76.5%}
+#film .lane-line{top:88px!important}
+#film .card{width:43%;height:auto;gap:2px;padding:6px 10px 8px}
+#film .card.held{height:auto;padding:0}
+#film .card-hit{padding:6px 10px 8px;gap:2px}
+#film .card .verb{font-size:15px}
+#film .card code{font-size:14px}
+#film .card .sub,#film .card.held .who{font-size:14px}
+#film .card code .dir{display:none}
+#film [data-card=card-hook]{left:2%;top:92px}
+#film [data-card=card-dash]{left:2%;top:178px}
+#film [data-card=card-graph]{left:2%;top:250px}
+#film [data-card=card-tests]{left:55%;top:178px}
+#film [data-card=card-held]{left:55%;top:244px}
+#film [data-card=card-read]{left:55%;top:372px}
+#film [data-card=card-saved]{left:55%;top:434px}
+#film .live-world,#film .wire-v{height:100%}
+/* The wire joins the same two cards as on the page: #29's edits of src/hook.rs and #28's held write. */
+#film .wire-v path{d:path("M 155.7 160 C 175 160, 171 370, 190.3 370")}
+#film .wire-label{left:50%;top:214px;font-size:14px;padding:1px 6px}
+#film .inspector{position:absolute;left:0;right:0;bottom:0;margin:0;border-radius:16px 16px 0 0;padding:8px 16px 14px;font-size:14px;z-index:5}
+#film .insp-head code,#film .insp-head span,#film .inspector code{font-size:14px}
+#film .insp-head button,#film .insp-path,#film .insp-changed,#film .insp-saw,#film .insp-told,#film .insp-foot{display:none!important}
+#film .insp-row{padding:6px 0 0;border-top:0}
+#film .insp-row>span{font-size:14px}
+#film .live *{transition:none!important;animation:none!important}

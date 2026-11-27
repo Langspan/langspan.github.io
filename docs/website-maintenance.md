@@ -125,8 +125,9 @@ records the pinned upstream files and the one local `Stage` extension.
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Home page: hero loop, problem, what each agent sees, get started, LangSpan Live, evidence, questions and hand-off |
-| `assets/product-first.css`, `assets/product-first.js` | Home page layout, light and dark themes, the hero loop clock and `window.LangSpanHero` |
+| `index.html` | Home page, revision 2: recorded Live replay in the hero, thesis, scenes, how it works, pending proof, across computers, works with, get started, open source, questions, for agents and closing |
+| `assets/product-first.css`, `assets/product-first.js` | Home page layout, light and dark themes, the hero loop clock, camera and inspector, and `window.LangSpanHero` |
+| `assets/evidence/hero-slice-2026-11-25.json` | The recorded event slice the hero replays; every hero card cites its seq numbers |
 | `assets/proof.css` | Recorded, Simulated and Illustration chips and the host evidence table, shared by both pages |
 | `assets/site.css` | Responsive layout, focus states and reduced-motion support |
 | `assets/site.js` | Page interactions, setup choices, copy controls and motion coordination |

@@ -82,7 +82,7 @@ drift. Land a sound hit one frame after its picture event.
 | Scene kit demo and the older films | `marketing/story.json` (scene offsets and `motion`) |
 | Scale and semantic stories | `marketing/parallel-story.json` |
 
-The hero loop's file holds the 10-second clock at 30 fps, every event with
+The hero loop's file holds the 12-second clock at 30 fps, every event with
 its target, motion and text, the declared reading holds and the phone cut's
 size. The site publishes only `assets/`, so the hero script carries the same
 values; the phone cut's renderer fails if they differ.
@@ -94,8 +94,7 @@ An agent can then render, check and fix any frame on its own, and the film
 scripts can capture it. The site's contracts:
 
 - `window.LangSpanHero = { element, timing, renderAt(seconds) }` for the
-  hero loop. Until the hero exposes it, the phone cut drives the current
-  coordination panel by step.
+  hero loop.
 - `window.LangSpanCanvas.render(seconds)`,
   `window.LangSpanParallel.seek(seconds, count)`,
   `window.LangSpanBenchmark.seek(seconds)` and
@@ -141,7 +140,7 @@ link to it), **Simulated** (a controlled run with constructed input) or
 **Illustration** (authored). Put the label on the visual and in its
 caption. Never show an outcome LangSpan hasn't measured. A film made from
 the page's own component carries the page's labels; the phone cut's footer
-reads "Recorded messages · illustrated continuation".
+reads "LangSpan’s own agents at work".
 
 ## QA that measures motion
 
@@ -150,9 +149,9 @@ motion as well:
 
 1. **Freeze detection.** Run a freeze detector on the decoded draft. Every
    freeze that the timing file doesn't declare is a bug. A 150 ms feedback
-   change to one word sits below a detector's noise floor, so a declared
-   hold may run on through it; check instead that each feedback event
-   changes the decoded pixels.
+   change to one word, or one small card fading onto a light canvas, sits
+   below a detector's noise floor, so a declared hold may run on through it;
+   check instead that each such event changes the decoded pixels.
 2. **Change per second.** Plot the mean pixel change per second across the
    render. Peaks sit on events, and holds are flat only where the timing
    file says to hold.
@@ -227,8 +226,9 @@ element is the headline text, not an image or a video.
   `loading="lazy"`. A first-screen image never has `loading="lazy"`.
 - **Pause.** Anything that moves for more than 5 seconds, starts on its own
   and sits beside other content has a visible pause control (WCAG 2.2.2).
-  Starting on scroll counts as starting on its own. The hero loop stops
-  after 3 loops on the refusal frame.
+  Starting on scroll counts as starting on its own. The hero loops
+  without stopping while it is on screen; its Pause control sits with the
+  canvas controls.
 - **Reduced motion.** Animate only under
   `prefers-reduced-motion: no-preference`, and listen for changes. With
   reduced motion, nothing plays on its own and the static state is

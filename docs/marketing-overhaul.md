@@ -322,3 +322,46 @@ unresolved anchor. At 390 × 844 the hero panel is 370 px tall and the recorded
 refusal line starts at y = 636. The hero's `timing.events`, `easing` and
 `holds_s` equal those in the timing file from pull request #35. Not checked:
 playback on a real phone, and the phone cut's own render and freeze checks.
+
+## Home page, revision 2 — 27 November 2026
+
+Implements the owner-approved wireframe for langspan.github.io#39 and fixes
+#40, with the owner's later direction on tone: no hedging in body copy, every
+limit stated once in the questions, no placeholders and no dates on the page.
+
+- Sections: hero, thesis and stages, what Git doesn't see (four scenes and
+  Try it), how it works, across computers, works with, get started, open
+  source, questions, for agents, closing.
+- The proof section stays in `index.html` inside a comment until the
+  benchmark publishes real numbers (LangSpan.dev #495, results from #172).
+  The scenes that have no real recording (heard a change, rename held,
+  checked before merging) are left out.
+- Hero: LangSpan Live's "Now" view loops a slice of LangSpan's own agents,
+  two Claude Code sessions in one checkout. The caption reads "LangSpan's own
+  agents at work"; the page shows no date. The slice is
+  `assets/evidence/hero-slice-2026-11-25.json`, exported read-only from the
+  dogfood coordinator's event log on 25 November 2026, 19:56:19 to 19:57:53
+  (seq 29121 to 29290, plus 28584). It keeps seq, type, time, paths, lane
+  labels, the tool of an observed operation, the origin of a source
+  observation, the other lane of a held write or a message, and the
+  repository and branch. It drops prompts, message text, digests, session,
+  lease, operation and workspace IDs, symbols and line ranges, workspace
+  roots and home paths, events of other sessions, and events that name no
+  session. Each card cites its seq numbers in `data-seq`; the timing file
+  cites them per event.
+- The hero is hand-built HTML and SVG with no new dependency. At 1280 px and
+  wider, time runs left to right and the inspector sits over the right of
+  the canvas; below that, time runs top to bottom in two lane columns, with
+  the inspector beside the canvas or, under 760 px, under it. The canvas
+  controls are Pause, zoom in, zoom out, Fit and Follow newest (on by
+  default); dragging pans. Reduced motion, `?motion=static` and a page
+  without JavaScript show the final frame.
+- Timing: `marketing/motion/hero-loop/timing.json` is a 12-second clock at
+  30 fps (360 frames) that loops while the hero is on screen.
+- #40: the version shows the latest release (v0.8.0 until
+  `assets/latest-release.js` reads a newer one), and the host table and the
+  technical guide's host states match the product README.
+- The phone-cut check treats a small card entrance like a feedback change:
+  when no frame-to-frame change reaches the freeze detector's floor, a
+  declared hold may run through it, and the entrance must still change the
+  decoded pixels.

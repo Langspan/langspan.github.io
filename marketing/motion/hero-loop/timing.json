@@ -1,12 +1,13 @@
 {
   "name": "hero-loop",
-  "contract": "The home page hero loop and its phone cut read these values. When the hero exposes window.LangSpanHero = { element, timing, renderAt(seconds) }, the phone cut renders that element and fails if timing.events differs from this file. Until then it drives the current coordination panel by step.",
+  "contract": "The home page hero (assets/product-first.js) and its phone cut read these values. The hero exposes window.LangSpanHero = { element, timing, renderAt(seconds) }; the phone cut renders that element and fails if timing.events differs from this file.",
   "fps": 30,
-  "duration_s": 10,
-  "frames": 300,
-  "loops_before_stop": 3,
-  "stop_state": "refusal",
-  "reduced_motion_state": "refusal",
+  "duration_s": 12,
+  "frames": 360,
+  "loops_before_stop": null,
+  "stop_state": null,
+  "reduced_motion_state": "final",
+  "final_s": 9,
   "easing": {
     "entrance": { "curve": [0.16, 1, 0.3, 1], "ms": 280 },
     "exit": { "curve": [0.7, 0, 0.84, 0], "ms": 160 },
@@ -14,25 +15,29 @@
     "state": { "curve": [0.16, 1, 0.3, 1], "ms": 280 }
   },
   "events": [
-    { "at": 0, "step": 0, "target": "scene", "motion": "none", "text": "Agent A holds src/gate.rs · name(). Agent B has a new prompt." },
-    { "at": 1, "target": "card", "motion": "entrance", "travel_px": 8, "text": "editing now: \"src/gate.rs\"", "provenance": "recorded" },
-    { "at": 3.6, "target": "row-b", "motion": "feedback", "text": "edits src/gate.rs · name()" },
-    { "at": 4, "target": "card", "motion": "exit" },
-    { "at": 4.08, "step": 1, "target": "card", "motion": "entrance", "travel_px": 8, "text": "Command blocked by PreToolUse hook: LangSpan coordination conflict.", "provenance": "recorded" },
-    { "at": 4.08, "target": "refusal-rule", "motion": "state", "text": "Coral left rule grows from 0 to 100% height." },
-    { "at": 7, "step": 2, "target": "card", "motion": "entrance", "travel_px": 8, "text": "Codex picks a different file.", "provenance": "illustration" },
-    { "at": 9.2, "target": "row-a", "motion": "feedback", "text": "Hold released" },
-    { "at": 9.4, "target": "card", "motion": "exit" },
-    { "at": 9.4, "step": 0, "target": "rows", "motion": "state", "text": "Rows return to the frame 0 state." }
+    { "at": 0, "target": "scene", "motion": "none", "text": "Two agents in one checkout. 1 write held in the last 10 min.", "seq": [28584] },
+    { "at": 0.5, "target": "card-hook", "motion": "entrance", "travel_px": 8, "text": "Edited src/hook.rs · 3 edits", "seq": [29128, 29129, 29140, 29141, 29145, 29146] },
+    { "at": 1.5, "target": "card-dash", "motion": "entrance", "travel_px": 8, "text": "Edited 1 file and ran 1 command", "seq": [29172, 29173, 29212] },
+    { "at": 2.3, "target": "status", "motion": "feedback", "text": "2 writes held in the last 10 min", "seq": [29204] },
+    { "at": 2.7, "target": "card-tests", "motion": "entrance", "travel_px": 8, "text": "Edited tests/break_alerts.rs", "seq": [29243, 29244] },
+    { "at": 3.7, "target": "card-held", "motion": "entrance", "travel_px": 8, "text": "Write held src/hook.rs · changed since this agent read it", "seq": [29255, 29256] },
+    { "at": 3.7, "target": "wire", "motion": "state", "text": "The Held wire draws from #29's edits of src/hook.rs to #28's held write.", "seq": [29256] },
+    { "at": 3.7, "target": "status", "motion": "feedback", "text": "3 writes held in the last 10 min", "seq": [29256] },
+    { "at": 5, "target": "card-graph", "motion": "entrance", "travel_px": 8, "text": "Edited 2 files graph.rs, breaks.rs", "seq": [29267, 29268, 29277, 29278] },
+    { "at": 5.8, "target": "card-read", "motion": "entrance", "travel_px": 8, "text": "Read src/hook.rs", "seq": [29274] },
+    { "at": 6.6, "target": "card-saved", "motion": "entrance", "travel_px": 8, "text": "Saved after re-reading src/hook.rs", "seq": [29284, 29285] },
+    { "at": 7.6, "target": "inspector", "motion": "entrance", "travel_px": 8, "text": "The inspector opens on the held write." },
+    { "at": 11.4, "target": "scene", "motion": "exit", "text": "Cards, the wire and the inspector leave together." },
+    { "at": 11.4, "target": "status", "motion": "feedback", "text": "1 write held in the last 10 min", "seq": [28584] }
   ],
-  "holds_s": [[0, 1], [1.28, 3.6], [4.36, 7], [7.28, 9.2], [9.68, 10]],
+  "holds_s": [[0, 0.5], [0.78, 1.5], [1.78, 2.7], [2.98, 3.7], [3.98, 5], [5.28, 5.8], [6.08, 6.6], [6.88, 7.6], [7.88, 11.4], [11.56, 12]],
   "phone_cut": {
     "width": 540,
     "height": 675,
     "scale": 2,
     "min_text_px": 28,
-    "seek_samples_s": [0.5, 2.5, 5.5, 8.5],
-    "poster_s": 5.5
+    "seek_samples_s": [0.2, 4.4, 9, 11.8],
+    "poster_s": 9
   },
-  "source": "Current home page coordination panel. The briefing and refusal lines are verbatim from the recorded Codex session on 25 November 2026; the continuation is illustrative. No agent or daemon runs."
+  "source": "assets/evidence/hero-slice-2026-11-25.json: two Claude Code sessions in one checkout of the LangSpan repository, 25 November 2026, 19:56:19 to 19:57:53 (event seq 29121 to 29290, plus 28584). Each card and each status count comes from the listed seq. The replay compresses 94 seconds of recorded time into 12 seconds. No agent or daemon runs."
 }

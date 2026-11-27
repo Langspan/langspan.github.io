@@ -80,14 +80,31 @@ def check(directory):
             start = round(e['at'] * fps) - 1
             feedback[e['at']] = round(diff(start, start + round(fps * SPEC['easing']['feedback']['ms'] / 1000) + 1), 4)
             assert feedback[e['at']] >= 0.01, f'feedback at {e["at"]} s changed nothing'
+    # The same holds for a small entrance, such as one card fading onto the
+    # canvas: if no frame-to-frame change reaches the detector's floor
+    # (-50 dB, about 0.8 gray levels), a hold may run on through it, and the
+    # entrance must still change the decoded pixels.
+    floor = 255 * 10 ** (-50 / 20)
+    quiet, entrances = set(), {}
+    for e in SPEC['events']:
+        if e['motion'] == 'entrance':
+            start = round(e['at'] * fps) - 1
+            end = start + round(fps * SPEC['easing']['entrance']['ms'] / 1000) + 1
+            step = max(diff(k, k + 1) for k in range(start, end))
+            entrances[e['at']] = {'change': round(diff(start, end), 4), 'largest_frame_step': round(step, 4)}
+            if step < floor:
+                assert entrances[e['at']]['change'] >= 0.1, f'entrance at {e["at"]} s changed nothing'
+                quiet.add(e['at'])
     allowed = []
     for lo, hi in SPEC['holds_s']:
-        later = [e['at'] for e in SPEC['events'] if e['at'] >= hi and e['motion'] not in ('feedback', 'none')]
+        later = [e['at'] for e in SPEC['events'] if e['at'] >= hi and e['motion'] not in ('feedback', 'none') and not (e['motion'] == 'entrance' and e['at'] in quiet)]
         allowed.append([lo, min(later, default=SPEC['duration_s'])])
     found = freezes(directory / 'hero-loop-phone.mp4')
     for a, b in found:
         assert any(a >= lo - .25 and b <= hi + .25 for lo, hi in allowed), f'unplanned freeze: {a}-{b} s'
     result['feedback_mean_gray_differences'] = feedback
+    result['entrance_mean_gray_differences'] = entrances
+    result['entrances_below_detector_floor_s'] = sorted(quiet)
     result.update({'seam_mean_gray_difference': round(seam, 4), 'beat_mean_gray_differences': [round(v, 4) for v in beats],
                    'detected_holds_s': found, 'declared_holds_s': SPEC['holds_s'], 'unplanned_freezes': 0,
                    'pixel_identical_seek_samples': len(render['seek_determinism']), 'source_sha256': render['source_sha256']})
