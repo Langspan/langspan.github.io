@@ -15,7 +15,7 @@ const smallText=p=>p.evaluate(()=>{const out=[],w=document.createTreeWalker(docu
 // The hero's cards and wire labels that are on screen: inside the canvas and
 // right of the pinned lane names.
 const onScreen=hero=>hero.evaluate(h=>{const c=h.querySelector('[data-canvas]'),cr=c.getBoundingClientRect(),g=parseFloat(getComputedStyle(c).getPropertyValue('--gutter'));
- return [...h.querySelectorAll('[data-cards] .card,[data-wire-labels] .wire-label')].map(e=>{const r=e.getBoundingClientRect();return {id:e.dataset.card||e.textContent,seq:e.dataset.seq||'',x:r.left,y:r.top,r:r.right,b:r.bottom,o:+getComputedStyle(e).opacity,size:Math.min(...[...e.querySelectorAll('*')].filter(n=>[...n.childNodes].some(x=>x.nodeType===3&&x.textContent.trim())&&getComputedStyle(n).visibility!=='hidden').map(n=>parseFloat(getComputedStyle(n).fontSize)),parseFloat(getComputedStyle(e).fontSize))};}).filter(r=>r.o>0.99&&r.x>=cr.left+g&&r.r<=cr.right&&r.y>=cr.top&&r.b<=cr.bottom);});
+ return [...h.querySelectorAll('[data-cards] .card,[data-wire-labels] .wire-label,[data-wire-labels] .source-chip')].map(e=>{const r=e.getBoundingClientRect();return {id:e.dataset.card||e.textContent,seq:e.dataset.seq||'',x:r.left,y:r.top,r:r.right,b:r.bottom,o:+getComputedStyle(e).opacity,size:Math.min(...[...e.querySelectorAll('*')].filter(n=>[...n.childNodes].some(x=>x.nodeType===3&&x.textContent.trim())&&getComputedStyle(n).visibility!=='hidden').map(n=>parseFloat(getComputedStyle(n).fontSize)),parseFloat(getComputedStyle(e).fontSize))};}).filter(r=>r.o>0.99&&r.x>=cr.left+g&&r.r<=cr.right&&r.y>=cr.top&&r.b<=cr.bottom);});
 const overlaps=list=>{const o=[];for(let i=0;i<list.length;i++)for(let j=i+1;j<list.length;j++){const a=list[i],b=list[j];if(a.x<b.r-1&&b.x<a.r-1&&a.y<b.b-1&&b.y<a.b-1)o.push(a.id+' x '+b.id);}return o;};
 
 // The fixture: privacy and traceability. Runs without a browser.
@@ -74,7 +74,7 @@ export async function checkProductFirst(browser,base,out,axe){
    assert.equal(await hero.locator('figcaption, .live-foot, [class*=legend]').count(),0,'no narration and no legend');
    const shown=await onScreen(hero);
    assert.ok(shown.length>=2,'cards on screen at '+width);
-   assert.ok(shown.some(r=>r.id==='Held'),'the first Held wire is on screen at '+width);
+   assert.ok(shown.some(r=>r.id.startsWith('Held')),'the first Held wire is on screen at '+width);
    for(const r of shown)if(r.seq)assert.ok(r.seq.split(' ').every(s=>bySeq.has(+s)),'card cites the fixture');
    assert.deepEqual(overlaps(shown),[],'overlap at '+width);
    if(width<=760)assert.ok(shown.every(r=>r.size>=12),'hero text under 12 px at '+width);
@@ -132,7 +132,7 @@ async function checkCanvas(p,hero,width){
  for(const [what,get,close] of [
   ['a card',()=>visibleCard(''),'escape'],
   ['the held card',()=>visibleCard('held'),'outside'],
-  ['the Held wire',()=>visibleIn('.wire-label-held'),'button'],
+  ['the Held wire',()=>visibleIn('.wire-label-held, .source-chip'),'button'],
   ['a lane name',async()=>hero.locator('.lane-name').first(),'button']]){
   const opener=await get();assert.ok(opener,what+' is on screen');
   await opener.click();
@@ -182,21 +182,35 @@ async function checkMotion(browser,base){
   const seam=await p.evaluate(L=>{const H=window.LangSpanHero,f=1/30;H.renderAt(L-f);const a=H.camera().x;H.renderAt(0);const b=H.camera().x;H.renderAt(f);const c=H.camera().x;return {a,b,c,period:H.layout().period};},timing.duration_s);
   const step=seam.c-seam.b,jump=seam.b+seam.period-seam.a;
   assert.ok(Math.abs(jump-step)<=Math.max(2,step*1.5),'the camera flows across the seam ('+jump.toFixed(1)+' px against '+step.toFixed(1)+' px per frame)');
-  // Each wire: while it draws, the card it ends at, and the card or lane edge it starts from, are on screen.
-  for(const w of timing.wires){
+  // Each held wire, while it draws: the held card is on screen, and so is
+  // what the wire starts from — the source card when both fit (the camera
+  // frames them), else the source lane's nearest card in view marked
+  // "earlier", or a source chip. No wire starts from a bare lane edge.
+  // Text stays readable while the camera frames: 10 px wide, 12 px narrow.
+  for(const [i,w] of timing.wires.entries()){
    for(const t of [w.at,w.at+w.ms/2000,w.at+w.ms/1000]){
-    const r=await p.evaluate(([t,w])=>{const H=window.LangSpanHero,h=H.element;H.renderAt(t);const c=h.querySelector('[data-canvas]'),cr=c.getBoundingClientRect(),g=parseFloat(getComputedStyle(c).getPropertyValue('--gutter'));
-     const box=id=>{const e=[...h.querySelectorAll('[data-cards] .card')].find(x=>x.dataset.card===id&&+getComputedStyle(x).opacity>0.5);if(!e)return null;const b=e.getBoundingClientRect();return {l:b.left,r:b.right};};
-     const L=H.layout(),cam=H.camera(),to=box(w.to);let from=w.from?box(w.from):null;
-     // Where the start card would be, even off screen, from the layout.
-     if(w.from&&!from&&to){const dx=(L.x[w.to]-L.x[w.from])*cam.s;from={l:to.l-dx,r:to.l-dx+L.W*cam.s};}
-     return {to,from,left:cr.left+g,right:cr.right};},[t,w]);
-    assert.ok(r.to&&r.to.l>=r.left-1&&r.to.r<=r.right+1,`${w.label} wire at ${t.toFixed(2)} s: its end card is on screen at ${width}`);
-    // The start card must be on screen whenever both cards fit in the view; when
-    // they don't, the wire starts at the other lane's edge of the view.
-    const span=r.from&&r.to?r.to.r-r.from.l:Infinity;
-    if(w.from&&span<=r.right-r.left)assert.ok(r.from.l>=r.left-1&&r.from.r<=r.right+1,`${w.label} wire at ${t.toFixed(2)} s: its start card is on screen at ${width}`);
+    const r=await p.evaluate(([t,i,w])=>{const H=window.LangSpanHero,h=H.element;H.renderAt(t);const c=h.querySelector('[data-canvas]'),cr=c.getBoundingClientRect(),g=parseFloat(getComputedStyle(c).getPropertyValue('--gutter'));
+     const onScreen=e=>{if(!e)return false;const b=e.getBoundingClientRect();return b.left>=cr.left+g-1&&b.right<=cr.right+1&&b.top>=cr.top-1&&b.bottom<=cr.bottom+1&&+getComputedStyle(e).opacity>0.5;};
+     const card=id=>[...h.querySelectorAll('[data-cards] .card')].find(x=>x.dataset.card===id&&+getComputedStyle(x).opacity>0.5&&onScreen(x));
+     const f=w.kind==='held'?H.frameFor(i):{mode:'both',from:w.from};
+     const scale=H.camera().s;let min=99;for(const e of h.querySelectorAll('[data-cards] .card *')){if(![...e.childNodes].some(n=>n.nodeType===3&&n.textContent.trim()))continue;if(!onScreen(e.closest('.card')))continue;min=Math.min(min,parseFloat(getComputedStyle(e).fontSize)*scale);}
+     const start=f.mode==='chip'?[...h.querySelectorAll('.source-chip')].some(onScreen):!!card(f.from);
+     const marked=f.mode!=='neighbor'||[...h.querySelectorAll('.wire-earlier')].some(e=>+getComputedStyle(e).opacity>0.4);
+     return {to:!!card(w.to),start,marked,mode:f.mode,min};},[t,i,w]);
+    assert.ok(r.to,`${w.label} wire at ${t.toFixed(2)} s: the held or answering card is on screen at ${width}`);
+    assert.ok(r.start,`${w.label} wire at ${t.toFixed(2)} s: its start (${r.mode}) is on screen at ${width}`);
+    assert.ok(r.marked,`${w.label} wire at ${t.toFixed(2)} s: a wire from a later card is marked "earlier"`);
+    assert.ok(r.min>=(width>760?10:12)-0.01,`card text ${r.min.toFixed(1)} px while framing at ${width}`);
    }
+  }
+  // Lane chains: every two consecutive cards of an agent on screen are joined.
+  for(const t of [6,16,24,30]){
+   const missing=await p.evaluate(t=>{const H=window.LangSpanHero,h=H.element,L=H.layout();H.renderAt(t);
+    const lines=[...h.querySelectorAll('.chains .chain line')].map(l=>[+l.getAttribute('x1'),+l.getAttribute('x2')]);
+    const cards=[...h.querySelectorAll('[data-cards] .card')].filter(c=>+getComputedStyle(c).opacity>0.99).map(c=>({id:c.dataset.card,x:parseFloat(c.style.left)}));
+    const out=[];for(const c of cards){const d=H.timing.cards.find(x=>x.id===c.id);if(!d.next||d.next_loop)continue;const n=cards.find(x=>x.id===d.next&&x.x>c.x);if(!n)continue;
+     if(!lines.some(([a,b])=>Math.abs(a-(c.x+L.W))<0.6&&Math.abs(b-n.x)<0.6))out.push(c.id+'→'+n.id);}return out;},t);
+   assert.deepEqual(missing,[],'lane chain missing at '+t+' s at '+width);
   }
   // Frame time: renderAt plus the style and layout it causes, over two seconds of frames, at full size and zoomed out.
   const ms=await p.evaluate(()=>{const H=window.LangSpanHero,run=()=>{const t0=performance.now();for(let i=0;i<120;i++){H.renderAt(20+i/60);H.element.querySelector('[data-cards]').getBoundingClientRect();document.body.offsetHeight;}return (performance.now()-t0)/120;};const a=run();for(let i=0;i<4;i++)document.querySelector('[data-cam="out"]').click();const b=run();return [a,b];});
@@ -234,7 +248,7 @@ async function checkPauseResume(browser,base){
  const r=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'reduce'});await mockLatestRelease(r,TAG);
  await r.goto(base+'/',{waitUntil:'networkidle'});
  const g=await r.evaluate(()=>{const c=document.querySelector('[data-canvas]');return c.getBoundingClientRect().left+parseFloat(getComputedStyle(c).getPropertyValue('--gutter'));});
- for(const el of await r.locator('.wire-label-held').all()){const b=await el.boundingBox();if(b&&b.x>g){await el.click();break;}}assert.ok(await r.locator('[data-pop]').isVisible(),'reduced motion stays interactive');
+ for(const el of await r.locator('.wire-label-held, .source-chip').all()){const b=await el.boundingBox();if(b&&b.x>g){await el.click();break;}}assert.ok(await r.locator('[data-pop]').isVisible(),'reduced motion stays interactive');
  assert.equal(await r.evaluate(()=>window.LangSpanHero.clock().playing),false,'reduced motion never resumes');
  await r.close();
 }

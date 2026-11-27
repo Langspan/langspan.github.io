@@ -152,6 +152,17 @@ def main():
         out_cards.append({'id': cid, 'lane': lanes.index(c['lane']), 'kind': c['kind'], 'at': c['at'], 'flow': c['flow'],
                           'seq': c['seq'], 'time': c['time'][:8], **{k: v for k, v in d.items() if v}})
         c['id'] = cid
+    # Each lane's chain: the next card of the same agent, and whether the log
+    # shows it idle for longer than the connector's idle threshold before it.
+    for lane in range(len(lanes)):
+        mine = [x for x in out_cards if x['lane'] == lane]
+        for a, b in zip(mine, mine[1:]):
+            a['next'] = b['id']
+            ra, rb = next(c for c in cards if c['id'] == a['id']), next(c for c in cards if c['id'] == b['id'])
+            if rb['t'] - ra['t_last'] > p['connector']['idle_after_s']:
+                a['idle_after'] = True
+        if mine:
+            mine[-1]['next'] = mine[0]['id']; mine[-1]['next_loop'] = True; mine[-1]['idle_after'] = True
     for c in cards:
         if c['kind'] == 'held' and c.get('by'):
             src = [x for x in cards if x['lane'] == c['by'] and x['t'] <= c['t'] and x['kind'] in ('edit', 'saved') and x.get('path') == c['path']]

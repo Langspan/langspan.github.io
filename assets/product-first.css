@@ -132,7 +132,7 @@ h1 span{color:var(--slate)}
 /* The canvas. Each breakpoint (and the phone cut) sets these sizes; the hero
    script reads them, so cards, rows and the flow speed stay in one place.
    --flow-k is the pan speed in px per second of flow (pacing.json, camera). */
-.live-canvas{--card-w:136px;--card-h:78px;--held-h:98px;--row-h:150px;--row-top:56px;--gutter:200px;--card-gap:12px;--flow-k:72;
+.live-canvas{--card-w:136px;--card-h:80px;--held-h:108px;--row-h:154px;--row-top:56px;--gutter:200px;--card-gap:12px;--flow-k:72;--card-min-text:12;--layout:wide;
   position:relative;height:520px;overflow:hidden;background-color:var(--canvas);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:18px 18px;touch-action:pan-y}
 .live-canvas.panning{cursor:grabbing}
 .live-canvas:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
@@ -145,6 +145,17 @@ h1 span{color:var(--slate)}
 .wire-held .wire-glow{stroke:var(--held);stroke-width:9;stroke-opacity:.16}
 .wire-message .wire-line{stroke:var(--muted);stroke-width:1.6}
 .wire-labels{position:absolute;left:0;top:0}
+/* Each lane's chain of work, under the cards and the cross-lane wires. */
+.chain line{stroke-width:2;vector-effect:non-scaling-stroke}
+.chain circle{stroke:none}
+.chain.lane-a line{stroke:var(--lane-a)}.chain.lane-a circle{fill:var(--lane-a)}
+.chain.lane-b line{stroke:var(--lane-b)}.chain.lane-b circle{fill:var(--lane-b)}
+.chain.lane-c line{stroke:var(--lane-c)}.chain.lane-c circle{fill:var(--lane-c)}
+.chain.idle line{stroke-dasharray:4 5;stroke-opacity:.5}
+.zoom-blocks .chain line{stroke-width:3}
+.source-chip b{color:var(--held);font-weight:700}
+.source-chip{position:absolute;width:max-content;max-width:240px;font:inherit;font-size:12px;line-height:1.25;text-align:left;padding:4px 8px;border-radius:8px;background:var(--raised);color:var(--slate);border:1px dashed var(--held);cursor:pointer;z-index:1}
+.wire-earlier{position:absolute;font-size:11px;font-weight:600;color:var(--held);background:var(--canvas);padding:0 4px;border-radius:4px;white-space:nowrap;transform-origin:0 50%}
 .wire-label{position:absolute;transform:translate(-50%,-50%);z-index:1;font:inherit;cursor:pointer;background:var(--card);border-radius:999px;padding:2px 10px;font-size:12px;font-weight:700;white-space:nowrap}
 .wire-label-held{color:var(--held);border:1.5px solid var(--held)}
 .wire-label-message{color:var(--slate);border:1px solid var(--line);font-weight:600}
@@ -155,15 +166,15 @@ h1 span{color:var(--slate)}
 .card-hit:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 .card-hit[aria-expanded=true]{outline:2px solid var(--ink);outline-offset:1px}
 .card .verb{font-size:13px;font-weight:600;line-height:1.25}
-.card code{align-self:flex-start;max-width:100%;font-size:11px;background:var(--pill);border-radius:4px;padding:1px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.card .sub{font-size:11px;color:var(--muted);line-height:1.25}
+.card code{align-self:flex-start;max-width:100%;font-size:12px;background:var(--pill);border-radius:4px;padding:1px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .sub{font-size:12px;color:var(--muted);line-height:1.25}
 .card.lane-a .verb{color:var(--lane-a)}.card.lane-b .verb{color:var(--lane-b)}.card.lane-c .verb{color:var(--lane-c)}
 .card.command,.card.sent,.card.got{background:var(--paper);border-style:dashed}
 .card.command .verb,.card.sent .verb,.card.got .verb{color:var(--muted)}
 .card.saved{--ok:1;background:color-mix(in srgb,var(--saved-bg) calc(var(--ok)*100%),var(--card));border-color:color-mix(in srgb,var(--saved-line) calc(var(--ok)*100%),var(--card-line))}
 .card.saved .verb{color:color-mix(in srgb,var(--rec-fg) calc(var(--ok)*100%),var(--slate))}
 .card.held{height:var(--held-h);background:var(--coral);border-color:#c0634a;color:#151513}
-.card.held .who{font-size:11px;line-height:1.2;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#3a1d14}
+.card.held .who{font-size:12px;line-height:1.2;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#3a1d14}
 .card.held .verb{color:#151513}
 .card.held code{background:#f2c4b3;color:#151513}
 .card.held .sub{color:#3a1d14}
@@ -183,6 +194,8 @@ h1 span{color:var(--slate)}
 .lane-name::before{content:"";position:absolute;left:0;top:7px;width:12px;height:12px;box-sizing:border-box;border-radius:50%;border:2px solid var(--lane-a)}
 .lane-name.lane-b::before{border-color:var(--lane-b)}.lane-name.lane-c::before{border-color:var(--lane-c)}
 .lane-name .short{display:none}
+.lane-name::after{content:"";position:absolute;right:-6px;top:calc(var(--card-h) * var(--s,1) / 2 - 5px);width:10px;height:10px;box-sizing:border-box;border-radius:50%;border:2px solid var(--lane-a);background:var(--canvas)}
+.lane-name.lane-b::after{border-color:var(--lane-b)}.lane-name.lane-c::after{border-color:var(--lane-c)}
 .lane-name[aria-expanded=true]{text-decoration:underline}
 /* Details popover: small, light, anchored to what was clicked, inside the canvas. */
 .pop{position:absolute;z-index:5;width:min(300px,calc(100% - 16px));overflow:auto;background:var(--raised);color:var(--ink);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 24px #1515131f;padding:10px 12px 12px;font-size:13px;line-height:1.4}
@@ -202,7 +215,7 @@ h1 span{color:var(--slate)}
   .live-tools button{min-width:44px;min-height:44px;font-size:13px}
 }
 @media (max-width:759px){
-  .live-canvas{--card-w:96px;--card-h:100px;--held-h:150px;--row-h:184px;--row-top:48px;--gutter:84px;--card-gap:8px;--flow-k:46;height:590px}
+  .live-canvas{--card-w:96px;--card-h:100px;--held-h:150px;--row-h:200px;--row-top:48px;--gutter:84px;--card-gap:8px;--flow-k:46;--card-min-text:12;--layout:narrow;height:640px}
   .live-status{left:10px;right:10px;top:8px;font-size:12px}
   .live-status strong{font-weight:400;color:var(--slate)}
   .lane-name{left:8px;font-size:12px;padding-left:16px}

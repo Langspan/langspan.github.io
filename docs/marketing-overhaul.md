@@ -353,15 +353,31 @@ limit stated once in the questions, no placeholders and no dates on the page.
   and other sessions.
 - `marketing/scripts/build-hero-timeline.py` turns the slice and
   `marketing/motion/hero-loop/pacing.json` into `timing.json` (43 cards,
-  three held writes, each re-read and saved, and two messages, in a 30.4 s
+  three held writes, each re-read and saved, and two messages, in a 33.4 s
   loop) and writes the equal copy into `assets/product-first.js`, the lane
   names and a still for pages without JavaScript. Edits of one file by one
   agent less than 20 s apart become one card with a count. Idle time is
   compressed (each gap plays as 0.35 to 0.45 s); the order never changes.
-  The flow stops for each coordination moment: 2.2 s for a held write (the
-  wire draws in 600 ms, then one 150 ms emphasis), 1.0 s for a save turning
-  green and 1.0 s for a message. The longest stretch between moments is
-  12.5 s, across the seam included.
+  The flow stops for each coordination moment: 3.2 s for a held write, 1.0 s
+  for a save turning green and 1.0 s for a message. The longest stretch
+  between moments is 12.5 s, across the seam included. The flow speed,
+  about 92 px/s at 1440 px, is an owner decision (27 November 2026).
+- A held write's stop frames both of its cards: after the held card enters
+  (200 ms), the camera eases out and pans together over 600 ms
+  (`cubic-bezier(0.16, 1, 0.3, 1)`) to fit both with 48 px of margin, the
+  wire draws card to card in 600 ms, the 150 ms emphasis plays, the view
+  holds 1 s and eases back over 600 ms. The camera never scales card text
+  below 10 px at wide sizes (12 px on phones). When both cards can't fit,
+  the wire starts from the source lane's nearest card in view, marked
+  "earlier"; on phones, or without such a card, a small chip beside the held
+  card names the earlier change ("Held · #29 edited hook.rs earlier"). No
+  wire starts from a bare lane edge.
+- Each lane reads as the agent's chain of work: a 2 px line in the lane's
+  color joins each card to that agent's next card, with 6 px nodes at the
+  card edges. A gap of more than 30 s in the log is drawn dashed and
+  lighter. A hollow dot where each lane's line leaves the lane names marks
+  the lane's start. Held and message wires stay curves in their own colors,
+  with labels.
 - The canvas flows continuously and loops without a seam: the loop's last
   cards are followed by the next loop's first cards, one loop's width
   further on. Cards keep their order in time across lanes and are pushed

@@ -18,7 +18,8 @@ body.film-mode> :not(#film){display:none!important}
 #film .live-frame{height:100%;border-radius:12px;border:1px solid var(--line);box-shadow:0 14px 36px #15151313}
 #film .live-bar,#film .live-tools,#film .live-foot{display:none!important}
 #film .live-main{display:block;position:relative;height:100%}
-#film .live-canvas{--card-w:118px;--card-h:104px;--held-h:112px;--row-h:158px;--row-top:46px;--gutter:96px;--card-gap:10px;--flow-k:58;height:100%}
+#film .live-canvas{--card-w:118px;--card-h:104px;--held-h:112px;--row-h:158px;--row-top:46px;--gutter:96px;--card-gap:10px;--flow-k:58;--card-min-text:14;--layout:narrow;height:100%}
+#film .source-chip,#film .wire-earlier{font-size:14px}
 #film .live-status{top:10px;left:12px;font-size:14px}
 #film .live-status strong{font-weight:400;color:var(--slate)}
 #film .lane-name{left:10px;font-size:14px;padding-left:18px}

@@ -6,12 +6,12 @@
  "gap_cap_s": 4,
  "group_edits_within_s": 20,
  "tail_s": 0.6,
- "stop_held_s": 2.2,
+ "stop_held_s": 3.2,
  "stop_saved_s": 1.0,
  "stop_message_s": 1.0,
- "wire_delay_s": 0.2,
+ "wire_delay_s": 0.8,
  "wire_draw_ms": 600,
- "emphasis_gap_s": 0.1,
+ "emphasis_gap_s": 0.05,
  "emphasis_ms": 150,
  "emphasis_scale": 1.03,
  "message_delay_s": 0.1,
@@ -75,13 +75,36 @@
  "static_layout": {
   "about": "The wide layout's sizes, for the still shown without JavaScript; equal to the wide values in assets/product-first.css.",
   "W": 136,
-  "H": 78,
-  "HH": 98,
-  "row": 150,
+  "H": 80,
+  "HH": 108,
+  "row": 154,
   "top": 56,
   "G": 200,
   "gap": 12,
   "K": 72,
   "Wc": 1358
+ },
+ "framing": {
+  "about": "While a held write's wire draws, the camera frames both cards: it eases out over ease_ms, holds, and eases back over ease_ms before the stop ends. It never scales cards below min_text_px; if both cards can't fit, the wire starts from the nearest visible card in the source lane with an 'earlier' marker, or (narrow) from a source chip beside the held card.",
+  "enter_after_s": 0.2,
+  "ease_ms": 600,
+  "ease_curve": [
+   0.16,
+   1,
+   0.3,
+   1
+  ],
+  "margin_px": 48,
+  "min_text_px": {
+   "wide": 10,
+   "narrow": 12
+  },
+  "hold_after_emphasis_s": 1.0
+ },
+ "connector": {
+  "about": "Each lane's chain of work: 2 px in the lane color from each card to that agent's next card, with 6 px nodes. A gap in the log longer than idle_after_s is drawn dashed and lighter.",
+  "width_px": 2,
+  "node_px": 6,
+  "idle_after_s": 30
  }
 }

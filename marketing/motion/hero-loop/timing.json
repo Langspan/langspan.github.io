@@ -2,9 +2,9 @@
  "name": "hero-loop",
  "contract": "The home page hero (assets/product-first.js) and its phone cut read these values. The hero exposes window.LangSpanHero = { element, timing, renderAt(seconds) }; the phone cut renders that element and fails if timing differs from this file. Built by marketing/scripts/build-hero-timeline.py from assets/evidence/hero-slice.json and pacing.json.",
  "fps": 30,
- "duration_s": 30.4,
- "frames": 912,
- "final_s": 3.0,
+ "duration_s": 33.4,
+ "frames": 1002,
+ "final_s": 4.0,
  "tolerance_ms": 50,
  "pacing": {
   "about": "Numbers for the hero's motion. build-hero-timeline.py turns these and the recorded slice into timing.json.",
@@ -14,12 +14,12 @@
   "gap_cap_s": 4,
   "group_edits_within_s": 20,
   "tail_s": 0.6,
-  "stop_held_s": 2.2,
+  "stop_held_s": 3.2,
   "stop_saved_s": 1.0,
   "stop_message_s": 1.0,
-  "wire_delay_s": 0.2,
+  "wire_delay_s": 0.8,
   "wire_draw_ms": 600,
-  "emphasis_gap_s": 0.1,
+  "emphasis_gap_s": 0.05,
   "emphasis_ms": 150,
   "emphasis_scale": 1.03,
   "message_delay_s": 0.1,
@@ -83,14 +83,37 @@
   "static_layout": {
    "about": "The wide layout's sizes, for the still shown without JavaScript; equal to the wide values in assets/product-first.css.",
    "W": 136,
-   "H": 78,
-   "HH": 98,
-   "row": 150,
+   "H": 80,
+   "HH": 108,
+   "row": 154,
    "top": 56,
    "G": 200,
    "gap": 12,
    "K": 72,
    "Wc": 1358
+  },
+  "framing": {
+   "about": "While a held write's wire draws, the camera frames both cards: it eases out over ease_ms, holds, and eases back over ease_ms before the stop ends. It never scales cards below min_text_px; if both cards can't fit, the wire starts from the nearest visible card in the source lane with an 'earlier' marker, or (narrow) from a source chip beside the held card.",
+   "enter_after_s": 0.2,
+   "ease_ms": 600,
+   "ease_curve": [
+    0.16,
+    1,
+    0.3,
+    1
+   ],
+   "margin_px": 48,
+   "min_text_px": {
+    "wide": 10,
+    "narrow": 12
+   },
+   "hold_after_emphasis_s": 1.0
+  },
+  "connector": {
+   "about": "Each lane's chain of work: 2 px in the lane color from each card to that agent's next card, with 6 px nodes. A gap in the log longer than idle_after_s is drawn dashed and lighter.",
+   "width_px": 2,
+   "node_px": 6,
+   "idle_after_s": 30
   }
  },
  "flow_total_s": 18.805,
@@ -120,42 +143,42 @@
  "stops_s": [
   [
    0.85,
-   3.05,
+   4.05,
    "held"
   ],
   [
-   3.95,
    4.95,
+   5.95,
    "saved"
   ],
   [
-   16.448,
    17.448,
+   18.448,
    "got"
   ],
   [
-   17.898,
-   20.098,
+   18.898,
+   22.098,
    "held"
   ],
   [
-   21.264,
-   22.264,
+   23.264,
+   24.264,
    "got"
   ],
   [
-   23.135,
-   24.135,
+   25.135,
+   26.135,
    "saved"
   ],
   [
-   24.585,
-   26.785,
+   26.585,
+   29.785,
    "held"
   ],
   [
-   28.805,
-   29.805,
+   31.805,
+   32.805,
    "saved"
   ]
  ],
@@ -171,12 +194,12 @@
    "held": 1
   },
   {
-   "at": 17.898,
+   "at": 18.898,
    "agents": 3,
    "held": 2
   },
   {
-   "at": 24.585,
+   "at": 26.585,
    "agents": 3,
    "held": 3
   }
@@ -188,13 +211,13 @@
    "from": null,
    "from_lane": 1,
    "to": "c1",
-   "at": 1.05,
+   "at": 1.65,
    "ms": 600,
    "stop": [
     0.85,
-    3.05
+    4.05
    ],
-   "emphasis_at": 1.75,
+   "emphasis_at": 2.3,
    "seq": [
     28584
    ]
@@ -204,11 +227,11 @@
    "label": "Message",
    "from": "c28",
    "to": "c30",
-   "at": 16.548,
+   "at": 17.548,
    "ms": 400,
    "stop": [
-    16.448,
-    17.448
+    17.448,
+    18.448
    ],
    "seq": [
     29178,
@@ -221,13 +244,13 @@
    "from": "c3",
    "from_lane": 0,
    "to": "c31",
-   "at": 18.098,
+   "at": 19.698,
    "ms": 600,
    "stop": [
-    17.898,
-    20.098
+    18.898,
+    22.098
    ],
-   "emphasis_at": 18.798,
+   "emphasis_at": 20.348,
    "seq": [
     29204
    ]
@@ -237,11 +260,11 @@
    "label": "Message",
    "from": "c33",
    "to": "c34",
-   "at": 21.364,
+   "at": 23.364,
    "ms": 400,
    "stop": [
-    21.264,
-    22.264
+    23.264,
+    24.264
    ],
    "seq": [
     29221,
@@ -254,13 +277,13 @@
    "from": "c25",
    "from_lane": 0,
    "to": "c37",
-   "at": 24.785,
+   "at": 27.385,
    "ms": 600,
    "stop": [
-    24.585,
-    26.785
+    26.585,
+    29.785
    ],
-   "emphasis_at": 25.485,
+   "emphasis_at": 28.035,
    "seq": [
     29256
    ]
@@ -314,7 +337,8 @@
      "Time",
      "19:52:06–19:53:17, 13 edits"
     ]
-   ]
+   ],
+   "next": "c5"
   },
   {
    "id": "c1",
@@ -344,13 +368,14 @@
      "Why",
      "changed since this agent read it"
     ]
-   ]
+   ],
+   "next": "c2"
   },
   {
    "id": "c2",
    "lane": 0,
    "kind": "read",
-   "at": 3.5,
+   "at": 4.5,
    "flow": 0.9,
    "seq": [
     28591
@@ -368,13 +393,14 @@
      "Time",
      "19:52:35"
     ]
-   ]
+   ],
+   "next": "c3"
   },
   {
    "id": "c3",
    "lane": 0,
    "kind": "saved",
-   "at": 3.95,
+   "at": 4.95,
    "flow": 1.35,
    "seq": [
     28617
@@ -396,13 +422,14 @@
      "Started from",
      "the current file"
     ]
-   ]
+   ],
+   "next": "c4"
   },
   {
    "id": "c4",
    "lane": 0,
    "kind": "edit",
-   "at": 5.4,
+   "at": 6.4,
    "flow": 1.8,
    "seq": [
     28659
@@ -420,13 +447,14 @@
      "Time",
      "19:53:19"
     ]
-   ]
+   ],
+   "next": "c8"
   },
   {
    "id": "c5",
    "lane": 1,
    "kind": "edit",
-   "at": 5.789,
+   "at": 6.789,
    "flow": 2.189,
    "seq": [
     28663,
@@ -445,13 +473,14 @@
      "Time",
      "19:53:21"
     ]
-   ]
+   ],
+   "next": "c6"
   },
   {
    "id": "c6",
    "lane": 1,
    "kind": "edit",
-   "at": 6.234,
+   "at": 7.234,
    "flow": 2.634,
    "seq": [
     28670,
@@ -470,13 +499,14 @@
      "Time",
      "19:53:24"
     ]
-   ]
+   ],
+   "next": "c9"
   },
   {
    "id": "c7",
    "lane": 2,
    "kind": "edit",
-   "at": 6.584,
+   "at": 7.584,
    "flow": 2.984,
    "seq": [
     28671,
@@ -498,13 +528,14 @@
      "Time",
      "19:53:24–19:53:35, 2 edits"
     ]
-   ]
+   ],
+   "next": "c11"
   },
   {
    "id": "c8",
    "lane": 0,
    "kind": "edit",
-   "at": 6.986,
+   "at": 7.986,
    "flow": 3.386,
    "seq": [
     28684,
@@ -542,13 +573,14 @@
      "Time",
      "19:53:26–19:54:20, 10 edits"
     ]
-   ]
+   ],
+   "next": "c14"
   },
   {
    "id": "c9",
    "lane": 1,
    "kind": "edit",
-   "at": 7.355,
+   "at": 8.355,
    "flow": 3.755,
    "seq": [
     28689,
@@ -570,13 +602,14 @@
      "Time",
      "19:53:27–19:53:32, 2 edits"
     ]
-   ]
+   ],
+   "next": "c10"
   },
   {
    "id": "c10",
    "lane": 1,
    "kind": "edit",
-   "at": 7.805,
+   "at": 8.805,
    "flow": 4.205,
    "seq": [
     28723,
@@ -600,13 +633,14 @@
      "Time",
      "19:53:37–19:53:44, 3 edits"
     ]
-   ]
+   ],
+   "next": "c12"
   },
   {
    "id": "c11",
    "lane": 2,
    "kind": "edit",
-   "at": 8.255,
+   "at": 9.255,
    "flow": 4.655,
    "seq": [
     28772,
@@ -625,13 +659,14 @@
      "Time",
      "19:54:02"
     ]
-   ]
+   ],
+   "next": "c13"
   },
   {
    "id": "c12",
    "lane": 1,
    "kind": "edit",
-   "at": 8.679,
+   "at": 9.679,
    "flow": 5.079,
    "seq": [
     28779,
@@ -653,13 +688,14 @@
      "Time",
      "19:54:05–19:54:07, 2 edits"
     ]
-   ]
+   ],
+   "next": "c16"
   },
   {
    "id": "c13",
    "lane": 2,
    "kind": "edit",
-   "at": 9.129,
+   "at": 10.129,
    "flow": 5.529,
    "seq": [
     28806,
@@ -714,13 +750,14 @@
      "Time",
      "19:54:25–19:56:04, 19 edits"
     ]
-   ]
+   ],
+   "next": "c26"
   },
   {
    "id": "c14",
    "lane": 0,
    "kind": "edit",
-   "at": 9.579,
+   "at": 10.579,
    "flow": 5.979,
    "seq": [
     28816,
@@ -739,13 +776,14 @@
      "Time",
      "19:54:30"
     ]
-   ]
+   ],
+   "next": "c15"
   },
   {
    "id": "c15",
    "lane": 0,
    "kind": "edit",
-   "at": 10.029,
+   "at": 11.029,
    "flow": 6.429,
    "seq": [
     28828,
@@ -764,13 +802,14 @@
      "Time",
      "19:54:34"
     ]
-   ]
+   ],
+   "next": "c17"
   },
   {
    "id": "c16",
    "lane": 1,
    "kind": "edit",
-   "at": 10.414,
+   "at": 11.414,
    "flow": 6.814,
    "seq": [
     28835,
@@ -808,13 +847,14 @@
      "Time",
      "19:54:35–19:55:05, 10 edits"
     ]
-   ]
+   ],
+   "next": "c19"
   },
   {
    "id": "c17",
    "lane": 0,
    "kind": "edit",
-   "at": 10.864,
+   "at": 11.864,
    "flow": 7.264,
    "seq": [
     28875,
@@ -833,13 +873,14 @@
      "Time",
      "19:54:45"
     ]
-   ]
+   ],
+   "next": "c18"
   },
   {
    "id": "c18",
    "lane": 0,
    "kind": "edit",
-   "at": 11.314,
+   "at": 12.314,
    "flow": 7.714,
    "seq": [
     28939,
@@ -871,13 +912,14 @@
      "Time",
      "19:55:11–19:55:45, 7 edits"
     ]
-   ]
+   ],
+   "next": "c24"
   },
   {
    "id": "c19",
    "lane": 1,
    "kind": "edit",
-   "at": 11.764,
+   "at": 12.764,
    "flow": 8.164,
    "seq": [
     28950,
@@ -896,13 +938,14 @@
      "Time",
      "19:55:15"
     ]
-   ]
+   ],
+   "next": "c20"
   },
   {
    "id": "c20",
    "lane": 1,
    "kind": "edit",
-   "at": 12.214,
+   "at": 13.214,
    "flow": 8.614,
    "seq": [
     28999,
@@ -921,13 +964,14 @@
      "Time",
      "19:55:29"
     ]
-   ]
+   ],
+   "next": "c21"
   },
   {
    "id": "c21",
    "lane": 1,
    "kind": "edit",
-   "at": 12.664,
+   "at": 13.664,
    "flow": 9.064,
    "seq": [
     29019
@@ -945,13 +989,14 @@
      "Time",
      "19:55:38"
     ]
-   ]
+   ],
+   "next": "c22"
   },
   {
    "id": "c22",
    "lane": 1,
    "kind": "edit",
-   "at": 13.062,
+   "at": 14.062,
    "flow": 9.462,
    "seq": [
     29023,
@@ -970,13 +1015,14 @@
      "Time",
      "19:55:40"
     ]
-   ]
+   ],
+   "next": "c23"
   },
   {
    "id": "c23",
    "lane": 1,
    "kind": "edit",
-   "at": 13.512,
+   "at": 14.512,
    "flow": 9.912,
    "seq": [
     29075,
@@ -998,13 +1044,15 @@
      "Time",
      "19:56:03–19:56:04, 2 edits"
     ]
-   ]
+   ],
+   "next": "c28",
+   "idle_after": true
   },
   {
    "id": "c24",
    "lane": 0,
    "kind": "edit",
-   "at": 13.917,
+   "at": 14.917,
    "flow": 10.317,
    "seq": [
     29090,
@@ -1028,13 +1076,14 @@
      "Time",
      "19:56:06–19:56:13, 3 edits"
     ]
-   ]
+   ],
+   "next": "c25"
   },
   {
    "id": "c25",
    "lane": 0,
    "kind": "edit",
-   "at": 14.367,
+   "at": 15.367,
    "flow": 10.767,
    "seq": [
     29128,
@@ -1058,13 +1107,14 @@
      "Time",
      "19:56:27–19:56:30, 3 edits"
     ]
-   ]
+   ],
+   "next": "c27"
   },
   {
    "id": "c26",
    "lane": 2,
    "kind": "edit",
-   "at": 14.742,
+   "at": 15.742,
    "flow": 11.142,
    "seq": [
     29134,
@@ -1090,13 +1140,15 @@
      "Time",
      "19:56:28–19:56:32, 4 edits"
     ]
-   ]
+   ],
+   "next": "c29",
+   "idle_after": true
   },
   {
    "id": "c27",
    "lane": 0,
    "kind": "edit",
-   "at": 15.192,
+   "at": 16.192,
    "flow": 11.592,
    "seq": [
     29172,
@@ -1115,13 +1167,14 @@
      "Time",
      "19:56:45"
     ]
-   ]
+   ],
+   "next": "c30"
   },
   {
    "id": "c28",
    "lane": 1,
    "kind": "sent",
-   "at": 15.642,
+   "at": 16.642,
    "flow": 12.042,
    "seq": [
     29178
@@ -1143,13 +1196,14 @@
      "Time",
      "19:56:50"
     ]
-   ]
+   ],
+   "next": "c31"
   },
   {
    "id": "c29",
    "lane": 2,
    "kind": "edit",
-   "at": 16.092,
+   "at": 17.092,
    "flow": 12.492,
    "seq": [
     29189,
@@ -1179,13 +1233,14 @@
      "Time",
      "19:57:04–19:57:18, 6 edits"
     ]
-   ]
+   ],
+   "next": "c38"
   },
   {
    "id": "c30",
    "lane": 0,
    "kind": "got",
-   "at": 16.448,
+   "at": 17.448,
    "flow": 12.848,
    "seq": [
     29196
@@ -1199,13 +1254,14 @@
      "Time",
      "19:57:04"
     ]
-   ]
+   ],
+   "next": "c32"
   },
   {
    "id": "c31",
    "lane": 1,
    "kind": "held",
-   "at": 17.898,
+   "at": 18.898,
    "flow": 13.298,
    "seq": [
     29204
@@ -1229,13 +1285,14 @@
      "Why",
      "changed since this agent read it"
     ]
-   ]
+   ],
+   "next": "c34"
   },
   {
    "id": "c32",
    "lane": 0,
    "kind": "command",
-   "at": 20.513,
+   "at": 22.513,
    "flow": 13.713,
    "seq": [
     29212
@@ -1253,13 +1310,14 @@
      "Time",
      "19:57:11"
     ]
-   ]
+   ],
+   "next": "c33"
   },
   {
    "id": "c33",
    "lane": 0,
    "kind": "sent",
-   "at": 20.868,
+   "at": 22.868,
    "flow": 14.068,
    "seq": [
     29221
@@ -1277,13 +1335,15 @@
      "Time",
      "19:57:11"
     ]
-   ]
+   ],
+   "next": "c39",
+   "idle_after": true
   },
   {
    "id": "c34",
    "lane": 1,
    "kind": "got",
-   "at": 21.264,
+   "at": 23.264,
    "flow": 14.464,
    "seq": [
     29224
@@ -1297,13 +1357,14 @@
      "Time",
      "19:57:13"
     ]
-   ]
+   ],
+   "next": "c35"
   },
   {
    "id": "c35",
    "lane": 1,
    "kind": "read",
-   "at": 22.685,
+   "at": 24.685,
    "flow": 14.885,
    "seq": [
     29230
@@ -1321,13 +1382,14 @@
      "Time",
      "19:57:16"
     ]
-   ]
+   ],
+   "next": "c36"
   },
   {
    "id": "c36",
    "lane": 1,
    "kind": "saved",
-   "at": 23.135,
+   "at": 25.135,
    "flow": 15.335,
    "seq": [
     29243,
@@ -1350,13 +1412,14 @@
      "Started from",
      "the current file"
     ]
-   ]
+   ],
+   "next": "c37"
   },
   {
    "id": "c37",
    "lane": 1,
    "kind": "held",
-   "at": 24.585,
+   "at": 26.585,
    "flow": 15.785,
    "seq": [
     29256
@@ -1380,13 +1443,14 @@
      "Why",
      "changed since this agent read it"
     ]
-   ]
+   ],
+   "next": "c40"
   },
   {
    "id": "c38",
    "lane": 2,
    "kind": "edit",
-   "at": 27.167,
+   "at": 30.167,
    "flow": 16.167,
    "seq": [
     29258,
@@ -1408,13 +1472,16 @@
      "Time",
      "19:57:43–19:57:53, 2 edits"
     ]
-   ]
+   ],
+   "next": "c7",
+   "next_loop": true,
+   "idle_after": true
   },
   {
    "id": "c39",
    "lane": 0,
    "kind": "edit",
-   "at": 27.58,
+   "at": 30.58,
    "flow": 16.58,
    "seq": [
     29267,
@@ -1433,13 +1500,14 @@
      "Time",
      "19:57:45"
     ]
-   ]
+   ],
+   "next": "c41"
   },
   {
    "id": "c40",
    "lane": 1,
    "kind": "read",
-   "at": 27.969,
+   "at": 30.969,
    "flow": 16.969,
    "seq": [
     29274
@@ -1457,13 +1525,14 @@
      "Time",
      "19:57:47"
     ]
-   ]
+   ],
+   "next": "c42"
   },
   {
    "id": "c41",
    "lane": 0,
    "kind": "edit",
-   "at": 28.402,
+   "at": 31.402,
    "flow": 17.402,
    "seq": [
     29277,
@@ -1482,13 +1551,16 @@
      "Time",
      "19:57:50"
     ]
-   ]
+   ],
+   "next": "c1",
+   "next_loop": true,
+   "idle_after": true
   },
   {
    "id": "c42",
    "lane": 1,
    "kind": "saved",
-   "at": 28.805,
+   "at": 31.805,
    "flow": 17.805,
    "seq": [
     29284,
@@ -1511,7 +1583,10 @@
      "Started from",
      "the current file"
     ]
-   ]
+   ],
+   "next": "c0",
+   "next_loop": true,
+   "idle_after": true
   }
  ],
  "phone_cut": {
@@ -1525,7 +1600,7 @@
    15.5,
    20
   ],
-  "poster_s": 3.0,
+  "poster_s": 4.0,
   "stills_s": [
    1,
    4,

@@ -23,7 +23,7 @@
      layout and, while the view follows the newest work, places the camera from t
      too, so any frame renders the same however the clock reached it. */
   // BEGIN TIMING
-  const TIMING = {"name":"hero-loop","fps":30,"duration_s":30.4,"frames":912,"final_s":3.0,"tolerance_ms":50,"pacing":{"about":"Numbers for the hero's motion. build-hero-timeline.py turns these and the recorded slice into timing.json.","lead_in_s":0.4,"gap_min_s":0.35,"gap_max_s":0.45,"gap_cap_s":4,"group_edits_within_s":20,"tail_s":0.6,"stop_held_s":2.2,"stop_saved_s":1.0,"stop_message_s":1.0,"wire_delay_s":0.2,"wire_draw_ms":600,"emphasis_gap_s":0.1,"emphasis_ms":150,"emphasis_scale":1.03,"message_delay_s":0.1,"message_draw_ms":400,"tint_delay_s":0.2,"tint_ms":300,"entrance_ms":200,"entrance_travel_px":8,"entrance_curve":[0.16,1,0.3,1],"camera":{"newest_at":0.72,"ease_ms":500,"ease_curve":[0.16,1,0.3,1],"px_per_flow_s":{"wide":72,"narrow":46,"film":58}},"zoom":{"min":0.25,"max":2,"step":1.25,"compact_below":0.7,"blocks_below":0.45},"tolerance_ms":50,"seek_samples_s":[1,8,15.5,20],"stills_s":[1,4,4.8,6,7.5,10],"banned":["springs with overshoot","typing effects","camera zoom or drift in the untouched loop beyond the lateral flow","particles or confetti","glow on anything but a Held wire","auto-opening panels","narration text"],"static_layout":{"about":"The wide layout's sizes, for the still shown without JavaScript; equal to the wide values in assets/product-first.css.","W":136,"H":78,"HH":98,"row":150,"top":56,"G":200,"gap":12,"K":72,"Wc":1358}},"flow_total_s":18.805,"lanes":[{"label":"Agent · #29 renames","short":"#29","agent":"Claude Code","checkout":"shared checkout","branch":"dogfood/rename-safety"},{"label":"Agent · #28 signature alerts","short":"#28","agent":"Claude Code","checkout":"shared checkout","branch":"dogfood/rename-safety"},{"label":"Agent · worktree signatures","short":"Worktree","agent":"Claude Code","checkout":"own worktree","branch":"feat/worktree-signatures-c7"}],"stops_s":[[0.85,3.05,"held"],[3.95,4.95,"saved"],[16.448,17.448,"got"],[17.898,20.098,"held"],[21.264,22.264,"got"],[23.135,24.135,"saved"],[24.585,26.785,"held"],[28.805,29.805,"saved"]],"status":[{"at":0.4,"agents":3,"held":0},{"at":0.85,"agents":3,"held":1},{"at":17.898,"agents":3,"held":2},{"at":24.585,"agents":3,"held":3}],"wires":[{"kind":"held","label":"Held","from":null,"from_lane":1,"to":"c1","at":1.05,"ms":600,"stop":[0.85,3.05],"emphasis_at":1.75,"seq":[28584]},{"kind":"message","label":"Message","from":"c28","to":"c30","at":16.548,"ms":400,"stop":[16.448,17.448],"seq":[29178,29196]},{"kind":"held","label":"Held","from":"c3","from_lane":0,"to":"c31","at":18.098,"ms":600,"stop":[17.898,20.098],"emphasis_at":18.798,"seq":[29204]},{"kind":"message","label":"Message","from":"c33","to":"c34","at":21.364,"ms":400,"stop":[21.264,22.264],"seq":[29221,29224]},{"kind":"held","label":"Held","from":"c25","from_lane":0,"to":"c37","at":24.785,"ms":600,"stop":[24.585,26.785],"emphasis_at":25.485,"seq":[29256]}],"cards":[{"id":"c0","lane":1,"kind":"edit","at":0.4,"flow":0.0,"seq":[28551,28552,28556,28557,28563,28564,28568,28569,28573,28574,28595,28596,28602,28603,28607,28608,28612,28624,28625,28638,28639,28643,28644,28648,28649],"time":"19:52:06","verb":"Edited","code":"src/hook.rs","sub":"13 edits","title":"Edited","rows":[["File","src/hook.rs, lines 124–155, 218–435, 2642–2819, 2923–3071, 3115–3180, 3199–3330, 3678–3679"],["Time","19:52:06–19:53:17, 13 edits"]]},{"id":"c1","lane":0,"kind":"held","at":0.85,"flow":0.45,"seq":[28584],"time":"19:52:30","verb":"Write held","code":"tests/break_alerts.rs","sub":"changed since this agent read it","who":"LangSpan","title":"Write held","rows":[["File","tests/break_alerts.rs"],["Time","19:52:30"],["Why","changed since this agent read it"]]},{"id":"c2","lane":0,"kind":"read","at":3.5,"flow":0.9,"seq":[28591],"time":"19:52:35","verb":"Read","code":"tests/break_alerts.rs","title":"Read again","rows":[["File","tests/break_alerts.rs, the current version"],["Time","19:52:35"]]},{"id":"c3","lane":0,"kind":"saved","at":3.95,"flow":1.35,"seq":[28617],"time":"19:52:55","verb":"Saved after re-reading","code":"tests/break_alerts.rs","title":"Saved after re-reading","rows":[["File","tests/break_alerts.rs"],["Time","19:52:55"],["Started from","the current file"]]},{"id":"c4","lane":0,"kind":"edit","at":5.4,"flow":1.8,"seq":[28659],"time":"19:53:19","verb":"Edited","code":"crates/langspan-core/tests/renames.rs","title":"Edited","rows":[["File","crates/langspan-core/tests/renames.rs"],["Time","19:53:19"]]},{"id":"c5","lane":1,"kind":"edit","at":5.789,"flow":2.189,"seq":[28663,28664],"time":"19:53:21","verb":"Edited","code":"src/claude_code.rs","title":"Edited","rows":[["File","src/claude_code.rs, lines 43–161"],["Time","19:53:21"]]},{"id":"c6","lane":1,"kind":"edit","at":6.234,"flow":2.634,"seq":[28670,28672],"time":"19:53:24","verb":"Edited","code":"src/codex.rs","title":"Edited","rows":[["File","src/codex.rs, lines 39–166"],["Time","19:53:24"]]},{"id":"c7","lane":2,"kind":"edit","at":6.584,"flow":2.984,"seq":[28671,28676,28715,28716],"time":"19:53:24","verb":"Edited","code":"tests/graph.rs","sub":"2 edits","title":"Edited","rows":[["File","tests/graph.rs, lines 185–224, 234–247, 248–252"],["Time","19:53:24–19:53:35, 2 edits"]]},{"id":"c8","lane":0,"kind":"edit","at":6.986,"flow":3.386,"seq":[28684,28685,28695,28696,28700,28701,28731,28732,28741,28742,28753,28754,28759,28760,28763,28764,28791,28792,28802,28803],"time":"19:53:26","verb":"Edited","code":"crates/langspan-core/src/lib.rs","sub":"10 edits","title":"Edited","rows":[["File","crates/langspan-core/src/lib.rs, lines 1239–1265, 1316–1331, 6023–6103, 9086–9146, 9150–9165, 9167–9241"],["Time","19:53:26–19:54:20, 10 edits"]]},{"id":"c9","lane":1,"kind":"edit","at":7.355,"flow":3.755,"seq":[28689,28690,28707,28708],"time":"19:53:27","verb":"Edited","code":"src/cursor.rs","sub":"2 edits","title":"Edited","rows":[["File","src/cursor.rs, lines 124–267"],["Time","19:53:27–19:53:32, 2 edits"]]},{"id":"c10","lane":1,"kind":"edit","at":7.805,"flow":4.205,"seq":[28723,28724,28736,28737,28746,28747],"time":"19:53:37","verb":"Edited","code":"src/gemini.rs","sub":"3 edits","title":"Edited","rows":[["File","src/gemini.rs, lines 115–247"],["Time","19:53:37–19:53:44, 3 edits"]]},{"id":"c11","lane":2,"kind":"edit","at":8.255,"flow":4.655,"seq":[28772,28773],"time":"19:54:02","verb":"Edited","code":"tests/graph.rs","title":"Edited","rows":[["File","tests/graph.rs, lines 1299–1349"],["Time","19:54:02"]]},{"id":"c12","lane":1,"kind":"edit","at":8.679,"flow":5.079,"seq":[28779,28780,28785,28786],"time":"19:54:05","verb":"Edited","code":"docs/usage.md","sub":"2 edits","title":"Edited","rows":[["File","docs/usage.md, lines 985–993, 999–1007"],["Time","19:54:05–19:54:07, 2 edits"]]},{"id":"c13","lane":2,"kind":"edit","at":9.129,"flow":5.529,"seq":[28806,28807,28823,28824,28850,28851,28866,28867,28887,28888,28903,28904,28913,28914,28919,28920,28933,28934,28957,28968,28969,28977,28978,28994,28995,29041,29042,29048,29049,29055,29056,29061,29062,29070,29071,29080,29081],"time":"19:54:25","verb":"Edited","code":"crates/langspan-core/src/lib.rs","sub":"19 edits","title":"Edited","rows":[["File","crates/langspan-core/src/lib.rs, lines 476–523, 1364–1376, 1693–1738, 1952–2267, 2327–2885, 3447–3789, 3828–5845, 6880–6884, 6886–7506, 7508–7517, 8149–9198"],["Time","19:54:25–19:56:04, 19 edits"]]},{"id":"c14","lane":0,"kind":"edit","at":9.579,"flow":5.979,"seq":[28816,28817],"time":"19:54:30","verb":"Edited","code":"crates/langspan-core/tests/interface_counts.rs","title":"Edited","rows":[["File","crates/langspan-core/tests/interface_counts.rs, lines 26–38"],["Time","19:54:30"]]},{"id":"c15","lane":0,"kind":"edit","at":10.029,"flow":6.429,"seq":[28828,28829],"time":"19:54:34","verb":"Edited","code":"crates/langspan-core/tests/dashboard.rs","title":"Edited","rows":[["File","crates/langspan-core/tests/dashboard.rs, lines 261–351"],["Time","19:54:34"]]},{"id":"c16","lane":1,"kind":"edit","at":10.414,"flow":6.814,"seq":[28835,28836,28840,28841,28845,28846,28862,28863,28871,28872,28880,28881,28894,28895,28898,28899,28908,28909,28926,28927],"time":"19:54:35","verb":"Edited","code":"docs/adr/0029-break-alerts-at-write-time.md","sub":"10 edits","title":"Edited","rows":[["File","docs/adr/0029-break-alerts-at-write-time.md, lines 3–10, 17–34, 68–75, 131–138, 148–155, 186–193, 194–202, 225–232, 243–246"],["Time","19:54:35–19:55:05, 10 edits"]]},{"id":"c17","lane":0,"kind":"edit","at":10.864,"flow":7.264,"seq":[28875,28876],"time":"19:54:45","verb":"Edited","code":"crates/langspan-core/src/lib.rs","title":"Edited","rows":[["File","crates/langspan-core/src/lib.rs, lines 9150–9166"],["Time","19:54:45"]]},{"id":"c18","lane":0,"kind":"edit","at":11.314,"flow":7.714,"seq":[28939,28940,28945,28946,28961,28962,28972,28973,28984,28985,28989,28990,29032,29033],"time":"19:55:11","verb":"Edited","code":"src/graph.rs","sub":"7 edits","title":"Edited","rows":[["File","src/graph.rs, lines 45–111, 135–179, 184–275, 366–568, 1804–1821"],["Time","19:55:11–19:55:45, 7 edits"]]},{"id":"c19","lane":1,"kind":"edit","at":11.764,"flow":8.164,"seq":[28950,28951],"time":"19:55:15","verb":"Edited","code":"docs/security/threat-model.md","title":"Edited","rows":[["File","docs/security/threat-model.md, lines 511–517"],["Time","19:55:15"]]},{"id":"c20","lane":1,"kind":"edit","at":12.214,"flow":8.614,"seq":[28999,29000],"time":"19:55:29","verb":"Edited","code":"src/cursor.rs","title":"Edited","rows":[["File","src/cursor.rs, lines 312–317"],["Time","19:55:29"]]},{"id":"c21","lane":1,"kind":"edit","at":12.664,"flow":9.064,"seq":[29019],"time":"19:55:38","verb":"Edited","code":"README.md","title":"Edited","rows":[["File","README.md"],["Time","19:55:38"]]},{"id":"c22","lane":1,"kind":"edit","at":13.062,"flow":9.462,"seq":[29023,29024],"time":"19:55:40","verb":"Edited","code":"docs/roadmap.md","title":"Edited","rows":[["File","docs/roadmap.md, lines 45–51"],["Time","19:55:40"]]},{"id":"c23","lane":1,"kind":"edit","at":13.512,"flow":9.912,"seq":[29075,29076,29085,29086],"time":"19:56:03","verb":"Edited","code":"src/hook.rs","sub":"2 edits","title":"Edited","rows":[["File","src/hook.rs, lines 506–556, 3202–3331"],["Time","19:56:03–19:56:04, 2 edits"]]},{"id":"c24","lane":0,"kind":"edit","at":13.917,"flow":10.317,"seq":[29090,29091,29106,29107,29111,29112],"time":"19:56:06","verb":"Edited","code":"src/breaks.rs","sub":"3 edits","title":"Edited","rows":[["File","src/breaks.rs, lines 217–285"],["Time","19:56:06–19:56:13, 3 edits"]]},{"id":"c25","lane":0,"kind":"edit","at":14.367,"flow":10.767,"seq":[29128,29129,29140,29141,29145,29146],"time":"19:56:27","verb":"Edited","code":"src/hook.rs","sub":"3 edits","title":"Edited","rows":[["File","src/hook.rs, lines 1773–2097, 4234–4278, 4281–4346"],["Time","19:56:27–19:56:30, 3 edits"]]},{"id":"c26","lane":2,"kind":"edit","at":14.742,"flow":11.142,"seq":[29134,29135,29150,29151,29157,29158,29161,29162],"time":"19:56:28","verb":"Edited","code":"src/observer.rs","sub":"4 edits","title":"Edited","rows":[["File","src/observer.rs, lines 10–30, 115–332"],["Time","19:56:28–19:56:32, 4 edits"]]},{"id":"c27","lane":0,"kind":"edit","at":15.192,"flow":11.592,"seq":[29172,29173],"time":"19:56:45","verb":"Edited","code":"src/dashboard.html","title":"Edited","rows":[["File","src/dashboard.html, lines 254–260"],["Time","19:56:45"]]},{"id":"c28","lane":1,"kind":"sent","at":15.642,"flow":12.042,"seq":[29178],"time":"19:56:50","verb":"Sent a message","sub":"to #29 renames","title":"Sent a message","rows":[["To","Agent · #29 renames"],["About","src/hook.rs, tests/break_alerts.rs"],["Time","19:56:50"]]},{"id":"c29","lane":2,"kind":"edit","at":16.092,"flow":12.492,"seq":[29189,29190,29198,29199,29207,29208,29225,29226,29232,29233,29237,29238],"time":"19:57:04","verb":"Edited","code":"src/graph.rs","sub":"6 edits","title":"Edited","rows":[["File","src/graph.rs, lines 45–112, 296–340, 361–560, 1161–1167, 1173–1209"],["Time","19:57:04–19:57:18, 6 edits"]]},{"id":"c30","lane":0,"kind":"got","at":16.448,"flow":12.848,"seq":[29196],"time":"19:57:04","verb":"Got a message","sub":"with its next prompt","title":"Got a message","rows":[["Time","19:57:04"]]},{"id":"c31","lane":1,"kind":"held","at":17.898,"flow":13.298,"seq":[29204],"time":"19:57:08","verb":"Write held","code":"tests/break_alerts.rs","sub":"changed since this agent read it","who":"LangSpan","title":"Write held","rows":[["File","tests/break_alerts.rs"],["Time","19:57:08"],["Why","changed since this agent read it"]]},{"id":"c32","lane":0,"kind":"command","at":20.513,"flow":13.713,"seq":[29212],"time":"19:57:11","verb":"Ran a command","sub":"changed 2 files","title":"Ran a command","rows":[["Changed","crates/langspan-graph/src/lib.rs, crates/langspan-graph/tests/renames.rs"],["Time","19:57:11"]]},{"id":"c33","lane":0,"kind":"sent","at":20.868,"flow":14.068,"seq":[29221],"time":"19:57:11","verb":"Sent a message","sub":"to #28 signature alerts","title":"Sent a message","rows":[["To","Agent · #28 signature alerts"],["Time","19:57:11"]]},{"id":"c34","lane":1,"kind":"got","at":21.264,"flow":14.464,"seq":[29224],"time":"19:57:13","verb":"Got a message","sub":"with its next prompt","title":"Got a message","rows":[["Time","19:57:13"]]},{"id":"c35","lane":1,"kind":"read","at":22.685,"flow":14.885,"seq":[29230],"time":"19:57:16","verb":"Read","code":"tests/break_alerts.rs","title":"Read again","rows":[["File","tests/break_alerts.rs, the current version"],["Time","19:57:16"]]},{"id":"c36","lane":1,"kind":"saved","at":23.135,"flow":15.335,"seq":[29243,29244],"time":"19:57:22","verb":"Saved after re-reading","code":"tests/break_alerts.rs","title":"Saved after re-reading","rows":[["File","tests/break_alerts.rs, lines 841–915"],["Time","19:57:22"],["Started from","the current file"]]},{"id":"c37","lane":1,"kind":"held","at":24.585,"flow":15.785,"seq":[29256],"time":"19:57:41","verb":"Write held","code":"src/hook.rs","sub":"changed since this agent read it","who":"LangSpan","title":"Write held","rows":[["File","src/hook.rs"],["Time","19:57:41"],["Why","changed since this agent read it"]]},{"id":"c38","lane":2,"kind":"edit","at":27.167,"flow":16.167,"seq":[29258,29259,29290,29291],"time":"19:57:43","verb":"Edited","code":"src/graph.rs","sub":"2 edits","title":"Edited","rows":[["File","src/graph.rs, lines 361–569, 742–782"],["Time","19:57:43–19:57:53, 2 edits"]]},{"id":"c39","lane":0,"kind":"edit","at":27.58,"flow":16.58,"seq":[29267,29268],"time":"19:57:45","verb":"Edited","code":"src/graph.rs","title":"Edited","rows":[["File","src/graph.rs, lines 184–276"],["Time","19:57:45"]]},{"id":"c40","lane":1,"kind":"read","at":27.969,"flow":16.969,"seq":[29274],"time":"19:57:47","verb":"Read","code":"src/hook.rs","title":"Read again","rows":[["File","src/hook.rs, the current version"],["Time","19:57:47"]]},{"id":"c41","lane":0,"kind":"edit","at":28.402,"flow":17.402,"seq":[29277,29278],"time":"19:57:50","verb":"Edited","code":"src/breaks.rs","title":"Edited","rows":[["File","src/breaks.rs, lines 217–286"],["Time","19:57:50"]]},{"id":"c42","lane":1,"kind":"saved","at":28.805,"flow":17.805,"seq":[29284,29285],"time":"19:57:52","verb":"Saved after re-reading","code":"src/hook.rs","title":"Saved after re-reading","rows":[["File","src/hook.rs, lines 3209–3338"],["Time","19:57:52"],["Started from","the current file"]]}]};
+  const TIMING = {"name":"hero-loop","fps":30,"duration_s":33.4,"frames":1002,"final_s":4.0,"tolerance_ms":50,"pacing":{"about":"Numbers for the hero's motion. build-hero-timeline.py turns these and the recorded slice into timing.json.","lead_in_s":0.4,"gap_min_s":0.35,"gap_max_s":0.45,"gap_cap_s":4,"group_edits_within_s":20,"tail_s":0.6,"stop_held_s":3.2,"stop_saved_s":1.0,"stop_message_s":1.0,"wire_delay_s":0.8,"wire_draw_ms":600,"emphasis_gap_s":0.05,"emphasis_ms":150,"emphasis_scale":1.03,"message_delay_s":0.1,"message_draw_ms":400,"tint_delay_s":0.2,"tint_ms":300,"entrance_ms":200,"entrance_travel_px":8,"entrance_curve":[0.16,1,0.3,1],"camera":{"newest_at":0.72,"ease_ms":500,"ease_curve":[0.16,1,0.3,1],"px_per_flow_s":{"wide":72,"narrow":46,"film":58}},"zoom":{"min":0.25,"max":2,"step":1.25,"compact_below":0.7,"blocks_below":0.45},"tolerance_ms":50,"seek_samples_s":[1,8,15.5,20],"stills_s":[1,4,4.8,6,7.5,10],"banned":["springs with overshoot","typing effects","camera zoom or drift in the untouched loop beyond the lateral flow","particles or confetti","glow on anything but a Held wire","auto-opening panels","narration text"],"static_layout":{"about":"The wide layout's sizes, for the still shown without JavaScript; equal to the wide values in assets/product-first.css.","W":136,"H":80,"HH":108,"row":154,"top":56,"G":200,"gap":12,"K":72,"Wc":1358},"framing":{"about":"While a held write's wire draws, the camera frames both cards: it eases out over ease_ms, holds, and eases back over ease_ms before the stop ends. It never scales cards below min_text_px; if both cards can't fit, the wire starts from the nearest visible card in the source lane with an 'earlier' marker, or (narrow) from a source chip beside the held card.","enter_after_s":0.2,"ease_ms":600,"ease_curve":[0.16,1,0.3,1],"margin_px":48,"min_text_px":{"wide":10,"narrow":12},"hold_after_emphasis_s":1.0},"connector":{"about":"Each lane's chain of work: 2 px in the lane color from each card to that agent's next card, with 6 px nodes. A gap in the log longer than idle_after_s is drawn dashed and lighter.","width_px":2,"node_px":6,"idle_after_s":30}},"flow_total_s":18.805,"lanes":[{"label":"Agent · #29 renames","short":"#29","agent":"Claude Code","checkout":"shared checkout","branch":"dogfood/rename-safety"},{"label":"Agent · #28 signature alerts","short":"#28","agent":"Claude Code","checkout":"shared checkout","branch":"dogfood/rename-safety"},{"label":"Agent · worktree signatures","short":"Worktree","agent":"Claude Code","checkout":"own worktree","branch":"feat/worktree-signatures-c7"}],"stops_s":[[0.85,4.05,"held"],[4.95,5.95,"saved"],[17.448,18.448,"got"],[18.898,22.098,"held"],[23.264,24.264,"got"],[25.135,26.135,"saved"],[26.585,29.785,"held"],[31.805,32.805,"saved"]],"status":[{"at":0.4,"agents":3,"held":0},{"at":0.85,"agents":3,"held":1},{"at":18.898,"agents":3,"held":2},{"at":26.585,"agents":3,"held":3}],"wires":[{"kind":"held","label":"Held","from":null,"from_lane":1,"to":"c1","at":1.65,"ms":600,"stop":[0.85,4.05],"emphasis_at":2.3,"seq":[28584]},{"kind":"message","label":"Message","from":"c28","to":"c30","at":17.548,"ms":400,"stop":[17.448,18.448],"seq":[29178,29196]},{"kind":"held","label":"Held","from":"c3","from_lane":0,"to":"c31","at":19.698,"ms":600,"stop":[18.898,22.098],"emphasis_at":20.348,"seq":[29204]},{"kind":"message","label":"Message","from":"c33","to":"c34","at":23.364,"ms":400,"stop":[23.264,24.264],"seq":[29221,29224]},{"kind":"held","label":"Held","from":"c25","from_lane":0,"to":"c37","at":27.385,"ms":600,"stop":[26.585,29.785],"emphasis_at":28.035,"seq":[29256]}],"cards":[{"id":"c0","lane":1,"kind":"edit","at":0.4,"flow":0.0,"seq":[28551,28552,28556,28557,28563,28564,28568,28569,28573,28574,28595,28596,28602,28603,28607,28608,28612,28624,28625,28638,28639,28643,28644,28648,28649],"time":"19:52:06","verb":"Edited","code":"src/hook.rs","sub":"13 edits","title":"Edited","rows":[["File","src/hook.rs, lines 124–155, 218–435, 2642–2819, 2923–3071, 3115–3180, 3199–3330, 3678–3679"],["Time","19:52:06–19:53:17, 13 edits"]],"next":"c5"},{"id":"c1","lane":0,"kind":"held","at":0.85,"flow":0.45,"seq":[28584],"time":"19:52:30","verb":"Write held","code":"tests/break_alerts.rs","sub":"changed since this agent read it","who":"LangSpan","title":"Write held","rows":[["File","tests/break_alerts.rs"],["Time","19:52:30"],["Why","changed since this agent read it"]],"next":"c2"},{"id":"c2","lane":0,"kind":"read","at":4.5,"flow":0.9,"seq":[28591],"time":"19:52:35","verb":"Read","code":"tests/break_alerts.rs","title":"Read again","rows":[["File","tests/break_alerts.rs, the current version"],["Time","19:52:35"]],"next":"c3"},{"id":"c3","lane":0,"kind":"saved","at":4.95,"flow":1.35,"seq":[28617],"time":"19:52:55","verb":"Saved after re-reading","code":"tests/break_alerts.rs","title":"Saved after re-reading","rows":[["File","tests/break_alerts.rs"],["Time","19:52:55"],["Started from","the current file"]],"next":"c4"},{"id":"c4","lane":0,"kind":"edit","at":6.4,"flow":1.8,"seq":[28659],"time":"19:53:19","verb":"Edited","code":"crates/langspan-core/tests/renames.rs","title":"Edited","rows":[["File","crates/langspan-core/tests/renames.rs"],["Time","19:53:19"]],"next":"c8"},{"id":"c5","lane":1,"kind":"edit","at":6.789,"flow":2.189,"seq":[28663,28664],"time":"19:53:21","verb":"Edited","code":"src/claude_code.rs","title":"Edited","rows":[["File","src/claude_code.rs, lines 43–161"],["Time","19:53:21"]],"next":"c6"},{"id":"c6","lane":1,"kind":"edit","at":7.234,"flow":2.634,"seq":[28670,28672],"time":"19:53:24","verb":"Edited","code":"src/codex.rs","title":"Edited","rows":[["File","src/codex.rs, lines 39–166"],["Time","19:53:24"]],"next":"c9"},{"id":"c7","lane":2,"kind":"edit","at":7.584,"flow":2.984,"seq":[28671,28676,28715,28716],"time":"19:53:24","verb":"Edited","code":"tests/graph.rs","sub":"2 edits","title":"Edited","rows":[["File","tests/graph.rs, lines 185–224, 234–247, 248–252"],["Time","19:53:24–19:53:35, 2 edits"]],"next":"c11"},{"id":"c8","lane":0,"kind":"edit","at":7.986,"flow":3.386,"seq":[28684,28685,28695,28696,28700,28701,28731,28732,28741,28742,28753,28754,28759,28760,28763,28764,28791,28792,28802,28803],"time":"19:53:26","verb":"Edited","code":"crates/langspan-core/src/lib.rs","sub":"10 edits","title":"Edited","rows":[["File","crates/langspan-core/src/lib.rs, lines 1239–1265, 1316–1331, 6023–6103, 9086–9146, 9150–9165, 9167–9241"],["Time","19:53:26–19:54:20, 10 edits"]],"next":"c14"},{"id":"c9","lane":1,"kind":"edit","at":8.355,"flow":3.755,"seq":[28689,28690,28707,28708],"time":"19:53:27","verb":"Edited","code":"src/cursor.rs","sub":"2 edits","title":"Edited","rows":[["File","src/cursor.rs, lines 124–267"],["Time","19:53:27–19:53:32, 2 edits"]],"next":"c10"},{"id":"c10","lane":1,"kind":"edit","at":8.805,"flow":4.205,"seq":[28723,28724,28736,28737,28746,28747],"time":"19:53:37","verb":"Edited","code":"src/gemini.rs","sub":"3 edits","title":"Edited","rows":[["File","src/gemini.rs, lines 115–247"],["Time","19:53:37–19:53:44, 3 edits"]],"next":"c12"},{"id":"c11","lane":2,"kind":"edit","at":9.255,"flow":4.655,"seq":[28772,28773],"time":"19:54:02","verb":"Edited","code":"tests/graph.rs","title":"Edited","rows":[["File","tests/graph.rs, lines 1299–1349"],["Time","19:54:02"]],"next":"c13"},{"id":"c12","lane":1,"kind":"edit","at":9.679,"flow":5.079,"seq":[28779,28780,28785,28786],"time":"19:54:05","verb":"Edited","code":"docs/usage.md","sub":"2 edits","title":"Edited","rows":[["File","docs/usage.md, lines 985–993, 999–1007"],["Time","19:54:05–19:54:07, 2 edits"]],"next":"c16"},{"id":"c13","lane":2,"kind":"edit","at":10.129,"flow":5.529,"seq":[28806,28807,28823,28824,28850,28851,28866,28867,28887,28888,28903,28904,28913,28914,28919,28920,28933,28934,28957,28968,28969,28977,28978,28994,28995,29041,29042,29048,29049,29055,29056,29061,29062,29070,29071,29080,29081],"time":"19:54:25","verb":"Edited","code":"crates/langspan-core/src/lib.rs","sub":"19 edits","title":"Edited","rows":[["File","crates/langspan-core/src/lib.rs, lines 476–523, 1364–1376, 1693–1738, 1952–2267, 2327–2885, 3447–3789, 3828–5845, 6880–6884, 6886–7506, 7508–7517, 8149–9198"],["Time","19:54:25–19:56:04, 19 edits"]],"next":"c26"},{"id":"c14","lane":0,"kind":"edit","at":10.579,"flow":5.979,"seq":[28816,28817],"time":"19:54:30","verb":"Edited","code":"crates/langspan-core/tests/interface_counts.rs","title":"Edited","rows":[["File","crates/langspan-core/tests/interface_counts.rs, lines 26–38"],["Time","19:54:30"]],"next":"c15"},{"id":"c15","lane":0,"kind":"edit","at":11.029,"flow":6.429,"seq":[28828,28829],"time":"19:54:34","verb":"Edited","code":"crates/langspan-core/tests/dashboard.rs","title":"Edited","rows":[["File","crates/langspan-core/tests/dashboard.rs, lines 261–351"],["Time","19:54:34"]],"next":"c17"},{"id":"c16","lane":1,"kind":"edit","at":11.414,"flow":6.814,"seq":[28835,28836,28840,28841,28845,28846,28862,28863,28871,28872,28880,28881,28894,28895,28898,28899,28908,28909,28926,28927],"time":"19:54:35","verb":"Edited","code":"docs/adr/0029-break-alerts-at-write-time.md","sub":"10 edits","title":"Edited","rows":[["File","docs/adr/0029-break-alerts-at-write-time.md, lines 3–10, 17–34, 68–75, 131–138, 148–155, 186–193, 194–202, 225–232, 243–246"],["Time","19:54:35–19:55:05, 10 edits"]],"next":"c19"},{"id":"c17","lane":0,"kind":"edit","at":11.864,"flow":7.264,"seq":[28875,28876],"time":"19:54:45","verb":"Edited","code":"crates/langspan-core/src/lib.rs","title":"Edited","rows":[["File","crates/langspan-core/src/lib.rs, lines 9150–9166"],["Time","19:54:45"]],"next":"c18"},{"id":"c18","lane":0,"kind":"edit","at":12.314,"flow":7.714,"seq":[28939,28940,28945,28946,28961,28962,28972,28973,28984,28985,28989,28990,29032,29033],"time":"19:55:11","verb":"Edited","code":"src/graph.rs","sub":"7 edits","title":"Edited","rows":[["File","src/graph.rs, lines 45–111, 135–179, 184–275, 366–568, 1804–1821"],["Time","19:55:11–19:55:45, 7 edits"]],"next":"c24"},{"id":"c19","lane":1,"kind":"edit","at":12.764,"flow":8.164,"seq":[28950,28951],"time":"19:55:15","verb":"Edited","code":"docs/security/threat-model.md","title":"Edited","rows":[["File","docs/security/threat-model.md, lines 511–517"],["Time","19:55:15"]],"next":"c20"},{"id":"c20","lane":1,"kind":"edit","at":13.214,"flow":8.614,"seq":[28999,29000],"time":"19:55:29","verb":"Edited","code":"src/cursor.rs","title":"Edited","rows":[["File","src/cursor.rs, lines 312–317"],["Time","19:55:29"]],"next":"c21"},{"id":"c21","lane":1,"kind":"edit","at":13.664,"flow":9.064,"seq":[29019],"time":"19:55:38","verb":"Edited","code":"README.md","title":"Edited","rows":[["File","README.md"],["Time","19:55:38"]],"next":"c22"},{"id":"c22","lane":1,"kind":"edit","at":14.062,"flow":9.462,"seq":[29023,29024],"time":"19:55:40","verb":"Edited","code":"docs/roadmap.md","title":"Edited","rows":[["File","docs/roadmap.md, lines 45–51"],["Time","19:55:40"]],"next":"c23"},{"id":"c23","lane":1,"kind":"edit","at":14.512,"flow":9.912,"seq":[29075,29076,29085,29086],"time":"19:56:03","verb":"Edited","code":"src/hook.rs","sub":"2 edits","title":"Edited","rows":[["File","src/hook.rs, lines 506–556, 3202–3331"],["Time","19:56:03–19:56:04, 2 edits"]],"next":"c28","idle_after":true},{"id":"c24","lane":0,"kind":"edit","at":14.917,"flow":10.317,"seq":[29090,29091,29106,29107,29111,29112],"time":"19:56:06","verb":"Edited","code":"src/breaks.rs","sub":"3 edits","title":"Edited","rows":[["File","src/breaks.rs, lines 217–285"],["Time","19:56:06–19:56:13, 3 edits"]],"next":"c25"},{"id":"c25","lane":0,"kind":"edit","at":15.367,"flow":10.767,"seq":[29128,29129,29140,29141,29145,29146],"time":"19:56:27","verb":"Edited","code":"src/hook.rs","sub":"3 edits","title":"Edited","rows":[["File","src/hook.rs, lines 1773–2097, 4234–4278, 4281–4346"],["Time","19:56:27–19:56:30, 3 edits"]],"next":"c27"},{"id":"c26","lane":2,"kind":"edit","at":15.742,"flow":11.142,"seq":[29134,29135,29150,29151,29157,29158,29161,29162],"time":"19:56:28","verb":"Edited","code":"src/observer.rs","sub":"4 edits","title":"Edited","rows":[["File","src/observer.rs, lines 10–30, 115–332"],["Time","19:56:28–19:56:32, 4 edits"]],"next":"c29","idle_after":true},{"id":"c27","lane":0,"kind":"edit","at":16.192,"flow":11.592,"seq":[29172,29173],"time":"19:56:45","verb":"Edited","code":"src/dashboard.html","title":"Edited","rows":[["File","src/dashboard.html, lines 254–260"],["Time","19:56:45"]],"next":"c30"},{"id":"c28","lane":1,"kind":"sent","at":16.642,"flow":12.042,"seq":[29178],"time":"19:56:50","verb":"Sent a message","sub":"to #29 renames","title":"Sent a message","rows":[["To","Agent · #29 renames"],["About","src/hook.rs, tests/break_alerts.rs"],["Time","19:56:50"]],"next":"c31"},{"id":"c29","lane":2,"kind":"edit","at":17.092,"flow":12.492,"seq":[29189,29190,29198,29199,29207,29208,29225,29226,29232,29233,29237,29238],"time":"19:57:04","verb":"Edited","code":"src/graph.rs","sub":"6 edits","title":"Edited","rows":[["File","src/graph.rs, lines 45–112, 296–340, 361–560, 1161–1167, 1173–1209"],["Time","19:57:04–19:57:18, 6 edits"]],"next":"c38"},{"id":"c30","lane":0,"kind":"got","at":17.448,"flow":12.848,"seq":[29196],"time":"19:57:04","verb":"Got a message","sub":"with its next prompt","title":"Got a message","rows":[["Time","19:57:04"]],"next":"c32"},{"id":"c31","lane":1,"kind":"held","at":18.898,"flow":13.298,"seq":[29204],"time":"19:57:08","verb":"Write held","code":"tests/break_alerts.rs","sub":"changed since this agent read it","who":"LangSpan","title":"Write held","rows":[["File","tests/break_alerts.rs"],["Time","19:57:08"],["Why","changed since this agent read it"]],"next":"c34"},{"id":"c32","lane":0,"kind":"command","at":22.513,"flow":13.713,"seq":[29212],"time":"19:57:11","verb":"Ran a command","sub":"changed 2 files","title":"Ran a command","rows":[["Changed","crates/langspan-graph/src/lib.rs, crates/langspan-graph/tests/renames.rs"],["Time","19:57:11"]],"next":"c33"},{"id":"c33","lane":0,"kind":"sent","at":22.868,"flow":14.068,"seq":[29221],"time":"19:57:11","verb":"Sent a message","sub":"to #28 signature alerts","title":"Sent a message","rows":[["To","Agent · #28 signature alerts"],["Time","19:57:11"]],"next":"c39","idle_after":true},{"id":"c34","lane":1,"kind":"got","at":23.264,"flow":14.464,"seq":[29224],"time":"19:57:13","verb":"Got a message","sub":"with its next prompt","title":"Got a message","rows":[["Time","19:57:13"]],"next":"c35"},{"id":"c35","lane":1,"kind":"read","at":24.685,"flow":14.885,"seq":[29230],"time":"19:57:16","verb":"Read","code":"tests/break_alerts.rs","title":"Read again","rows":[["File","tests/break_alerts.rs, the current version"],["Time","19:57:16"]],"next":"c36"},{"id":"c36","lane":1,"kind":"saved","at":25.135,"flow":15.335,"seq":[29243,29244],"time":"19:57:22","verb":"Saved after re-reading","code":"tests/break_alerts.rs","title":"Saved after re-reading","rows":[["File","tests/break_alerts.rs, lines 841–915"],["Time","19:57:22"],["Started from","the current file"]],"next":"c37"},{"id":"c37","lane":1,"kind":"held","at":26.585,"flow":15.785,"seq":[29256],"time":"19:57:41","verb":"Write held","code":"src/hook.rs","sub":"changed since this agent read it","who":"LangSpan","title":"Write held","rows":[["File","src/hook.rs"],["Time","19:57:41"],["Why","changed since this agent read it"]],"next":"c40"},{"id":"c38","lane":2,"kind":"edit","at":30.167,"flow":16.167,"seq":[29258,29259,29290,29291],"time":"19:57:43","verb":"Edited","code":"src/graph.rs","sub":"2 edits","title":"Edited","rows":[["File","src/graph.rs, lines 361–569, 742–782"],["Time","19:57:43–19:57:53, 2 edits"]],"next":"c7","next_loop":true,"idle_after":true},{"id":"c39","lane":0,"kind":"edit","at":30.58,"flow":16.58,"seq":[29267,29268],"time":"19:57:45","verb":"Edited","code":"src/graph.rs","title":"Edited","rows":[["File","src/graph.rs, lines 184–276"],["Time","19:57:45"]],"next":"c41"},{"id":"c40","lane":1,"kind":"read","at":30.969,"flow":16.969,"seq":[29274],"time":"19:57:47","verb":"Read","code":"src/hook.rs","title":"Read again","rows":[["File","src/hook.rs, the current version"],["Time","19:57:47"]],"next":"c42"},{"id":"c41","lane":0,"kind":"edit","at":31.402,"flow":17.402,"seq":[29277,29278],"time":"19:57:50","verb":"Edited","code":"src/breaks.rs","title":"Edited","rows":[["File","src/breaks.rs, lines 217–286"],["Time","19:57:50"]],"next":"c1","next_loop":true,"idle_after":true},{"id":"c42","lane":1,"kind":"saved","at":31.805,"flow":17.805,"seq":[29284,29285],"time":"19:57:52","verb":"Saved after re-reading","code":"src/hook.rs","title":"Saved after re-reading","rows":[["File","src/hook.rs, lines 3209–3338"],["Time","19:57:52"],["Started from","the current file"]],"next":"c0","next_loop":true,"idle_after":true}]};
   // END TIMING
   const P = TIMING.pacing, LOOP = TIMING.duration_s, FINAL_T = TIMING.final_s;
   const bezier = ([x1, y1, x2, y2]) => p => {
@@ -37,7 +37,7 @@
     }
     return 3 * (1 - u) ** 2 * u * y1 + 3 * (1 - u) * u * u * y2 + u ** 3;
   };
-  const easeIn = bezier(P.entrance_curve), easeCam = bezier(P.camera.ease_curve), easeLift = bezier([0.37, 0, 0.63, 1]);
+  const easeIn = bezier(P.entrance_curve), easeFrame = bezier(P.framing.ease_curve), easeLift = bezier([0.37, 0, 0.63, 1]);
   const clamp01 = v => Math.max(0, Math.min(1, v));
   const ramp = P.camera.ease_ms / 1000 / 2;
   // Flow time: the clock with each stop taken out. Around a stop the speed
@@ -77,10 +77,15 @@
     });
     for (const c of CARDS) if (c.kind === 'saved') cards[c.id][3] = easeIn(clamp01((t - c.at - P.tint_delay_s) * 1000 / P.tint_ms));
     // Which stop, if any, the camera is holding for, with its 0..1 weight.
+    // A held write's stop frames both of its cards: the camera eases out after
+    // the held card enters, holds while the wire draws, and eases back before
+    // the stop ends.
     let hold = null;
+    const F = P.framing, fe = F.ease_ms / 1000;
     for (let i = 0; i < WIRES.length; i++) {
+      if (WIRES[i].kind !== 'held') continue;
       const [a, b] = WIRES[i].stop;
-      const w = Math.min(easeCam(clamp01((t - a) / 0.4)), 1 - easeCam(clamp01((t - (b - 0.4)) / 0.4)));
+      const w = Math.min(easeFrame(clamp01((t - a - F.enter_after_s) / fe)), 1 - easeFrame(clamp01((t - (b - fe)) / fe)));
       if (t >= a && t <= b && w > 0) hold = [i, w];
     }
     let status = STATUS[0];
@@ -106,7 +111,7 @@
     function layout() {
       const cs = getComputedStyle(canvas), n = v => parseFloat(cs.getPropertyValue(v));
       const l = { W: n('--card-w'), H: n('--card-h'), HH: n('--held-h'), row: n('--row-h'), top: n('--row-top'), G: n('--gutter'), gap: n('--card-gap'),
-        K: n('--flow-k'), Wc: canvas.clientWidth, Hc: canvas.clientHeight };
+        K: n('--flow-k'), Wc: canvas.clientWidth, Hc: canvas.clientHeight, minText: n('--card-min-text'), narrow: cs.getPropertyValue('--layout').trim() === 'narrow' };
       // Cards keep their order in time across all lanes: each card sits
       // K px per second of flow after the one before it, pushed right only as
       // far as needed to clear the last card in its own lane.
@@ -153,13 +158,32 @@
       else { let i = 0; while (k[i + 1][0] <= f) i++; a = k[i]; b = k[i + 1]; }
       const base = a[1] + (b[1] - a[1]) * (b[0] > a[0] ? (f - a[0]) / (b[0] - a[0]) : 1);
       // At a flow scale below 1, the newest work stays at the same place across the canvas.
-      const zoomed = base + P.camera.newest_at * L.Wc * (1 - 1 / cam.fs);
-      if (!st.hold || cam.fs !== 1) return zoomed;
-      const w = WIRES[st.hold[0]], from = w.from ? byId[w.from] : null;
-      if (!from) return base;
-      const to = byId[w.to], need = L.x[from.id] - (L.G + 12), keep = L.x[to.id] + L.W - L.Wc + 8;
-      const target = Math.max(Math.min(base, need), keep);
-      return base + (target - base) * st.hold[1];
+      return base + P.camera.newest_at * L.Wc * (1 - 1 / cam.fs);
+    }
+    /* How a held write is framed, from the layout alone:
+       'both'     both cards fit at a scale that keeps card text at least
+                  framing.min_text_px; the wire runs card to card.
+       'neighbor' (wide) they don't fit; the wire starts from the source
+                  lane's first card in view, marked "earlier".
+       'chip'     (narrow) a small source chip beside the held card. */
+    function frameFor(i) {
+      L.frames = L.frames || {};
+      if (L.frames[i]) return L.frames[i];
+      const w = WIRES[i], to = byId[w.to], from = w.from ? byId[w.from] : null, F = P.framing, m = F.margin_px;
+      const sMin = Math.min(1, F.min_text_px[L.narrow ? 'narrow' : 'wide'] / L.minText);
+      const st = frameState(w.stop[0] + F.enter_after_s), keep = cam.fs; cam.fs = 1;
+      const base = flowCamera(st); cam.fs = keep;
+      let fr = null;
+      if (from && L.x[from.id] < L.x[to.id]) {
+        const span = L.x[to.id] + L.W - L.x[from.id], s = Math.min(1, (L.Wc - L.G - 2 * m) / span);
+        if (s >= sMin) fr = { mode: 'both', s, x: L.x[from.id] - (L.G + m) / s, from: from.id };
+      }
+      if (!fr) {
+        const left = base + (L.G + 8);
+        const near = CARDS.filter(c => c.lane === (from ? from.lane : w.from_lane) && c.at <= to.at && L.x[c.id] >= left && L.x[c.id] + L.W <= L.x[to.id]);
+        fr = !L.narrow && near.length ? { mode: 'neighbor', s: 1, x: base, from: near[0].id } : { mode: 'chip', s: 1, x: base, from: null };
+      }
+      return (L.frames[i] = fr);
     }
 
     // Pools: card buttons, wire paths and labels are reused as they scroll.
@@ -202,11 +226,76 @@
       return b;
     }
 
+    const chipPool = new Map(), markPool = new Map(), chainPool = new Map();
+    function chipEl(key, w, i) {
+      let el = chipPool.get(key);
+      if (el) return el;
+      const to = byId[w.to], lane = TIMING.lanes[w.from_lane];
+      el = document.createElement('button');
+      el.type = 'button'; el.className = 'source-chip'; el.dataset.detailOpen = 'wire:' + i;
+      el.setAttribute('aria-haspopup', 'dialog'); el.setAttribute('aria-expanded', 'false');
+      const held = document.createElement('b');
+      held.textContent = w.label;
+      el.append(held, ' · ' + lane.short + ' edited ' + to.code.split('/').pop() + ' earlier');
+      chipPool.set(key, el);
+      return el;
+    }
+    function markEl(key) {
+      let el = markPool.get(key);
+      if (el) return el;
+      el = document.createElement('span');
+      el.className = 'wire-earlier'; el.textContent = 'earlier'; el.setAttribute('aria-hidden', 'true');
+      markPool.set(key, el);
+      return el;
+    }
+    /* Each lane's chain of work: a line in the lane's color from each card to
+       the agent's next card, with small nodes at the card edges. A long idle
+       stretch in the log is drawn dashed and lighter. */
+    const chainLayer = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    chainLayer.setAttribute('class', 'chains');
+    wireLayer.prepend(chainLayer);
+    function drawChains(st, viewL, viewR, margin) {
+      const want = new Set(), y = c => L.top + c.lane * L.row + L.H / 2;
+      const nMin = Math.floor((viewL - margin - L.period) / L.period);
+      for (let n = nMin; n <= 0; n++) {
+        for (const c of CARDS) {
+          if (!c.next) continue;
+          const nx = byId[c.next], nn = c.next_loop ? n + 1 : n;
+          const a = L.x[c.id] + n * L.period + L.W, b = L.x[nx.id] + nn * L.period;
+          if (b < viewL - margin || a > viewR + margin) continue;
+          const oa = n < 0 ? 1 : st.cards[c.id][0], ob = nn < 0 ? 1 : nn > 0 ? 0 : st.cards[nx.id][0];
+          if (oa < 0.001 || ob < 0.001) continue;
+          const key = n + ':' + c.id;
+          want.add(key);
+          let g = chainPool.get(key);
+          if (!g) {
+            g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            g.setAttribute('class', 'chain lane-' + 'abcdefghij'[c.lane % 10] + (c.idle_after ? ' idle' : ''));
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line'), n1 = document.createElementNS('http://www.w3.org/2000/svg', 'circle'), n2 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            n1.setAttribute('r', P.connector.node_px / 2); n2.setAttribute('r', P.connector.node_px / 2);
+            g.append(line, n1, n2); chainPool.set(key, g);
+          }
+          const [line, n1, n2] = g.children, yy = y(c).toFixed(1);
+          line.setAttribute('x1', a.toFixed(1)); line.setAttribute('x2', b.toFixed(1)); line.setAttribute('y1', yy); line.setAttribute('y2', yy);
+          n1.setAttribute('cx', a.toFixed(1)); n1.setAttribute('cy', yy); n2.setAttribute('cx', b.toFixed(1)); n2.setAttribute('cy', yy);
+          g.style.opacity = Math.min(oa, ob).toFixed(3);
+          if (g.parentNode !== chainLayer) chainLayer.append(g);
+        }
+      }
+      for (const [key, g] of chainPool) if (!want.has(key)) { g.remove(); chainPool.delete(key); }
+    }
+
     let last = null;
     function renderAt(seconds) {
       if (!L) layout();
       const st = frameState(seconds);
-      if (cam.mode === 'flow') { cam.s = cam.fs; cam.x = flowCamera(st); cam.y = 0; }
+      if (cam.mode === 'flow') {
+        cam.s = cam.fs; cam.x = flowCamera(st); cam.y = 0;
+        if (st.hold && cam.fs === 1) {
+          const fr = frameFor(st.hold[0]), k = st.hold[1];
+          cam.s = 1 + (fr.s - 1) * k; cam.x = cam.x + (fr.x - cam.x) * k;
+        }
+      }
       const s = cam.s, viewL = cam.x, viewR = cam.x + L.Wc / s, margin = L.W * 2;
       // Zooming keeps the first lane at its place under the status line.
       const ty = L.top * (1 - s) + cam.y;
@@ -232,7 +321,8 @@
         }
         WIRES.forEach((w, i) => {
           const p = n < 0 ? 1 : st.wires[i];
-          if (p < 0.001) return;
+          // A held wire's start (its card, chip or marker) shows from the moment the camera frames it.
+          if (p < 0.001 && !(n === 0 && st.hold && st.hold[0] === i)) return;
           const to = byId[w.to], from = w.from ? byId[w.from] : null;
           const x2 = L.x[to.id] + off, x1 = from ? L.x[from.id] + off + L.W : x2 - 60;
           if (Math.max(x1, x2) < viewL - margin || Math.min(x1, x2) > viewR + margin) return;
@@ -251,15 +341,34 @@
       for (const [key, el] of pool) if (!want.has(key)) { if (el.contains(document.activeElement)) continue; el.remove(); pool.delete(key); }
       // Wires and their labels.
       for (const [key, [w, i, p, off]] of wantW) {
-        const g = wireEl(key, w), to = byId[w.to], from = w.from ? byId[w.from] : null;
+        const g = wireEl(key, w), to = byId[w.to];
+        const fr = w.kind === 'held' ? frameFor(i) : { mode: 'both', from: w.from };
+        const from = fr.from ? byId[fr.from] : null, srcLane = w.from ? byId[w.from].lane : w.from_lane;
         const x2 = L.x[to.id] + off, y2 = cardY(to) + cardH(to) / 2;
-        let x1 = from ? L.x[from.id] + off + L.W : x2 - 60, y1 = from ? cardY(from) + cardH(from) / 2 : L.top + w.from_lane * L.row + L.H / 2;
-        // If the card the wire starts from has passed under the lane names,
-        // the wire starts at that lane's edge of the view instead.
-        const edge = viewL + (L.G + 4) / s;
-        if (x1 < edge && x2 > edge) { x1 = edge; y1 = L.top + (from ? from.lane : w.from_lane) * L.row + L.H / 2; }
+        let x1 = from ? L.x[from.id] + off + L.W : x2, y1 = from ? cardY(from) + cardH(from) / 2 : y2;
         let d;
-        if (x2 - x1 >= 24) {
+        if (fr.mode === 'chip') {
+          // A small chip in the gap between the two lanes names the earlier change.
+          const chip = chipEl(key, w, i), up = srcLane < to.lane, gap = L.top + Math.min(srcLane, to.lane) * L.row;
+          const gy = up ? gap + L.H + (L.row - L.H) / 2 : gap + (to.kind === 'held' ? L.HH : L.H) + (L.row - (to.kind === 'held' ? L.HH : L.H)) / 2;
+          // Centered over the held card; kept inside the view while the camera frames it.
+          const cw = Math.min(240, (L.Wc - L.G) * 0.9) / s;
+          const framing = off === 0 && st.hold && st.hold[0] === i;
+          const cx = framing ? Math.max(viewL + (L.G + 6) / s + cw / 2, Math.min(viewR - 6 / s - cw / 2, x2 + L.W / 2)) : x2 + L.W / 2;
+          chip.style.maxWidth = (cw * s).toFixed(0) + 'px';
+          chip.style.left = cx.toFixed(1) + 'px'; chip.style.top = gy.toFixed(1) + 'px'; chip.style.opacity = Math.max(clamp01(p * 2), off === 0 && st.hold && st.hold[0] === i ? st.hold[1] : 0).toFixed(3);
+          chip.style.transform = 'translate(-50%,-50%)' + (s < 1 ? ' scale(' + (1 / s).toFixed(3) + ')' : '');
+          if (chip.parentNode !== labelLayer) labelLayer.append(chip);
+          x1 = cx; y1 = gy;
+          const ty = up ? cardY(to) : cardY(to) + cardH(to), tx = x2 + L.W / 2;
+          d = 'M ' + x1.toFixed(1) + ' ' + y1.toFixed(1) + ' C ' + tx.toFixed(1) + ' ' + y1.toFixed(1) + ', ' + tx.toFixed(1) + ' ' + y1.toFixed(1) + ', ' + tx.toFixed(1) + ' ' + ty.toFixed(1);
+        } else if (fr.mode === 'neighbor') {
+          // From the later card's facing edge, straight across the lane gap.
+          const down = y2 > y1, fx = x1 - L.W / 2, fy = cardY(from) + (down ? cardH(from) : 0);
+          const tx = x2 + L.W / 2, ty = down ? cardY(to) : cardY(to) + cardH(to), my = (fy + ty) / 2;
+          x1 = fx; y1 = fy;
+          d = 'M ' + fx.toFixed(1) + ' ' + fy.toFixed(1) + ' C ' + fx.toFixed(1) + ' ' + my.toFixed(1) + ', ' + tx.toFixed(1) + ' ' + my.toFixed(1) + ', ' + tx.toFixed(1) + ' ' + ty.toFixed(1);
+        } else if (x2 - x1 >= 24) {
           const dx = Math.max(24, (x2 - x1) / 2);
           d = 'M ' + x1.toFixed(1) + ' ' + y1.toFixed(1) + ' C ' + (x1 + dx).toFixed(1) + ' ' + y1.toFixed(1) + ', ' + (x2 - dx).toFixed(1) + ' ' + y2.toFixed(1) + ', ' + x2.toFixed(1) + ' ' + y2.toFixed(1);
         } else {
@@ -272,17 +381,29 @@
         for (const path of g.children) { path.setAttribute('d', d); path.style.strokeDashoffset = (1 - p).toFixed(4); }
         g.style.opacity = '1';
         if (g.parentNode !== wireLayer) wireLayer.append(g);
+        if (fr.mode === 'neighbor') {
+          // The wire starts from a later card in the same lane: mark it "earlier".
+          const mk = markEl(key);
+          // Beside the wire's start, in the gap between the rows.
+          const down = y2 > cardY(from);
+          mk.style.left = (x1 + 8).toFixed(1) + 'px'; mk.style.top = (down ? y1 + 4 : y1 - 20).toFixed(1) + 'px'; mk.style.opacity = Math.max(clamp01(p * 2), off === 0 && st.hold && st.hold[0] === i ? st.hold[1] : 0).toFixed(3);
+          mk.style.transform = s < 1 ? 'scale(' + (1 / s).toFixed(3) + ')' : '';
+          if (mk.parentNode !== labelLayer) labelLayer.append(mk);
+        }
+        if (fr.mode === 'chip') continue; // The chip carries the label.
         const lb = labelEl(key, w, i);
         // The label sits in the gap between the two lanes, beside the wire.
         const fl = from ? from.lane : w.from_lane, top = Math.min(fl, to.lane);
         const upperH = Math.max(L.H, ...[from, to].filter(c => c && c.lane === top && c.kind === 'held').map(() => L.HH));
         const gapY = (L.top + top * L.row + upperH + L.top + (top + 1) * L.row) / 2;
-        lb.style.left = ((x1 + x2 + (x2 - x1 >= 24 ? 0 : L.W / 2)) / 2).toFixed(1) + 'px';
+        lb.style.left = (fr.mode === 'chip' ? x2 + L.W / 2 + 34 : (x1 + x2 + (x2 - x1 >= 24 ? 0 : L.W / 2)) / 2).toFixed(1) + 'px';
         // Labels keep their size when the plane is zoomed out.
         lb.style.transform = 'translate(-50%,-50%)' + (s < 1 ? ' scale(' + (1 / s).toFixed(3) + ')' : ''); lb.style.top = gapY.toFixed(1) + 'px'; lb.style.opacity = clamp01(p * 2).toFixed(3);
         if (lb.parentNode !== labelLayer) labelLayer.append(lb);
       }
       for (const [key, g] of wirePool) if (!wantW.has(key)) { g.remove(); wirePool.delete(key); }
+      for (const pool2 of [chipPool, markPool]) for (const [key, el] of pool2) if (!wantW.has(key) || (pool2 === chipPool ? frameFor(+key.split(':')[1]).mode !== 'chip' : frameFor(+key.split(':')[1]).mode !== 'neighbor')) { el.remove(); pool2.delete(key); }
+      drawChains(st, viewL, viewR, margin);
       for (const [key, b] of labelPool) if (!wantW.has(key)) { if (b === document.activeElement) continue; b.remove(); labelPool.delete(key); }
       if (!last || last.status[0] !== st.status[0]) countAgents.textContent = st.status[0] + (st.status[0] === 1 ? ' agent' : ' agents');
       if (!last || last.status[1] !== st.status[1]) countHeld.textContent = st.status[1] + (st.status[1] === 1 ? ' write' : ' writes');
@@ -469,7 +590,7 @@
     // fails if its timing differs from timing.json.
     window.LangSpanHero = {
       element: hero, timing: TIMING, renderAt, frameState,
-      layout: () => L, camera: () => ({ ...cam }), relayout,
+      layout: () => L, camera: () => ({ ...cam }), relayout, frameFor: i => frameFor(i),
       // For films: keep the flow at a given scale (1 is the default view).
       flowScale: s => { cam.mode = 'flow'; cam.fs = s; syncFollow(); },
       clock: () => ({ elapsed, playing, held, visible, running: !!raf, resumeScheduled: !!idle })
