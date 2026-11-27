@@ -14,7 +14,11 @@ QA method and a table of common failures. If the two disagree, this file wins.
 1. Motion explains state: a hold, a briefing, a refusal, a notice or a
    choice. It never fakes an agent action, a cursor or an outcome LangSpan
    hasn't measured. Label each piece **Recorded**, **Simulated** or
-   **Illustration**.
+   **Illustration**. One exception, the owner's decision of 27 November
+   2026: a product view that replays a real recorded session needs no
+   visible label when the view shows the real repository, branch and file
+   paths, and the fixture with its provenance (seq range and date) is in
+   this repository. Simulated and illustrative visuals keep their labels.
 2. Write the clock before any motion. One timing file drives the picture,
    the captions and the cuts. The hero loop's clock is
    [`marketing/motion/hero-loop/timing.json`](../../../marketing/motion/hero-loop/timing.json).

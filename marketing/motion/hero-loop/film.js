@@ -16,7 +16,7 @@
   film.id = 'film';
   film.innerHTML = '<header class="film-header"><div data-film-logo></div><span class="film-context">Coordination for coding agents</span></header>'
     + '<div class="film-stage" data-film-panel></div>'
-    + '<footer class="film-footer"><strong>Your agents. On the same page.</strong><span>LangSpan’s own agents at work</span></footer>';
+    + '<footer class="film-footer"><strong>Your agents. On the same page.</strong></footer>';
   film.querySelector('[data-film-logo]').append(logo);
   film.querySelector('[data-film-panel]').append(panel);
   document.body.append(film);

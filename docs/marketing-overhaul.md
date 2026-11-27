@@ -336,22 +336,24 @@ limit stated once in the questions, no placeholders and no dates on the page.
   benchmark publishes real numbers (LangSpan.dev #495, results from #172).
   The scenes that have no real recording (heard a change, rename held,
   checked before merging) are left out.
-- Hero: LangSpan Live's "Now" view loops a slice of LangSpan's own agents,
-  two Claude Code sessions in one checkout. The caption reads "LangSpan's own
-  agents at work"; the page shows no date. The slice is
+- Hero: LangSpan Live's "Now" view loops a slice of LangSpan's own agents:
+  two Claude Code sessions in one checkout and a third in its own worktree
+  (a quiet lane, word cards only). There is no caption, label or date; the
+  real repository, branch and file paths show that it is a real session
+  (owner decision, 27 November 2026, recorded in the motion standard). The slice is
   `assets/evidence/hero-slice-2026-11-25.json`, exported read-only from the
   dogfood coordinator's event log on 25 November 2026, 19:56:19 to 19:57:53
   (seq 29121 to 29290, plus 28584). It keeps seq, type, time, paths, lane
   labels, the tool of an observed operation, the origin of a source
   observation, the other lane of a held write or a message, and the
-  repository and branch. It drops prompts, message text, digests, session,
+  repository, and each lane's branch and checkout kind. It drops prompts, message text, digests, session,
   lease, operation and workspace IDs, symbols and line ranges, workspace
   roots and home paths, events of other sessions, and events that name no
   session. Each card cites its seq numbers in `data-seq`; the timing file
   cites them per event.
 - The hero is hand-built HTML and SVG with no new dependency. At 1280 px and
   wider, time runs left to right and the inspector sits over the right of
-  the canvas; below that, time runs top to bottom in two lane columns, with
+  the canvas; below that, time runs top to bottom in three lane columns, with
   the inspector beside the canvas or, under 760 px, under it. The canvas
   controls are Pause, zoom in, zoom out, Fit and Follow newest (on by
   default); dragging pans. Reduced motion, `?motion=static` and a page

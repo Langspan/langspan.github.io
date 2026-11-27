@@ -4,8 +4,7 @@ import {mockLatestRelease} from './release-links-check.mjs';
 // Home page, revision 2 (langspan.github.io#39): the hero replays a recorded
 // slice of LangSpan Live's "Now" view from assets/evidence/hero-slice-2026-11-25.json.
 const ORDER=['top','problem','agent-sees','how-it-works','across-computers','verified','start','open-source','questions','for-agents','get-langspan'];
-const CARDS=['card-hook','card-dash','card-tests','card-held','card-graph','card-read','card-saved'];
-const LABEL='LangSpan’s own agents at work';
+const CARDS=['card-hook','card-observer','card-dash','card-graph-c7','card-tests','card-held','card-graph-late','card-graph','card-read','card-saved'];
 const TAG='v0.8.0';
 const fixture=JSON.parse(readFileSync(new URL('../assets/evidence/hero-slice-2026-11-25.json',import.meta.url),'utf8'));
 const timing=JSON.parse(readFileSync(new URL('../marketing/motion/hero-loop/timing.json',import.meta.url),'utf8'));
@@ -22,8 +21,9 @@ function checkFixture(){
   assert.ok(!banned.test(text),'fixture contains '+banned);
  assert.ok(fixture.events.every(e=>Object.keys(e).every(k=>['seq','type','lane','time','paths','tool','origin','held_by_change_from','to'].includes(k))),'fixture keeps only the listed fields');
  assert.ok(!fixture.events.some(e=>e.type==='session_prompted'),'fixture keeps no prompts');
- assert.deepEqual([...new Set(fixture.events.map(e=>e.lane))].sort(),['Agent · #28 signature alerts','Agent · #29 renames']);
- assert.equal(fixture.label,LABEL);
+ assert.deepEqual([...new Set(fixture.events.map(e=>e.lane))].sort(),['Agent · #28 signature alerts','Agent · #29 renames','Agent · worktree signatures']);
+ assert.deepEqual([fixture.repository,fixture.branch],['LangSpan.dev','dogfood/rename-safety']);
+ assert.ok(Object.keys(fixture.lanes).length===3&&Object.values(fixture.lanes).every(l=>l.branch&&l.checkout));
  // Every seq the timing draws is in the fixture.
  for(const e of timing.events)for(const s of e.seq||[])assert.ok(bySeq.has(s),'timing cites seq '+s+', which is not in the fixture');
  const refused=fixture.events.filter(e=>e.type==='write_refused');
@@ -55,13 +55,16 @@ export async function checkProductFirst(browser,base,out,axe){
    // Hero: reduced motion shows the final state of the recorded slice.
    const hero=p.locator('[data-hero-loop]');
    assert.equal(await p.evaluate(()=>window.LangSpanHero.clock().playing),false);
-   assert.equal(await hero.locator('.live-tag').textContent(),LABEL);
+   assert.equal(await hero.locator('.live-tag').count(),0,'no caption on the hero');
+   assert.equal((await hero.locator('.live-agents').textContent()).trim(),'3 agents');
+   assert.equal(await hero.locator('.live-bar code').textContent(),fixture.branch);
+   for(const [lane,info] of Object.entries(fixture.lanes))assert.ok(await hero.locator('.lane-head',{hasText:lane}).isVisible(),lane);
    for(const c of CARDS)assert.ok(await hero.locator('[data-card="'+c+'"]').isVisible(),c+' visible');
    assert.equal(await hero.locator('.wire-label:visible').count(),1);
    assert.equal(await hero.locator('.wire-label').textContent(),'Held');
    assert.ok(await hero.locator('[data-inspector]').isVisible(),'inspector open on the held card');
    assert.ok(await hero.locator('[data-card="card-held"]').evaluate(e=>e.classList.contains('selected')));
-   assert.equal((await hero.locator('.live-status').textContent()).trim(),'2 agents working · 3 writes held in the last 10 min');
+   assert.equal((await hero.locator('.live-status').textContent()).trim(),'3 agents working · 3 writes held in the last 10 min');
    assert.equal(await hero.locator('[class*=legend]').count(),0,'no legend');
    // Each drawn card cites fixture events, and its file pill names a path from them.
    for(const c of CARDS){
@@ -77,6 +80,8 @@ export async function checkProductFirst(browser,base,out,axe){
    else assert.ok(graph.y>hook.y&&saved.y>held.y&&held.x>hook.x,'vertical timeline '+width);
    const insp=await hero.locator('[data-inspector]').boundingBox();
    if(width>=1280)for(const c of CARDS){const b=await box(p,c);assert.ok(b.x+b.width<=insp.x,'card '+c+' clear of the inspector at '+width);}
+   // No two cards, lane heads or the Held label overlap.
+   assert.deepEqual(await hero.evaluate(h=>{const b=[...h.querySelectorAll('[data-card],.wire-label,.lane-head')].filter(e=>getComputedStyle(e).display!=='none').map(e=>[e.dataset.card||e.className,e.getBoundingClientRect()]);const o=[];for(let i=0;i<b.length;i++)for(let j=i+1;j<b.length;j++){const a=b[i][1],c=b[j][1];if(a.left<c.right-1&&c.left<a.right-1&&a.top<c.bottom-1&&c.top<a.bottom-1)o.push(b[i][0]+' x '+b[j][0]);}return o;}),[],'overlap at '+width);
    const tools=hero.locator('[data-camera] button');// Pause, +, −, Fit, Follow newest
    assert.equal(await tools.count(),5);
    if(width<1280)for(const b of await tools.all()){const r=await b.boundingBox();assert.ok(r.width>=44&&r.height>=44,'camera control at least 44 px');}

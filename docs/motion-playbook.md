@@ -136,7 +136,9 @@ table when its surface is next rebuilt, and check it again at that time.
 ## Provenance
 
 Label every visual as **Recorded** (verbatim from a real session, with a
-link to it), **Simulated** (a controlled run with constructed input) or
+link to it; a product view replaying a real session that shows the real
+repository, branch and paths, with its fixture and provenance in this
+repository, needs no visible label), **Simulated** (a controlled run with constructed input) or
 **Illustration** (authored). Put the label on the visual and in its
 caption. Never show an outcome LangSpan hasn't measured. A film made from
 the page's own component carries the page's labels; the phone cut's footer

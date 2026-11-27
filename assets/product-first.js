@@ -32,14 +32,17 @@
     "final_s": 9,
     "easing": {"entrance": {"curve": [0.16, 1, 0.3, 1], "ms": 280}, "exit": {"curve": [0.7, 0, 0.84, 0], "ms": 160}, "feedback": {"curve": [0.16, 1, 0.3, 1], "ms": 150}, "state": {"curve": [0.16, 1, 0.3, 1], "ms": 280}},
     "events": [
-      {"at": 0, "target": "scene", "motion": "none", "text": "Two agents in one checkout. 1 write held in the last 10 min.", "seq": [28584]},
+      {"at": 0, "target": "scene", "motion": "none", "text": "Three agents: two in one checkout, one in its own worktree. 1 write held in the last 10 min.", "seq": [28584]},
       {"at": 0.5, "target": "card-hook", "motion": "entrance", "travel_px": 8, "text": "Edited src/hook.rs · 3 edits", "seq": [29128, 29129, 29140, 29141, 29145, 29146]},
+      {"at": 1.0, "target": "card-observer", "motion": "entrance", "travel_px": 8, "text": "Edited src/observer.rs · 4 edits", "seq": [29134, 29135, 29150, 29151, 29157, 29158, 29161, 29162]},
       {"at": 1.5, "target": "card-dash", "motion": "entrance", "travel_px": 8, "text": "Edited 1 file and ran 1 command", "seq": [29172, 29173, 29212]},
+      {"at": 2.0, "target": "card-graph-c7", "motion": "entrance", "travel_px": 8, "text": "Edited src/graph.rs · 6 edits", "seq": [29189, 29190, 29198, 29199, 29207, 29208, 29225, 29226, 29232, 29233, 29237, 29238]},
       {"at": 2.3, "target": "status", "motion": "feedback", "text": "2 writes held in the last 10 min", "seq": [29204]},
       {"at": 2.7, "target": "card-tests", "motion": "entrance", "travel_px": 8, "text": "Edited tests/break_alerts.rs", "seq": [29243, 29244]},
       {"at": 3.7, "target": "card-held", "motion": "entrance", "travel_px": 8, "text": "Write held src/hook.rs · changed since this agent read it", "seq": [29255, 29256]},
       {"at": 3.7, "target": "wire", "motion": "state", "text": "The Held wire draws from #29's edits of src/hook.rs to #28's held write.", "seq": [29256]},
       {"at": 3.7, "target": "status", "motion": "feedback", "text": "3 writes held in the last 10 min", "seq": [29256]},
+      {"at": 4.4, "target": "card-graph-late", "motion": "entrance", "travel_px": 8, "text": "Edited src/graph.rs", "seq": [29258, 29259]},
       {"at": 5, "target": "card-graph", "motion": "entrance", "travel_px": 8, "text": "Edited 2 files graph.rs, breaks.rs", "seq": [29267, 29268, 29277, 29278]},
       {"at": 5.8, "target": "card-read", "motion": "entrance", "travel_px": 8, "text": "Read src/hook.rs", "seq": [29274]},
       {"at": 6.6, "target": "card-saved", "motion": "entrance", "travel_px": 8, "text": "Saved after re-reading src/hook.rs", "seq": [29284, 29285]},
@@ -47,7 +50,7 @@
       {"at": 11.4, "target": "scene", "motion": "exit", "text": "Cards, the wire and the inspector leave together."},
       {"at": 11.4, "target": "status", "motion": "feedback", "text": "1 write held in the last 10 min", "seq": [28584]}
     ],
-    "holds_s": [[0, 0.5], [0.78, 1.5], [1.78, 2.7], [2.98, 3.7], [3.98, 5], [5.28, 5.8], [6.08, 6.6], [6.88, 7.6], [7.88, 11.4], [11.56, 12]]
+    "holds_s": [[0, 0.5], [0.78, 1.0], [1.28, 1.5], [1.78, 2.0], [2.28, 2.7], [2.98, 3.7], [3.98, 4.4], [4.68, 5.0], [5.28, 5.8], [6.08, 6.6], [6.88, 7.6], [7.88, 11.4], [11.56, 12]]
   };
   const LOOP = TIMING.duration_s, FINAL_T = TIMING.final_s;
   const bezier = ([x1, y1, x2, y2]) => p => {

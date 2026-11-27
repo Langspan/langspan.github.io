@@ -62,30 +62,33 @@
     <div class="live-frame">
       <div class="live-bar">
         <span class="live-repo">LangSpan.dev</span><span class="live-sep" aria-hidden="true">/</span><code>dogfood/rename-safety</code>
-        <span class="live-tag">LangSpan’s own agents at work</span>
-        <span class="live-agents"><i aria-hidden="true"></i>2 agents</span>
+        <span class="live-agents"><i aria-hidden="true"></i>3 agents</span>
       </div>
       <div class="live-tools" role="group" aria-label="Camera" data-camera hidden>
         <button type="button" class="live-pause" data-hero-play>Pause</button><button type="button" aria-label="Zoom in" data-cam="in">+</button><button type="button" aria-label="Zoom out" data-cam="out">−</button><button type="button" aria-label="Fit all work" data-cam="fit">Fit</button><button type="button" aria-label="Follow the newest work" aria-pressed="true" data-cam="follow">Follow newest</button>
       </div>
       <div class="live-main">
         <div class="live-canvas" data-canvas>
-          <p class="live-status" data-hero-target="status"><strong>2 agents working</strong> · <span data-status-count>3 writes held</span> in the last 10 min</p>
+          <p class="live-status" data-hero-target="status"><strong>3 agents working</strong> · <span data-status-count>3 writes held</span> in the last 10 min</p>
           <div class="live-world" data-world>
-            <i class="lane-line lane-a" aria-hidden="true"></i><i class="lane-line lane-b" aria-hidden="true"></i>
+            <i class="lane-line lane-a" aria-hidden="true"></i><i class="lane-line lane-b" aria-hidden="true"></i><i class="lane-line lane-c" aria-hidden="true"></i>
             <div class="lane-head lane-a"><i aria-hidden="true"></i><span><strong>Agent · #29 renames</strong><span>Claude Code</span><span>shared checkout</span></span></div>
             <div class="lane-head lane-b"><i aria-hidden="true"></i><span><strong>Agent · #28 signature alerts</strong><span>Claude Code</span><span>shared checkout</span></span></div>
+            <div class="lane-head lane-c"><i aria-hidden="true"></i><span><strong>Agent · worktree signatures</strong><span>Claude Code</span><span>own worktree</span></span></div>
             <svg class="wire wire-h" viewBox="0 0 1360 520" width="1360" height="520" aria-hidden="true" data-wire><path class="wire-glow" d="M 274 182 C 274 223, 566 203, 566 244"/><path class="wire-line" pathLength="1" d="M 274 182 C 274 223, 566 203, 566 244"/></svg>
-            <svg class="wire wire-v" viewBox="0 0 346 620" preserveAspectRatio="none" aria-hidden="true" data-wire><path class="wire-glow" d="M 150 144 C 179 144, 167 344, 196 344"/><path class="wire-line" pathLength="1" d="M 150 144 C 179 144, 167 344, 196 344"/></svg>
+            <svg class="wire wire-v" viewBox="0 0 346 660" preserveAspectRatio="none" aria-hidden="true" data-wire><path class="wire-glow" d="M 112.5 159 C 126 159, 107 372, 120.2 372"/><path class="wire-line" pathLength="1" d="M 112.5 159 C 126 159, 107 372, 120.2 372"/></svg>
             <span class="wire-label" data-wire-label>Held</span>
             <ol class="cards" aria-label="Work in the recording, oldest first">
-              <li class="card lane-a" data-card="card-hook" data-seq="29128 29129 29140 29141 29145 29146"><span class="verb">Edited</span><code>src/hook.rs</code><span class="sub">3 edits</span></li>
+              <li class="card lane-a" data-card="card-hook" data-seq="29128 29129 29140 29141 29145 29146"><span class="verb">Edited</span><code>src/<wbr>hook.rs</code><span class="sub">3 edits</span></li>
+              <li class="card lane-c" data-card="card-observer" data-seq="29134 29135 29150 29151 29157 29158 29161 29162"><span class="verb">Edited</span><code>src/<wbr>observer.rs</code><span class="sub">4 edits</span></li>
               <li class="card group" data-card="card-dash" data-seq="29172 29173 29212"><span class="verb">Edited 1 file and ran 1 command</span></li>
-              <li class="card lane-b" data-card="card-tests" data-seq="29243 29244"><span class="verb">Edited</span><code><span class="dir">tests/</span>break_alerts.rs</code></li>
-              <li class="card held lane-b" data-card="card-held" data-seq="29255 29256"><button type="button" class="card-hit" data-open-inspector aria-expanded="true" aria-controls="held-details"><span class="who">LangSpan</span><span class="verb">Write held</span><code>src/hook.rs</code><span class="sub">changed since this agent read it</span></button></li>
+              <li class="card lane-c" data-card="card-graph-c7" data-seq="29189 29190 29198 29199 29207 29208 29225 29226 29232 29233 29237 29238"><span class="verb">Edited</span><code>src/<wbr>graph.rs</code><span class="sub">6 edits</span></li>
+              <li class="card lane-b" data-card="card-tests" data-seq="29243 29244"><span class="verb">Edited</span><code><span class="dir">tests/</span>break_<wbr>alerts.rs</code></li>
+              <li class="card held lane-b" data-card="card-held" data-seq="29255 29256"><button type="button" class="card-hit" data-open-inspector aria-expanded="true" aria-controls="held-details"><span class="who">LangSpan</span><span class="verb">Write held</span><code>src/<wbr>hook.rs</code><span class="sub">changed since this agent read it</span></button></li>
+              <li class="card lane-c" data-card="card-graph-late" data-seq="29258 29259"><span class="verb">Edited</span><code>src/<wbr>graph.rs</code></li>
               <li class="card group" data-card="card-graph" data-seq="29267 29268 29277 29278"><span class="verb">Edited 2 files</span><code>graph.rs, breaks.rs</code></li>
-              <li class="card lane-b" data-card="card-read" data-seq="29274"><span class="verb">Read</span><code>src/hook.rs</code></li>
-              <li class="card saved" data-card="card-saved" data-seq="29284 29285"><span class="verb">Saved after re-reading</span><code>src/hook.rs</code></li>
+              <li class="card lane-b" data-card="card-read" data-seq="29274"><span class="verb">Read</span><code>src/<wbr>hook.rs</code></li>
+              <li class="card saved" data-card="card-saved" data-seq="29284 29285"><span class="verb">Saved after re-reading</span><code>src/<wbr>hook.rs</code></li>
             </ol>
           </div>
         </div>

@@ -1,7 +1,22 @@
 {
  "name": "LangSpan Live \"Now\" view, recorded slice",
- "label": "LangSpan’s own agents at work",
- "recorded": "Two Claude Code sessions working in one checkout of the LangSpan repository on 25 November 2026, exported read-only from the coordinator event log that LangSpan keeps while we build it. Recorded 25 November 2026, 19:56:19 to 19:57:53 (local time). The home page shows this slice on a loop without the date.",
+ "recorded": "Three Claude Code sessions in LangSpan's own development, exported read-only from the coordinator event log that LangSpan keeps while we build it. Two work in one shared checkout of the LangSpan.dev repository on branch dogfood/rename-safety; the third works in its own worktree on branch feat/worktree-signatures-c7. Recorded 25 November 2026, 19:56:19 to 19:57:53 (local time). The home page shows this slice on a loop without the date.",
+ "repository": "LangSpan.dev",
+ "branch": "dogfood/rename-safety",
+ "lanes": {
+  "Agent · #29 renames": {
+   "checkout": "shared checkout",
+   "branch": "dogfood/rename-safety"
+  },
+  "Agent · #28 signature alerts": {
+   "checkout": "shared checkout",
+   "branch": "dogfood/rename-safety"
+  },
+  "Agent · worktree signatures": {
+   "checkout": "own worktree",
+   "branch": "feat/worktree-signatures-c7"
+  }
+ },
  "seq_range": [
   29121,
   29290
@@ -18,7 +33,8 @@
   "lane label",
   "tool (operation_observed)",
   "origin (source_observed)",
-  "the other lane for a held write (write_refused) or a message (message_sent)"
+  "the other lane for a held write (write_refused) or a message (message_sent)",
+  "repository, and each lane's branch and checkout kind"
  ],
  "dropped": [
   "prompts (session_prompted)",
@@ -32,9 +48,7 @@
   "events of other sessions",
   "disk_observed and lease_completed (no session)"
  ],
- "notes": "Both write_refused events in the window, and seq 28584, are stale-source holds: the file changed after the agent last read it. The read at seq 29274 saw the same version of src/hook.rs that #29 left after its edits (equal digests; digests dropped here). A briefing_delivered or message_sent event records no time of its own. Repository and branch come from the coordinator workspace of these sessions.",
- "repository": "LangSpan.dev",
- "branch": "dogfood/rename-safety",
+ "notes": "Both write_refused events in the window, and seq 28584, are stale-source holds: the file changed after the agent last read it. The read at seq 29274 saw the same version of src/hook.rs that #29 left after its edits (equal digests; digests dropped here). A briefing_delivered or message_sent event records no time of its own. Repository and branch come from the coordinator workspace of these sessions. The third lane's branch comes from the repository's branch history (created 19:46, first commit 20:10, \"tell dependents about another worktree's uncommitted signatures\"); its workspace is registered separately from the shared checkout. No write of any of the three sessions was held between 19:47:52 and 19:52:30 (the log from seq 27503 on was checked).",
  "events": [
   {
    "seq": 28584,
@@ -90,6 +104,12 @@
    "time": "2026-11-25T19:56:22.125"
   },
   {
+   "seq": 29127,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:56:22.692"
+  },
+  {
    "seq": 29128,
    "type": "lease_granted",
    "lane": "Agent · #29 renames",
@@ -121,6 +141,39 @@
    "seq": 29132,
    "type": "briefing_delivered",
    "lane": "Agent · #29 renames"
+  },
+  {
+   "seq": 29134,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "paths": [
+    "src/observer.rs"
+   ]
+  },
+  {
+   "seq": 29135,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:56:28.436",
+   "paths": [
+    "src/observer.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29136,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:56:28.437",
+   "paths": [
+    "src/observer.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29138,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures"
   },
   {
    "seq": 29140,
@@ -190,6 +243,34 @@
    "time": "2026-11-25T19:56:30.020"
   },
   {
+   "seq": 29150,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "paths": [
+    "src/observer.rs"
+   ]
+  },
+  {
+   "seq": 29151,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:56:30.062",
+   "paths": [
+    "src/observer.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29152,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:56:30.063",
+   "paths": [
+    "src/observer.rs"
+   ],
+   "origin": "write"
+  },
+  {
    "seq": 29155,
    "type": "briefing_delivered",
    "lane": "Agent · #28 signature alerts"
@@ -199,6 +280,68 @@
    "type": "tool_batch_observed",
    "lane": "Agent · #28 signature alerts",
    "time": "2026-11-25T19:56:31.215"
+  },
+  {
+   "seq": 29157,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "paths": [
+    "src/observer.rs"
+   ]
+  },
+  {
+   "seq": 29158,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:56:31.372",
+   "paths": [
+    "src/observer.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29159,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:56:31.373",
+   "paths": [
+    "src/observer.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29161,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "paths": [
+    "src/observer.rs"
+   ]
+  },
+  {
+   "seq": 29162,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:56:32.429",
+   "paths": [
+    "src/observer.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29163,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:56:32.430",
+   "paths": [
+    "src/observer.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29165,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:56:32.445"
   },
   {
    "seq": 29166,
@@ -308,10 +451,60 @@
    "time": "2026-11-25T19:56:54.643"
   },
   {
+   "seq": 29184,
+   "type": "session_seen",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:56:58.234"
+  },
+  {
+   "seq": 29185,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures"
+  },
+  {
+   "seq": 29186,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:56:58.341"
+  },
+  {
    "seq": 29188,
    "type": "tool_batch_observed",
    "lane": "Agent · #28 signature alerts",
    "time": "2026-11-25T19:56:58.733"
+  },
+  {
+   "seq": 29189,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "paths": [
+    "src/graph.rs"
+   ]
+  },
+  {
+   "seq": 29190,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:57:04.485",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29191,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:57:04.488",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29193,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures"
   },
   {
    "seq": 29195,
@@ -328,6 +521,40 @@
    "type": "tool_batch_observed",
    "lane": "Agent · #29 renames",
    "time": "2026-11-25T19:57:06.052"
+  },
+  {
+   "seq": 29198,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "paths": [
+    "src/graph.rs"
+   ]
+  },
+  {
+   "seq": 29199,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:57:06.348",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29200,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:57:06.349",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29202,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:57:06.366"
   },
   {
    "seq": 29203,
@@ -359,6 +586,34 @@
    "seq": 29206,
    "type": "briefing_delivered",
    "lane": "Agent · #28 signature alerts"
+  },
+  {
+   "seq": 29207,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "paths": [
+    "src/graph.rs"
+   ]
+  },
+  {
+   "seq": 29208,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:57:10.280",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29209,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:57:10.281",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
   },
   {
    "seq": 29212,
@@ -405,6 +660,39 @@
    "lane": "Agent · #28 signature alerts"
   },
   {
+   "seq": 29225,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "paths": [
+    "src/graph.rs"
+   ]
+  },
+  {
+   "seq": 29226,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:57:15.144",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29227,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:57:15.145",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29229,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures"
+  },
+  {
    "seq": 29230,
    "type": "source_observed",
    "lane": "Agent · #28 signature alerts",
@@ -419,6 +707,68 @@
    "type": "tool_batch_observed",
    "lane": "Agent · #28 signature alerts",
    "time": "2026-11-25T19:57:16.239"
+  },
+  {
+   "seq": 29232,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "paths": [
+    "src/graph.rs"
+   ]
+  },
+  {
+   "seq": 29233,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:57:16.805",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29234,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:57:16.806",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29237,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "paths": [
+    "src/graph.rs"
+   ]
+  },
+  {
+   "seq": 29238,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:57:18.448",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29239,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:57:18.449",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29241,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:57:18.467"
   },
   {
    "seq": 29242,
@@ -518,6 +868,51 @@
     "src/hook.rs"
    ],
    "held_by_change_from": "Agent · #29 renames"
+  },
+  {
+   "seq": 29257,
+   "type": "session_seen",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:57:42.975"
+  },
+  {
+   "seq": 29258,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "paths": [
+    "src/graph.rs"
+   ]
+  },
+  {
+   "seq": 29259,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:57:43.019",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29260,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:57:43.020",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29262,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures"
+  },
+  {
+   "seq": 29263,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "2026-11-25T19:57:43.042"
   },
   {
    "seq": 29265,
@@ -672,6 +1067,14 @@
    "type": "session_seen",
    "lane": "Agent · #28 signature alerts",
    "time": "2026-11-25T19:57:53.003"
+  },
+  {
+   "seq": 29290,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "paths": [
+    "src/graph.rs"
+   ]
   }
  ]
 }
