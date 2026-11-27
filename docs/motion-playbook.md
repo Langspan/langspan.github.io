@@ -82,9 +82,10 @@ drift. Land a sound hit one frame after its picture event.
 | Scene kit demo and the older films | `marketing/story.json` (scene offsets and `motion`) |
 | Scale and semantic stories | `marketing/parallel-story.json` |
 
-The hero loop's file holds the 12-second clock at 30 fps, every event with
-its target, motion and text, the declared reading holds and the phone cut's
-size. The site publishes only `assets/`, so the hero script carries the same
+The hero loop's file holds the clock at 30 fps, built from the recorded
+slice and `pacing.json` by `marketing/scripts/build-hero-timeline.py`: every
+card and wire with its time and seq numbers, the stops for coordination
+moments, the status line and the phone cut's size. The site publishes only `assets/`, so the hero script carries the same
 values; the phone cut's renderer fails if they differ.
 
 ### The `renderAt(t)` contract

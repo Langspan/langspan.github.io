@@ -5,11 +5,10 @@
   const spec = window.FILM_SPEC, cut = spec.phone_cut, D = spec.duration_s;
   const hero = window.LangSpanHero;
   if (!hero) throw Error('The home page hero is unavailable: window.LangSpanHero is missing');
-  if (JSON.stringify(hero.timing.events) !== JSON.stringify(spec.events) ||
-      JSON.stringify(hero.timing.holds_s) !== JSON.stringify(spec.holds_s) ||
-      JSON.stringify(hero.timing.easing) !== JSON.stringify(spec.easing) || hero.timing.duration_s !== D) {
-    throw Error('The hero loop timing differs from marketing/motion/hero-loop/timing.json');
+  for (const key of ['cards', 'wires', 'stops_s', 'status', 'pacing']) {
+    if (JSON.stringify(hero.timing[key]) !== JSON.stringify(spec[key])) throw Error('The hero timing (' + key + ') differs from marketing/motion/hero-loop/timing.json');
   }
+  if (hero.timing.duration_s !== D) throw Error('The hero loop length differs from timing.json');
   const panel = hero.element;
   const logo = document.querySelector('.top-header .brand img').cloneNode(true);
   const film = document.createElement('main');
@@ -22,6 +21,8 @@
   document.body.append(film);
   document.body.classList.add('film-mode');
 
+  // The film always shows the flow; a layout change re-reads the film's sizes.
+  hero.relayout();
   window.renderAt = seconds => {
     const t = ((seconds % D) + D) % D;
     hero.renderAt(t);
@@ -30,10 +31,16 @@
 
   window.measureFilm = () => {
     const box = film.getBoundingClientRect(), errors = [];
+    // The canvas clips the moving plane: work outside it, or under the pinned
+    // lane names, isn't on screen, so only the work in view is measured.
+    const canvas = panel.querySelector('[data-canvas]'), c = canvas.getBoundingClientRect();
+    const gutter = parseFloat(getComputedStyle(canvas).getPropertyValue('--gutter'));
+    const plane = panel.querySelector('[data-world]');
     let minText = Infinity;
     for (const n of film.querySelectorAll('*')) {
       const style = getComputedStyle(n), r = n.getBoundingClientRect();
       if (style.display === 'none' || style.visibility === 'hidden' || r.width === 0 || r.height === 0) continue;
+      if (plane.contains(n) && (r.right <= c.left + gutter || r.left >= c.right || r.bottom <= c.top || r.top >= c.bottom || r.left < c.left + gutter || r.right > c.right)) continue;
       if (n instanceof SVGElement && n.tagName !== 'svg') continue;
       const text = [...n.childNodes].some(x => x.nodeType === 3 && x.textContent.trim());
       if (text) minText = Math.min(minText, parseFloat(style.fontSize) * cut.scale);

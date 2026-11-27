@@ -336,45 +336,46 @@ limit stated once in the questions, no placeholders and no dates on the page.
   benchmark publishes real numbers (LangSpan.dev #495, results from #172).
   The scenes that have no real recording (heard a change, rename held,
   checked before merging) are left out.
-- Hero: LangSpan Live's "Now" view loops a slice of LangSpan's own agents:
-  two Claude Code sessions in one checkout and a third in its own worktree
-  (a quiet lane, word cards only). There is no caption, label or date; the
-  real repository, branch and file paths show that it is a real session
-  (owner decision, 27 November 2026, recorded in the motion standard). The slice is
-  `assets/evidence/hero-slice-2026-11-25.json`, exported read-only from the
-  dogfood coordinator's event log on 25 November 2026, 19:56:19 to 19:57:53
-  (seq 29121 to 29290, plus 28584). It keeps seq, type, time, paths, lane
-  labels, the tool of an observed operation, the origin of a source
-  observation, the other lane of a held write or a message, and the
-  repository, and each lane's branch and checkout kind. It drops prompts, message text, digests, session,
-  lease, operation and workspace IDs, symbols and line ranges, workspace
-  roots and home paths, events of other sessions, and events that name no
-  session. Each card cites its seq numbers in `data-seq`; the timing file
-  cites them per event.
-- The hero is hand-built HTML and SVG with no new dependency. At 1280 px and
-  wider, time runs left to right; below that, time runs top to bottom in
-  three lane columns. It is an interactive canvas: Pause or Play, zoom in,
-  zoom out, Fit and Follow newest (on by default); Ctrl or pinch wheel and
-  two-finger pinch zoom; drag pans; on the focused canvas, arrows pan 48 px,
-  + and - zoom by 1.25, 0 fits and L follows. A click on a card or on the
-  Held wire opens a small details popover anchored to it, inside the canvas,
-  with the file, the lines, the time and, for the held write, what changed,
-  what LangSpan told the agent and what happened next. Escape, a click
-  outside or the close button dismiss it. It never opens on its own.
-- Any interaction pauses the loop; it resumes from the current beat after
-  8 s without interaction, or at once on Play or Follow newest. A visitor's
-  Pause stays paused. Reduced motion, `?motion=static` and a page without
-  JavaScript show the settled frame at 10 s, still interactive with
-  JavaScript.
-- Timing (`marketing/motion/hero-loop/timing.json`, 12 s at 30 fps, owner's
-  beats of 27 November 2026): cards enter in event order at 0.2, 0.5, 0.8,
-  1.1 and 1.4 s (200 ms fade and 8 px rise); hold to 3.5 s; the held write
-  enters at 3.5 s and the Held wire draws from 3.7 s for 600 ms; one 150 ms
-  emphasis at 4.5 s (scale 1.03 and back); the third lane and #29 continue
-  at 5.0 and 5.25 s; the read enters at 5.6 s; the save enters at 7.0 s and
-  turns green over 300 ms from 7.2 s; the scene holds from 7.5 to 11.0 s and
-  cross-fades to the empty lanes over 600 ms. The entrance is 200 ms by the
-  owner's direction, shorter than the standard's 280 ms.
+- Hero: LangSpan Live's "Now" view flows right to left over a recorded
+  slice of LangSpan's own agents: two Claude Code sessions in one checkout
+  and one in its own worktree, the only sessions with tool calls in the
+  log for that stretch. There is no caption, label or date; the real
+  repository, branch and file paths show that it is a real session (owner
+  decision, 27 November 2026, recorded in the motion standard).
+- The slice is `assets/evidence/hero-slice.json`: seq 28549 to 29303,
+  19:52:00 to 19:58:00 local time (UTC−6) on 25 November 2026, which is
+  01:52 to 01:58 UTC on 26 November. `marketing/scripts/export-hero-slice.py`
+  exports it read-only from the coordinator log. It keeps event types, seq
+  numbers, times, tools, paths, line ranges, lane labels, the reason for a
+  held write and the lane whose change held it, and which lane a message went
+  to and which sent message an acknowledgement answers. It drops prompts,
+  message text, digests, every ID, symbol names, workspace roots, home paths
+  and other sessions.
+- `marketing/scripts/build-hero-timeline.py` turns the slice and
+  `marketing/motion/hero-loop/pacing.json` into `timing.json` (43 cards,
+  three held writes, each re-read and saved, and two messages, in a 30.4 s
+  loop) and writes the equal copy into `assets/product-first.js`, the lane
+  names and a still for pages without JavaScript. Edits of one file by one
+  agent less than 20 s apart become one card with a count. Idle time is
+  compressed (each gap plays as 0.35 to 0.45 s); the order never changes.
+  The flow stops for each coordination moment: 2.2 s for a held write (the
+  wire draws in 600 ms, then one 150 ms emphasis), 1.0 s for a save turning
+  green and 1.0 s for a message. The longest stretch between moments is
+  12.5 s, across the seam included.
+- The canvas flows continuously and loops without a seam: the loop's last
+  cards are followed by the next loop's first cards, one loop's width
+  further on. Cards keep their order in time across lanes and are pushed
+  right only to clear the card before them in their own lane. Cards, wires
+  and labels are drawn from pools as they enter the view, so the page keeps
+  at most a few dozen card elements.
+- Interaction: Pause or Play, zoom in, zoom out, Fit (the whole loop),
+  Follow newest; Ctrl or pinch wheel and pinch zoom; drag pans; arrows, + and
+  -, 0 and L on the focused canvas. Zoomed out, cards lose their last line,
+  then become lane-colored blocks; their details stay one click away. A
+  click on a card, a wire label or a lane name opens a small details
+  popover. Any interaction pauses the flow; it resumes after 8 s, or at once
+  on Play or Follow newest. Reduced motion shows the first held moment,
+  paused and interactive.
 - #40: the version shows the latest release (v0.8.0 until
   `assets/latest-release.js` reads a newer one), and the host table and the
   technical guide's host states match the product README.

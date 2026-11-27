@@ -129,11 +129,62 @@ h1 span{color:var(--slate)}
 .live-tools .live-pause{min-width:60px}
 .live-tools button[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .live-main{position:relative}
-.live-canvas{position:relative;height:640px;overflow:hidden;background-color:var(--canvas);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:18px 18px;touch-action:pan-y}
+/* The canvas. Each breakpoint (and the phone cut) sets these sizes; the hero
+   script reads them, so cards, rows and the flow speed stay in one place.
+   --flow-k is the pan speed in px per second of flow (pacing.json, camera). */
+.live-canvas{--card-w:136px;--card-h:78px;--held-h:98px;--row-h:150px;--row-top:56px;--gutter:200px;--card-gap:12px;--flow-k:72;
+  position:relative;height:520px;overflow:hidden;background-color:var(--canvas);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:18px 18px;touch-action:pan-y}
 .live-canvas.panning{cursor:grabbing}
 .live-canvas:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+.live-status{position:absolute;left:24px;top:16px;z-index:4;margin:0;font-size:14px;color:var(--slate)}
+.live-status strong{color:var(--ink)}
+.live-world{position:absolute;left:0;top:0;width:1px;height:1px;transform-origin:0 0;will-change:transform}
+.wires{position:absolute;left:0;top:0;width:1px;height:1px;overflow:visible;pointer-events:none}
+.wire path{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;stroke-dasharray:1 1}
+.wire-held .wire-line{stroke:var(--held);stroke-width:2.2}
+.wire-held .wire-glow{stroke:var(--held);stroke-width:9;stroke-opacity:.16}
+.wire-message .wire-line{stroke:var(--muted);stroke-width:1.6}
+.wire-labels{position:absolute;left:0;top:0}
+.wire-label{position:absolute;transform:translate(-50%,-50%);z-index:1;font:inherit;cursor:pointer;background:var(--card);border-radius:999px;padding:2px 10px;font-size:12px;font-weight:700;white-space:nowrap}
+.wire-label-held{color:var(--held);border:1.5px solid var(--held)}
+.wire-label-message{color:var(--slate);border:1px solid var(--line);font-weight:600}
+.cards{list-style:none;margin:0;padding:0}
+.card{position:absolute;width:var(--card-w);height:var(--card-h);padding:0;overflow:hidden;transform-origin:50% 50%;background:var(--card);border:1px solid var(--card-line);border-radius:10px;color:var(--ink)}
+.card>*,.card-hit>*{flex:none}
+.card-hit{all:unset;box-sizing:border-box;width:100%;height:100%;display:flex;flex-direction:column;gap:3px;padding:8px 10px;cursor:pointer;border-radius:10px;font:inherit}
+.card-hit:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 .card-hit[aria-expanded=true]{outline:2px solid var(--ink);outline-offset:1px}
-/* Details popover: small, light, anchored to the card or wire, inside the canvas. */
+.card .verb{font-size:13px;font-weight:600;line-height:1.25}
+.card code{align-self:flex-start;max-width:100%;font-size:11px;background:var(--pill);border-radius:4px;padding:1px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .sub{font-size:11px;color:var(--muted);line-height:1.25}
+.card.lane-a .verb{color:var(--lane-a)}.card.lane-b .verb{color:var(--lane-b)}.card.lane-c .verb{color:var(--lane-c)}
+.card.command,.card.sent,.card.got{background:var(--paper);border-style:dashed}
+.card.command .verb,.card.sent .verb,.card.got .verb{color:var(--muted)}
+.card.saved{--ok:1;background:color-mix(in srgb,var(--saved-bg) calc(var(--ok)*100%),var(--card));border-color:color-mix(in srgb,var(--saved-line) calc(var(--ok)*100%),var(--card-line))}
+.card.saved .verb{color:color-mix(in srgb,var(--rec-fg) calc(var(--ok)*100%),var(--slate))}
+.card.held{height:var(--held-h);background:var(--coral);border-color:#c0634a;color:#151513}
+.card.held .who{font-size:11px;line-height:1.2;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#3a1d14}
+.card.held .verb{color:#151513}
+.card.held code{background:#f2c4b3;color:#151513}
+.card.held .sub{color:#3a1d14}
+/* Zoomed out: shorter cards, then lane-colored blocks. A block keeps its file
+   name in its title and its details on click. */
+.zoom-compact .card .sub,.zoom-compact .card .who{display:none}
+.zoom-blocks .card-hit>*{visibility:hidden}
+.zoom-blocks .card{border:0;background:color-mix(in srgb,var(--lane-a) 55%,var(--card))}
+.zoom-blocks .card.lane-b{background:color-mix(in srgb,var(--lane-b) 55%,var(--card))}
+.zoom-blocks .card.lane-c{background:color-mix(in srgb,var(--lane-c) 55%,var(--card))}
+.zoom-blocks .card.held{background:var(--coral)}
+.zoom-blocks .wire-label{font-size:11px;padding:1px 6px}
+/* Lane names stay pinned at the left, over the moving plane. */
+.gutter{position:absolute;left:0;top:0;bottom:0;width:var(--gutter);z-index:3;background:var(--canvas);pointer-events:none}
+.gutter::after{content:"";position:absolute;top:0;bottom:0;left:100%;width:20px;background:linear-gradient(to right,var(--canvas),color-mix(in srgb,var(--canvas) 0%,transparent))}
+.lane-name{position:absolute;left:16px;right:8px;top:calc(var(--dy,0px) + var(--y,0px) * var(--s,1));pointer-events:auto;font:inherit;text-align:left;background:none;border:0;padding:4px 0 4px 18px;cursor:pointer;color:var(--ink);font-size:14px;font-weight:600;line-height:1.25}
+.lane-name::before{content:"";position:absolute;left:0;top:7px;width:12px;height:12px;box-sizing:border-box;border-radius:50%;border:2px solid var(--lane-a)}
+.lane-name.lane-b::before{border-color:var(--lane-b)}.lane-name.lane-c::before{border-color:var(--lane-c)}
+.lane-name .short{display:none}
+.lane-name[aria-expanded=true]{text-decoration:underline}
+/* Details popover: small, light, anchored to what was clicked, inside the canvas. */
 .pop{position:absolute;z-index:5;width:min(300px,calc(100% - 16px));overflow:auto;background:var(--raised);color:var(--ink);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 24px #1515131f;padding:10px 12px 12px;font-size:13px;line-height:1.4}
 .pop-close{position:absolute;right:4px;top:4px;width:32px;height:32px;border:0;border-radius:6px;background:transparent;color:var(--muted);font-size:18px;line-height:1}
 .pop-close:hover{background:var(--hover);color:var(--ink)}
@@ -141,102 +192,32 @@ h1 span{color:var(--slate)}
 .pop dl{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:0}
 .pop dt{color:var(--muted);font-size:12px;padding-top:1px}
 .pop dd{margin:0;overflow-wrap:anywhere}
-.pop code{font-size:12px;background:var(--pill);border-radius:4px;padding:0 4px}
-.pop q{display:block;font-family:var(--mono);font-size:12px;quotes:none;color:var(--slate)}
-.live-status{position:absolute;left:24px;top:18px;z-index:2;font-size:14px;color:var(--slate)}
-.live-status strong{color:var(--ink)}
-.live-world{position:absolute;left:0;top:0;width:1360px;height:520px;transform-origin:0 0}
-.lane-line{position:absolute;height:2px;left:200px;right:0;opacity:.22}
-.lane-line.lane-a{top:143px;background:var(--lane-a)}.lane-line.lane-b{top:293px;background:var(--lane-b)}.lane-line.lane-c{top:443px;background:var(--lane-c)}
-.lane-head{position:absolute;left:24px;width:170px;display:flex;gap:8px;align-items:flex-start}
-.lane-head.lane-a{top:112px}.lane-head.lane-b{top:262px}.lane-head.lane-c{top:412px}
-.lane-head>i{flex:none;width:12px;height:12px;margin-top:4px;border-radius:50%;border:2px solid;background:var(--canvas)}
-.lane-head.lane-a>i{border-color:var(--lane-a)}.lane-head.lane-b>i{border-color:var(--lane-b)}.lane-head.lane-c>i{border-color:var(--lane-c)}
-.lane-head>span{display:flex;flex-direction:column;min-width:0}
-.lane-head strong{font-size:14px;line-height:1.25}
-.lane-head span span{font-size:12px;color:var(--muted)}
-.wire{position:absolute;left:0;top:0;pointer-events:none;overflow:visible}
-.wire path{fill:none;stroke:var(--held);stroke-linecap:round;vector-effect:non-scaling-stroke}
-.wire-glow{stroke-width:9;stroke-opacity:.16}
-.wire-line{stroke-width:2.2;stroke-dasharray:1 1;stroke-dashoffset:0}
-.wire-v{display:none}
-.wire-label{position:absolute;left:420px;top:213px;transform:translate(-50%,-50%);z-index:1;font:inherit;cursor:pointer;background:var(--card);color:var(--held);border:1.5px solid var(--held);border-radius:999px;padding:2px 10px;font-size:12px;font-weight:700;white-space:nowrap}
-.cards{list-style:none;margin:0;padding:0}
-.card{position:absolute;width:136px;height:78px;padding:0;overflow:hidden;transform-origin:50% 50%;background:var(--card);border:1px solid var(--card-line);border-radius:10px;color:var(--ink)}
-.card>*,.card-hit>*{flex:none}
-.card .verb{font-size:13px;font-weight:600;line-height:1.25}
-.card code{align-self:flex-start;max-width:100%;font-size:11px;background:var(--pill);border-radius:4px;padding:1px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.card .sub{font-size:11px;color:var(--muted);line-height:1.25}
-.card.lane-a .verb{color:var(--lane-a)}.card.lane-b .verb{color:var(--lane-b)}.card.lane-c .verb{color:var(--lane-c)}
-.card.group{background:var(--paper);border-style:dashed}.card.group .verb{color:var(--muted)}
-.card.saved{--ok:1;background:color-mix(in srgb,var(--saved-bg) calc(var(--ok)*100%),var(--card));border-color:color-mix(in srgb,var(--saved-line) calc(var(--ok)*100%),var(--card-line))}.card.saved .verb{color:color-mix(in srgb,var(--rec-fg) calc(var(--ok)*100%),var(--slate))}
-.card.held{height:98px;background:var(--coral);border-color:#c0634a;color:#151513}
-.card.held.selected{box-shadow:0 0 0 3px var(--ink)}
-.card-hit{all:unset;box-sizing:border-box;width:100%;height:100%;display:flex;flex-direction:column;gap:3px;padding:8px 10px;cursor:pointer;border-radius:10px;font:inherit}
-.card-hit:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
-.card.held .who{font-size:11px;line-height:1.2;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#3a1d14}
-.card.held .verb{color:#151513}
-.card.held code{background:#f2c4b3;color:#151513}
-.card.held .sub{color:#3a1d14}
-[data-card=card-hook]{left:206px;top:104px}
-[data-card=card-dash]{left:352px;top:104px}
-[data-card=card-graph]{left:498px;top:104px}
-[data-card=card-tests]{left:352px;top:254px}
-[data-card=card-held]{left:498px;top:244px}
-[data-card=card-read]{left:644px;top:254px}
-[data-card=card-saved]{left:790px;top:254px}
-[data-card=card-observer]{left:206px;top:404px}
-[data-card=card-graph-c7]{left:352px;top:404px}
-[data-card=card-graph-late]{left:498px;top:404px}
-.live-foot{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:16px}
-.live-foot p{flex:1 1 520px;font-size:15px;color:var(--slate)}
-@media (max-width:1439px) and (min-width:1280px){.live-world{transform:scale(.84)}}
-
+/* Without JavaScript: a still of the first held moment. */
+.live-static{position:absolute;inset:0}
+.is-live .live-static{display:none}
 @media (max-width:1279px){
   .live-band{padding:10px;border-radius:18px;background-size:14px 14px}
   .live-frame{border-radius:14px;border-bottom:1px solid var(--line)}
   .live-tools{position:static;padding:6px 10px;border-bottom:1px solid var(--card-line);background:var(--card)}
   .live-tools button{min-width:44px;min-height:44px;font-size:13px}
-  .live-canvas{height:660px}
+}
+@media (max-width:759px){
+  .live-canvas{--card-w:96px;--card-h:100px;--held-h:150px;--row-h:184px;--row-top:48px;--gutter:84px;--card-gap:8px;--flow-k:46;height:590px}
   .live-status{left:10px;right:10px;top:8px;font-size:12px}
   .live-status strong{font-weight:400;color:var(--slate)}
-  .live-world{width:100%;height:660px}
-  .lane-line{width:2px;height:auto;top:116px!important;bottom:0;right:auto}
-  .lane-line.lane-a{left:17.25%}.lane-line.lane-b{left:50%}.lane-line.lane-c{left:82.75%}
-  .lane-head{top:34px!important;width:30.5%}
-  .lane-head.lane-a{left:2%}.lane-head.lane-b{left:34.75%}.lane-head.lane-c{left:67.5%}
-  .lane-head>i{display:none}
-  .lane-head strong{font-size:13px}
-  .wire-h{display:none}
-  .wire-v{display:block;width:100%;height:660px}
-  .wire-label{left:34.1%;top:244px}
-  .card{width:30.5%;height:auto;min-height:62px}
-  .card code,.card .sub,.card.held .who{font-size:12px}
+  .lane-name{left:8px;font-size:12px;padding-left:16px}
+  .lane-name::before{width:10px;height:10px;top:7px}
+  .lane-name .full{display:none}.lane-name .short{display:inline}
+  .card-hit{padding:7px}
+  .card code,.card .sub,.card.held .who,.wire-label{font-size:12px}
+  .card code{white-space:normal;padding:1px 3px}
   .pop-close{width:44px;height:44px;right:0;top:0}
   .pop dl{grid-template-columns:1fr}
   .pop dt{padding-top:4px}
-  .card.held{height:auto}
-  .card-hit{padding:7px 7px}
-  .card code{white-space:normal;padding:1px 3px}
-  [data-card=card-hook],[data-card=card-observer]{top:132px}
-  [data-card=card-dash],[data-card=card-tests],[data-card=card-graph-c7]{top:256px}
-  [data-card=card-held]{top:332px}
-  [data-card=card-graph-late]{top:356px}
-  [data-card=card-graph]{top:410px}
-  [data-card=card-read]{top:480px}
-  [data-card=card-saved]{top:556px}
-  [data-card=card-hook],[data-card=card-dash],[data-card=card-graph]{left:2%}
-  [data-card=card-tests],[data-card=card-held],[data-card=card-read],[data-card=card-saved]{left:34.75%}
-  [data-card=card-observer],[data-card=card-graph-c7],[data-card=card-graph-late]{left:67.5%}
-}
-@media (max-width:759px){
   .live-repo,.live-sep{display:none}
   .live-bar{padding:8px 10px;font-size:12px}
-  .live-foot p{flex-basis:100%;font-size:14px}
+  .live-static .cards{transform:scale(.62);transform-origin:0 0}
 }
-@media (max-width:420px){.card code .dir{display:none}}
-@media (max-width:370px){.card code{overflow-wrap:anywhere}}
-
 /* Thesis and stages */
 .stages{display:flex;flex-wrap:wrap;gap:16px;margin-top:6px}
 .stages article{flex:1 1 300px;min-width:0;background:var(--raised);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:10px}

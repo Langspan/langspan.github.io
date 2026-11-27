@@ -127,7 +127,7 @@ records the pinned upstream files and the one local `Stage` extension.
 | --- | --- |
 | `index.html` | Home page, revision 2: recorded Live replay in the hero, thesis, scenes, how it works, pending proof, across computers, works with, get started, open source, questions, for agents and closing |
 | `assets/product-first.css`, `assets/product-first.js` | Home page layout, light and dark themes, the hero loop clock, camera and inspector, and `window.LangSpanHero` |
-| `assets/evidence/hero-slice-2026-11-25.json` | The recorded event slice the hero replays; every hero card cites its seq numbers |
+| `assets/evidence/hero-slice.json` | The recorded event slice the hero flows over; every hero card and wire cites its seq numbers. Export it with `marketing/scripts/export-hero-slice.py` and turn it into the clock with `marketing/scripts/build-hero-timeline.py` |
 | `assets/proof.css` | Recorded, Simulated and Illustration chips and the host evidence table, shared by both pages |
 | `assets/site.css` | Responsive layout, focus states and reduced-motion support |
 | `assets/site.js` | Page interactions, setup choices, copy controls and motion coordination |

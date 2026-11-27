@@ -16,29 +16,15 @@ body.film-mode> :not(#film){display:none!important}
 #film .live{width:100%;margin:0}
 #film .live-band{padding:0;background:none;border-radius:0;height:100%}
 #film .live-frame{height:100%;border-radius:12px;border:1px solid var(--line);box-shadow:0 14px 36px #15151313}
-#film .live-bar,#film .live-tools,#film .live-foot,#film .lane-head span span:last-child{display:none!important}
+#film .live-bar,#film .live-tools,#film .live-foot{display:none!important}
 #film .live-main{display:block;position:relative;height:100%}
-#film .live-canvas{height:100%}
+#film .live-canvas{--card-w:118px;--card-h:104px;--held-h:112px;--row-h:158px;--row-top:46px;--gutter:96px;--card-gap:10px;--flow-k:58;height:100%}
 #film .live-status{top:10px;left:12px;font-size:14px}
-#film .lane-head{top:34px!important;width:30.5%}
-#film .lane-head strong{font-size:14px}
-#film .lane-head span span{display:none}
-#film .lane-line{top:84px!important}
-#film .card{width:30.5%;height:auto;min-height:0}
+#film .live-status strong{font-weight:400;color:var(--slate)}
+#film .lane-name{left:10px;font-size:14px;padding-left:18px}
+#film .lane-name .full{display:none}#film .lane-name .short{display:inline}
 #film .card-hit{padding:6px 8px 7px;gap:2px}
-#film .card .verb,#film .card code,#film .card .sub,#film .card.held .who{font-size:14px}
-#film .card code{padding:1px 4px}
-#film .card code .dir{display:none}
-#film [data-card=card-hook],#film [data-card=card-observer]{top:90px}
-#film [data-card=card-dash],#film [data-card=card-tests]{top:176px}
-#film [data-card=card-graph-c7]{top:196px}
-#film [data-card=card-held]{top:261px}
-#film [data-card=card-graph-late]{top:280px}
-#film [data-card=card-graph]{top:300px}
-#film [data-card=card-read]{top:380px}
-#film [data-card=card-saved]{top:444px}
-#film .live-world,#film .wire-v{height:100%}
-/* The wire joins the same two cards as on the page: #29's edits of src/hook.rs and #28's held write. */
-#film .wire-v path{d:path("M 112.3 149.5 C 124 149.5, 100 250, 102 306 C 103 340, 108 370.4, 120 370.4")}
-#film .wire-label{left:29.5%!important;top:262px!important;font-size:14px;padding:1px 6px}
+#film .card .verb,#film .card code,#film .card .sub,#film .card.held .who,#film .wire-label{font-size:14px}
+#film .card code{white-space:normal;padding:1px 4px;overflow-wrap:anywhere}
 #film .live *{transition:none!important;animation:none!important}
+#film .card.held .sub{display:none}

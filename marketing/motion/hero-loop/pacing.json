@@ -1,0 +1,87 @@
+{
+ "about": "Numbers for the hero's motion. build-hero-timeline.py turns these and the recorded slice into timing.json.",
+ "lead_in_s": 0.4,
+ "gap_min_s": 0.35,
+ "gap_max_s": 0.45,
+ "gap_cap_s": 4,
+ "group_edits_within_s": 20,
+ "tail_s": 0.6,
+ "stop_held_s": 2.2,
+ "stop_saved_s": 1.0,
+ "stop_message_s": 1.0,
+ "wire_delay_s": 0.2,
+ "wire_draw_ms": 600,
+ "emphasis_gap_s": 0.1,
+ "emphasis_ms": 150,
+ "emphasis_scale": 1.03,
+ "message_delay_s": 0.1,
+ "message_draw_ms": 400,
+ "tint_delay_s": 0.2,
+ "tint_ms": 300,
+ "entrance_ms": 200,
+ "entrance_travel_px": 8,
+ "entrance_curve": [
+  0.16,
+  1,
+  0.3,
+  1
+ ],
+ "camera": {
+  "newest_at": 0.72,
+  "ease_ms": 500,
+  "ease_curve": [
+   0.16,
+   1,
+   0.3,
+   1
+  ],
+  "px_per_flow_s": {
+   "wide": 72,
+   "narrow": 46,
+   "film": 58
+  }
+ },
+ "zoom": {
+  "min": 0.25,
+  "max": 2,
+  "step": 1.25,
+  "compact_below": 0.7,
+  "blocks_below": 0.45
+ },
+ "tolerance_ms": 50,
+ "seek_samples_s": [
+  1,
+  8,
+  15.5,
+  20
+ ],
+ "stills_s": [
+  1,
+  4,
+  4.8,
+  6,
+  7.5,
+  10
+ ],
+ "banned": [
+  "springs with overshoot",
+  "typing effects",
+  "camera zoom or drift in the untouched loop beyond the lateral flow",
+  "particles or confetti",
+  "glow on anything but a Held wire",
+  "auto-opening panels",
+  "narration text"
+ ],
+ "static_layout": {
+  "about": "The wide layout's sizes, for the still shown without JavaScript; equal to the wide values in assets/product-first.css.",
+  "W": 136,
+  "H": 78,
+  "HH": 98,
+  "row": 150,
+  "top": 56,
+  "G": 200,
+  "gap": 12,
+  "K": 72,
+  "Wc": 1358
+ }
+}

@@ -69,42 +69,23 @@
       </div>
       <div class="live-main">
         <div class="live-canvas" data-canvas tabindex="0" role="group" aria-label="Agent activity. Arrow keys pan, plus and minus zoom, 0 fits all work, L follows the newest work.">
-          <p class="live-status" data-hero-target="status"><strong>3 agents working</strong> · <span data-status-count>3 writes held</span> in the last 10 min</p>
+          <p class="live-status"><strong data-status-agents>3 agents</strong> working · <span data-status-held>3 writes</span> held in the last 10 min</p>
           <div class="live-world" data-world>
-            <i class="lane-line lane-a" aria-hidden="true"></i><i class="lane-line lane-b" aria-hidden="true"></i><i class="lane-line lane-c" aria-hidden="true"></i>
-            <div class="lane-head lane-a"><i aria-hidden="true"></i><span><strong>Agent · #29 renames</strong><span>Claude Code</span><span>shared checkout</span></span></div>
-            <div class="lane-head lane-b"><i aria-hidden="true"></i><span><strong>Agent · #28 signature alerts</strong><span>Claude Code</span><span>shared checkout</span></span></div>
-            <div class="lane-head lane-c"><i aria-hidden="true"></i><span><strong>Agent · worktree signatures</strong><span>Claude Code</span><span>own worktree</span></span></div>
-            <svg class="wire wire-h" viewBox="0 0 1360 520" width="1360" height="520" aria-hidden="true" data-wire><path class="wire-glow" d="M 274 182 C 274 223, 566 203, 566 244"/><path class="wire-line" pathLength="1" d="M 274 182 C 274 223, 566 203, 566 244"/></svg>
-            <svg class="wire wire-v" viewBox="0 0 346 660" preserveAspectRatio="none" aria-hidden="true" data-wire><path class="wire-glow" d="M 112.5 168 C 126 168, 107 392, 120.2 392"/><path class="wire-line" pathLength="1" d="M 112.5 168 C 126 168, 107 392, 120.2 392"/></svg>
-            <button type="button" class="wire-label" data-wire-label data-detail-open="wire" aria-haspopup="dialog" aria-expanded="false">Held</button>
-            <ol class="cards" aria-label="Work in the recording, oldest first">
-              <li class="card lane-a" data-card="card-hook" data-seq="29128 29129 29140 29141 29145 29146"><button type="button" class="card-hit" data-detail-open="card-hook" aria-haspopup="dialog" aria-expanded="false"><span class="verb">Edited</span><code>src/<wbr>hook.rs</code><span class="sub">3 edits</span></button></li>
-              <li class="card lane-c" data-card="card-observer" data-seq="29134 29135 29150 29151 29157 29158 29161 29162"><button type="button" class="card-hit" data-detail-open="card-observer" aria-haspopup="dialog" aria-expanded="false"><span class="verb">Edited</span><code>src/<wbr>observer.rs</code><span class="sub">4 edits</span></button></li>
-              <li class="card group" data-card="card-dash" data-seq="29172 29173 29212"><button type="button" class="card-hit" data-detail-open="card-dash" aria-haspopup="dialog" aria-expanded="false"><span class="verb">Edited 1 file and ran 1 command</span></button></li>
-              <li class="card lane-c" data-card="card-graph-c7" data-seq="29189 29190 29198 29199 29207 29208 29225 29226 29232 29233 29237 29238"><button type="button" class="card-hit" data-detail-open="card-graph-c7" aria-haspopup="dialog" aria-expanded="false"><span class="verb">Edited</span><code>src/<wbr>graph.rs</code><span class="sub">6 edits</span></button></li>
-              <li class="card lane-b" data-card="card-tests" data-seq="29243 29244"><button type="button" class="card-hit" data-detail-open="card-tests" aria-haspopup="dialog" aria-expanded="false"><span class="verb">Edited</span><code><span class="dir">tests/</span>break_<wbr>alerts.rs</code></button></li>
-              <li class="card held lane-b" data-card="card-held" data-seq="29255 29256"><button type="button" class="card-hit" data-detail-open="card-held" aria-haspopup="dialog" aria-expanded="false"><span class="who">LangSpan</span><span class="verb">Write held</span><code>src/<wbr>hook.rs</code><span class="sub">changed since this agent read it</span></button></li>
-              <li class="card lane-c" data-card="card-graph-late" data-seq="29258 29259"><button type="button" class="card-hit" data-detail-open="card-graph-late" aria-haspopup="dialog" aria-expanded="false"><span class="verb">Edited</span><code>src/<wbr>graph.rs</code></button></li>
-              <li class="card group" data-card="card-graph" data-seq="29267 29268 29277 29278"><button type="button" class="card-hit" data-detail-open="card-graph" aria-haspopup="dialog" aria-expanded="false"><span class="verb">Edited 2 files</span><code>graph.rs, breaks.rs</code></button></li>
-              <li class="card lane-b" data-card="card-read" data-seq="29274"><button type="button" class="card-hit" data-detail-open="card-read" aria-haspopup="dialog" aria-expanded="false"><span class="verb">Read</span><code>src/<wbr>hook.rs</code></button></li>
-              <li class="card saved" data-card="card-saved" data-seq="29284 29285"><button type="button" class="card-hit" data-detail-open="card-saved" aria-haspopup="dialog" aria-expanded="false"><span class="verb">Saved after re-reading</span><code>src/<wbr>hook.rs</code></button></li>
-            </ol>
+            <svg class="wires" aria-hidden="true" data-wires></svg>
+            <ol class="cards" aria-label="Work in the recording, oldest first" data-cards></ol>
+            <div class="wire-labels" data-wire-labels></div>
+          </div>
+          <!-- BEGIN HERO STATIC -->
+          <div class="live-static" data-static aria-hidden="true"><ol class="cards"><li class="card edit lane-b" style="left:877px;top:206px"><span class="card-hit"><span class="verb">Edited</span><code class="path">src/hook.rs</code><span class="sub">13 edits</span></span></li><li class="card held lane-a" style="left:910px;top:56px"><span class="card-hit"><span class="who">LangSpan</span><span class="verb">Write held</span><code class="path">tests/break_alerts.rs</code><span class="sub">changed since this agent read it</span></span></li></ol></div>          <!-- END HERO STATIC -->
+          <div class="gutter" data-gutter>
+            <!-- BEGIN HERO LANES -->
+            <button type="button" class="lane-name lane-a" data-lane="0" data-detail-open="lane:0" aria-haspopup="dialog" aria-expanded="false"><span class="full">Agent · #29 renames</span><span class="short">#29</span></button>
+            <button type="button" class="lane-name lane-b" data-lane="1" data-detail-open="lane:1" aria-haspopup="dialog" aria-expanded="false"><span class="full">Agent · #28 signature alerts</span><span class="short">#28</span></button>
+            <button type="button" class="lane-name lane-c" data-lane="2" data-detail-open="lane:2" aria-haspopup="dialog" aria-expanded="false"><span class="full">Agent · worktree signatures</span><span class="short">Worktree</span></button>            <!-- END HERO LANES -->
           </div>
           <div class="pop" role="dialog" aria-label="Details" data-pop hidden><button type="button" class="pop-close" data-pop-close aria-label="Close details">×</button><div data-pop-body></div></div>
         </div>
       </div>
-          <template data-detail="card-hook"><p class="pop-kind">Edited · Agent · #29 renames</p><dl><dt>File</dt><dd><code>src/hook.rs</code>, lines 1773–2097, 4234–4278, 4281–4346</dd><dt>Time</dt><dd>19:56:27–19:56:30, 3 edits</dd></dl></template>
-          <template data-detail="card-observer"><p class="pop-kind">Edited · Agent · worktree signatures</p><dl><dt>File</dt><dd><code>src/observer.rs</code>, lines 10–30, 115–332</dd><dt>Time</dt><dd>19:56:28–19:56:32, 4 edits</dd></dl></template>
-          <template data-detail="card-dash"><p class="pop-kind">Edited 1 file and ran 1 command · Agent · #29 renames</p><dl><dt>File</dt><dd><code>src/dashboard.html</code>, lines 254–260</dd><dt>Time</dt><dd>19:56:45</dd><dt>Command</dt><dd>changed <code>crates/langspan-graph/src/lib.rs</code> and <code>crates/langspan-graph/tests/renames.rs</code></dd><dt>Time</dt><dd>19:57:11</dd></dl></template>
-          <template data-detail="card-graph-c7"><p class="pop-kind">Edited · Agent · worktree signatures</p><dl><dt>File</dt><dd><code>src/graph.rs</code>, lines 45–112, 296–340, 361–560, 1161–1167, 1173–1209</dd><dt>Time</dt><dd>19:57:04–19:57:18, 6 edits</dd></dl></template>
-          <template data-detail="card-tests"><p class="pop-kind">Edited · Agent · #28 signature alerts</p><dl><dt>File</dt><dd><code>tests/break_alerts.rs</code>, lines 841–915</dd><dt>Time</dt><dd>19:57:22</dd></dl></template>
-          <template data-detail="card-graph-late"><p class="pop-kind">Edited · Agent · worktree signatures</p><dl><dt>File</dt><dd><code>src/graph.rs</code>, lines 361–569</dd><dt>Time</dt><dd>19:57:43</dd></dl></template>
-          <template data-detail="card-graph"><p class="pop-kind">Edited 2 files · Agent · #29 renames</p><dl><dt>File</dt><dd><code>src/graph.rs</code>, lines 184–276</dd><dt>Time</dt><dd>19:57:45</dd><dt>File</dt><dd><code>src/breaks.rs</code>, lines 217–286</dd><dt>Time</dt><dd>19:57:50</dd></dl></template>
-          <template data-detail="card-read"><p class="pop-kind">Read · Agent · #28 signature alerts</p><dl><dt>File</dt><dd><code>src/hook.rs</code>, the version Agent #29 wrote</dd><dt>Time</dt><dd>19:57:47</dd></dl></template>
-          <template data-detail="card-saved"><p class="pop-kind">Saved after re-reading · Agent · #28 signature alerts</p><dl><dt>File</dt><dd><code>src/hook.rs</code>, lines 3209–3338</dd><dt>Time</dt><dd>19:57:52</dd><dt>Started from</dt><dd>the current file</dd></dl></template>
-          <template data-detail="card-held"><p class="pop-kind">Write held · Agent · #28 signature alerts</p><dl><dt>File</dt><dd><code>src/hook.rs</code></dd><dt>Time</dt><dd>19:57:41</dd><dt>What changed</dt><dd>Agent #29 edited <code>src/hook.rs</code> 3 times, at 19:56:27–30, after this agent last read it.</dd><dt>What LangSpan told the agent</dt><dd><q>These files changed after this session last read them. … "src/hook.rs" … Read each file again, then make the edit against its current content.</q></dd><dt>What happened next</dt><dd>19:57:47 · read the file again<br>19:57:52 · saved its edit</dd></dl></template>
-          <template data-detail="wire"><p class="pop-kind">Held · from Agent #29 to Agent #28</p><dl><dt>Why</dt><dd>Agent #29 changed <code>src/hook.rs</code> at 19:56:27–30. Agent #28 tried to save over it at 19:57:41.</dd><dt>Then</dt><dd>Agent #28 read the file again at 19:57:47 and saved at 19:57:52.</dd></dl></template>
     </div>
     </div>
   </figure>
@@ -191,7 +172,7 @@
 <section class="section night" id="proof" aria-labelledby="proof-title">
   <div class="wrap stack">
     <p class="setup">One agent renames a function. Another agent, in its own worktree, adds a call to the old name. Git merges both without a conflict.</p>
-    <h2 id="proof-title">Clean merges that still break the build.</h2>
+    <h2 id="proof-title">Proof</h2>
     <p class="body-l">We’re running the same task twice, once with worktrees only and once with LangSpan. We’ll publish every run here, including the ones that fail.</p>
     <div class="arms">
       <section class="arm" aria-label="Worktrees only">
