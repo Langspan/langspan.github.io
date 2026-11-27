@@ -80,31 +80,51 @@ def check(directory):
             start = round(e['at'] * fps) - 1
             feedback[e['at']] = round(diff(start, start + round(fps * SPEC['easing']['feedback']['ms'] / 1000) + 1), 4)
             assert feedback[e['at']] >= 0.01, f'feedback at {e["at"]} s changed nothing'
-    # The same holds for a small entrance, such as one card fading onto the
-    # canvas: if no frame-to-frame change reaches the detector's floor
-    # (-50 dB, about 0.8 gray levels), a hold may run on through it, and the
-    # entrance must still change the decoded pixels.
+    # The same holds for any small move, such as one card fading onto the
+    # light canvas or a 3 percent emphasis: if no frame-to-frame change reaches
+    # the detector's floor (-50 dB, about 0.8 gray levels), a hold may run on
+    # through it, and the move must still change the decoded pixels.
     floor = 255 * 10 ** (-50 / 20)
-    quiet, entrances = set(), {}
+    quiet, moves, onsets = set(), {}, {}
+    tolerance = SPEC.get('tolerance_ms', 50) / 1000
     for e in SPEC['events']:
-        if e['motion'] == 'entrance':
-            start = round(e['at'] * fps) - 1
-            end = start + round(fps * SPEC['easing']['entrance']['ms'] / 1000) + 1
-            step = max(diff(k, k + 1) for k in range(start, end))
-            entrances[e['at']] = {'change': round(diff(start, end), 4), 'largest_frame_step': round(step, 4)}
-            if step < floor:
-                assert entrances[e['at']]['change'] >= 0.1, f'entrance at {e["at"]} s changed nothing'
-                quiet.add(e['at'])
+        if e['motion'] == 'none':
+            continue
+        start = round(e['at'] * fps) - 1
+        end = min(n - 1, start + round(fps * SPEC['easing'][e['motion']]['ms'] / 1000) + 1)
+        # Each beat starts within the tolerance of its time in the timing file.
+        changed = [k for k in range(start, min(n - 1, start + 4)) if diff(k, k + 1) > 0.02]
+        assert changed, f'{e["motion"]} at {e["at"]} s changed nothing within {tolerance * 1000:.0f} ms'
+        onset = (changed[0] + 1) / fps
+        assert abs(onset - e['at']) <= tolerance + 1e-6, f'{e["motion"]} at {e["at"]} s starts at {onset:.3f} s'
+        onsets.setdefault(str(e['at']), round(onset, 3))
+        if e['motion'] == 'feedback':
+            continue
+        step = max(diff(k, k + 1) for k in range(start, end))
+        change = max(diff(start, k) for k in range(start, end + 1))
+        moves[f'{e["at"]} {e["target"]} {e["motion"]}'] = {'largest_change': round(change, 4), 'largest_frame_step': round(step, 4)}
+        if step < floor:
+            assert change >= 0.1, f'{e["motion"]} at {e["at"]} s changed nothing'
+            quiet.add((e['at'], e['motion']))
+    # A freeze may cover declared holds joined by moves below the floor and
+    # feedback changes; it may not cover a move the detector can see.
+    spans = [list(h) for h in SPEC['holds_s']]
+    for e in SPEC['events']:
+        if e['motion'] == 'feedback' or (e['at'], e['motion']) in quiet:
+            spans.append([e['at'], round(e['at'] + SPEC['easing'][e['motion']]['ms'] / 1000, 3)])
     allowed = []
-    for lo, hi in SPEC['holds_s']:
-        later = [e['at'] for e in SPEC['events'] if e['at'] >= hi and e['motion'] not in ('feedback', 'none') and not (e['motion'] == 'entrance' and e['at'] in quiet)]
-        allowed.append([lo, min(later, default=SPEC['duration_s'])])
+    for lo, hi in sorted(spans):
+        if allowed and lo <= allowed[-1][1] + 1e-6:
+            allowed[-1][1] = max(allowed[-1][1], hi)
+        else:
+            allowed.append([lo, hi])
     found = freezes(directory / 'hero-loop-phone.mp4')
     for a, b in found:
         assert any(a >= lo - .25 and b <= hi + .25 for lo, hi in allowed), f'unplanned freeze: {a}-{b} s'
     result['feedback_mean_gray_differences'] = feedback
-    result['entrance_mean_gray_differences'] = entrances
-    result['entrances_below_detector_floor_s'] = sorted(quiet)
+    result['move_mean_gray_differences'] = moves
+    result['moves_below_detector_floor'] = sorted(f'{a} {m}' for a, m in quiet)
+    result['beat_onsets_s'] = onsets
     result.update({'seam_mean_gray_difference': round(seam, 4), 'beat_mean_gray_differences': [round(v, 4) for v in beats],
                    'detected_holds_s': found, 'declared_holds_s': SPEC['holds_s'], 'unplanned_freezes': 0,
                    'pixel_identical_seek_samples': len(render['seek_determinism']), 'source_sha256': render['source_sha256']})

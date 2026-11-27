@@ -34,7 +34,8 @@
   "tool (operation_observed)",
   "origin (source_observed)",
   "the other lane for a held write (write_refused) or a message (message_sent)",
-  "repository, and each lane's branch and checkout kind"
+  "repository, and each lane's branch and checkout kind",
+  "line ranges of each admitted edit (lease_granted)"
  ],
  "dropped": [
   "prompts (session_prompted)",
@@ -42,7 +43,7 @@
   "digests",
   "session IDs",
   "lease, operation and observation IDs",
-  "symbol names and line ranges",
+  "symbol names",
   "workspace IDs and roots",
   "home paths",
   "events of other sessions",
@@ -115,6 +116,12 @@
    "lane": "Agent · #29 renames",
    "paths": [
     "src/hook.rs"
+   ],
+   "lines": [
+    [
+     1773,
+     2097
+    ]
    ]
   },
   {
@@ -148,6 +155,12 @@
    "lane": "Agent · worktree signatures",
    "paths": [
     "src/observer.rs"
+   ],
+   "lines": [
+    [
+     10,
+     30
+    ]
    ]
   },
   {
@@ -181,6 +194,12 @@
    "lane": "Agent · #29 renames",
    "paths": [
     "src/hook.rs"
+   ],
+   "lines": [
+    [
+     4234,
+     4278
+    ]
    ]
   },
   {
@@ -214,6 +233,12 @@
    "lane": "Agent · #29 renames",
    "paths": [
     "src/hook.rs"
+   ],
+   "lines": [
+    [
+     4281,
+     4346
+    ]
    ]
   },
   {
@@ -248,6 +273,12 @@
    "lane": "Agent · worktree signatures",
    "paths": [
     "src/observer.rs"
+   ],
+   "lines": [
+    [
+     115,
+     323
+    ]
    ]
   },
   {
@@ -287,6 +318,12 @@
    "lane": "Agent · worktree signatures",
    "paths": [
     "src/observer.rs"
+   ],
+   "lines": [
+    [
+     115,
+     331
+    ]
    ]
   },
   {
@@ -315,6 +352,12 @@
    "lane": "Agent · worktree signatures",
    "paths": [
     "src/observer.rs"
+   ],
+   "lines": [
+    [
+     115,
+     332
+    ]
    ]
   },
   {
@@ -383,6 +426,12 @@
    "lane": "Agent · #29 renames",
    "paths": [
     "src/dashboard.html"
+   ],
+   "lines": [
+    [
+     254,
+     260
+    ]
    ]
   },
   {
@@ -479,6 +528,12 @@
    "lane": "Agent · worktree signatures",
    "paths": [
     "src/graph.rs"
+   ],
+   "lines": [
+    [
+     1161,
+     1167
+    ]
    ]
   },
   {
@@ -528,6 +583,12 @@
    "lane": "Agent · worktree signatures",
    "paths": [
     "src/graph.rs"
+   ],
+   "lines": [
+    [
+     1173,
+     1209
+    ]
    ]
   },
   {
@@ -593,6 +654,12 @@
    "lane": "Agent · worktree signatures",
    "paths": [
     "src/graph.rs"
+   ],
+   "lines": [
+    [
+     45,
+     111
+    ]
    ]
   },
   {
@@ -665,6 +732,12 @@
    "lane": "Agent · worktree signatures",
    "paths": [
     "src/graph.rs"
+   ],
+   "lines": [
+    [
+     45,
+     112
+    ]
    ]
   },
   {
@@ -714,6 +787,12 @@
    "lane": "Agent · worktree signatures",
    "paths": [
     "src/graph.rs"
+   ],
+   "lines": [
+    [
+     296,
+     340
+    ]
    ]
   },
   {
@@ -742,6 +821,12 @@
    "lane": "Agent · worktree signatures",
    "paths": [
     "src/graph.rs"
+   ],
+   "lines": [
+    [
+     361,
+     560
+    ]
    ]
   },
   {
@@ -782,6 +867,12 @@
    "lane": "Agent · #28 signature alerts",
    "paths": [
     "tests/break_alerts.rs"
+   ],
+   "lines": [
+    [
+     841,
+     915
+    ]
    ]
   },
   {
@@ -881,6 +972,12 @@
    "lane": "Agent · worktree signatures",
    "paths": [
     "src/graph.rs"
+   ],
+   "lines": [
+    [
+     361,
+     569
+    ]
    ]
   },
   {
@@ -931,6 +1028,12 @@
    "lane": "Agent · #29 renames",
    "paths": [
     "src/graph.rs"
+   ],
+   "lines": [
+    [
+     184,
+     276
+    ]
    ]
   },
   {
@@ -1001,6 +1104,12 @@
    "lane": "Agent · #29 renames",
    "paths": [
     "src/breaks.rs"
+   ],
+   "lines": [
+    [
+     217,
+     286
+    ]
    ]
   },
   {
@@ -1035,6 +1144,12 @@
    "lane": "Agent · #28 signature alerts",
    "paths": [
     "src/hook.rs"
+   ],
+   "lines": [
+    [
+     3209,
+     3338
+    ]
    ]
   },
   {
@@ -1074,6 +1189,12 @@
    "lane": "Agent · worktree signatures",
    "paths": [
     "src/graph.rs"
+   ],
+   "lines": [
+    [
+     742,
+     782
+    ]
    ]
   }
  ]

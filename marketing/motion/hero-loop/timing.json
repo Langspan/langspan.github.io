@@ -1,13 +1,57 @@
 {
   "name": "hero-loop",
-  "contract": "The home page hero (assets/product-first.js) and its phone cut read these values. The hero exposes window.LangSpanHero = { element, timing, renderAt(seconds) }; the phone cut renders that element and fails if timing.events differs from this file.",
+  "contract": "The home page hero (assets/product-first.js) and its phone cut read these values. The hero exposes window.LangSpanHero = { element, timing, renderAt(seconds) }; the phone cut renders that element and fails if timing.events differs from this file. Each beat lands within tolerance_ms of its event; check-hero-loop.py measures the onsets in the decoded video.",
   "fps": 30,
   "duration_s": 12,
   "frames": 360,
   "loops_before_stop": null,
   "stop_state": null,
   "reduced_motion_state": "final",
-  "final_s": 9,
+  "final_s": 10,
+  "tolerance_ms": 50,
+  "beats_s": {
+    "cards_enter": [
+      0,
+      2.0
+    ],
+    "hook_edit_settles": [
+      2.0,
+      3.5
+    ],
+    "held_and_wire": [
+      3.5,
+      4.5
+    ],
+    "emphasis": [
+      4.5,
+      5.0
+    ],
+    "read": [
+      5.5,
+      6.5
+    ],
+    "saved": [
+      7.0,
+      8.0
+    ],
+    "settled_hold": [
+      8.0,
+      11.0
+    ],
+    "crossfade_to_start": [
+      11.0,
+      12.0
+    ]
+  },
+  "banned": [
+    "springs with overshoot",
+    "typing effects",
+    "camera zoom or drift",
+    "confetti, sparkles or particles",
+    "glow on anything but the Held wire",
+    "auto-opening panels",
+    "narration text"
+  ],
   "easing": {
     "entrance": {
       "curve": [
@@ -16,16 +60,43 @@
         0.3,
         1
       ],
-      "ms": 280
+      "ms": 200
     },
-    "exit": {
+    "draw": {
       "curve": [
-        0.7,
-        0,
-        0.84,
-        0
+        0.16,
+        1,
+        0.3,
+        1
       ],
-      "ms": 160
+      "ms": 600
+    },
+    "emphasis": {
+      "curve": [
+        0.37,
+        0,
+        0.63,
+        1
+      ],
+      "ms": 150
+    },
+    "tint": {
+      "curve": [
+        0.16,
+        1,
+        0.3,
+        1
+      ],
+      "ms": 300
+    },
+    "crossfade": {
+      "curve": [
+        0.16,
+        1,
+        0.3,
+        1
+      ],
+      "ms": 600
     },
     "feedback": {
       "curve": [
@@ -35,15 +106,6 @@
         1
       ],
       "ms": 150
-    },
-    "state": {
-      "curve": [
-        0.16,
-        1,
-        0.3,
-        1
-      ],
-      "ms": 280
     }
   },
   "events": [
@@ -51,17 +113,16 @@
       "at": 0,
       "target": "scene",
       "motion": "none",
-      "text": "Three agents: two in one checkout, one in its own worktree. 1 write held in the last 10 min.",
       "seq": [
         28584
-      ]
+      ],
+      "text": "Three lanes, no cards yet. 1 write held in the last 10 min."
     },
     {
-      "at": 0.5,
+      "at": 0.2,
       "target": "card-hook",
       "motion": "entrance",
       "travel_px": 8,
-      "text": "Edited src/hook.rs · 3 edits",
       "seq": [
         29128,
         29129,
@@ -69,14 +130,14 @@
         29141,
         29145,
         29146
-      ]
+      ],
+      "text": "Agent #29 edits src/hook.rs (3 edits)."
     },
     {
-      "at": 1.0,
+      "at": 0.5,
       "target": "card-observer",
       "motion": "entrance",
       "travel_px": 8,
-      "text": "Edited src/observer.rs · 4 edits",
       "seq": [
         29134,
         29135,
@@ -86,26 +147,26 @@
         29158,
         29161,
         29162
-      ]
+      ],
+      "text": "The worktree agent edits src/observer.rs (4 edits)."
     },
     {
-      "at": 1.5,
+      "at": 0.8,
       "target": "card-dash",
       "motion": "entrance",
       "travel_px": 8,
-      "text": "Edited 1 file and ran 1 command",
       "seq": [
         29172,
         29173,
         29212
-      ]
+      ],
+      "text": "Agent #29 edits 1 file and runs 1 command."
     },
     {
-      "at": 2.0,
+      "at": 1.1,
       "target": "card-graph-c7",
       "motion": "entrance",
       "travel_px": 8,
-      "text": "Edited src/graph.rs · 6 edits",
       "seq": [
         29189,
         29190,
@@ -119,176 +180,183 @@
         29233,
         29237,
         29238
-      ]
+      ],
+      "text": "The worktree agent edits src/graph.rs (6 edits)."
     },
     {
-      "at": 2.3,
+      "at": 1.25,
       "target": "status",
       "motion": "feedback",
-      "text": "2 writes held in the last 10 min",
       "seq": [
         29204
-      ]
+      ],
+      "text": "2 writes held in the last 10 min"
     },
     {
-      "at": 2.7,
+      "at": 1.4,
       "target": "card-tests",
       "motion": "entrance",
       "travel_px": 8,
-      "text": "Edited tests/break_alerts.rs",
       "seq": [
         29243,
         29244
-      ]
+      ],
+      "text": "Agent #28 edits tests/break_alerts.rs."
     },
     {
-      "at": 3.7,
+      "at": 3.5,
       "target": "card-held",
       "motion": "entrance",
       "travel_px": 8,
-      "text": "Write held src/hook.rs · changed since this agent read it",
       "seq": [
         29255,
         29256
-      ]
+      ],
+      "text": "Agent #28's write of src/hook.rs is held: the file changed since it read it."
+    },
+    {
+      "at": 3.5,
+      "target": "status",
+      "motion": "feedback",
+      "seq": [
+        29256
+      ],
+      "text": "3 writes held in the last 10 min"
     },
     {
       "at": 3.7,
       "target": "wire",
-      "motion": "state",
-      "text": "The Held wire draws from #29's edits of src/hook.rs to #28's held write.",
+      "motion": "draw",
       "seq": [
         29256
-      ]
+      ],
+      "text": "The Held wire draws from #29's edits of src/hook.rs to #28's held write."
     },
     {
-      "at": 3.7,
-      "target": "status",
-      "motion": "feedback",
-      "text": "3 writes held in the last 10 min",
-      "seq": [
-        29256
-      ]
+      "at": 4.5,
+      "target": "card-held",
+      "motion": "emphasis",
+      "scale": 1.03,
+      "text": "One emphasis on the held card: scale 1 to 1.03 and back."
     },
     {
-      "at": 4.4,
+      "at": 5.0,
       "target": "card-graph-late",
       "motion": "entrance",
       "travel_px": 8,
-      "text": "Edited src/graph.rs",
       "seq": [
         29258,
         29259
-      ]
+      ],
+      "text": "The worktree agent edits src/graph.rs again."
     },
     {
-      "at": 5,
+      "at": 5.25,
       "target": "card-graph",
       "motion": "entrance",
       "travel_px": 8,
-      "text": "Edited 2 files graph.rs, breaks.rs",
       "seq": [
         29267,
         29268,
         29277,
         29278
-      ]
+      ],
+      "text": "Agent #29 edits src/graph.rs and src/breaks.rs."
     },
     {
-      "at": 5.8,
+      "at": 5.6,
       "target": "card-read",
       "motion": "entrance",
       "travel_px": 8,
-      "text": "Read src/hook.rs",
       "seq": [
         29274
-      ]
+      ],
+      "text": "Agent #28 reads src/hook.rs again."
     },
     {
-      "at": 6.6,
+      "at": 7.0,
       "target": "card-saved",
       "motion": "entrance",
       "travel_px": 8,
-      "text": "Saved after re-reading src/hook.rs",
       "seq": [
         29284,
         29285
-      ]
+      ],
+      "text": "Agent #28 saves its edit, made against the current file."
     },
     {
-      "at": 7.6,
-      "target": "inspector",
-      "motion": "entrance",
-      "travel_px": 8,
-      "text": "The inspector opens on the held write."
+      "at": 7.2,
+      "target": "card-saved",
+      "motion": "tint",
+      "text": "The saved card's border and fill turn green."
     },
     {
-      "at": 11.4,
+      "at": 11.0,
       "target": "scene",
-      "motion": "exit",
-      "text": "Cards, the wire and the inspector leave together."
+      "motion": "crossfade",
+      "text": "Cards and the wire fade back to the empty lanes."
     },
     {
-      "at": 11.4,
+      "at": 11.0,
       "target": "status",
       "motion": "feedback",
-      "text": "1 write held in the last 10 min",
       "seq": [
         28584
-      ]
+      ],
+      "text": "1 write held in the last 10 min"
     }
   ],
   "holds_s": [
     [
       0,
+      0.2
+    ],
+    [
+      0.4,
       0.5
     ],
     [
-      0.78,
-      1.0
+      0.7,
+      0.8
     ],
     [
-      1.28,
-      1.5
+      1.0,
+      1.1
     ],
     [
-      1.78,
-      2.0
+      1.3,
+      1.4
     ],
     [
-      2.28,
-      2.7
+      1.6,
+      3.5
     ],
     [
-      2.98,
-      3.7
+      4.3,
+      4.5
     ],
     [
-      3.98,
-      4.4
-    ],
-    [
-      4.68,
+      4.65,
       5.0
     ],
     [
-      5.28,
-      5.8
+      5.2,
+      5.25
     ],
     [
-      6.08,
-      6.6
+      5.45,
+      5.6
     ],
     [
-      6.88,
-      7.6
+      5.8,
+      7.0
     ],
     [
-      7.88,
-      11.4
+      7.5,
+      11.0
     ],
     [
-      11.56,
+      11.6,
       12
     ]
   ],
@@ -298,12 +366,20 @@
     "scale": 2,
     "min_text_px": 28,
     "seek_samples_s": [
-      0.2,
+      0.1,
       4.4,
-      9,
+      10,
       11.8
     ],
-    "poster_s": 9
+    "poster_s": 10,
+    "stills_s": [
+      1,
+      4,
+      4.8,
+      6,
+      7.5,
+      10
+    ]
   },
   "source": "assets/evidence/hero-slice-2026-11-25.json: three Claude Code sessions in LangSpan's own development, two in one checkout and one in its own worktree, 25 November 2026, 19:56:19 to 19:57:53 (event seq 29121 to 29290, plus 28584). Each card and each status count comes from the listed seq. The loop compresses 94 seconds of recorded time into 12 seconds. No agent or daemon runs."
 }

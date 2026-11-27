@@ -47,7 +47,7 @@
     <div class="hero-row">
       <div class="hero-text">
         <h1 id="hero-title">Your agents.<br><span>On the same page.</span></h1>
-        <p class="hero-line">Run agents in parallel. Build as a team.</p>
+        <p class="hero-line">Run agents in parallel. They tell each other what changed, so you don’t have to.</p>
         <p class="lede">Connect the coding agents you already use across sessions, worktrees and machines. When one agent changes a file another agent is working on, LangSpan tells the other one before it saves over the change.</p>
       </div>
       <div class="hero-cta">
@@ -68,7 +68,7 @@
         <button type="button" class="live-pause" data-hero-play>Pause</button><button type="button" aria-label="Zoom in" data-cam="in">+</button><button type="button" aria-label="Zoom out" data-cam="out">−</button><button type="button" aria-label="Fit all work" data-cam="fit">Fit</button><button type="button" aria-label="Follow the newest work" aria-pressed="true" data-cam="follow">Follow newest</button>
       </div>
       <div class="live-main">
-        <div class="live-canvas" data-canvas>
+        <div class="live-canvas" data-canvas tabindex="0" role="group" aria-label="Agent activity. Arrow keys pan, plus and minus zoom, 0 fits all work, L follows the newest work.">
           <p class="live-status" data-hero-target="status"><strong>3 agents working</strong> · <span data-status-count>3 writes held</span> in the last 10 min</p>
           <div class="live-world" data-world>
             <i class="lane-line lane-a" aria-hidden="true"></i><i class="lane-line lane-b" aria-hidden="true"></i><i class="lane-line lane-c" aria-hidden="true"></i>
@@ -76,45 +76,45 @@
             <div class="lane-head lane-b"><i aria-hidden="true"></i><span><strong>Agent · #28 signature alerts</strong><span>Claude Code</span><span>shared checkout</span></span></div>
             <div class="lane-head lane-c"><i aria-hidden="true"></i><span><strong>Agent · worktree signatures</strong><span>Claude Code</span><span>own worktree</span></span></div>
             <svg class="wire wire-h" viewBox="0 0 1360 520" width="1360" height="520" aria-hidden="true" data-wire><path class="wire-glow" d="M 274 182 C 274 223, 566 203, 566 244"/><path class="wire-line" pathLength="1" d="M 274 182 C 274 223, 566 203, 566 244"/></svg>
-            <svg class="wire wire-v" viewBox="0 0 346 660" preserveAspectRatio="none" aria-hidden="true" data-wire><path class="wire-glow" d="M 112.5 159 C 126 159, 107 372, 120.2 372"/><path class="wire-line" pathLength="1" d="M 112.5 159 C 126 159, 107 372, 120.2 372"/></svg>
-            <span class="wire-label" data-wire-label>Held</span>
+            <svg class="wire wire-v" viewBox="0 0 346 660" preserveAspectRatio="none" aria-hidden="true" data-wire><path class="wire-glow" d="M 112.5 168 C 126 168, 107 392, 120.2 392"/><path class="wire-line" pathLength="1" d="M 112.5 168 C 126 168, 107 392, 120.2 392"/></svg>
+            <button type="button" class="wire-label" data-wire-label data-detail-open="wire" aria-haspopup="dialog" aria-expanded="false">Held</button>
             <ol class="cards" aria-label="Work in the recording, oldest first">
-              <li class="card lane-a" data-card="card-hook" data-seq="29128 29129 29140 29141 29145 29146"><span class="verb">Edited</span><code>src/<wbr>hook.rs</code><span class="sub">3 edits</span></li>
-              <li class="card lane-c" data-card="card-observer" data-seq="29134 29135 29150 29151 29157 29158 29161 29162"><span class="verb">Edited</span><code>src/<wbr>observer.rs</code><span class="sub">4 edits</span></li>
-              <li class="card group" data-card="card-dash" data-seq="29172 29173 29212"><span class="verb">Edited 1 file and ran 1 command</span></li>
-              <li class="card lane-c" data-card="card-graph-c7" data-seq="29189 29190 29198 29199 29207 29208 29225 29226 29232 29233 29237 29238"><span class="verb">Edited</span><code>src/<wbr>graph.rs</code><span class="sub">6 edits</span></li>
-              <li class="card lane-b" data-card="card-tests" data-seq="29243 29244"><span class="verb">Edited</span><code><span class="dir">tests/</span>break_<wbr>alerts.rs</code></li>
-              <li class="card held lane-b" data-card="card-held" data-seq="29255 29256"><button type="button" class="card-hit" data-open-inspector aria-expanded="true" aria-controls="held-details"><span class="who">LangSpan</span><span class="verb">Write held</span><code>src/<wbr>hook.rs</code><span class="sub">changed since this agent read it</span></button></li>
-              <li class="card lane-c" data-card="card-graph-late" data-seq="29258 29259"><span class="verb">Edited</span><code>src/<wbr>graph.rs</code></li>
-              <li class="card group" data-card="card-graph" data-seq="29267 29268 29277 29278"><span class="verb">Edited 2 files</span><code>graph.rs, breaks.rs</code></li>
-              <li class="card lane-b" data-card="card-read" data-seq="29274"><span class="verb">Read</span><code>src/<wbr>hook.rs</code></li>
-              <li class="card saved" data-card="card-saved" data-seq="29284 29285"><span class="verb">Saved after re-reading</span><code>src/<wbr>hook.rs</code></li>
+              <li class="card lane-a" data-card="card-hook" data-seq="29128 29129 29140 29141 29145 29146"><button type="button" class="card-hit" data-detail-open="card-hook" aria-haspopup="dialog" aria-expanded="false"><span class="verb">Edited</span><code>src/<wbr>hook.rs</code><span class="sub">3 edits</span></button></li>
+              <li class="card lane-c" data-card="card-observer" data-seq="29134 29135 29150 29151 29157 29158 29161 29162"><button type="button" class="card-hit" data-detail-open="card-observer" aria-haspopup="dialog" aria-expanded="false"><span class="verb">Edited</span><code>src/<wbr>observer.rs</code><span class="sub">4 edits</span></button></li>
+              <li class="card group" data-card="card-dash" data-seq="29172 29173 29212"><button type="button" class="card-hit" data-detail-open="card-dash" aria-haspopup="dialog" aria-expanded="false"><span class="verb">Edited 1 file and ran 1 command</span></button></li>
+              <li class="card lane-c" data-card="card-graph-c7" data-seq="29189 29190 29198 29199 29207 29208 29225 29226 29232 29233 29237 29238"><button type="button" class="card-hit" data-detail-open="card-graph-c7" aria-haspopup="dialog" aria-expanded="false"><span class="verb">Edited</span><code>src/<wbr>graph.rs</code><span class="sub">6 edits</span></button></li>
+              <li class="card lane-b" data-card="card-tests" data-seq="29243 29244"><button type="button" class="card-hit" data-detail-open="card-tests" aria-haspopup="dialog" aria-expanded="false"><span class="verb">Edited</span><code><span class="dir">tests/</span>break_<wbr>alerts.rs</code></button></li>
+              <li class="card held lane-b" data-card="card-held" data-seq="29255 29256"><button type="button" class="card-hit" data-detail-open="card-held" aria-haspopup="dialog" aria-expanded="false"><span class="who">LangSpan</span><span class="verb">Write held</span><code>src/<wbr>hook.rs</code><span class="sub">changed since this agent read it</span></button></li>
+              <li class="card lane-c" data-card="card-graph-late" data-seq="29258 29259"><button type="button" class="card-hit" data-detail-open="card-graph-late" aria-haspopup="dialog" aria-expanded="false"><span class="verb">Edited</span><code>src/<wbr>graph.rs</code></button></li>
+              <li class="card group" data-card="card-graph" data-seq="29267 29268 29277 29278"><button type="button" class="card-hit" data-detail-open="card-graph" aria-haspopup="dialog" aria-expanded="false"><span class="verb">Edited 2 files</span><code>graph.rs, breaks.rs</code></button></li>
+              <li class="card lane-b" data-card="card-read" data-seq="29274"><button type="button" class="card-hit" data-detail-open="card-read" aria-haspopup="dialog" aria-expanded="false"><span class="verb">Read</span><code>src/<wbr>hook.rs</code></button></li>
+              <li class="card saved" data-card="card-saved" data-seq="29284 29285"><button type="button" class="card-hit" data-detail-open="card-saved" aria-haspopup="dialog" aria-expanded="false"><span class="verb">Saved after re-reading</span><code>src/<wbr>hook.rs</code></button></li>
             </ol>
           </div>
+          <div class="pop" role="dialog" aria-label="Details" data-pop hidden><button type="button" class="pop-close" data-pop-close aria-label="Close details">×</button><div data-pop-body></div></div>
         </div>
-        <aside class="inspector" id="held-details" aria-label="Details for the held write" data-inspector>
-          <div class="insp-head"><code>src/hook.rs</code><span>Write held once</span><button type="button" data-close-inspector hidden>Close</button></div>
-          <p class="insp-path">LangSpan.dev › dogfood/rename-safety › src › hook.rs</p>
-          <div class="insp-changed"><strong>What changed</strong><p>The other agent (#29 renames) edited <code>src/hook.rs</code> 3 times, at 19:56:27–30. This agent last read the file before that, so its edit would have been based on the old version.</p></div>
-          <div class="insp-row insp-saw"><span>Who saw it</span><p>This agent. LangSpan held its edit at 19:57:41 and said why in the reply.</p></div>
-          <div class="insp-row insp-next"><span>What happened next</span><p>19:57:47 · Read <code>src/hook.rs</code>, the version the other agent wrote.<br>19:57:52 · Saved its edit, which now started from the current file.</p></div>
-          <div class="insp-row insp-told"><span>What LangSpan told the agent</span><p><code class="insp-quote">These files changed after this session last read them. … "src/hook.rs" … Read each file again, then make the edit against its current content.</code></p></div>
-          <p class="insp-foot">Claude Code · Agent on #28 signature alerts · 19:57:41</p>
-        </aside>
       </div>
+          <template data-detail="card-hook"><p class="pop-kind">Edited · Agent · #29 renames</p><dl><dt>File</dt><dd><code>src/hook.rs</code>, lines 1773–2097, 4234–4278, 4281–4346</dd><dt>Time</dt><dd>19:56:27–19:56:30, 3 edits</dd></dl></template>
+          <template data-detail="card-observer"><p class="pop-kind">Edited · Agent · worktree signatures</p><dl><dt>File</dt><dd><code>src/observer.rs</code>, lines 10–30, 115–332</dd><dt>Time</dt><dd>19:56:28–19:56:32, 4 edits</dd></dl></template>
+          <template data-detail="card-dash"><p class="pop-kind">Edited 1 file and ran 1 command · Agent · #29 renames</p><dl><dt>File</dt><dd><code>src/dashboard.html</code>, lines 254–260</dd><dt>Time</dt><dd>19:56:45</dd><dt>Command</dt><dd>changed <code>crates/langspan-graph/src/lib.rs</code> and <code>crates/langspan-graph/tests/renames.rs</code></dd><dt>Time</dt><dd>19:57:11</dd></dl></template>
+          <template data-detail="card-graph-c7"><p class="pop-kind">Edited · Agent · worktree signatures</p><dl><dt>File</dt><dd><code>src/graph.rs</code>, lines 45–112, 296–340, 361–560, 1161–1167, 1173–1209</dd><dt>Time</dt><dd>19:57:04–19:57:18, 6 edits</dd></dl></template>
+          <template data-detail="card-tests"><p class="pop-kind">Edited · Agent · #28 signature alerts</p><dl><dt>File</dt><dd><code>tests/break_alerts.rs</code>, lines 841–915</dd><dt>Time</dt><dd>19:57:22</dd></dl></template>
+          <template data-detail="card-graph-late"><p class="pop-kind">Edited · Agent · worktree signatures</p><dl><dt>File</dt><dd><code>src/graph.rs</code>, lines 361–569</dd><dt>Time</dt><dd>19:57:43</dd></dl></template>
+          <template data-detail="card-graph"><p class="pop-kind">Edited 2 files · Agent · #29 renames</p><dl><dt>File</dt><dd><code>src/graph.rs</code>, lines 184–276</dd><dt>Time</dt><dd>19:57:45</dd><dt>File</dt><dd><code>src/breaks.rs</code>, lines 217–286</dd><dt>Time</dt><dd>19:57:50</dd></dl></template>
+          <template data-detail="card-read"><p class="pop-kind">Read · Agent · #28 signature alerts</p><dl><dt>File</dt><dd><code>src/hook.rs</code>, the version Agent #29 wrote</dd><dt>Time</dt><dd>19:57:47</dd></dl></template>
+          <template data-detail="card-saved"><p class="pop-kind">Saved after re-reading · Agent · #28 signature alerts</p><dl><dt>File</dt><dd><code>src/hook.rs</code>, lines 3209–3338</dd><dt>Time</dt><dd>19:57:52</dd><dt>Started from</dt><dd>the current file</dd></dl></template>
+          <template data-detail="card-held"><p class="pop-kind">Write held · Agent · #28 signature alerts</p><dl><dt>File</dt><dd><code>src/hook.rs</code></dd><dt>Time</dt><dd>19:57:41</dd><dt>What changed</dt><dd>Agent #29 edited <code>src/hook.rs</code> 3 times, at 19:56:27–30, after this agent last read it.</dd><dt>What LangSpan told the agent</dt><dd><q>These files changed after this session last read them. … "src/hook.rs" … Read each file again, then make the edit against its current content.</q></dd><dt>What happened next</dt><dd>19:57:47 · read the file again<br>19:57:52 · saved its edit</dd></dl></template>
+          <template data-detail="wire"><p class="pop-kind">Held · from Agent #29 to Agent #28</p><dl><dt>Why</dt><dd>Agent #29 changed <code>src/hook.rs</code> at 19:56:27–30. Agent #28 tried to save over it at 19:57:41.</dd><dt>Then</dt><dd>Agent #28 read the file again at 19:57:47 and saved at 19:57:52.</dd></dl></template>
     </div>
     </div>
-    <figcaption class="wrap live-foot">
-      <p>Two of our agents were editing the same checkout. One tried to save over a file the other had just changed. LangSpan held the edit, the agent read the new version, and then it saved.</p>
-    </figcaption>
   </figure>
 </section>
 
 <section class="section band" id="problem" aria-labelledby="problem-title">
   <div class="wrap stack">
     <p class="setup">Starting four agents takes a few commands. Then you spend the afternoon telling each one what the others changed.</p>
-    <h2 id="problem-title">Parallel execution is becoming easy. Coordinated development is still hard.</h2>
-    <p class="body-l">A worktree gives each agent its own working copy of your repository, so their files stay apart. It doesn’t tell one agent what another one changed. You find out when you merge, or you pass the news along by hand.</p>
+    <h2 id="problem-title">Stop being the message bus between your agents.</h2>
+    <p class="body-l"><strong>Parallel execution is becoming easy. Coordinated development is still hard.</strong> A worktree gives each agent its own working copy of your repository, so their files stay apart. It doesn’t tell one agent what another one changed. You find out when you merge, or you pass the news along by hand.</p>
     <div class="stages">
       <article><span class="stage-n">Stage 1</span><h3>One developer, one agent.</h3><p>You are the context. There’s nothing to coordinate.</p><div class="tags"><span class="tag-plain">Just you and your agent</span></div></article>
       <article><span class="stage-n">Stage 2</span><h3>One developer, many agents.</h3><p>You become the messenger. You copy what one agent changed into the next agent’s prompt.</p><div class="tags"><span class="tag tag-rec">Available today on one computer</span></div></article>
@@ -177,7 +177,7 @@
       <span class="flow-arrow" aria-hidden="true"></span>
       <div class="flow-box"><strong>Git and your review</strong><ul><li>Branches</li><li>Worktrees</li><li>CI and code review</li></ul><span>Each test result is tied to the exact code it tested.</span></div>
     </div>
-    <p class="body-m">LangSpan isn’t an orchestrator, a task manager or an IDE. It doesn’t start your agents or hand out work. You choose what to build and review the result.</p>
+    <p class="body-m">LangSpan doesn’t start your agents, assign tasks or plan work. Your agents stay independent, and LangSpan keeps them informed of each other’s changes. You choose what to build and review the result.</p>
     <div class="mechanism">
       <article><h3>Agents report.</h3><p>LangSpan adds hooks to each agent. A hook is a small check the agent runs on its own around each step. Hooks tell LangSpan’s background service what the agent reads and edits. Your agent makes no extra calls.</p></article>
       <article><h3>Others hear.</h3><p>When an agent starts, and with each new prompt, LangSpan adds a short note about related work to what the agent sees.</p><div class="quote"><span>What Codex saw in a real session</span><code>claude-code session a990eb45 in this checkout on branch "main": editing now: "src/gate.rs"</code></div></article>
@@ -294,7 +294,7 @@
       <div><h3>Does LangSpan stop every broken merge?</h3><p>No. Edit holds stop two agents from changing the same function at once on one computer. Changes in different files, or on different computers, can still break each other. Heads-ups about changed functions narrow that gap. Testing the branches together before you merge is the final check.</p></div>
       <div><h3>Can an agent get past a hold?</h3><p>Yes. LangSpan sees edits that an agent makes with its edit tools. An edit made another way, such as by a script, can get past it. So can an edit you approve after a hold has ended. Your agent’s own permission prompts and your review still apply.</p></div>
       <div><h3>Do I still need worktrees, branches and CI?</h3><p>Yes. LangSpan works alongside them. It connects agents across worktrees on one computer, and it ties each test result to the exact code that was tested.</p></div>
-      <div><h3>Does LangSpan run my agents for me?</h3><p>No. It isn’t an orchestrator, a task manager or an IDE. You start your agents as usual, choose the work and review the result.</p></div>
+      <div><h3>Does LangSpan run my agents for me?</h3><p>No. It doesn’t start agents, assign tasks or plan work. You start your agents as usual, choose the work and review the result. LangSpan coordinates them: each agent hears what the others changed.</p></div>
       <div><h3>Is there a measured result?</h3><p>Not yet. We’re running a benchmark that gives the same task to agents with worktrees only, with each other’s task descriptions, and with LangSpan. No result is published yet. The method is public.</p></div>
       <div><h3>Which languages get heads-ups about changed functions?</h3><p>Rust, Python, TypeScript, JavaScript, Go, Java and C#. LangSpan matches function names, not their full meaning, so treat each one as a heads-up.</p></div>
       <div><h3>What does it cost?</h3><p>LangSpan is open source under the Apache-2.0 license. There’s no account and no hosted service.</p></div>
@@ -332,7 +332,7 @@ It shows one plan and asks once. Don't confirm it for them.</pre>
 <section class="section closing" id="get-langspan" aria-labelledby="close-title">
   <div class="wrap stack center">
     <img class="lk-light" src="assets/brand/langspan-icon-light.svg" width="64" height="64" alt="" loading="lazy"><img class="lk-dark" src="assets/brand/langspan-icon-dark.svg" width="64" height="64" alt="" loading="lazy">
-    <h2 id="close-title">Stop being the message bus between your agents.</h2>
+    <h2 id="close-title">You’re not the glue anymore.</h2>
     <div class="cmd"><code id="install-close">curl -fsSL https://github.com/Langspan/LangSpan.dev/releases/latest/download/install.sh | sh</code><button type="button" data-copy="install-close" hidden>Copy</button></div>
     <div class="cta-row"><a class="btn" href="#start">Install LangSpan</a><a class="btn secondary" href="https://github.com/Langspan/LangSpan.dev">View on GitHub</a></div>
   </div>

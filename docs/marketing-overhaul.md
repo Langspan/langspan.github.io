@@ -352,18 +352,34 @@ limit stated once in the questions, no placeholders and no dates on the page.
   session. Each card cites its seq numbers in `data-seq`; the timing file
   cites them per event.
 - The hero is hand-built HTML and SVG with no new dependency. At 1280 px and
-  wider, time runs left to right and the inspector sits over the right of
-  the canvas; below that, time runs top to bottom in three lane columns, with
-  the inspector beside the canvas or, under 760 px, under it. The canvas
-  controls are Pause, zoom in, zoom out, Fit and Follow newest (on by
-  default); dragging pans. Reduced motion, `?motion=static` and a page
-  without JavaScript show the final frame.
-- Timing: `marketing/motion/hero-loop/timing.json` is a 12-second clock at
-  30 fps (360 frames) that loops while the hero is on screen.
+  wider, time runs left to right; below that, time runs top to bottom in
+  three lane columns. It is an interactive canvas: Pause or Play, zoom in,
+  zoom out, Fit and Follow newest (on by default); Ctrl or pinch wheel and
+  two-finger pinch zoom; drag pans; on the focused canvas, arrows pan 48 px,
+  + and - zoom by 1.25, 0 fits and L follows. A click on a card or on the
+  Held wire opens a small details popover anchored to it, inside the canvas,
+  with the file, the lines, the time and, for the held write, what changed,
+  what LangSpan told the agent and what happened next. Escape, a click
+  outside or the close button dismiss it. It never opens on its own.
+- Any interaction pauses the loop; it resumes from the current beat after
+  8 s without interaction, or at once on Play or Follow newest. A visitor's
+  Pause stays paused. Reduced motion, `?motion=static` and a page without
+  JavaScript show the settled frame at 10 s, still interactive with
+  JavaScript.
+- Timing (`marketing/motion/hero-loop/timing.json`, 12 s at 30 fps, owner's
+  beats of 27 November 2026): cards enter in event order at 0.2, 0.5, 0.8,
+  1.1 and 1.4 s (200 ms fade and 8 px rise); hold to 3.5 s; the held write
+  enters at 3.5 s and the Held wire draws from 3.7 s for 600 ms; one 150 ms
+  emphasis at 4.5 s (scale 1.03 and back); the third lane and #29 continue
+  at 5.0 and 5.25 s; the read enters at 5.6 s; the save enters at 7.0 s and
+  turns green over 300 ms from 7.2 s; the scene holds from 7.5 to 11.0 s and
+  cross-fades to the empty lanes over 600 ms. The entrance is 200 ms by the
+  owner's direction, shorter than the standard's 280 ms.
 - #40: the version shows the latest release (v0.8.0 until
   `assets/latest-release.js` reads a newer one), and the host table and the
   technical guide's host states match the product README.
-- The phone-cut check treats a small card entrance like a feedback change:
-  when no frame-to-frame change reaches the freeze detector's floor, a
-  declared hold may run through it, and the entrance must still change the
-  decoded pixels.
+- The phone-cut check treats any small move like a feedback change: when no
+  frame-to-frame change reaches the freeze detector's floor, a declared hold
+  may run through it, and the move must still change the decoded pixels. It
+  also checks that every beat starts within 50 ms of its time in the timing
+  file, and the renderer writes stills at 1, 4, 4.8, 6, 7.5 and 10 s.

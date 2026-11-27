@@ -24,8 +24,7 @@ body.film-mode> :not(#film){display:none!important}
 #film .lane-head strong{font-size:14px}
 #film .lane-head span span{display:none}
 #film .lane-line{top:84px!important}
-#film .card{width:30.5%;height:auto;min-height:0;gap:2px;padding:6px 8px 7px}
-#film .card.held{padding:0}
+#film .card{width:30.5%;height:auto;min-height:0}
 #film .card-hit{padding:6px 8px 7px;gap:2px}
 #film .card .verb,#film .card code,#film .card .sub,#film .card.held .who{font-size:14px}
 #film .card code{padding:1px 4px}
@@ -41,10 +40,5 @@ body.film-mode> :not(#film){display:none!important}
 #film .live-world,#film .wire-v{height:100%}
 /* The wire joins the same two cards as on the page: #29's edits of src/hook.rs and #28's held write. */
 #film .wire-v path{d:path("M 112.3 149.5 C 124 149.5, 100 250, 102 306 C 103 340, 108 370.4, 120 370.4")}
-#film .wire-label{left:29.5%;top:262px;font-size:14px;padding:1px 6px}
-#film .inspector{position:absolute;left:0;right:0;bottom:0;margin:0;border-radius:16px 16px 0 0;padding:8px 16px 14px;font-size:14px;z-index:5}
-#film .insp-head code,#film .insp-head span,#film .inspector code{font-size:14px}
-#film .insp-head button,#film .insp-path,#film .insp-changed,#film .insp-saw,#film .insp-told,#film .insp-foot{display:none!important}
-#film .insp-row{padding:6px 0 0;border-top:0}
-#film .insp-row>span{font-size:14px}
+#film .wire-label{left:29.5%!important;top:262px!important;font-size:14px;padding:1px 6px}
 #film .live *{transition:none!important;animation:none!important}

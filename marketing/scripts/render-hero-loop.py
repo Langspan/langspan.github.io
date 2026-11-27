@@ -95,6 +95,8 @@ def main():
             report['seek_determinism'].append({'time_s': t, 'pixel_identical': same})
             assert same, f'seeking to {t} s draws different pixels'
         (out / 'hero-loop-phone-poster.png').write_bytes(draw(CUT['poster_s']))
+        for t in CUT.get('stills_s', []):
+            (out / f'still-{t:g}s.png').write_bytes(draw(t))
         report['endpoint_pixel_identical'] = draw(0) == draw(SPEC['duration_s'])
         assert report['endpoint_pixel_identical'], 'frame N differs from frame 0'
         if not args.stills:
