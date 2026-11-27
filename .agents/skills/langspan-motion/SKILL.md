@@ -39,12 +39,6 @@ QA method and a table of common failures. If the two disagree, this file wins.
 `cubic-bezier(.2, 0, 0, 1)` at 300 ms is retired. An entrance travels at
 most 8 px. Don't use zooms, glow, particles, typing effects or gradients.
 
-Exceptions, each an owner decision:
-
-- 27 November 2026: the hero's pinned lane names have a 20 px fade where the
-  moving cards pass under them (`.gutter::after` in
-  `assets/product-first.css`). It is the only gradient on the page.
-
 ## The phone cut
 
 The hero loop's film is a 1080 × 1350 phone cut, rendered from the same
