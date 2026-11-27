@@ -62,7 +62,7 @@
     {
       "source": "marketing/film/social-card.html, rendered at 1280x640 by marketing/scripts/social-card.mjs; no version number",
       "path": "assets/product/social-card.png",
-      "sha256": "9ace31c026cbd148da3995742771f834fc9d543f37bf26e6b20bb1f38e79d4bf"
+      "sha256": "fb5c563f6c30c274ac9955b4746bf87e3cc8b9a9d989312bdfc4fec1e56cc003"
     },
     {
       "source": "demo-src/CoordinationDemo.tsx and CapabilityExplorer.tsx (generated from marketing/story.json; restored geometry and PR #24 copy)",
