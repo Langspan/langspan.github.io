@@ -135,7 +135,7 @@
       L = l;
       for (const el of gutter.children) {
         const i = +el.dataset.lane;
-        el.style.setProperty('--y', (l.top + i * l.row) + 'px');
+        el.style.setProperty('--y', (i * l.row) + 'px');
       }
     }
     const cardY = c => L.top + c.lane * L.row + ((c.kind === 'held' ? L.HH : L.H) < L.row ? 0 : 0);
@@ -208,11 +208,13 @@
       const st = frameState(seconds);
       if (cam.mode === 'flow') { cam.s = cam.fs; cam.x = flowCamera(st); cam.y = 0; }
       const s = cam.s, viewL = cam.x, viewR = cam.x + L.Wc / s, margin = L.W * 2;
-      world.style.transform = 'translate(' + (-cam.x * s).toFixed(1) + 'px,' + cam.y.toFixed(1) + 'px) scale(' + s.toFixed(4) + ')';
+      // Zooming keeps the first lane at its place under the status line.
+      const ty = L.top * (1 - s) + cam.y;
+      world.style.transform = 'translate(' + (-cam.x * s).toFixed(1) + 'px,' + ty.toFixed(1) + 'px) scale(' + s.toFixed(4) + ')';
       // The dot grid is part of the plane, so it moves and scales with the work.
       const dot = 18 * s;
       canvas.style.backgroundSize = dot.toFixed(2) + 'px ' + dot.toFixed(2) + 'px';
-      canvas.style.backgroundPosition = (((-cam.x * s) % dot) + dot).toFixed(2) + 'px ' + ((cam.y % dot) + dot).toFixed(2) + 'px';
+      canvas.style.backgroundPosition = (((-cam.x * s) % dot) + dot).toFixed(2) + 'px ' + ((ty % dot) + dot).toFixed(2) + 'px';
       canvas.classList.toggle('zoom-compact', s < P.zoom.compact_below && s >= P.zoom.blocks_below);
       canvas.classList.toggle('zoom-blocks', s < P.zoom.blocks_below);
       gutter.style.setProperty('--s', s); gutter.style.setProperty('--dy', cam.y + 'px');
@@ -275,7 +277,9 @@
         const fl = from ? from.lane : w.from_lane, top = Math.min(fl, to.lane);
         const upperH = Math.max(L.H, ...[from, to].filter(c => c && c.lane === top && c.kind === 'held').map(() => L.HH));
         const gapY = (L.top + top * L.row + upperH + L.top + (top + 1) * L.row) / 2;
-        lb.style.left = ((x1 + x2 + (x2 - x1 >= 24 ? 0 : L.W / 2)) / 2).toFixed(1) + 'px'; lb.style.top = gapY.toFixed(1) + 'px'; lb.style.opacity = clamp01(p * 2).toFixed(3);
+        lb.style.left = ((x1 + x2 + (x2 - x1 >= 24 ? 0 : L.W / 2)) / 2).toFixed(1) + 'px';
+        // Labels keep their size when the plane is zoomed out.
+        lb.style.transform = 'translate(-50%,-50%)' + (s < 1 ? ' scale(' + (1 / s).toFixed(3) + ')' : ''); lb.style.top = gapY.toFixed(1) + 'px'; lb.style.opacity = clamp01(p * 2).toFixed(3);
         if (lb.parentNode !== labelLayer) labelLayer.append(lb);
       }
       for (const [key, g] of wirePool) if (!wantW.has(key)) { g.remove(); wirePool.delete(key); }
