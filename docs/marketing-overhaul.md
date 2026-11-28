@@ -322,3 +322,93 @@ unresolved anchor. At 390 × 844 the hero panel is 370 px tall and the recorded
 refusal line starts at y = 636. The hero's `timing.events`, `easing` and
 `holds_s` equal those in the timing file from pull request #35. Not checked:
 playback on a real phone, and the phone cut's own render and freeze checks.
+
+## Home page, revision 2 — 27 November 2026
+
+Implements the owner-approved wireframe for langspan.github.io#39 and fixes
+#40, with the owner's later direction on tone: no hedging in body copy, every
+limit stated once in the questions, no placeholders and no dates on the page.
+
+- Sections: hero, thesis and stages, what Git doesn't see (four scenes and
+  Try it), how it works, across computers, works with, get started, open
+  source, questions, for agents, closing.
+- The proof section stays in `index.html` inside a comment until the
+  benchmark publishes real numbers (LangSpan.dev #495, results from #172).
+  The scenes that have no real recording (heard a change, rename held,
+  checked before merging) are left out.
+- Hero: LangSpan Live's "Now" view flows right to left over a recorded
+  slice of LangSpan's own agents: two Claude Code sessions in one checkout
+  and one in its own worktree, the only sessions with tool calls in the
+  log for that stretch. There is no caption, label or date; the real
+  repository, branch and file paths show that it is a real session (owner
+  decision, 27 November 2026, recorded in the motion standard).
+- The slice is `assets/evidence/hero-slice.json`: seq 28549 to 29303,
+  19:52:00 to 19:58:00 local time (UTC−6) on 25 November 2026, which is
+  01:52 to 01:58 UTC on 26 November. `marketing/scripts/export-hero-slice.py`
+  exports it read-only from the coordinator log. It keeps event types, seq
+  numbers, times, tools, paths, line ranges, lane labels, the reason for a
+  held write and the lane whose change held it, and which lane a message went
+  to and which sent message an acknowledgement answers. It drops prompts,
+  message text, digests, every ID, symbol names, workspace roots, home paths
+  and other sessions.
+- `marketing/scripts/build-hero-timeline.py` turns the slice and
+  `marketing/motion/hero-loop/pacing.json` into `timing.json` (43 cards,
+  three held writes, each re-read and saved, and two messages, in a 33.4 s
+  loop) and writes the equal copy into `assets/product-first.js`, the lane
+  names and a still for pages without JavaScript. Edits of one file by one
+  agent less than 20 s apart become one card with a count. Idle time is
+  compressed (each gap plays as 0.35 to 0.45 s); the order never changes.
+  The flow stops for each coordination moment: 3.2 s for a held write, 1.0 s
+  for a save turning green and 1.0 s for a message. The longest stretch
+  between moments is 12.5 s, across the seam included. The flow speed,
+  about 92 px/s at 1440 px, is an owner decision (27 November 2026).
+- A held write's stop frames both of its cards: after the held card enters
+  (200 ms), the camera eases out and pans together over 600 ms
+  (`cubic-bezier(0.16, 1, 0.3, 1)`) to fit both with 48 px of margin, the
+  wire draws card to card in 600 ms, the 150 ms emphasis plays, the view
+  holds 1 s and eases back over 600 ms. The camera never scales card text
+  below 10 px at wide sizes (12 px on phones). When both cards can't fit,
+  the wire starts from the source lane's nearest card in view, marked
+  "earlier"; on phones, or without such a card, a small chip beside the held
+  card names the earlier change ("Held · #29 edited hook.rs earlier"). No
+  wire starts from a bare lane edge.
+- Each lane reads as the agent's chain of work: a 2 px line in the lane's
+  color joins each card to that agent's next card, with 6 px nodes at the
+  card edges. A gap of more than 30 s in the log is drawn dashed and
+  lighter. A hollow dot where each lane's line leaves the lane names marks
+  the lane's start. Held and message wires stay curves in their own colors,
+  with labels.
+- Cards use style B (owner's choice, 27 November 2026): a 14 px tool glyph
+  per verb (edit, read, command, save, hold, message) tinted in the lane's
+  color, monospace path pills, 12 px text, and coral only on held writes.
+- Held and message wires run through the gap between the two lanes and
+  enter each card through its top or bottom edge, never across a card. Only
+  the current moment's wire is at full strength; earlier wires fade to
+  25 percent within 400 ms after their stop. Labels, markers and chips stay
+  fully inside the canvas.
+- Final touches (owner, 27 November 2026): the pinned lane names sit behind
+  a solid edge with a 1 px divider (no gradient), the Held wire is a crisp
+  2 px coral stroke (no glow), and cards have no colored left border; lane
+  color shows in the chain nodes and the glyph tint.
+- The canvas flows continuously and loops without a seam: the loop's last
+  cards are followed by the next loop's first cards, one loop's width
+  further on. Cards keep their order in time across lanes and are pushed
+  right only to clear the card before them in their own lane. Cards, wires
+  and labels are drawn from pools as they enter the view, so the page keeps
+  at most a few dozen card elements.
+- Interaction: Pause or Play, zoom in, zoom out, Fit (the whole loop),
+  Follow newest; Ctrl or pinch wheel and pinch zoom; drag pans; arrows, + and
+  -, 0 and L on the focused canvas. Zoomed out, cards lose their last line,
+  then become lane-colored blocks; their details stay one click away. A
+  click on a card, a wire label or a lane name opens a small details
+  popover. Any interaction pauses the flow; it resumes after 8 s, or at once
+  on Play or Follow newest. Reduced motion shows the first held moment,
+  paused and interactive.
+- #40: the version shows the latest release (v0.8.0 until
+  `assets/latest-release.js` reads a newer one), and the host table and the
+  technical guide's host states match the product README.
+- The phone-cut check treats any small move like a feedback change: when no
+  frame-to-frame change reaches the freeze detector's floor, a declared hold
+  may run through it, and the move must still change the decoded pixels. It
+  also checks that every beat starts within 50 ms of its time in the timing
+  file, and the renderer writes stills at 1, 4, 4.8, 6, 7.5 and 10 s.

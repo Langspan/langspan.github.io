@@ -1,0 +1,5558 @@
+{
+ "name": "LangSpan Live \"Now\" view, recorded slice",
+ "recorded": "Three Claude Code sessions in LangSpan's own development, exported read-only from the coordinator event log. Two work in one shared checkout of LangSpan.dev on branch dogfood/rename-safety; the third works in its own worktree on branch feat/worktree-signatures-c7. No other session made a tool call in this window.",
+ "window": {
+  "local_time": "UTC-6",
+  "start": "2026-11-25T19:52:00-06:00",
+  "end": "2026-11-25T19:58:00-06:00",
+  "start_utc": "2026-11-26T01:52:00+00:00",
+  "end_utc": "2026-11-26T01:58:00+00:00"
+ },
+ "seq_range": [
+  28549,
+  29303
+ ],
+ "time": "Event times are local wall time (UTC-6), mapped from the coordinator clock with the anchor at_ms 2006850808 = 2026-11-26T01:45:14.270Z. A message event records no time of its own; it takes the time of the event before it (time_from_previous_event).",
+ "repository": "LangSpan.dev",
+ "before_window": {
+  "lanes_working_in_previous_5_min": [
+   "Agent · #28 signature alerts",
+   "Agent · #29 renames",
+   "Agent · worktree signatures"
+  ],
+  "writes_held_in_previous_10_min_at": []
+ },
+ "lanes": {
+  "Agent · #29 renames": {
+   "agent": "Claude Code",
+   "checkout": "shared checkout",
+   "branch": "dogfood/rename-safety"
+  },
+  "Agent · #28 signature alerts": {
+   "agent": "Claude Code",
+   "checkout": "shared checkout",
+   "branch": "dogfood/rename-safety"
+  },
+  "Agent · worktree signatures": {
+   "agent": "Claude Code",
+   "checkout": "own worktree",
+   "branch": "feat/worktree-signatures-c7"
+  }
+ },
+ "kept": [
+  "seq",
+  "type",
+  "time",
+  "lane label",
+  "paths",
+  "line ranges of each admitted edit",
+  "tool and non-success result of an observed operation",
+  "origin of a source observation",
+  "reason of a held write and the lane whose change held it",
+  "the lane a message went to, and which sent message an acknowledgement answers (by seq)"
+ ],
+ "dropped": [
+  "prompts (session_prompted)",
+  "message text",
+  "digests",
+  "session, lease, operation, observation, message and workspace IDs",
+  "symbol names",
+  "workspace roots and home paths",
+  "events of other sessions",
+  "events that name no session"
+ ],
+ "events": [
+  {
+   "seq": 28549,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:52:00.049"
+  },
+  {
+   "seq": 28550,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:52:05.719"
+  },
+  {
+   "seq": 28551,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:05.719",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/hook.rs"
+   ],
+   "lines": [
+    [
+     124,
+     155
+    ]
+   ]
+  },
+  {
+   "seq": 28552,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:06.189",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28553,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:06.190",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28556,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:06.303",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/hook.rs"
+   ],
+   "lines": [
+    [
+     218,
+     435
+    ]
+   ]
+  },
+  {
+   "seq": 28557,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:08.281",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28558,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:08.282",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28560,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:08.301"
+  },
+  {
+   "seq": 28561,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:52:08.301",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28562,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:52:11.188"
+  },
+  {
+   "seq": 28563,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:11.188",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/hook.rs"
+   ],
+   "lines": [
+    [
+     2642,
+     2756
+    ]
+   ]
+  },
+  {
+   "seq": 28564,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:12.864",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28565,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:12.865",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28568,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:12.977",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/hook.rs"
+   ],
+   "lines": [
+    [
+     2642,
+     2756
+    ]
+   ]
+  },
+  {
+   "seq": 28569,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:16.046",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28570,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:16.047",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28572,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:16.064"
+  },
+  {
+   "seq": 28573,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:16.064",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/hook.rs"
+   ],
+   "lines": [
+    [
+     2752,
+     2819
+    ]
+   ]
+  },
+  {
+   "seq": 28574,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:24.635",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28575,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:24.636",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28577,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:24.654"
+  },
+  {
+   "seq": 28579,
+   "type": "session_seen",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:29.162"
+  },
+  {
+   "seq": 28580,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:29.163",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 28581,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:29.180"
+  },
+  {
+   "seq": 28582,
+   "type": "session_seen",
+   "lane": "Agent · #29 renames",
+   "time": "19:52:30.983"
+  },
+  {
+   "seq": 28583,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:52:30.984",
+   "paths": [
+    "tests/break_alerts.rs"
+   ],
+   "origin": "refused"
+  },
+  {
+   "seq": 28584,
+   "type": "write_refused",
+   "lane": "Agent · #29 renames",
+   "time": "19:52:30.984",
+   "paths": [
+    "tests/break_alerts.rs"
+   ],
+   "reason": "changed since this agent read it",
+   "held_by_change_from": "Agent · #28 signature alerts"
+  },
+  {
+   "seq": 28585,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:52:31.002"
+  },
+  {
+   "seq": 28586,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:52:31.002",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28587,
+   "type": "session_seen",
+   "lane": "Agent · worktree signatures",
+   "time": "19:52:34.106"
+  },
+  {
+   "seq": 28588,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:52:34.108",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 28589,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:52:34.108",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28590,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:52:35.310"
+  },
+  {
+   "seq": 28591,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:52:35.676",
+   "paths": [
+    "tests/break_alerts.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 28592,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:52:35.676",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28593,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:52:35.704"
+  },
+  {
+   "seq": 28594,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:52:38.456"
+  },
+  {
+   "seq": 28595,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:38.456",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/hook.rs"
+   ],
+   "lines": [
+    [
+     2923,
+     3025
+    ]
+   ]
+  },
+  {
+   "seq": 28596,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:40.013",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28597,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:40.014",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28599,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:40.698",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 28600,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:40.724"
+  },
+  {
+   "seq": 28602,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:40.834",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/hook.rs"
+   ],
+   "lines": [
+    [
+     2969,
+     3063
+    ]
+   ]
+  },
+  {
+   "seq": 28603,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:48.273",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28604,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:48.274",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28607,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:48.387",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/hook.rs"
+   ],
+   "lines": [
+    [
+     3033,
+     3071
+    ]
+   ]
+  },
+  {
+   "seq": 28608,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:49.624",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28609,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:49.625",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28611,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:49.625",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/hook.rs"
+   ]
+  },
+  {
+   "seq": 28612,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:50.927",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28613,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:50.928",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28615,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:50.946"
+  },
+  {
+   "seq": 28616,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:52:50.946",
+   "time_from_previous_event": true,
+   "paths": [
+    "tests/break_alerts.rs"
+   ]
+  },
+  {
+   "seq": 28617,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:52:55.057",
+   "paths": [
+    "tests/break_alerts.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28618,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:52:55.058",
+   "paths": [
+    "tests/break_alerts.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28620,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:52:55.058",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28621,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:52:55.077"
+  },
+  {
+   "seq": 28624,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:55.178",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/hook.rs"
+   ],
+   "lines": [
+    [
+     3678,
+     3679
+    ]
+   ]
+  },
+  {
+   "seq": 28625,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:58.652",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28626,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:58.653",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28628,
+   "type": "briefing_delivered",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:58.653",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28629,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:52:58.671"
+  },
+  {
+   "seq": 28630,
+   "type": "session_seen",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:01.746"
+  },
+  {
+   "seq": 28631,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:01.747",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 28632,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:01.770"
+  },
+  {
+   "seq": 28634,
+   "type": "session_seen",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:03.037"
+  },
+  {
+   "seq": 28635,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:03.038"
+  },
+  {
+   "seq": 28636,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:06.182",
+   "paths": [
+    "crates/langspan-core/tests/interface_counts.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 28637,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:06.200"
+  },
+  {
+   "seq": 28638,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:06.200",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/hook.rs"
+   ],
+   "lines": [
+    [
+     3199,
+     3309
+    ]
+   ]
+  },
+  {
+   "seq": 28639,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:11.680",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28640,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:11.681",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28643,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:11.789",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/hook.rs"
+   ],
+   "lines": [
+    [
+     3115,
+     3180
+    ]
+   ]
+  },
+  {
+   "seq": 28644,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:13.567",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28645,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:13.568",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28647,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:13.586"
+  },
+  {
+   "seq": 28648,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:13.586",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/hook.rs"
+   ],
+   "lines": [
+    [
+     3201,
+     3330
+    ]
+   ]
+  },
+  {
+   "seq": 28649,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:17.346",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28650,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:17.346",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28653,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:17.944",
+   "paths": [
+    "src/claude_code.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 28654,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:17.968"
+  },
+  {
+   "seq": 28655,
+   "type": "session_seen",
+   "lane": "Agent · worktree signatures",
+   "time": "19:53:19.138"
+  },
+  {
+   "seq": 28656,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:53:19.154"
+  },
+  {
+   "seq": 28657,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:53:19.154",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28658,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:19.154",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/tests/renames.rs"
+   ]
+  },
+  {
+   "seq": 28659,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:19.434",
+   "paths": [
+    "crates/langspan-core/tests/renames.rs"
+   ],
+   "tool": "Write"
+  },
+  {
+   "seq": 28660,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:19.435",
+   "paths": [
+    "crates/langspan-core/tests/renames.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28662,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:19.453"
+  },
+  {
+   "seq": 28663,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:19.453",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/claude_code.rs"
+   ],
+   "lines": [
+    [
+     43,
+     161
+    ]
+   ]
+  },
+  {
+   "seq": 28664,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:21.012",
+   "paths": [
+    "src/claude_code.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28665,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:21.013",
+   "paths": [
+    "src/claude_code.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28667,
+   "type": "briefing_delivered",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:21.013",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28668,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:21.627",
+   "paths": [
+    "src/codex.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 28669,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:21.658"
+  },
+  {
+   "seq": 28670,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:21.658",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/codex.rs"
+   ],
+   "lines": [
+    [
+     39,
+     166
+    ]
+   ]
+  },
+  {
+   "seq": 28671,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:53:21.658",
+   "time_from_previous_event": true,
+   "paths": [
+    "tests/graph.rs"
+   ],
+   "lines": [
+    [
+     185,
+     224
+    ]
+   ]
+  },
+  {
+   "seq": 28672,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:24.790",
+   "paths": [
+    "src/codex.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28673,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:24.791",
+   "paths": [
+    "src/codex.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28675,
+   "type": "briefing_delivered",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:24.791",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28676,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:53:24.795",
+   "paths": [
+    "tests/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28677,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:53:24.796",
+   "paths": [
+    "tests/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28679,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:53:24.796",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28684,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:25.086",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     1239,
+     1265
+    ]
+   ]
+  },
+  {
+   "seq": 28685,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:26.893",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28686,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:26.894",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28688,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:26.894",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28689,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:26.894",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/cursor.rs"
+   ],
+   "lines": [
+    [
+     124,
+     261
+    ]
+   ]
+  },
+  {
+   "seq": 28690,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:27.644",
+   "paths": [
+    "src/cursor.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28691,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:27.645",
+   "paths": [
+    "src/cursor.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28693,
+   "type": "briefing_delivered",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:27.645",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28694,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:27.664"
+  },
+  {
+   "seq": 28695,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:27.664",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     6023,
+     6091
+    ]
+   ]
+  },
+  {
+   "seq": 28696,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:28.487",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28697,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:28.487",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28699,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:28.487",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28700,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:28.487",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     6023,
+     6092
+    ]
+   ]
+  },
+  {
+   "seq": 28701,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:30.993",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28702,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:30.994",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28704,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:31.012"
+  },
+  {
+   "seq": 28707,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:31.122",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/cursor.rs"
+   ],
+   "lines": [
+    [
+     124,
+     267
+    ]
+   ]
+  },
+  {
+   "seq": 28708,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:32.464",
+   "paths": [
+    "src/cursor.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28709,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:32.465",
+   "paths": [
+    "src/cursor.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28711,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:32.483"
+  },
+  {
+   "seq": 28712,
+   "type": "session_seen",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:34.041"
+  },
+  {
+   "seq": 28713,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:34.043",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 28714,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:34.068"
+  },
+  {
+   "seq": 28715,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:53:34.068",
+   "time_from_previous_event": true,
+   "paths": [
+    "tests/graph.rs"
+   ],
+   "lines": [
+    [
+     234,
+     247
+    ],
+    [
+     248,
+     252
+    ]
+   ]
+  },
+  {
+   "seq": 28716,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:53:35.368",
+   "paths": [
+    "tests/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28717,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:53:35.369",
+   "paths": [
+    "tests/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28719,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:53:35.369",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28720,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:53:35.387"
+  },
+  {
+   "seq": 28722,
+   "type": "session_seen",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:37.386"
+  },
+  {
+   "seq": 28723,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:37.386",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/gemini.rs"
+   ],
+   "lines": [
+    [
+     115,
+     240
+    ]
+   ]
+  },
+  {
+   "seq": 28724,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:37.423",
+   "paths": [
+    "src/gemini.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28725,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:37.424",
+   "paths": [
+    "src/gemini.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28729,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:53:37.535",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28730,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:53:38.283"
+  },
+  {
+   "seq": 28731,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:38.283",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     6023,
+     6103
+    ]
+   ]
+  },
+  {
+   "seq": 28732,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:39.518",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28733,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:39.518",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28735,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:39.518",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28736,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:39.518",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/gemini.rs"
+   ],
+   "lines": [
+    [
+     115,
+     240
+    ]
+   ]
+  },
+  {
+   "seq": 28737,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:40.057",
+   "paths": [
+    "src/gemini.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28738,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:40.058",
+   "paths": [
+    "src/gemini.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28740,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:40.077"
+  },
+  {
+   "seq": 28741,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:40.077",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     6023,
+     6102
+    ]
+   ]
+  },
+  {
+   "seq": 28742,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:41.316",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28743,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:41.317",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28745,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:41.334"
+  },
+  {
+   "seq": 28746,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:41.334",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/gemini.rs"
+   ],
+   "lines": [
+    [
+     115,
+     247
+    ]
+   ]
+  },
+  {
+   "seq": 28747,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:44.304",
+   "paths": [
+    "src/gemini.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28748,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:44.305",
+   "paths": [
+    "src/gemini.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28752,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:45.053"
+  },
+  {
+   "seq": 28753,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:45.053",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     1316,
+     1331
+    ]
+   ]
+  },
+  {
+   "seq": 28754,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:48.598",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28755,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:48.598",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28757,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:50.831"
+  },
+  {
+   "seq": 28759,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:51.046",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     9086,
+     9145
+    ]
+   ]
+  },
+  {
+   "seq": 28760,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:51.992",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28761,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:51.993",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28763,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:51.993",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     9086,
+     9146
+    ]
+   ]
+  },
+  {
+   "seq": 28764,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:54.694",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28765,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:53:54.694",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28767,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:56.379"
+  },
+  {
+   "seq": 28769,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:59.508",
+   "paths": [
+    "docs/usage.md"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 28770,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:53:59.526"
+  },
+  {
+   "seq": 28771,
+   "type": "session_seen",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:02.935"
+  },
+  {
+   "seq": 28772,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:02.935",
+   "time_from_previous_event": true,
+   "paths": [
+    "tests/graph.rs"
+   ],
+   "lines": [
+    [
+     1299,
+     1349
+    ]
+   ]
+  },
+  {
+   "seq": 28773,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:02.972",
+   "paths": [
+    "tests/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28774,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:02.973",
+   "paths": [
+    "tests/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28776,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:02.973",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28777,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:02.991"
+  },
+  {
+   "seq": 28779,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:03.096",
+   "time_from_previous_event": true,
+   "paths": [
+    "docs/usage.md"
+   ],
+   "lines": [
+    [
+     985,
+     993
+    ]
+   ]
+  },
+  {
+   "seq": 28780,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:05.902",
+   "paths": [
+    "docs/usage.md"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28781,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:05.903",
+   "paths": [
+    "docs/usage.md"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28784,
+   "type": "session_seen",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:07.851"
+  },
+  {
+   "seq": 28785,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:07.851",
+   "time_from_previous_event": true,
+   "paths": [
+    "docs/usage.md"
+   ],
+   "lines": [
+    [
+     999,
+     1007
+    ]
+   ]
+  },
+  {
+   "seq": 28786,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:07.898",
+   "paths": [
+    "docs/usage.md"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28787,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:07.899",
+   "paths": [
+    "docs/usage.md"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28789,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:07.917"
+  },
+  {
+   "seq": 28790,
+   "type": "session_seen",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:10.524"
+  },
+  {
+   "seq": 28791,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:10.524",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     9167,
+     9211
+    ],
+    [
+     9150,
+     9165
+    ]
+   ]
+  },
+  {
+   "seq": 28792,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:10.592",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28793,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:10.593",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28795,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:10.593",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28796,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:10.611"
+  },
+  {
+   "seq": 28797,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:11.398",
+   "paths": [
+    "docs/adr/0011-shell-writes.md"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 28798,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:11.424"
+  },
+  {
+   "seq": 28801,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:17.291"
+  },
+  {
+   "seq": 28802,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:17.291",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     9168,
+     9241
+    ]
+   ]
+  },
+  {
+   "seq": 28803,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:20.423",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28804,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:20.424",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28806,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:20.424",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     1364,
+     1376
+    ]
+   ]
+  },
+  {
+   "seq": 28807,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:25.137",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28808,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:25.139",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28810,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:25.139",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28811,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:25.159"
+  },
+  {
+   "seq": 28813,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:25.203",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28814,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:26.645"
+  },
+  {
+   "seq": 28816,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:26.856",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/tests/interface_counts.rs"
+   ],
+   "lines": [
+    [
+     26,
+     38
+    ]
+   ]
+  },
+  {
+   "seq": 28817,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:30.120",
+   "paths": [
+    "crates/langspan-core/tests/interface_counts.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28818,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:30.121",
+   "paths": [
+    "crates/langspan-core/tests/interface_counts.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28820,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:30.803",
+   "paths": [
+    "crates/langspan-core/tests/dashboard.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 28821,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:30.823"
+  },
+  {
+   "seq": 28822,
+   "type": "session_seen",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:34.360"
+  },
+  {
+   "seq": 28823,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:34.360",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     6886,
+     7385
+    ]
+   ]
+  },
+  {
+   "seq": 28824,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:34.429",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28825,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:34.430",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28827,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:34.430",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28828,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:34.430",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/tests/dashboard.rs"
+   ],
+   "lines": [
+    [
+     261,
+     351
+    ]
+   ]
+  },
+  {
+   "seq": 28829,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:34.466",
+   "paths": [
+    "crates/langspan-core/tests/dashboard.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28830,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:34.467",
+   "paths": [
+    "crates/langspan-core/tests/dashboard.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28835,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:34.801",
+   "time_from_previous_event": true,
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "lines": [
+    [
+     17,
+     34
+    ]
+   ]
+  },
+  {
+   "seq": 28836,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:35.866",
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28837,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:35.868",
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28839,
+   "type": "briefing_delivered",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:35.868",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28840,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:35.868",
+   "time_from_previous_event": true,
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "lines": [
+    [
+     68,
+     74
+    ]
+   ]
+  },
+  {
+   "seq": 28841,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:37.215",
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28842,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:37.217",
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28844,
+   "type": "session_seen",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:38.472"
+  },
+  {
+   "seq": 28845,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:38.472",
+   "time_from_previous_event": true,
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "lines": [
+    [
+     69,
+     75
+    ]
+   ]
+  },
+  {
+   "seq": 28846,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:38.520",
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28847,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:38.522",
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28849,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:38.561"
+  },
+  {
+   "seq": 28850,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:38.561",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     6880,
+     6884
+    ]
+   ]
+  },
+  {
+   "seq": 28851,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:39.397",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28852,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:39.400",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28854,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:39.400",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28855,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:39.444"
+  },
+  {
+   "seq": 28858,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:39.666",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28859,
+   "type": "session_seen",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:40.929"
+  },
+  {
+   "seq": 28860,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:40.946"
+  },
+  {
+   "seq": 28862,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:41.153",
+   "time_from_previous_event": true,
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "lines": [
+    [
+     131,
+     138
+    ]
+   ]
+  },
+  {
+   "seq": 28863,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:43.575",
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28864,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:43.575",
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28866,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:43.575",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     6929,
+     7393
+    ]
+   ]
+  },
+  {
+   "seq": 28867,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:44.042",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28868,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:44.043",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28871,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:45.214",
+   "time_from_previous_event": true,
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "lines": [
+    [
+     148,
+     155
+    ]
+   ]
+  },
+  {
+   "seq": 28872,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:45.433",
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28873,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:45.434",
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28875,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:45.434",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     9150,
+     9166
+    ]
+   ]
+  },
+  {
+   "seq": 28876,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:45.532",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28877,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:45.533",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28879,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:45.533",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28880,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:45.533",
+   "time_from_previous_event": true,
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "lines": [
+    [
+     186,
+     193
+    ]
+   ]
+  },
+  {
+   "seq": 28881,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:49.083",
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28882,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:49.084",
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28884,
+   "type": "briefing_delivered",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:49.084",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28887,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:49.297",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     6929,
+     7386
+    ]
+   ]
+  },
+  {
+   "seq": 28888,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:50.275",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28889,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:50.278",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28891,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:50.278",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28892,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:50.316"
+  },
+  {
+   "seq": 28894,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:50.422",
+   "time_from_previous_event": true,
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "lines": [
+    [
+     225,
+     232
+    ]
+   ]
+  },
+  {
+   "seq": 28895,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:52.832",
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28896,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:52.834",
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28898,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:52.834",
+   "time_from_previous_event": true,
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "lines": [
+    [
+     243,
+     246
+    ]
+   ]
+  },
+  {
+   "seq": 28899,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:54.729",
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28900,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:54.730",
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28903,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:54.833",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     6929,
+     7430
+    ]
+   ]
+  },
+  {
+   "seq": 28904,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:55.955",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28905,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:55.957",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28908,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:55.957",
+   "time_from_previous_event": true,
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "lines": [
+    [
+     3,
+     10
+    ]
+   ]
+  },
+  {
+   "seq": 28909,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:56.850",
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28910,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:56.851",
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28912,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:54:56.869"
+  },
+  {
+   "seq": 28913,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:56.869",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     1693,
+     1738
+    ]
+   ]
+  },
+  {
+   "seq": 28914,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:59.292",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28915,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:59.293",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28917,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:59.293",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28918,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:54:59.601"
+  },
+  {
+   "seq": 28919,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:54:59.601",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     476,
+     523
+    ]
+   ]
+  },
+  {
+   "seq": 28920,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:01.308",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28921,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:01.309",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28923,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:01.327"
+  },
+  {
+   "seq": 28924,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:03.534"
+  },
+  {
+   "seq": 28926,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:03.747",
+   "time_from_previous_event": true,
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "lines": [
+    [
+     194,
+     202
+    ]
+   ]
+  },
+  {
+   "seq": 28927,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:05.173",
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28928,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:05.174",
+   "paths": [
+    "docs/adr/0029-break-alerts-at-write-time.md"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28930,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:05.850",
+   "paths": [
+    "docs/security/threat-model.md"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 28931,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:05.870"
+  },
+  {
+   "seq": 28932,
+   "type": "session_seen",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:07.432"
+  },
+  {
+   "seq": 28933,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:07.432",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     2327,
+     2885
+    ]
+   ]
+  },
+  {
+   "seq": 28934,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:07.503",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28935,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:07.504",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28937,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:11.030"
+  },
+  {
+   "seq": 28938,
+   "type": "session_seen",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:11.428"
+  },
+  {
+   "seq": 28939,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:11.428",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/graph.rs"
+   ],
+   "lines": [
+    [
+     45,
+     111
+    ]
+   ]
+  },
+  {
+   "seq": 28940,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:11.470",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28941,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:11.471",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28945,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:11.574",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/graph.rs"
+   ],
+   "lines": [
+    [
+     135,
+     179
+    ]
+   ]
+  },
+  {
+   "seq": 28946,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:15.044",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28947,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:15.045",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28949,
+   "type": "session_seen",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:15.772"
+  },
+  {
+   "seq": 28950,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:15.772",
+   "time_from_previous_event": true,
+   "paths": [
+    "docs/security/threat-model.md"
+   ],
+   "lines": [
+    [
+     511,
+     517
+    ]
+   ]
+  },
+  {
+   "seq": 28951,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:15.816",
+   "paths": [
+    "docs/security/threat-model.md"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28952,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:15.817",
+   "paths": [
+    "docs/security/threat-model.md"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28954,
+   "type": "briefing_delivered",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:15.817",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28955,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:15.835"
+  },
+  {
+   "seq": 28956,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:15.835",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ]
+  },
+  {
+   "seq": 28957,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:16.043",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28958,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:16.044",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28960,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:16.044",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28961,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:16.044",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/graph.rs"
+   ],
+   "lines": [
+    [
+     184,
+     269
+    ]
+   ]
+  },
+  {
+   "seq": 28962,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:17.796",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28963,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:17.797",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28965,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:17.797",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 28968,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:17.909",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     3447,
+     3789
+    ]
+   ]
+  },
+  {
+   "seq": 28969,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:18.551",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28970,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:18.552",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28972,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:18.552",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/graph.rs"
+   ],
+   "lines": [
+    [
+     184,
+     275
+    ]
+   ]
+  },
+  {
+   "seq": 28973,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:19.046",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28974,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:19.047",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28976,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:19.064"
+  },
+  {
+   "seq": 28977,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:19.064",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     1952,
+     2267
+    ]
+   ]
+  },
+  {
+   "seq": 28978,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:20.285",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28979,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:20.286",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28981,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:20.305"
+  },
+  {
+   "seq": 28982,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:20.854",
+   "paths": [
+    "src/cursor.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 28983,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:20.878"
+  },
+  {
+   "seq": 28984,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:20.878",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/graph.rs"
+   ],
+   "lines": [
+    [
+     366,
+     565
+    ]
+   ]
+  },
+  {
+   "seq": 28985,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:25.101",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28986,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:25.102",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28989,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:25.215",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/graph.rs"
+   ],
+   "lines": [
+    [
+     366,
+     568
+    ]
+   ]
+  },
+  {
+   "seq": 28990,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:27.516",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28991,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:27.517",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28993,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:27.534"
+  },
+  {
+   "seq": 28994,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:27.534",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     3828,
+     5820
+    ]
+   ]
+  },
+  {
+   "seq": 28995,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:28.081",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 28996,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:28.082",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 28998,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:28.942"
+  },
+  {
+   "seq": 28999,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:28.942",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/cursor.rs"
+   ],
+   "lines": [
+    [
+     312,
+     317
+    ]
+   ]
+  },
+  {
+   "seq": 29000,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:29.569",
+   "paths": [
+    "src/cursor.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29001,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:29.570",
+   "paths": [
+    "src/cursor.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29003,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:29.588"
+  },
+  {
+   "seq": 29004,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:31.830"
+  },
+  {
+   "seq": 29005,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:31.830",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29008,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:33.562",
+   "paths": [
+    "docs/IMPLEMENTATION_STATUS.md"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 29009,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:33.579"
+  },
+  {
+   "seq": 29010,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:33.579",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29011,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:33.623"
+  },
+  {
+   "seq": 29014,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:34.860",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 29015,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:34.880"
+  },
+  {
+   "seq": 29016,
+   "type": "session_seen",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:37.459"
+  },
+  {
+   "seq": 29017,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:37.471"
+  },
+  {
+   "seq": 29018,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:37.471",
+   "time_from_previous_event": true,
+   "paths": [
+    "README.md"
+   ]
+  },
+  {
+   "seq": 29019,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:38.905",
+   "paths": [
+    "README.md"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29020,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:38.905",
+   "paths": [
+    "README.md"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29023,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:39.009",
+   "time_from_previous_event": true,
+   "paths": [
+    "docs/roadmap.md"
+   ],
+   "lines": [
+    [
+     45,
+     51
+    ]
+   ]
+  },
+  {
+   "seq": 29024,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:40.852",
+   "paths": [
+    "docs/roadmap.md"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29025,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:40.853",
+   "paths": [
+    "docs/roadmap.md"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29027,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:40.871"
+  },
+  {
+   "seq": 29028,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:41.771",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 29029,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:41.771",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29030,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:41.793"
+  },
+  {
+   "seq": 29031,
+   "type": "session_seen",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:45.927"
+  },
+  {
+   "seq": 29032,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:45.927",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/graph.rs"
+   ],
+   "lines": [
+    [
+     1804,
+     1821
+    ]
+   ]
+  },
+  {
+   "seq": 29033,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:45.967",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29034,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:45.968",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29036,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:45.968",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29038,
+   "type": "session_seen",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:46.756"
+  },
+  {
+   "seq": 29039,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:46.757",
+   "paths": [
+    "src/skill.md"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 29040,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:46.776"
+  },
+  {
+   "seq": 29041,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:46.776",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     7000,
+     7504
+    ]
+   ]
+  },
+  {
+   "seq": 29042,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:46.919",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29043,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:46.920",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29046,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:47.548",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 29047,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:47.571"
+  },
+  {
+   "seq": 29048,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:47.571",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     7000,
+     7506
+    ],
+    [
+     7508,
+     7517
+    ]
+   ]
+  },
+  {
+   "seq": 29049,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:51.234",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29050,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:51.235",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29052,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:51.235",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29053,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:52.498"
+  },
+  {
+   "seq": 29055,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:52.669",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     3828,
+     5839
+    ]
+   ]
+  },
+  {
+   "seq": 29056,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:52.744",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29057,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:52.745",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29060,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:54.383"
+  },
+  {
+   "seq": 29061,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:54.383",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     3828,
+     5839
+    ]
+   ]
+  },
+  {
+   "seq": 29062,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:54.865",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29063,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:54.866",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29065,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:54.883"
+  },
+  {
+   "seq": 29066,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:56.780",
+   "paths": [
+    "src/breaks.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 29067,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:55:56.806"
+  },
+  {
+   "seq": 29068,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:58.680",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 29069,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:55:58.707"
+  },
+  {
+   "seq": 29070,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:55:58.707",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     8149,
+     9198
+    ]
+   ]
+  },
+  {
+   "seq": 29071,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:02.862",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29072,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:02.863",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29075,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:56:02.863",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/hook.rs"
+   ],
+   "lines": [
+    [
+     506,
+     556
+    ]
+   ]
+  },
+  {
+   "seq": 29076,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:56:03.851",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29077,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:56:03.852",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29080,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:03.852",
+   "time_from_previous_event": true,
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "lines": [
+    [
+     3828,
+     5845
+    ]
+   ]
+  },
+  {
+   "seq": 29081,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:04.513",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29082,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:04.514",
+   "paths": [
+    "crates/langspan-core/src/lib.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29084,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:04.514",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29085,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:56:04.514",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/hook.rs"
+   ],
+   "lines": [
+    [
+     3202,
+     3331
+    ]
+   ]
+  },
+  {
+   "seq": 29086,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:56:04.941",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29087,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:56:04.942",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29089,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:56:04.959"
+  },
+  {
+   "seq": 29090,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:04.959",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/breaks.rs"
+   ],
+   "lines": [
+    [
+     217,
+     269
+    ]
+   ]
+  },
+  {
+   "seq": 29091,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:06.034",
+   "paths": [
+    "src/breaks.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29092,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:06.035",
+   "paths": [
+    "src/breaks.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29094,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:06.035",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29095,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:06.057"
+  },
+  {
+   "seq": 29096,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:06.057",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29097,
+   "type": "session_seen",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:10.211"
+  },
+  {
+   "seq": 29098,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:10.228"
+  },
+  {
+   "seq": 29101,
+   "type": "briefing_delivered",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:56:10.338",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29102,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:56:10.808"
+  },
+  {
+   "seq": 29106,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:11.016",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/breaks.rs"
+   ],
+   "lines": [
+    [
+     217,
+     285
+    ]
+   ]
+  },
+  {
+   "seq": 29107,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:11.922",
+   "paths": [
+    "src/breaks.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29108,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:11.923",
+   "paths": [
+    "src/breaks.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29110,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:11.923",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29111,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:11.923",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/breaks.rs"
+   ],
+   "lines": [
+    [
+     217,
+     285
+    ]
+   ]
+  },
+  {
+   "seq": 29112,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:13.020",
+   "paths": [
+    "src/breaks.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29113,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:13.021",
+   "paths": [
+    "src/breaks.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29115,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:13.039"
+  },
+  {
+   "seq": 29116,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:14.508"
+  },
+  {
+   "seq": 29117,
+   "type": "session_seen",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:18.432"
+  },
+  {
+   "seq": 29118,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:18.433"
+  },
+  {
+   "seq": 29120,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:19.092"
+  },
+  {
+   "seq": 29121,
+   "type": "session_seen",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:56:19.447"
+  },
+  {
+   "seq": 29122,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:56:19.464"
+  },
+  {
+   "seq": 29123,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:21.557",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 29124,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:21.557",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29125,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:22.109",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 29126,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:22.125"
+  },
+  {
+   "seq": 29127,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:22.692"
+  },
+  {
+   "seq": 29128,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:22.692",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/hook.rs"
+   ],
+   "lines": [
+    [
+     1773,
+     2097
+    ]
+   ]
+  },
+  {
+   "seq": 29129,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:27.425",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29130,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:27.426",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29132,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:27.426",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29134,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:27.535",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/observer.rs"
+   ],
+   "lines": [
+    [
+     10,
+     30
+    ]
+   ]
+  },
+  {
+   "seq": 29135,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:28.436",
+   "paths": [
+    "src/observer.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29136,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:28.437",
+   "paths": [
+    "src/observer.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29138,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:28.437",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29140,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:28.541",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/hook.rs"
+   ],
+   "lines": [
+    [
+     4234,
+     4278
+    ]
+   ]
+  },
+  {
+   "seq": 29141,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:28.875",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29142,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:28.876",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29144,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:28.876",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29145,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:28.876",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/hook.rs"
+   ],
+   "lines": [
+    [
+     4281,
+     4346
+    ]
+   ]
+  },
+  {
+   "seq": 29146,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:30.002",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29147,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:30.003",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29149,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:30.020"
+  },
+  {
+   "seq": 29150,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:30.020",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/observer.rs"
+   ],
+   "lines": [
+    [
+     115,
+     323
+    ]
+   ]
+  },
+  {
+   "seq": 29151,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:30.062",
+   "paths": [
+    "src/observer.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29152,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:30.063",
+   "paths": [
+    "src/observer.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29155,
+   "type": "briefing_delivered",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:56:30.703",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29156,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:56:31.215"
+  },
+  {
+   "seq": 29157,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:31.215",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/observer.rs"
+   ],
+   "lines": [
+    [
+     115,
+     331
+    ]
+   ]
+  },
+  {
+   "seq": 29158,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:31.372",
+   "paths": [
+    "src/observer.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29159,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:31.373",
+   "paths": [
+    "src/observer.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29161,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:31.373",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/observer.rs"
+   ],
+   "lines": [
+    [
+     115,
+     332
+    ]
+   ]
+  },
+  {
+   "seq": 29162,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:32.429",
+   "paths": [
+    "src/observer.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29163,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:32.430",
+   "paths": [
+    "src/observer.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29165,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:32.445"
+  },
+  {
+   "seq": 29166,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:35.819"
+  },
+  {
+   "seq": 29168,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:56:37.905"
+  },
+  {
+   "seq": 29169,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:39.952",
+   "paths": [
+    "src/dashboard.html"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 29170,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:39.982"
+  },
+  {
+   "seq": 29171,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:56:44.059"
+  },
+  {
+   "seq": 29172,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:44.059",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/dashboard.html"
+   ],
+   "lines": [
+    [
+     254,
+     260
+    ]
+   ]
+  },
+  {
+   "seq": 29173,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:45.079",
+   "paths": [
+    "src/dashboard.html"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29174,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:45.080",
+   "paths": [
+    "src/dashboard.html"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29176,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:46.048"
+  },
+  {
+   "seq": 29177,
+   "type": "session_seen",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:56:50.404"
+  },
+  {
+   "seq": 29178,
+   "type": "message_sent",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:56:50.404",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/hook.rs",
+    "tests/break_alerts.rs"
+   ],
+   "to": "Agent · #29 renames"
+  },
+  {
+   "seq": 29179,
+   "type": "briefing_delivered",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:56:50.404",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29180,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:56:50.469"
+  },
+  {
+   "seq": 29182,
+   "type": "session_seen",
+   "lane": "Agent · #29 renames",
+   "time": "19:56:50.857"
+  },
+  {
+   "seq": 29183,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:56:54.643"
+  },
+  {
+   "seq": 29184,
+   "type": "session_seen",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:58.234"
+  },
+  {
+   "seq": 29185,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:58.234",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29186,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:58.341"
+  },
+  {
+   "seq": 29188,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:56:58.733"
+  },
+  {
+   "seq": 29189,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:56:58.733",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/graph.rs"
+   ],
+   "lines": [
+    [
+     1161,
+     1167
+    ]
+   ]
+  },
+  {
+   "seq": 29190,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:04.485",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29191,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:04.488",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29193,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:04.488",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29195,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:04.724",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29196,
+   "type": "message_acknowledged",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:04.724",
+   "time_from_previous_event": true,
+   "acknowledges": 29178
+  },
+  {
+   "seq": 29197,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:06.052"
+  },
+  {
+   "seq": 29198,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:06.052",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/graph.rs"
+   ],
+   "lines": [
+    [
+     1173,
+     1209
+    ]
+   ]
+  },
+  {
+   "seq": 29199,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:06.348",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29200,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:06.349",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29202,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:06.366"
+  },
+  {
+   "seq": 29203,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:08.728",
+   "paths": [
+    "tests/break_alerts.rs"
+   ],
+   "origin": "refused"
+  },
+  {
+   "seq": 29204,
+   "type": "write_refused",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:08.728",
+   "paths": [
+    "tests/break_alerts.rs"
+   ],
+   "reason": "changed since this agent read it",
+   "held_by_change_from": "Agent · #29 renames"
+  },
+  {
+   "seq": 29205,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:08.748"
+  },
+  {
+   "seq": 29206,
+   "type": "briefing_delivered",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:08.748",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29207,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:08.748",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/graph.rs"
+   ],
+   "lines": [
+    [
+     45,
+     111
+    ]
+   ]
+  },
+  {
+   "seq": 29208,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:10.280",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29209,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:10.281",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29212,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:11.311",
+   "paths": [
+    "crates/langspan-graph/src/lib.rs",
+    "crates/langspan-graph/tests/renames.rs"
+   ],
+   "tool": "Bash"
+  },
+  {
+   "seq": 29213,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:11.312",
+   "paths": [
+    "crates/langspan-graph/src/lib.rs",
+    "crates/langspan-graph/tests/renames.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29221,
+   "type": "message_sent",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:11.523",
+   "time_from_previous_event": true,
+   "to": "Agent · #28 signature alerts"
+  },
+  {
+   "seq": 29222,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:13.364"
+  },
+  {
+   "seq": 29223,
+   "type": "briefing_delivered",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:13.364",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29224,
+   "type": "message_acknowledged",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:13.364",
+   "time_from_previous_event": true,
+   "acknowledges": 29221
+  },
+  {
+   "seq": 29225,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:13.364",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/graph.rs"
+   ],
+   "lines": [
+    [
+     45,
+     112
+    ]
+   ]
+  },
+  {
+   "seq": 29226,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:15.144",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29227,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:15.145",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29229,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:15.145",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29230,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:16.216",
+   "paths": [
+    "tests/break_alerts.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 29231,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:16.239"
+  },
+  {
+   "seq": 29232,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:16.239",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/graph.rs"
+   ],
+   "lines": [
+    [
+     296,
+     340
+    ]
+   ]
+  },
+  {
+   "seq": 29233,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:16.805",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29234,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:16.806",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29237,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:16.911",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/graph.rs"
+   ],
+   "lines": [
+    [
+     361,
+     560
+    ]
+   ]
+  },
+  {
+   "seq": 29238,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:18.448",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29239,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:18.449",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29241,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:18.467"
+  },
+  {
+   "seq": 29242,
+   "type": "session_seen",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:22.603"
+  },
+  {
+   "seq": 29243,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:22.603",
+   "time_from_previous_event": true,
+   "paths": [
+    "tests/break_alerts.rs"
+   ],
+   "lines": [
+    [
+     841,
+     915
+    ]
+   ]
+  },
+  {
+   "seq": 29244,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:22.631",
+   "paths": [
+    "tests/break_alerts.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29245,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:22.632",
+   "paths": [
+    "tests/break_alerts.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29247,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:22.649"
+  },
+  {
+   "seq": 29248,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:22.649",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29249,
+   "type": "session_seen",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:29.733"
+  },
+  {
+   "seq": 29250,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:29.754"
+  },
+  {
+   "seq": 29252,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:34.457"
+  },
+  {
+   "seq": 29253,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:37.717",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 29254,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:37.736"
+  },
+  {
+   "seq": 29255,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:41.753",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "refused"
+  },
+  {
+   "seq": 29256,
+   "type": "write_refused",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:41.753",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "reason": "changed since this agent read it",
+   "held_by_change_from": "Agent · #29 renames"
+  },
+  {
+   "seq": 29257,
+   "type": "session_seen",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:42.975"
+  },
+  {
+   "seq": 29258,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:42.975",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/graph.rs"
+   ],
+   "lines": [
+    [
+     361,
+     569
+    ]
+   ]
+  },
+  {
+   "seq": 29259,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:43.019",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29260,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:43.020",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29262,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:43.020",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29263,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:43.042"
+  },
+  {
+   "seq": 29265,
+   "type": "briefing_delivered",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:43.154",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29266,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:44.248"
+  },
+  {
+   "seq": 29267,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:44.248",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/graph.rs"
+   ],
+   "lines": [
+    [
+     184,
+     276
+    ]
+   ]
+  },
+  {
+   "seq": 29268,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:45.543",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29269,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:45.544",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29271,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:45.544",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29272,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:46.256",
+   "paths": [
+    "src/breaks.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 29273,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:46.285"
+  },
+  {
+   "seq": 29274,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:47.109",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 29275,
+   "type": "briefing_delivered",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:47.109",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29276,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:47.140"
+  },
+  {
+   "seq": 29277,
+   "type": "lease_granted",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:47.140",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/breaks.rs"
+   ],
+   "lines": [
+    [
+     217,
+     286
+    ]
+   ]
+  },
+  {
+   "seq": 29278,
+   "type": "operation_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:50.424",
+   "paths": [
+    "src/breaks.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29279,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:50.425",
+   "paths": [
+    "src/breaks.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29281,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:50.444"
+  },
+  {
+   "seq": 29284,
+   "type": "lease_granted",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:50.507",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/hook.rs"
+   ],
+   "lines": [
+    [
+     3209,
+     3338
+    ]
+   ]
+  },
+  {
+   "seq": 29285,
+   "type": "operation_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:52.537",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29286,
+   "type": "source_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:52.538",
+   "paths": [
+    "src/hook.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29288,
+   "type": "briefing_delivered",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:52.538",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29289,
+   "type": "session_seen",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:53.003"
+  },
+  {
+   "seq": 29290,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:53.003",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/graph.rs"
+   ],
+   "lines": [
+    [
+     742,
+     782
+    ]
+   ]
+  },
+  {
+   "seq": 29291,
+   "type": "operation_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:53.391",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "tool": "Edit"
+  },
+  {
+   "seq": 29292,
+   "type": "source_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:53.392",
+   "paths": [
+    "src/graph.rs"
+   ],
+   "origin": "write"
+  },
+  {
+   "seq": 29294,
+   "type": "briefing_delivered",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:53.392",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29295,
+   "type": "tool_batch_observed",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:53.417"
+  },
+  {
+   "seq": 29297,
+   "type": "source_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:54.206",
+   "paths": [
+    "src/breaks.rs"
+   ],
+   "origin": "read"
+  },
+  {
+   "seq": 29298,
+   "type": "briefing_delivered",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:54.206",
+   "time_from_previous_event": true
+  },
+  {
+   "seq": 29299,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #29 renames",
+   "time": "19:57:54.230"
+  },
+  {
+   "seq": 29300,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:55.391"
+  },
+  {
+   "seq": 29302,
+   "type": "tool_batch_observed",
+   "lane": "Agent · #28 signature alerts",
+   "time": "19:57:59.757"
+  },
+  {
+   "seq": 29303,
+   "type": "lease_granted",
+   "lane": "Agent · worktree signatures",
+   "time": "19:57:59.757",
+   "time_from_previous_event": true,
+   "paths": [
+    "src/graph.rs"
+   ],
+   "lines": [
+    [
+     1378,
+     1389
+    ]
+   ]
+  }
+ ]
+}

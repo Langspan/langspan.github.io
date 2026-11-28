@@ -66,30 +66,25 @@ def check(directory):
     def diff(a, b):
         return mean(abs(x - y) for x, y in zip(frames[a], frames[b]))
 
+    # The loop flows: the plane moves a little on every frame, so frame N-1
+    # differs from frame 0 by one frame's motion. The seam passes when that
+    # step is no bigger than the largest step between frames inside the loop.
+    steps = [diff(k, k + 1) for k in range(n - 1)]
     seam = diff(n - 1, 0)
-    assert seam <= 1.0, f'visible loop seam: mean gray difference {seam:.3f}'
+    typical = sorted(steps)[len(steps) // 2]
+    assert seam <= max(1.0, max(steps)), f'visible loop seam: {seam:.3f} against at most {max(steps):.3f} between frames'
     samples = [round(fps * t) for t in CUT['seek_samples_s']]
     beats = [diff(a, b) for a, b in zip(samples, samples[1:])]
     assert all(v >= 2 for v in beats), f'a beat did not change visibly: {beats}'
-    # A feedback change (150 ms, one word) sits below the freeze detector's
-    # noise floor, so a hold may run on through it. Each feedback event must
-    # still change the decoded pixels.
-    feedback = {}
-    for e in SPEC['events']:
-        if e['motion'] == 'feedback':
-            start = round(e['at'] * fps) - 1
-            feedback[e['at']] = round(diff(start, start + round(fps * SPEC['easing']['feedback']['ms'] / 1000) + 1), 4)
-            assert feedback[e['at']] >= 0.01, f'feedback at {e["at"]} s changed nothing'
-    allowed = []
-    for lo, hi in SPEC['holds_s']:
-        later = [e['at'] for e in SPEC['events'] if e['at'] >= hi and e['motion'] not in ('feedback', 'none')]
-        allowed.append([lo, min(later, default=SPEC['duration_s'])])
+    # Freezes: the flow moves on every frame except during the declared stops,
+    # where a coordination moment holds the pan. Any other freeze is a bug.
+    allowed = [[a - 0.25, b + 0.25] for a, b, _ in SPEC['stops_s']]
     found = freezes(directory / 'hero-loop-phone.mp4')
     for a, b in found:
-        assert any(a >= lo - .25 and b <= hi + .25 for lo, hi in allowed), f'unplanned freeze: {a}-{b} s'
-    result['feedback_mean_gray_differences'] = feedback
-    result.update({'seam_mean_gray_difference': round(seam, 4), 'beat_mean_gray_differences': [round(v, 4) for v in beats],
-                   'detected_holds_s': found, 'declared_holds_s': SPEC['holds_s'], 'unplanned_freezes': 0,
+        assert any(a >= lo and b <= hi for lo, hi in allowed), f'unplanned freeze: {a}-{b} s'
+    result.update({'seam_mean_gray_difference': round(seam, 4), 'median_frame_step': round(typical, 4), 'largest_frame_step': round(max(steps), 4),
+                   'beat_mean_gray_differences': [round(v, 4) for v in beats], 'detected_freezes_s': found,
+                   'declared_stops_s': SPEC['stops_s'], 'unplanned_freezes': 0,
                    'pixel_identical_seek_samples': len(render['seek_determinism']), 'source_sha256': render['source_sha256']})
     return result
 
