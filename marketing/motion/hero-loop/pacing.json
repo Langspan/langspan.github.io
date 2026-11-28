@@ -106,5 +106,10 @@
   "width_px": 2,
   "node_px": 6,
   "idle_after_s": 30
+ },
+ "wire_fade": {
+  "about": "After its stop ends, a wire fades to this opacity, so only the current moment's wire is at full strength.",
+  "to": 0.25,
+  "ms": 400
  }
 }

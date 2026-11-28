@@ -203,6 +203,22 @@ async function checkMotion(browser,base){
     assert.ok(r.min>=(width>760?10:12)-0.01,`card text ${r.min.toFixed(1)} px while framing at ${width}`);
    }
   }
+  // Wires run through the gaps between lanes: no point of a Held or Message
+  // wire lies inside a card other than its two end cards.
+  for(const t of [2.6,4.5,18.0,20.8,24.0,28.3,32.0]){
+   const hits=await p.evaluate(t=>{const H=window.LangSpanHero,h=H.element,L=H.layout(),T=H.timing;H.renderAt(t);const out=[];
+    const rects=[];for(let n=-1;n<=0;n++)for(const c of T.cards){const x=L.x[c.id]+n*L.period,y=L.top+c.lane*L.row,hh=c.kind==='held'?L.HH:L.H;rects.push({id:c.id,n,x,y,r:x+L.W,b:y+hh});}
+    for(const g of h.querySelectorAll('[data-wires] g.wire')){if(+g.style.opacity<0.2)continue;const path=g.querySelector('.wire-line'),len=path.getTotalLength(),n=+g.dataset.off/L.period;
+     for(let k=1;k<40;k++){const pt=path.getPointAtLength(len*k/40);for(const r of rects){if((r.id===g.dataset.from||r.id===g.dataset.to)&&r.n===n)continue;if(pt.x>r.x+1&&pt.x<r.r-1&&pt.y>r.y+1&&pt.y<r.b-1){out.push(g.dataset.to+' crosses '+r.id);break;}}}}
+    return [...new Set(out)];},t);
+   assert.deepEqual(hits,[],'a wire crosses a card at '+t+' s at '+width);
+  }
+  // Labels, markers and chips that show are fully inside the canvas, right of the lane names.
+  for(const t of [2.6,20.8,28.3]){
+   const clipped=await p.evaluate(t=>{const H=window.LangSpanHero,h=H.element;H.renderAt(t);const c=h.querySelector('[data-canvas]'),cr=c.getBoundingClientRect(),g=parseFloat(getComputedStyle(c).getPropertyValue('--gutter'));
+    return [...h.querySelectorAll('.wire-label,.wire-earlier,.source-chip')].filter(e=>getComputedStyle(e).visibility!=='hidden'&&+getComputedStyle(e).opacity>0.05).map(e=>[e.textContent,e.getBoundingClientRect()]).filter(([,b])=>b.left<cr.left+g-1||b.right>cr.right+1||b.top<cr.top-1||b.bottom>cr.bottom+1).map(([x])=>x);},t);
+   assert.deepEqual(clipped,[],'a label, marker or chip is clipped at '+t+' s at '+width);
+  }
   // Lane chains: every two consecutive cards of an agent on screen are joined.
   for(const t of [6,16,24,30]){
    const missing=await p.evaluate(t=>{const H=window.LangSpanHero,h=H.element,L=H.layout();H.renderAt(t);
