@@ -66,9 +66,10 @@
  "banned": [
   "springs with overshoot",
   "typing effects",
-  "camera zoom or drift in the untouched loop beyond the lateral flow",
+  "camera zoom or drift in the untouched loop beyond the lateral flow and the held-write framing",
   "particles or confetti",
-  "glow on anything but a Held wire",
+  "glow",
+  "gradients",
   "auto-opening panels",
   "narration text"
  ],

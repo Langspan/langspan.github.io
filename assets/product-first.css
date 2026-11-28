@@ -141,8 +141,7 @@ h1 span{color:var(--slate)}
 .live-world{position:absolute;left:0;top:0;width:1px;height:1px;transform-origin:0 0;will-change:transform}
 .wires{position:absolute;left:0;top:0;width:1px;height:1px;overflow:visible;pointer-events:none}
 .wire path{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;stroke-dasharray:1 1}
-.wire-held .wire-line{stroke:var(--held);stroke-width:2.2}
-.wire-held .wire-glow{stroke:var(--held);stroke-width:9;stroke-opacity:.16}
+.wire-held .wire-line{stroke:var(--held);stroke-width:2}
 .wire-message .wire-line{stroke:var(--muted);stroke-width:1.6}
 .wire-labels{position:absolute;left:0;top:0}
 /* Each lane's chain of work, under the cards and the cross-lane wires. */
@@ -180,8 +179,7 @@ h1 span{color:var(--slate)}
 .card.held .sub{color:#3a1d14}
 /* Card style B (owner's choice, 27 November 2026): a tool glyph per verb,
    monospace path pills and one type scale. Coral marks LangSpan's holds only. */
-.card{background:var(--card);border:1px solid var(--card-line);border-left:3px solid var(--lane-a);border-radius:6px}
-.card.lane-b{border-left-color:var(--lane-b)}.card.lane-c{border-left-color:var(--lane-c)}
+.card{background:var(--card);border:1px solid var(--card-line);border-radius:6px}
 .card-hit{padding:8px 10px;gap:5px}
 .card .verb{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--slate)}
 .card.lane-a .verb,.card.lane-b .verb,.card.lane-c .verb{color:var(--slate)}
@@ -196,7 +194,7 @@ h1 span{color:var(--slate)}
 .card code{background:var(--pill);border:1px solid var(--card-line);border-radius:4px;padding:1px 6px;font-size:12px;color:var(--ink)}
 .card .sub{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
 .card.command,.card.sent,.card.got{background:var(--canvas);border-style:solid}
-.card.held{background:color-mix(in srgb,var(--coral) 10%,var(--card));border:1px solid var(--coral);border-left:3px solid var(--coral);color:var(--ink);--glyph-color:var(--held)}
+.card.held{background:color-mix(in srgb,var(--coral) 10%,var(--card));border:1px solid var(--coral);color:var(--ink);--glyph-color:var(--held)}
 .card.held .who{display:none}
 .card.held .verb{color:var(--held)}
 .card.held code{background:color-mix(in srgb,var(--coral) 22%,var(--card));border-color:color-mix(in srgb,var(--coral) 45%,var(--card));color:var(--ink)}
@@ -217,9 +215,8 @@ h1 span{color:var(--slate)}
 .zoom-blocks .card.lane-c{background:color-mix(in srgb,var(--lane-c) 55%,var(--card))}
 .zoom-blocks .card.held{background:var(--coral)}
 .zoom-blocks .wire-label{font-size:11px;padding:1px 6px}
-/* Lane names stay pinned at the left, over the moving plane. */
-.gutter{position:absolute;left:0;top:0;bottom:0;width:var(--gutter);z-index:3;background:var(--canvas);pointer-events:none}
-.gutter::after{content:"";position:absolute;top:0;bottom:0;left:100%;width:20px;background:linear-gradient(to right,var(--canvas),color-mix(in srgb,var(--canvas) 0%,transparent))}
+/* Lane names stay pinned at the left, over the moving plane, behind a solid edge. */
+.gutter{position:absolute;left:0;top:0;bottom:0;width:var(--gutter);z-index:3;background:var(--canvas);border-right:1px solid var(--line);pointer-events:none}
 .lane-name{position:absolute;left:16px;right:8px;top:calc(var(--dy,0px) + var(--row-top) + var(--y,0px) * var(--s,1));pointer-events:auto;font:inherit;text-align:left;background:none;border:0;padding:4px 0 4px 18px;cursor:pointer;color:var(--ink);font-size:14px;font-weight:600;line-height:1.25}
 .lane-name::before{content:"";position:absolute;left:0;top:7px;width:12px;height:12px;box-sizing:border-box;border-radius:50%;border:2px solid var(--lane-a)}
 .lane-name.lane-b::before{border-color:var(--lane-b)}.lane-name.lane-c::before{border-color:var(--lane-c)}

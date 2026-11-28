@@ -386,10 +386,10 @@ limit stated once in the questions, no placeholders and no dates on the page.
   the current moment's wire is at full strength; earlier wires fade to
   25 percent within 400 ms after their stop. Labels, markers and chips stay
   fully inside the canvas.
-- Prepared for the owner, not merged: a solid gutter edge with a 1 px
-  divider instead of the gradient fade, a Held wire without glow, and cards
-  without the colored left border (stills `styles/final-*` on the review
-  branch).
+- Final touches (owner, 27 November 2026): the pinned lane names sit behind
+  a solid edge with a 1 px divider (no gradient), the Held wire is a crisp
+  2 px coral stroke (no glow), and cards have no colored left border; lane
+  color shows in the chain nodes and the glyph tint.
 - The canvas flows continuously and loops without a seam: the loop's last
   cards are followed by the next loop's first cards, one loop's width
   further on. Cards keep their order in time across lanes and are pushed
