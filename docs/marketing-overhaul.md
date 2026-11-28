@@ -378,6 +378,18 @@ limit stated once in the questions, no placeholders and no dates on the page.
   lighter. A hollow dot where each lane's line leaves the lane names marks
   the lane's start. Held and message wires stay curves in their own colors,
   with labels.
+- Cards use style B (owner's choice, 27 November 2026): a 14 px tool glyph
+  per verb (edit, read, command, save, hold, message) tinted in the lane's
+  color, monospace path pills, 12 px text, and coral only on held writes.
+- Held and message wires run through the gap between the two lanes and
+  enter each card through its top or bottom edge, never across a card. Only
+  the current moment's wire is at full strength; earlier wires fade to
+  25 percent within 400 ms after their stop. Labels, markers and chips stay
+  fully inside the canvas.
+- Prepared for the owner, not merged: a solid gutter edge with a 1 px
+  divider instead of the gradient fade, a Held wire without glow, and cards
+  without the colored left border (stills `styles/final-*` on the review
+  branch).
 - The canvas flows continuously and loops without a seam: the loop's last
   cards are followed by the next loop's first cards, one loop's width
   further on. Cards keep their order in time across lanes and are pushed
