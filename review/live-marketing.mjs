@@ -56,8 +56,15 @@ const b=await chromium.launch();try{
   const p=await b.newPage({viewport:{width:1440,height:900},colorScheme:mode,reducedMotion:'no-preference'});
   await p.goto('https://github.com/Langspan/LangSpan.dev',{waitUntil:'domcontentloaded',timeout:45000});
   const card=p.locator('article.markdown-body img[alt^="LangSpan: in a shared checkout"]').first();
-  await card.waitFor({timeout:20000});await card.scrollIntoViewIfNeeded();await card.evaluate(img=>img.decode());assert.equal(await card.evaluate(img=>img.naturalWidth),1300,'GitHub-rendered '+mode+' card decoded');
-  const a=await card.screenshot();await p.waitForTimeout(1800);const c=await card.screenshot();
+  // GitHub re-renders the README after load, which can detach the image the
+  // locator first resolved to. Each step re-resolves the locator and retries
+  // once if the element went away mid-action.
+  const settle=async step=>{for(let i=0;;i++){try{return await step();}catch(e){if(i>=2||!/not attached|detached/i.test(e.message))throw e;await p.waitForTimeout(500);}}};
+  await card.waitFor({timeout:20000});
+  await settle(()=>card.scrollIntoViewIfNeeded());
+  await settle(()=>card.evaluate(img=>img.decode()));
+  assert.equal(await settle(()=>card.evaluate(img=>img.naturalWidth)),1300,'GitHub-rendered '+mode+' card decoded');
+  const a=await settle(()=>card.screenshot());await p.waitForTimeout(1800);const c=await settle(()=>card.screenshot());
   console.log('GitHub '+mode+' image decoded; timed frames '+(a.equals(c)?'identical (playback not established)':'differ (animation observed)'));
   await p.close();
  }
